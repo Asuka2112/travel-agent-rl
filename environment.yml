@@ -1,0 +1,10 @@
+name: travel-agent-rl
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.12
+  - pip=25.1.1
+  - pip:
+      - -r requirements/base.txt
+      - -r requirements/dev.txt
+

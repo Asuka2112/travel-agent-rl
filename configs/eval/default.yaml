@@ -1,0 +1,16 @@
+seed: 20260819
+models: [base, sft, grpo]
+pairwise:
+  bidirectional: true
+metrics:
+  - task_success
+  - constraint_satisfaction
+  - tool_call_validity
+  - tool_selection_accuracy
+  - average_tool_calls
+  - average_turns
+  - loop_rate
+  - invalid_tool_call_rate
+  - final_answer_rate
+  - llm_judge_score
+

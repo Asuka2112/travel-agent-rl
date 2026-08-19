@@ -1,0 +1,12 @@
+model: Qwen/Qwen3-4B-Instruct-2507
+algorithm: grpo
+online_multi_turn: true
+max_turns: 13
+num_generations: 6
+training_strategy: full
+deepspeed_stage: 3
+rollout_target_gpu_count: 2
+training_target_gpu_count: 6
+allow_gpu_ids: []
+require_fresh_gpu_audit: true
+

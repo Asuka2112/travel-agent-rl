@@ -1,0 +1,14 @@
+seed: 20260819
+raw_candidate_minimum: 1500
+frozen_test_minimum: 80
+contamination:
+  exact: true
+  canonical: true
+  similarity_threshold: 0.92
+sources:
+  agent_star_synthetic:
+    enabled: true
+  travelplanner_official_test:
+    enabled: false
+    policy: evaluation_only
+
