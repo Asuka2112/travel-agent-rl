@@ -1,13 +1,13 @@
 # Milestones
 
-## M0 - Foundation (running)
+## M0 - Foundation (completed)
 
 - [x] Audit OS, GPUs, CUDA, CPU, RAM, disk, Python, and Git.
 - [x] Establish repository structure and reproducibility documents.
 - [x] Implement unified schemas and deterministic eight-tool mock registry.
 - [x] Add minimal CI and test suites.
-- [ ] Validate pinned CUDA 12.4 training dependency candidate on the server.
-- [ ] Record exact package lock and model revision.
+- [x] Validate pinned CUDA 12.4 training dependencies and real vLLM inference.
+- [x] Record exact package lock and model revision.
 
 ## M1 - Licensed data and frozen splits (planned)
 
@@ -49,4 +49,3 @@
 - [ ] Evaluate Base, SFT, and RL on identical frozen queries.
 - [ ] Run bidirectional pairwise judging to reduce position bias.
 - [ ] Generate final metrics, failure analysis, costs, and report.
-

@@ -11,6 +11,7 @@ multi-turn GRPO, and frozen evaluation.
 | Machine audit | completed | `docs/machine_profile.md` |
 | Repository skeleton | completed | source tree and CI |
 | Eight-tool mock environment | completed | environment tests and smoke script |
+| CUDA 12.4 stack + vLLM inference | completed | compatibility record and smoke evidence |
 | Public-data acquisition | planned | license gate must pass first |
 | Teacher distillation | planned | no API-backed run yet |
 | SFT | planned | no checkpoint or metric claimed |
@@ -33,4 +34,3 @@ pytest
 
 See `PROJECT_SPEC.md`, `TASKS.md`, and `docs/reproduction.md` for scope and
 reproducible commands.
-

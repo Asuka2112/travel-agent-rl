@@ -1,4 +1,8 @@
 .venv/
+.venv-train/
+.tmp/
+.pip-cache/
+models/
 __pycache__/
 *.py[cod]
 *.egg-info/

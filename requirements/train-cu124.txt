@@ -1,6 +1,4 @@
-# Candidate compatibility set for NVIDIA driver 550 / CUDA 12.4.
-# This file is not yet an empirical lock; M0 records import and GPU evidence
-# before removing this warning.
+# Validated import/GPU-smoke set for NVIDIA driver 550 / CUDA 12.4.
 --extra-index-url https://download.pytorch.org/whl/cu124
 torch==2.6.0
 transformers==4.53.3
@@ -8,4 +6,5 @@ ms-swift==3.8.3
 vllm==0.8.5.post1
 deepspeed==0.16.9
 flash-attn==2.7.4.post1
-
+gradio==5.32.1
+wheel==0.45.1

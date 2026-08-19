@@ -17,7 +17,7 @@ git clone <repository-url> travel-agent-rl
 cd travel-agent-rl
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
+python -m pip install --upgrade pip==26.2.1
 python -m pip install -r requirements/base.txt -r requirements/dev.txt
 python scripts/smoke_env.py
 pytest
@@ -25,9 +25,14 @@ pytest
 
 ## Training dependencies
 
-`requirements/train-cu124.txt` is marked candidate until the M0 compatibility
-test produces `outputs/compatibility/*.json`. Install it only on the matching
-host after reading `docs/compatibility.md`.
+The CUDA 12.4 stack is created in a separate environment:
+
+```bash
+bash scripts/setup_train_env.sh
+```
+
+`requirements/train-cu124-lock.txt` records all observed transitive versions.
+Read `docs/compatibility.md` before using the stack on a different driver.
 
 ## Required secrets
 
@@ -43,4 +48,3 @@ Mock mode requires no keys and is the default for tests.
 - Prompts and configs are committed and referenced by content hash.
 - The frozen test manifest is read-only after its creation commit.
 - Training/evaluation commands produce an experiment manifest before work.
-
