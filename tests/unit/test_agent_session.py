@@ -1,12 +1,28 @@
+import json
+
 from travel_agent_rl.agent import AgentSession, SessionStatus
 from travel_agent_rl.env import TravelEnvironment
-from travel_agent_rl.tools import build_mock_registry
+from travel_agent_rl.tools import BaseTool, build_mock_registry
+from travel_agent_rl.tools.mock import _object_schema
+from travel_agent_rl.tools.registry import ToolRegistry
 
 
 def _call(name: str, arguments: dict) -> str:
-    import json
-
     return f"<tool-call>{json.dumps({'name': name, 'arguments': arguments})}</tool-call>"
+
+
+class _OversizedTool(BaseTool):
+    name = "oversized"
+    description = "Return a deliberately oversized provider response."
+    argument_schema = _object_schema([], {})
+
+    def run(self, arguments: dict) -> dict:
+        return {
+            "documents": [
+                {"title": f"document-{index}", "content": "evidence " * 2_000}
+                for index in range(10)
+            ]
+        }
 
 
 def test_session_executes_tool_then_accepts_answer() -> None:
@@ -38,3 +54,16 @@ def test_invalid_output_consumes_turn_and_is_detectable() -> None:
     assert transition.error_code == "invalid_agent_output"
     assert transition.status is SessionStatus.FORCE_ANSWER
 
+
+def test_session_bounds_model_visible_tool_observation() -> None:
+    session = AgentSession(
+        TravelEnvironment(ToolRegistry([_OversizedTool()])),
+        max_turns=2,
+    )
+    transition = session.step(_call("oversized", {}))
+    assert transition.observation is not None
+    assert len(transition.observation) <= 2_000
+    payload = json.loads(transition.observation)
+    assert payload["status"] == "ok"
+    assert payload["tool_name"] == "oversized"
+    assert "truncated" in transition.observation

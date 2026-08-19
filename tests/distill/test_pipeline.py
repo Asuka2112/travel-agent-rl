@@ -68,8 +68,39 @@ def test_pipeline_resumes_completed_ids(tmp_path: Path) -> None:
 def test_failure_is_checkpointed(tmp_path: Path) -> None:
     backend = ScriptedBackend(["not valid"])
     distiller = TrajectoryDistiller(backend, session_factory, "prompt", max_model_calls=1)
+    output = tmp_path / "out.jsonl"
+    failed = tmp_path / "failed.jsonl"
     stats = DistillationPipeline(distiller).run(
-        [("bad", "bad")], tmp_path / "out.jsonl", tmp_path / "failed.jsonl"
+        [("bad", "bad")], output, failed
     )
     assert stats["failed"] == 1
-    assert "bad" in (tmp_path / "failed.jsonl").read_text()
+    assert not output.exists()
+    failed_record = json.loads(failed.read_text())
+    assert failed_record["query_id"] == "bad"
+    assert failed_record["metadata"]["success"] is False
+
+
+def test_failed_query_is_retried_instead_of_resumed(tmp_path: Path) -> None:
+    output = tmp_path / "out.jsonl"
+    failed = tmp_path / "failed.jsonl"
+    first = DistillationPipeline(
+        TrajectoryDistiller(
+            ScriptedBackend(["not valid"]),
+            session_factory,
+            "prompt",
+            max_model_calls=1,
+        )
+    )
+    assert first.run([("q1", "one")], output, failed)["failed"] == 1
+
+    second = DistillationPipeline(
+        TrajectoryDistiller(
+            ScriptedBackend(["<answer>recovered</answer>"]),
+            session_factory,
+            "prompt",
+        )
+    )
+    stats = second.run([("q1", "one")], output, failed)
+
+    assert stats == {"submitted": 1, "resumed": 0, "succeeded": 1, "failed": 0}
+    assert json.loads(output.read_text())["metadata"]["success"] is True

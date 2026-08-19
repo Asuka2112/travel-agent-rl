@@ -17,15 +17,15 @@
 - [x] Create and freeze an independent test split of at least 80 examples.
 - [x] Generate provenance, statistics, and contamination reports.
 
-## M2 - Production tool environment (running: credential gate)
+## M2 - Production tool environment (completed)
 
 - [x] Add AMap, weather, Firecrawl/search adapters behind interfaces.
 - [x] Add timeout, retry, rate-limit normalization, disk cache, and fixtures.
 - [x] Build deterministic flight and train databases/simulators.
 - [x] Implement parser, validator, repeat detection, and force-answer state machine.
-- [ ] Run credentialed live-tool smoke (`AMAP_API_KEY`, `FIRECRAWL_API_KEY`).
+- [x] Run credentialed live-tool smoke (`AMAP_API_KEY`, `FIRECRAWL_API_KEY`).
 
-## M3 - Teacher distillation and filtering (running: provider gate)
+## M3 - Teacher distillation and filtering (running: dataset production)
 
 - [x] Version teacher and judge prompts.
 - [x] Implement concurrent resumable trajectory generation.

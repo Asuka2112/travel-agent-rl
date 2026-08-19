@@ -36,6 +36,10 @@ Two installation details are required:
 2. Build/install FlashAttention with `TMPDIR` and `PIP_CACHE_DIR` on the `/data`
    filesystem; otherwise its downloaded wheel crosses filesystems during an
    atomic rename and fails with `Invalid cross-device link`.
+3. Pin FastAPI 0.115.12 and Starlette 0.46.2. The unconstrained 0.141.1/0.52.1
+   pair installs successfully but is incompatible with vLLM 0.8.5's
+   Prometheus route instrumentation, causing every HTTP endpoint to return 500
+   after an otherwise successful model load.
 
 The server cannot reach `huggingface.co` directly. `HF_ENDPOINT=https://hf-mirror.com`
 is used only as a transport mirror while the official full commit revision is
@@ -70,6 +74,31 @@ end-to-end validation is complete; real generation stays gated until an
 authorized endpoint or an evidence-backed local teacher configuration passes a
 small smoke run. Any local teacher choice must be recorded separately and does
 not change the Qwen3-4B student/base-model target.
+
+## Local teacher validation
+
+The Apache-2.0 `Qwen/Qwen3-30B-A3B-Instruct-2507` snapshot at revision
+`0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe` was downloaded and served on four
+otherwise idle RTX 4090 GPUs with tensor parallelism 4. vLLM loaded 14.3011 GiB
+of weights per GPU, initialized a 32,768-token context with a 215,376-token KV
+cache per worker, and reported 6.57-way maximum concurrency at the full context
+length. A deterministic chat request returned exactly `OK`.
+
+A subsequent real distillation smoke completed one 13-tool-turn trajectory with
+49,986 cumulative input tokens and 602 output tokens across its model calls. The
+trajectory passed rule filtering, canonicalization, and the structured local
+judge. This validates the execution path only; it does not claim that the full
+teacher dataset has been generated.
+
+## Credentialed live-tool gate
+
+On 2026-08-19 the production registry passed a credentialed live smoke with all
+eight tools returning `ok` on their first attempt. The live calls covered AMap
+POI search, nearby search, weather, and walking-route planning plus Firecrawl
+search and scrape. The deterministic flight and train simulators completed the
+same run. Provider credentials are stored outside the repository in a
+user-owned mode-`600` environment file; no credential value is logged or
+committed. No paid plan, billing account, or automatic recharge was enabled.
 
 `ds_report` found the fused Adam and CPU Adam build paths compatible with this
 toolchain. Optional `async_io` offload is currently unavailable because the

@@ -3,11 +3,12 @@ from __future__ import annotations
 import json
 from collections import Counter
 from enum import Enum
+from typing import Any
 
 from pydantic import BaseModel
 
 from travel_agent_rl.env import TravelEnvironment
-from travel_agent_rl.tools import ToolRequest
+from travel_agent_rl.tools import ToolRequest, ToolResponse
 
 from .protocol import FinalAnswer, ToolCall, parse_agent_output
 
@@ -16,6 +17,91 @@ class SessionStatus(str, Enum):
     RUNNING = "running"
     FORCE_ANSWER = "force_answer"
     FINISHED = "finished"
+
+
+MAX_TOOL_OBSERVATION_CHARS = 2_000
+
+
+def _compact_value(
+    value: Any,
+    *,
+    list_limit: int = 3,
+    string_limit: int = 500,
+    max_depth: int = 6,
+    depth: int = 0,
+) -> Any:
+    if isinstance(value, str):
+        if len(value) <= string_limit:
+            return value
+        return f"{value[:string_limit]}...[truncated {len(value) - string_limit} chars]"
+    if isinstance(value, list):
+        if depth >= max_depth:
+            return {"truncated": True, "original_items": len(value)}
+        compacted = [
+            _compact_value(
+                item,
+                list_limit=list_limit,
+                string_limit=string_limit,
+                max_depth=max_depth,
+                depth=depth + 1,
+            )
+            for item in value[:list_limit]
+        ]
+        if len(value) > list_limit:
+            compacted.append({"truncated_items": len(value) - list_limit})
+        return compacted
+    if isinstance(value, dict):
+        if depth >= max_depth:
+            return {"truncated": True, "original_keys": len(value)}
+        return {
+            str(key): _compact_value(
+                item,
+                list_limit=list_limit,
+                string_limit=string_limit,
+                max_depth=max_depth,
+                depth=depth + 1,
+            )
+            for key, item in value.items()
+        }
+    return value
+
+
+def _render_tool_observation(response: ToolResponse) -> str:
+    payload = response.model_dump(mode="json")
+    compacted = _compact_value(payload)
+    encoded = json.dumps(compacted, ensure_ascii=False, separators=(",", ":"))
+    if len(encoded) <= MAX_TOOL_OBSERVATION_CHARS:
+        return encoded
+
+    compact_data = _compact_value(
+        response.data,
+        list_limit=1,
+        string_limit=160,
+        max_depth=3,
+    )
+    data_text = json.dumps(compact_data, ensure_ascii=False, separators=(",", ":"))
+    fallback = {
+        "request_id": response.request_id,
+        "tool_name": response.tool_name,
+        "status": response.status.value,
+        "error": response.error.model_dump(mode="json") if response.error else None,
+        "attempts": response.attempts,
+        "cached": response.cached,
+        "latency_ms": response.latency_ms,
+        "data": {"preview": "", "truncated": True},
+    }
+    low, high = 0, len(data_text)
+    rendered = json.dumps(fallback, ensure_ascii=False, separators=(",", ":"))
+    while low <= high:
+        midpoint = (low + high) // 2
+        fallback["data"]["preview"] = data_text[:midpoint]
+        candidate = json.dumps(fallback, ensure_ascii=False, separators=(",", ":"))
+        if len(candidate) <= MAX_TOOL_OBSERVATION_CHARS:
+            rendered = candidate
+            low = midpoint + 1
+        else:
+            high = midpoint - 1
+    return rendered
 
 
 class SessionTransition(BaseModel):
@@ -78,7 +164,7 @@ class AgentSession:
         response = self.environment.execute(
             ToolRequest(tool_name=parsed.name, arguments=parsed.arguments)
         )
-        observation = response.model_dump_json()
+        observation = _render_tool_observation(response)
         if self.turns_used >= self.max_turns:
             self.status = SessionStatus.FORCE_ANSWER
             observation = f"{observation}\n{self.FORCE_ANSWER_MESSAGE}"
@@ -120,4 +206,3 @@ class AgentSession:
             turns_used=self.turns_used,
             final_answer=answer,
         )
-

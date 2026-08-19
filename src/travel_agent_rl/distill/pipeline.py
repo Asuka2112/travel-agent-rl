@@ -158,13 +158,13 @@ class DistillationPipeline:
                     )
                     stats["failed"] += 1
                     continue
-                self._append_jsonl(output_path, record.model_dump(mode="json"))
                 if record.metadata.success:
+                    self._append_jsonl(output_path, record.model_dump(mode="json"))
                     stats["succeeded"] += 1
                 else:
                     self._append_jsonl(
                         failed_path,
-                        {"query_id": query_id, "errors": record.metadata.exceptions},
+                        record.model_dump(mode="json"),
                     )
                     stats["failed"] += 1
         return stats
@@ -179,7 +179,9 @@ class DistillationPipeline:
                 if not line.strip():
                     continue
                 try:
-                    completed.add(json.loads(line)["query_id"])
+                    row = json.loads(line)
+                    if row.get("metadata", {}).get("success") is True:
+                        completed.add(row["query_id"])
                 except (json.JSONDecodeError, KeyError) as exc:
                     raise ValueError(f"invalid checkpoint line {line_number} in {path}") from exc
         return completed
