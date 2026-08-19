@@ -1,6 +1,12 @@
 """Resumable teacher-trajectory distillation."""
 
-from .client import ChatBackend, ChatResult, OpenAICompatibleChatBackend, TokenUsage
+from .client import (
+    ChatBackend,
+    ChatResult,
+    OpenAICompatibleChatBackend,
+    RetryingChatBackend,
+    TokenUsage,
+)
 from .models import TrajectoryMetadata, TrajectoryRecord
 from .pipeline import DistillationPipeline, TrajectoryDistiller
 
@@ -9,6 +15,7 @@ __all__ = [
     "ChatResult",
     "DistillationPipeline",
     "OpenAICompatibleChatBackend",
+    "RetryingChatBackend",
     "TokenUsage",
     "TrajectoryDistiller",
     "TrajectoryMetadata",

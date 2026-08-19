@@ -14,6 +14,7 @@ from travel_agent_rl.distill import (
     ChatResult,
     DistillationPipeline,
     OpenAICompatibleChatBackend,
+    RetryingChatBackend,
     TokenUsage,
     TrajectoryDistiller,
 )
@@ -53,6 +54,18 @@ def read_queries(path: Path, limit: int | None) -> list[tuple[str, str]]:
     return queries
 
 
+def render_tool_catalog(registry) -> str:
+    tools = []
+    for name in registry.names:
+        tool = registry.get(name)
+        if tool is None:
+            raise AssertionError(f"registry lost tool: {name}")
+        tools.append(
+            {"name": name, "description": tool.description, "arguments": tool.argument_schema}
+        )
+    return json.dumps(tools, ensure_ascii=False, sort_keys=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
@@ -77,8 +90,13 @@ def main() -> None:
         missing = [name for name, value in required.items() if not value]
         if missing:
             raise SystemExit(f"missing teacher settings: {', '.join(missing)}")
-        backend = OpenAICompatibleChatBackend(**required)
+        backend = RetryingChatBackend(
+            OpenAICompatibleChatBackend(**required),
+            max_attempts=int(provider.get("max_attempts", 3)),
+        )
         registry = build_live_registry(root)
+
+    prompt = f"{prompt.rstrip()}\n\nAvailable tools:\n{render_tool_catalog(registry)}\n"
 
     def session_factory() -> AgentSession:
         environment = TravelEnvironment(

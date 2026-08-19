@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from time import sleep
 from typing import Protocol, Sequence
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -39,15 +40,21 @@ class OpenAICompatibleChatBackend:
     timeout_seconds: float = 90.0
     max_tokens: int = 4096
     temperature: float = 0.1
+    encode_tool_as_user: bool = True
 
     def complete(self, messages: Sequence[AgentMessage], system_prompt: str) -> ChatResult:
         endpoint = f"{self.base_url.rstrip('/')}/chat/completions"
+        api_messages: list[dict[str, str]] = [{"role": "system", "content": system_prompt}]
+        for message in messages:
+            if message.role == "tool" and self.encode_tool_as_user:
+                api_messages.append(
+                    {"role": "user", "content": f"<tool-result>\n{message.content}\n</tool-result>"}
+                )
+            else:
+                api_messages.append(message.model_dump())
         payload = {
             "model": self.model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                *[message.model_dump() for message in messages],
-            ],
+            "messages": api_messages,
             "max_tokens": self.max_tokens,
             "temperature": self.temperature,
         }
@@ -80,3 +87,26 @@ class OpenAICompatibleChatBackend:
             total_tokens=raw_usage.get("total_tokens", 0),
         )
         return ChatResult(content=choice, model=body.get("model", self.model), usage=usage)
+
+
+@dataclass(frozen=True)
+class RetryingChatBackend:
+    backend: ChatBackend
+    max_attempts: int = 3
+    initial_backoff_seconds: float = 1.0
+
+    @property
+    def model(self) -> str:
+        return self.backend.model
+
+    def complete(self, messages: Sequence[AgentMessage], system_prompt: str) -> ChatResult:
+        if self.max_attempts < 1:
+            raise ValueError("max_attempts must be positive")
+        for attempt in range(1, self.max_attempts + 1):
+            try:
+                return self.backend.complete(messages, system_prompt)
+            except RuntimeError:
+                if attempt == self.max_attempts:
+                    raise
+                sleep(self.initial_backoff_seconds * (2 ** (attempt - 1)))
+        raise AssertionError("retry loop must return or raise")

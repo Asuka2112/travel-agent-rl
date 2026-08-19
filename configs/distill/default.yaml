@@ -12,3 +12,4 @@ provider:
   base_url_env: TEACHER_BASE_URL
   api_key_env: TEACHER_API_KEY
   model_env: TEACHER_MODEL
+  max_attempts: 3
