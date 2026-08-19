@@ -45,6 +45,13 @@ def judge_checkpoint_path(directory: Path, query_id: str) -> Path:
     return directory / f"{readable[:80]}__{digest}.json"
 
 
+def should_retry_judge_row(row: dict[str, object]) -> bool:
+    reasons = row.get("drop_reason", [])
+    return isinstance(reasons, list) and any(
+        str(reason).startswith("judge_exception:") for reason in reasons
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
@@ -116,6 +123,7 @@ def main() -> None:
 
     judged: list[TrajectoryRecord] = []
     judge_resumed = 0
+    judge_exception_retries = 0
     if not args.skip_judge:
         env = {
             "api_key": os.getenv("JUDGE_API_KEY"),
@@ -171,8 +179,13 @@ def main() -> None:
         for record in canonical:
             checkpoint = judge_checkpoint_path(judge_dir, record.query_id)
             if checkpoint.is_file():
-                judge_rows[record.query_id] = json.loads(checkpoint.read_text(encoding="utf-8"))
-                judge_resumed += 1
+                checkpoint_row = json.loads(checkpoint.read_text(encoding="utf-8"))
+                if should_retry_judge_row(checkpoint_row):
+                    pending.append(record)
+                    judge_exception_retries += 1
+                else:
+                    judge_rows[record.query_id] = checkpoint_row
+                    judge_resumed += 1
             else:
                 pending.append(record)
         with ThreadPoolExecutor(max_workers=int(config.get("judge_concurrency", 1))) as executor:
@@ -203,6 +216,7 @@ def main() -> None:
         "format_rejection_reasons": dict(sorted(format_rejected_reasons.items())),
         "judge_accepted": None if args.skip_judge else len(judged),
         "judge_resumed": judge_resumed,
+        "judge_exception_retries": judge_exception_retries,
         "stages": {
             "rule": {"before_count": len(records), "after_count": len(accepted)},
             "format": {"before_count": len(accepted), "after_count": len(canonical)},

@@ -1,0 +1,237 @@
+{
+  "artifacts": {
+    "dev": {
+      "path": "data/processed/dev.jsonl",
+      "records": 16,
+      "sha256": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712"
+    },
+    "format_accepted": {
+      "path": "data/intermediate/cleaning/format_accepted.jsonl",
+      "records": 1699,
+      "sha256": "5d46f22ef83407d0f8b2832d4c4a14f443dd1f60b0603351e293b5aa356d4677"
+    },
+    "frozen_queries": {
+      "path": "data/manifests/train_queries_1835.jsonl",
+      "records": 1835,
+      "sha256": "cf2f694419f7a96e868d07507a0a26d648cfd885ce69cda7daae36b3d3d82e6e"
+    },
+    "judge_accepted": {
+      "path": "data/intermediate/cleaning/judge_accepted.jsonl",
+      "records": 1463,
+      "sha256": "e460e959687a5fb0b2791dfc3f1163ff24417d94789f386fb180671b9e16213f"
+    },
+    "rl_queries": {
+      "path": "data/processed/rl_queries.jsonl",
+      "records": 200,
+      "sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80"
+    },
+    "rule_accepted": {
+      "path": "data/intermediate/cleaning/rule_accepted.jsonl",
+      "records": 1699,
+      "sha256": "94c19fe984c97882d7ed4bb79bd0d874a0ed3e8856c2c5454f7f9966eb559e0a"
+    },
+    "sft": {
+      "path": "data/processed/sft.jsonl",
+      "records": 881,
+      "sha256": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008"
+    },
+    "snapshot_manifest": {
+      "path": "data/manifests/web_snapshot_production_1835_v4_manifest.json",
+      "records": null,
+      "sha256": "3a128e62d81f7ffde2ef40936d4cd8e1b09bc718b9824f24b7e2fa682511f57e"
+    },
+    "trajectories": {
+      "path": "data/intermediate/distill/trajectories_1835.jsonl",
+      "records": 1820,
+      "sha256": "c60df4baf4d81db802b865d6a469ca8d863c4114025470285d1201c5bf9eb9a5"
+    }
+  },
+  "average_latency_seconds": 33.17222192362974,
+  "average_tool_calls": 10.88901098901099,
+  "average_turns": 10.824175824175825,
+  "cleaning": {
+    "format_accepted": 1699,
+    "format_rejected": 0,
+    "format_rejection_reasons": {},
+    "input": 1820,
+    "judge_accepted": 1463,
+    "judge_exception_retries": 2,
+    "judge_resumed": 1697,
+    "rejection_reasons": {
+      "repeated_action": 121
+    },
+    "rule_accepted": 1699,
+    "rule_rejected": 121,
+    "stages": {
+      "format": {
+        "after_count": 1699,
+        "before_count": 1699
+      },
+      "judge": {
+        "after_count": 1463,
+        "before_count": 1699
+      },
+      "rule": {
+        "after_count": 1699,
+        "before_count": 1820
+      }
+    }
+  },
+  "contamination": {
+    "dev_training_overlap": 0,
+    "parent_frozen_overlap": 0,
+    "parent_protected_overlap": 0,
+    "sft_rl_overlap": 0
+  },
+  "difficulty": {
+    "Easy": {
+      "final_pass_rate": 0.8569651741293532,
+      "frozen": 804,
+      "generated": 801,
+      "generation_rate": 0.996268656716418,
+      "judge_accepted": 689
+    },
+    "Hard": {
+      "final_pass_rate": 0.6850393700787402,
+      "frozen": 381,
+      "generated": 375,
+      "generation_rate": 0.984251968503937,
+      "judge_accepted": 261
+    },
+    "Medium": {
+      "final_pass_rate": 0.7892307692307692,
+      "frozen": 650,
+      "generated": 644,
+      "generation_rate": 0.9907692307692307,
+      "judge_accepted": 513
+    }
+  },
+  "format_rejection_reasons": {},
+  "frozen_queries": 1835,
+  "generated_failed": 15,
+  "generated_success": 1820,
+  "generation_failure_reasons": {
+    "TimeoutError: timed out": 4,
+    "model_call_limit_exceeded": 11
+  },
+  "generation_success_rate": 0.9918256130790191,
+  "judge_attempt1_infrastructure_failures": {
+    "archived_path": "data/intermediate/cleaning/judge-v1-mean4-min3-attempt1",
+    "judge_exception:JSONDecodeError": 1,
+    "judge_exception:TimeoutError": 1514,
+    "remaining_after_retry": 0,
+    "retry_policy": "exception-only; prompt and thresholds unchanged"
+  },
+  "judge_rejection_reasons": {
+    "judge_below_threshold": 236
+  },
+  "replay": {
+    "firecrawl_cloud_requests": 0,
+    "live_public_web_requests": 0,
+    "mode": "replay_only",
+    "provider_errors_replayed": {
+      "provider_client_error": 16,
+      "provider_server_error": 25,
+      "timeout": 48
+    },
+    "returned": 4189,
+    "run_id": "production-1835-replay-v4-fixed",
+    "snapshot_hits": 4278,
+    "snapshot_misses": 0,
+    "snapshot_not_preexisting": 0,
+    "unique_requests": 4278
+  },
+  "rule_rejection_reasons": {
+    "repeated_action": 121
+  },
+  "snapshot_content_sha256": "dbd160b6de284208c3906e9da0768cabfe3a77315e64280ea59685eefff15f92",
+  "source_code_commit": "e002008ddfe2fc46ea94c65a6791e65075329564",
+  "split": {
+    "algorithm_version": "fixed-hash-stratified-v1",
+    "all_training_ids_subset_of_frozen_1835": true,
+    "dev_count": 16,
+    "dev_training_overlap": 0,
+    "files": {
+      "dev": {
+        "path": "data/processed/dev.jsonl",
+        "sha256": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712"
+      },
+      "rl": {
+        "path": "data/processed/rl_queries.jsonl",
+        "sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80"
+      },
+      "sft": {
+        "path": "data/processed/sft.jsonl",
+        "sha256": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008"
+      }
+    },
+    "high_quality_input_count": 1463,
+    "parent_contamination": {
+      "frozen_overlap": 0,
+      "protected_comparisons": 2495600,
+      "protected_overlap": 0,
+      "selected": 1835
+    },
+    "parent_frozen_sha256": "cf2f694419f7a96e868d07507a0a26d648cfd885ce69cda7daae36b3d3d82e6e",
+    "rl_count": 200,
+    "rl_difficulty_quotas": {
+      "Easy": 94,
+      "Hard": 36,
+      "Medium": 70
+    },
+    "seed": 20261022,
+    "sft_count": 881,
+    "sft_rl_overlap": 0
+  },
+  "teacher": {
+    "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+    "prompt_version": "teacher-v4+production-web-budget-v1",
+    "revision": "0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe"
+  },
+  "tool_calls": {
+    "flight_search": 3091,
+    "nearby_search": 261,
+    "poi_search": 8467,
+    "route_planning": 1338,
+    "train_search": 213,
+    "weather": 131,
+    "web_scraping": 374,
+    "web_search": 5943
+  },
+  "tool_errors": {
+    "answer_required": 118,
+    "invalid_arguments": 4,
+    "provider_client_error": 23,
+    "provider_server_error": 37,
+    "repeated_action": 198,
+    "timeout": 74,
+    "tool_budget_exceeded": 886
+  },
+  "train_search": {
+    "calls": 213,
+    "query_count": 211,
+    "successful_observations": 213
+  },
+  "trip_scope": {
+    "multi_city": {
+      "final_pass_rate": 0.7838874680306905,
+      "frozen": 782,
+      "generated": 771,
+      "generation_rate": 0.9859335038363172,
+      "judge_accepted": 613
+    },
+    "single_city": {
+      "final_pass_rate": 0.8072174738841406,
+      "frozen": 1053,
+      "generated": 1049,
+      "generation_rate": 0.9962013295346629,
+      "judge_accepted": 850
+    }
+  },
+  "unknown_exceptions": 0,
+  "web_budget_exhaustion": {
+    "calls": 886,
+    "queries": 789,
+    "query_rate": 0.43351648351648353
+  }
+}

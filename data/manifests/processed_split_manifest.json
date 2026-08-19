@@ -1,0 +1,37 @@
+{
+  "algorithm_version": "fixed-hash-stratified-v1",
+  "all_training_ids_subset_of_frozen_1835": true,
+  "dev_count": 16,
+  "dev_training_overlap": 0,
+  "files": {
+    "dev": {
+      "path": "data/processed/dev.jsonl",
+      "sha256": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712"
+    },
+    "rl": {
+      "path": "data/processed/rl_queries.jsonl",
+      "sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80"
+    },
+    "sft": {
+      "path": "data/processed/sft.jsonl",
+      "sha256": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008"
+    }
+  },
+  "high_quality_input_count": 1463,
+  "parent_contamination": {
+    "frozen_overlap": 0,
+    "protected_comparisons": 2495600,
+    "protected_overlap": 0,
+    "selected": 1835
+  },
+  "parent_frozen_sha256": "cf2f694419f7a96e868d07507a0a26d648cfd885ce69cda7daae36b3d3d82e6e",
+  "rl_count": 200,
+  "rl_difficulty_quotas": {
+    "Easy": 94,
+    "Hard": 36,
+    "Medium": 70
+  },
+  "seed": 20261022,
+  "sft_count": 881,
+  "sft_rl_overlap": 0
+}

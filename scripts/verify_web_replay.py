@@ -11,6 +11,22 @@ from travel_agent_rl.tools.base import ToolExecutionError
 from travel_agent_rl.tools.firecrawl import FirecrawlScrape, FirecrawlSearch
 from travel_agent_rl.tools.web_snapshot import SnapshotWebTool, WebSnapshotStore
 
+SESSION_REJECTED_ERROR_CODES = frozenset(
+    {
+        "answer_required",
+        "invalid_agent_output",
+        "repeated_action",
+        "tool_budget_exceeded",
+        "unknown_tool",
+    }
+)
+
+
+def reached_web_provider(observation: dict[str, Any]) -> bool:
+    error = observation.get("error")
+    error_code = error.get("code") if isinstance(error, dict) else None
+    return error_code not in SESSION_REJECTED_ERROR_CODES
+
 
 def _calls(
     records: list[TrajectoryRecord], schema_version: int
@@ -20,9 +36,7 @@ def _calls(
         for call, observation in zip(record.tool_calls, record.tool_observations, strict=True):
             if call.name not in {"web_search", "web_scraping"}:
                 continue
-            error = observation.get("error")
-            error_code = error.get("code") if isinstance(error, dict) else None
-            if error_code == "tool_budget_exceeded":
+            if not reached_web_provider(observation):
                 continue
             key = WebSnapshotStore.request_key(call.name, call.arguments, schema_version)
             unique[key] = (call.name, call.arguments)
