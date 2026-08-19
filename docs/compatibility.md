@@ -55,6 +55,22 @@ Verified shard SHA-256 values:
 A minimal multi-turn GRPO parameter update remains a later M5 gate; import and
 inference success do not claim that training has already run.
 
+## External teacher provider gate
+
+On 2026-08-19 a new Google Cloud project with billing disabled could list the
+Gemini API model catalog, but every native and OpenAI-compatible generation
+request returned project-level HTTP 403 `Your project has been denied access`.
+The result was identical for Gemini and Gemma models, so this is an account or
+project access denial rather than a model-name, quota, or client defect. No
+paid tier was enabled and the blocked provider must not be represented as a
+working teacher.
+
+The distillation and judge code therefore remains provider-neutral. Mock
+end-to-end validation is complete; real generation stays gated until an
+authorized endpoint or an evidence-backed local teacher configuration passes a
+small smoke run. Any local teacher choice must be recorded separately and does
+not change the Qwen3-4B student/base-model target.
+
 `ds_report` found the fused Adam and CPU Adam build paths compatible with this
 toolchain. Optional `async_io` offload is currently unavailable because the
 host lacks `libaio` development headers; no system package was installed or
