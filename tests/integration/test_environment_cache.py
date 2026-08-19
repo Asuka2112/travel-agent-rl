@@ -32,3 +32,20 @@ def test_disk_cache_survives_environment_instance(tmp_path) -> None:
     assert second.cached is True
     assert second.data == first.data
 
+
+@pytest.mark.integration
+def test_disk_cache_isolated_by_namespace(tmp_path) -> None:
+    request = ToolRequest(tool_name="web_search", arguments={"query": "Hangzhou"})
+    first = TravelEnvironment(
+        build_mock_registry(),
+        cache_dir=tmp_path,
+        cache_namespace="provider-v1",
+    ).execute(request)
+    second = TravelEnvironment(
+        build_mock_registry(),
+        cache_dir=tmp_path,
+        cache_namespace="provider-v2",
+    ).execute(ToolRequest(tool_name="web_search", arguments={"query": "Hangzhou"}))
+
+    assert first.cached is False
+    assert second.cached is False

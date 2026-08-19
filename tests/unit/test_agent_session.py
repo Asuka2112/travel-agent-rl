@@ -67,3 +67,20 @@ def test_session_bounds_model_visible_tool_observation() -> None:
     assert payload["status"] == "ok"
     assert payload["tool_name"] == "oversized"
     assert "truncated" in transition.observation
+
+
+def test_session_enforces_combined_public_web_budget() -> None:
+    session = AgentSession(
+        TravelEnvironment(build_mock_registry()),
+        max_turns=5,
+        max_public_web_actions=2,
+    )
+    first = session.step(_call("web_search", {"query": "one"}))
+    second = session.step(_call("web_scraping", {"url": "https://example.test/two"}))
+    blocked = session.step(_call("web_search", {"query": "three"}))
+
+    assert first.error_code is None
+    assert second.error_code is None
+    assert blocked.error_code == "tool_budget_exceeded"
+    assert blocked.observation is not None
+    assert json.loads(blocked.observation)["agent_state"]["remaining_public_web_actions"] == 0

@@ -23,6 +23,16 @@ def write_jsonl(path: Path, rows: list[dict[str, object]]) -> None:
     temporary.replace(path)
 
 
+def write_json(path: Path, payload: dict[str, object]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.tmp")
+    temporary.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
@@ -40,8 +50,17 @@ def main() -> None:
     allowed_tools = set(build_mock_registry().names)
     rejected_reasons: Counter[str] = Counter()
     accepted: list[TrajectoryRecord] = []
+    audit: list[dict[str, object]] = []
     for record in records:
         result = apply_rule_filter(record, allowed_tools, max_turns=int(config["max_turns"]))
+        audit.append(
+            {
+                "accepted": result.accepted,
+                "query_id": record.query_id,
+                "reasons": result.reasons,
+                "stage": "rule",
+            }
+        )
         if result.accepted:
             accepted.append(record)
         else:
@@ -76,7 +95,19 @@ def main() -> None:
             minimum_dimension=float(config["judge_minimum_dimension"]),
         )
         for record in canonical:
-            if judge.evaluate(record).accepted:
+            decision = judge.evaluate(record)
+            audit.append(
+                {
+                    "accepted": decision.accepted,
+                    "prompt_version": decision.prompt_version,
+                    "query_id": record.query_id,
+                    "rationale": decision.rationale,
+                    "score_mean": decision.scores.mean,
+                    "scores": decision.scores.model_dump(mode="json"),
+                    "stage": "judge",
+                }
+            )
+            if decision.accepted:
                 judged.append(record)
         write_jsonl(
             root / config["judge_accepted_path"],
@@ -90,6 +121,8 @@ def main() -> None:
         "rejection_reasons": dict(sorted(rejected_reasons.items())),
         "judge_accepted": None if args.skip_judge else len(judged),
     }
+    write_jsonl(root / config["audit_path"], audit)
+    write_json(root / config["stats_path"], stats)
     print(json.dumps(stats, indent=2, sort_keys=True))
 
 

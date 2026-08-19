@@ -25,8 +25,8 @@ class AgentMessage(BaseModel):
 
 ParsedAgentOutput = ToolCall | FinalAnswer
 _PARSED_OUTPUT = TypeAdapter(ParsedAgentOutput)
-_TOOL_PATTERN = re.compile(r"^\s*<tool-call>\s*(.*?)\s*</tool-call>\s*$", re.DOTALL)
-_ANSWER_PATTERN = re.compile(r"^\s*<answer>\s*(.*?)\s*</answer>\s*$", re.DOTALL)
+_TOOL_PATTERN = re.compile(r"^\s*<tool-call>\s*(.*?)\s*</tool-call[>}]\s*$", re.DOTALL)
+_ANSWER_PATTERN = re.compile(r"^\s*<answer>\s*(.*?)\s*</answer[>}]\s*$", re.DOTALL)
 
 
 def parse_agent_output(text: str) -> ParsedAgentOutput:
@@ -40,4 +40,3 @@ def parse_agent_output(text: str) -> ParsedAgentOutput:
         return FinalAnswer(content=answer_match.group(1).strip())
 
     raise ValueError("assistant output must contain exactly one complete tool-call or answer block")
-

@@ -13,6 +13,13 @@
 | `flight_search` | local versioned inventory | same local simulator |
 | `train_search` | local versioned inventory | same local simulator |
 
+For Agent-STAR distillation, `build_distillation_registry` replaces US-oriented
+POI, nearby, flight, and ground-route calls with the fixed-revision
+Agent-STAR TravelDatabase. Weather remains AMap-backed, Firecrawl remains an
+optional public-web fallback, and train search remains a deterministic fixture.
+Each provider/data revision gets a distinct tool-cache namespace so cached
+responses cannot cross provider boundaries.
+
 Official references:
 
 - https://lbs.amap.com/api/webservice/guide/api/search/
@@ -49,3 +56,6 @@ key. Until credentialed coverage is measured, non-China travel queries must use
 web evidence or a license-cleared local travel database; this is an explicit
 M2/M3 risk, not assumed provider coverage.
 
+The local TravelDatabase path now mitigates that risk for 2022 US tasks. It
+does not make AMap an overseas provider and does not replace live-provider
+coverage tests for China-oriented traffic or weather use cases.

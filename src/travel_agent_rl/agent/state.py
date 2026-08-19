@@ -113,16 +113,26 @@ class SessionTransition(BaseModel):
 
 
 class AgentSession:
+    PUBLIC_WEB_TOOLS = frozenset({"web_search", "web_scraping"})
     FORCE_ANSWER_MESSAGE = (
         "Maximum tool-action turns reached. Return one final response inside "
         "<answer>...</answer> and do not call another tool."
     )
 
-    def __init__(self, environment: TravelEnvironment, max_turns: int = 13) -> None:
+    def __init__(
+        self,
+        environment: TravelEnvironment,
+        max_turns: int = 13,
+        max_public_web_actions: int | None = None,
+    ) -> None:
         if max_turns < 1:
             raise ValueError("max_turns must be positive")
+        if max_public_web_actions is not None and max_public_web_actions < 0:
+            raise ValueError("max_public_web_actions cannot be negative")
         self.environment = environment
         self.max_turns = max_turns
+        self.max_public_web_actions = max_public_web_actions
+        self.public_web_actions_used = 0
         self.turns_used = 0
         self.status = SessionStatus.RUNNING
         self.action_counts: Counter[str] = Counter()
@@ -160,11 +170,22 @@ class AgentSession:
         self.turns_used += 1
         if self.action_counts[action_key] > 1:
             return self._tool_error("repeated_action", "identical tool action already executed")
+        if parsed.name in self.PUBLIC_WEB_TOOLS and self.max_public_web_actions is not None:
+            if self.public_web_actions_used >= self.max_public_web_actions:
+                return self._tool_error(
+                    "tool_budget_exceeded",
+                    "public web action budget exhausted; use local evidence or answer",
+                )
+            self.public_web_actions_used += 1
 
         response = self.environment.execute(
             ToolRequest(tool_name=parsed.name, arguments=parsed.arguments)
         )
-        observation = _render_tool_observation(response)
+        response_for_model = response.model_copy(
+            update={"data": {**response.data, "_agent_state": self._agent_state()}},
+            deep=True,
+        )
+        observation = _render_tool_observation(response_for_model)
         if self.turns_used >= self.max_turns:
             self.status = SessionStatus.FORCE_ANSWER
             observation = f"{observation}\n{self.FORCE_ANSWER_MESSAGE}"
@@ -179,7 +200,11 @@ class AgentSession:
         if self.turns_used >= self.max_turns:
             self.status = SessionStatus.FORCE_ANSWER
         observation = json.dumps(
-            {"status": "error", "error": {"code": code, "message": message}},
+            {
+                "status": "error",
+                "error": {"code": code, "message": message},
+                "agent_state": self._agent_state(),
+            },
             sort_keys=True,
         )
         if self.status is SessionStatus.FORCE_ANSWER:
@@ -192,12 +217,29 @@ class AgentSession:
         )
 
     def _force_transition(self, error_code: str) -> SessionTransition:
+        observation = json.dumps(
+            {
+                "status": "error",
+                "error": {"code": error_code, "message": self.FORCE_ANSWER_MESSAGE},
+                "agent_state": self._agent_state(),
+            },
+            sort_keys=True,
+        )
         return SessionTransition(
             status=SessionStatus.FORCE_ANSWER,
             turns_used=self.turns_used,
-            observation=self.FORCE_ANSWER_MESSAGE,
+            observation=f"{observation}\n{self.FORCE_ANSWER_MESSAGE}",
             error_code=error_code,
         )
+
+    def _agent_state(self) -> dict[str, int | None]:
+        remaining_web = None
+        if self.max_public_web_actions is not None:
+            remaining_web = max(0, self.max_public_web_actions - self.public_web_actions_used)
+        return {
+            "remaining_tool_turns": max(0, self.max_turns - self.turns_used),
+            "remaining_public_web_actions": remaining_web,
+        }
 
     def _finish(self, answer: str) -> SessionTransition:
         self.status = SessionStatus.FINISHED

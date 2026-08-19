@@ -3,10 +3,14 @@ prompt_version: teacher-v1
 prompt_path: prompts/teacher/v1.txt
 max_turns: 13
 max_model_calls: 15
+max_public_web_actions: 2
 concurrency: 8
 input_path: data/processed/candidate_train.jsonl
 output_path: data/intermediate/qwen30b_teacher_trajectories.jsonl
 failed_path: data/intermediate/qwen30b_teacher_failures.jsonl
+tool_registry: local_travel_database
+database_path: data/processed/agent_star_travel.sqlite3
+tool_cache_namespace: agent-star-travel-db-985c8c7-v1
 provider:
   base_url_env: TEACHER_BASE_URL
   api_key_env: TEACHER_API_KEY

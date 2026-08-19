@@ -73,3 +73,47 @@ def build_live_registry(
             TrainSearchSimulator(root / "data/fixtures/train_inventory.json"),
         )
     )
+
+
+def build_distillation_registry(
+    root: Path,
+    *,
+    database_path: Path | None = None,
+    amap_api_key: str | None = None,
+    firecrawl_api_key: str | None = None,
+) -> ToolRegistry:
+    from .amap import AmapWeather
+    from .firecrawl import FirecrawlScrape, FirecrawlSearch
+    from .local_database import (
+        LocalFlightSearch,
+        LocalGroundRoutePlanning,
+        LocalTravelNearbySearch,
+        LocalTravelPoiSearch,
+    )
+    from .simulator import TrainSearchSimulator
+
+    amap_key = amap_api_key or os.getenv("AMAP_API_KEY")
+    firecrawl_key = firecrawl_api_key or os.getenv("FIRECRAWL_API_KEY")
+    missing = [
+        name
+        for name, value in (
+            ("AMAP_API_KEY", amap_key),
+            ("FIRECRAWL_API_KEY", firecrawl_key),
+        )
+        if not value
+    ]
+    if missing:
+        raise ValueError(f"missing distillation-tool credentials: {', '.join(missing)}")
+    resolved_database = database_path or root / "data/processed/agent_star_travel.sqlite3"
+    return ToolRegistry(
+        (
+            LocalTravelPoiSearch(resolved_database),
+            LocalTravelNearbySearch(resolved_database),
+            AmapWeather(amap_key),
+            LocalGroundRoutePlanning(resolved_database),
+            FirecrawlSearch(firecrawl_key),
+            FirecrawlScrape(firecrawl_key),
+            LocalFlightSearch(resolved_database),
+            TrainSearchSimulator(root / "data/fixtures/train_inventory.json"),
+        )
+    )

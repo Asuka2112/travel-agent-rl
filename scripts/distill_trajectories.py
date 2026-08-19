@@ -19,7 +19,11 @@ from travel_agent_rl.distill import (
     TrajectoryDistiller,
 )
 from travel_agent_rl.env import TravelEnvironment
-from travel_agent_rl.tools import build_live_registry, build_mock_registry
+from travel_agent_rl.tools import (
+    build_distillation_registry,
+    build_live_registry,
+    build_mock_registry,
+)
 
 
 class MockTeacherBackend:
@@ -84,8 +88,7 @@ def main() -> None:
     else:
         provider = config["provider"]
         required = {
-            name: os.getenv(provider[f"{name}_env"])
-            for name in ("api_key", "base_url", "model")
+            name: os.getenv(provider[f"{name}_env"]) for name in ("api_key", "base_url", "model")
         }
         missing = [name for name, value in required.items() if not value]
         if missing:
@@ -94,7 +97,13 @@ def main() -> None:
             OpenAICompatibleChatBackend(**required),
             max_attempts=int(provider.get("max_attempts", 3)),
         )
-        registry = build_live_registry(root)
+        if config.get("tool_registry") == "local_travel_database":
+            registry = build_distillation_registry(
+                root,
+                database_path=root / config["database_path"],
+            )
+        else:
+            registry = build_live_registry(root)
 
     prompt = f"{prompt.rstrip()}\n\nAvailable tools:\n{render_tool_catalog(registry)}\n"
 
@@ -102,8 +111,13 @@ def main() -> None:
         environment = TravelEnvironment(
             registry,
             cache_dir=root / "data/intermediate/tool_cache",
+            cache_namespace=str(config.get("tool_cache_namespace", "default")),
         )
-        return AgentSession(environment, max_turns=int(config["max_turns"]))
+        return AgentSession(
+            environment,
+            max_turns=int(config["max_turns"]),
+            max_public_web_actions=config.get("max_public_web_actions"),
+        )
 
     distiller = TrajectoryDistiller(
         backend,

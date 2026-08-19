@@ -5,6 +5,11 @@
       "records": 17386,
       "sha256": "36a575c22ba0af78e2b2cde9be639fcf325365b116fb9702e0472452aeaca358"
     },
+    "agent_star_travel.sqlite3": {
+      "bytes": 481374208,
+      "path": "data/processed/agent_star_travel.sqlite3",
+      "sha256": "b73fd25173c8d16fad8b7448c4bce8306ac3a451fc92eb302db7ecf92a6b5eb6"
+    },
     "contamination_excluded.jsonl": {
       "path": "data/processed/contamination_excluded.jsonl",
       "records": 108,
@@ -47,6 +52,36 @@
       "path": "data/raw/travelplanner/test.csv",
       "records": 1000,
       "sha256": "d1c8918683455ee9986e2e61a1aa31cf8f7a493a775b6d7ff59f26a421b89cc1"
+    },
+    {
+      "bytes": 817982,
+      "path": "data/raw/agent_star_travel_database/attractions.csv",
+      "records": 5302,
+      "sha256": "8007fa851ba5b3adb205fbd298169c95116b297cef7ccd21dbea26ecce2605d8"
+    },
+    {
+      "bytes": 304807007,
+      "path": "data/raw/agent_star_travel_database/clean_Flights_2022.csv",
+      "records": 3827360,
+      "sha256": "8dafdb0e3f8b79ce599a1e612a772865295bc226b46e5fb278368f7255b11cee"
+    },
+    {
+      "bytes": 520458,
+      "path": "data/raw/agent_star_travel_database/clean_accommodations_2022.csv",
+      "records": 5047,
+      "sha256": "7e70cc8cb573e824267be47153a3cf7934c839f01c955fb523d18be405921d86"
+    },
+    {
+      "bytes": 683023,
+      "path": "data/raw/agent_star_travel_database/clean_restaurant_2022.csv",
+      "records": 9551,
+      "sha256": "a38ef00a3398b1ef78306a9b1851c491723d27899c6a1d4a3d6fe042929c0f26"
+    },
+    {
+      "bytes": 795427,
+      "path": "data/raw/agent_star_travel_database/distance.csv",
+      "records": 17602,
+      "sha256": "7dc1a26dc7877ae96ce63e74be0d9660bbdef96ffccaffce441128e3a4864a27"
     }
   ],
   "source_revisions": {
@@ -55,6 +90,12 @@
       "repository": "xxwu/Agent-STAR-TravelDataset",
       "revision": "d644daaffe2c6a1ec63d86c70fe4c639215f28ee",
       "url": "https://huggingface.co/datasets/xxwu/Agent-STAR-TravelDataset"
+    },
+    "agent_star_travel_database": {
+      "declared_license": "mit",
+      "repository": "xxwu/Agent-STAR-TravelDatabase",
+      "revision": "985c8c7ba3e6beb986b3b0a55a2b064d18f2e68e",
+      "url": "https://huggingface.co/datasets/xxwu/Agent-STAR-TravelDatabase"
     },
     "travelplanner": {
       "declared_license": "cc-by-4.0",

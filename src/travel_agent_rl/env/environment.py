@@ -24,20 +24,27 @@ class TravelEnvironment:
         registry: ToolRegistry,
         max_attempts: int = 2,
         cache_dir: Path | None = None,
+        cache_namespace: str = "default",
     ) -> None:
         if max_attempts < 1:
             raise ValueError("max_attempts must be positive")
+        if not cache_namespace.strip():
+            raise ValueError("cache_namespace must not be empty")
         self.registry = registry
         self.max_attempts = max_attempts
         self.cache_dir = cache_dir
+        self.cache_namespace = cache_namespace
         self._cache: dict[str, ToolResponse] = {}
         if self.cache_dir is not None:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-    @staticmethod
-    def _cache_key(request: ToolRequest) -> str:
+    def _cache_key(self, request: ToolRequest) -> str:
         canonical = json.dumps(
-            {"tool_name": request.tool_name, "arguments": request.arguments},
+            {
+                "cache_namespace": self.cache_namespace,
+                "tool_name": request.tool_name,
+                "arguments": request.arguments,
+            },
             sort_keys=True,
             ensure_ascii=False,
             separators=(",", ":"),
