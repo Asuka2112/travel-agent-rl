@@ -26,6 +26,8 @@ class TrajectoryDistiller:
         system_prompt: str,
         *,
         prompt_version: str = "teacher-v1",
+        teacher_revision: str | None = None,
+        snapshot_version: int | None = None,
         max_model_calls: int = 15,
         input_cost_per_million: float | None = None,
         output_cost_per_million: float | None = None,
@@ -36,11 +38,18 @@ class TrajectoryDistiller:
         self.session_factory = session_factory
         self.system_prompt = system_prompt
         self.prompt_version = prompt_version
+        self.teacher_revision = teacher_revision
+        self.snapshot_version = snapshot_version
         self.max_model_calls = max_model_calls
         self.input_cost_per_million = input_cost_per_million
         self.output_cost_per_million = output_cost_per_million
 
-    def generate(self, query_id: str, query: str) -> TrajectoryRecord:
+    def generate(
+        self,
+        query_id: str,
+        query: str,
+        query_metadata: dict[str, object] | None = None,
+    ) -> TrajectoryRecord:
         started_at = datetime.now(timezone.utc)
         started = perf_counter()
         session = self.session_factory()
@@ -123,19 +132,28 @@ class TrajectoryDistiller:
         finished_at = datetime.now(timezone.utc)
         metadata = TrajectoryMetadata(
             query_id=query_id,
+            difficulty=(
+                str(query_metadata["difficulty"])
+                if query_metadata and query_metadata.get("difficulty")
+                else None
+            ),
             teacher_model=teacher_model,
+            teacher_revision=self.teacher_revision,
             prompt_version=self.prompt_version,
+            snapshot_version=self.snapshot_version,
             started_at=started_at,
             finished_at=finished_at,
             number_of_turns=session.turns_used,
             number_of_model_calls=model_calls,
             tools_used=[call.name for call in tool_calls],
+            tool_sequence=[call.name for call in tool_calls],
             success=bool(final_answer) and not exceptions,
             exceptions=exceptions,
             protocol_errors=protocol_errors,
             token_usage=usage,
             latency_seconds=perf_counter() - started,
             estimated_api_cost_usd=cost,
+            source_query_metadata=query_metadata or {},
         )
         return TrajectoryRecord(
             query_id=query_id,
@@ -168,7 +186,7 @@ class DistillationPipeline:
 
     def run(
         self,
-        queries: Iterable[tuple[str, str]],
+        queries: Iterable[tuple[str, str] | tuple[str, str, dict[str, object]]],
         output_path: Path,
         failed_path: Path,
         *,
@@ -179,8 +197,8 @@ class DistillationPipeline:
     ) -> dict[str, int]:
         if checkpoint_every < 1:
             raise ValueError("checkpoint_every must be positive")
-        query_rows = list(queries)
-        query_ids = {query_id for query_id, _ in query_rows}
+        query_rows = [self._normalize_query(row) for row in queries]
+        query_ids = {query_id for query_id, _, _ in query_rows}
         output_path.parent.mkdir(parents=True, exist_ok=True)
         failed_path.parent.mkdir(parents=True, exist_ok=True)
         if raw_dir is not None:
@@ -189,13 +207,17 @@ class DistillationPipeline:
             self._rebuild_outputs(raw_dir, output_path, index_path)
         else:
             completed = self._completed_ids(output_path)
-        pending = [(query_id, query) for query_id, query in query_rows if query_id not in completed]
+        pending = [
+            (query_id, query, metadata)
+            for query_id, query, metadata in query_rows
+            if query_id not in completed
+        ]
         stats = {"submitted": len(pending), "resumed": len(completed), "succeeded": 0, "failed": 0}
         processed_since_start = 0
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = {
-                executor.submit(self.distiller.generate, query_id, query): query_id
-                for query_id, query in pending
+                executor.submit(self.distiller.generate, query_id, query, metadata): query_id
+                for query_id, query, metadata in pending
             }
             for future in as_completed(futures):
                 query_id = futures[future]
@@ -231,6 +253,16 @@ class DistillationPipeline:
         if checkpoint_path is not None:
             self._write_checkpoint(checkpoint_path, stats)
         return stats
+
+    @staticmethod
+    def _normalize_query(
+        row: tuple[str, str] | tuple[str, str, dict[str, object]],
+    ) -> tuple[str, str, dict[str, object]]:
+        if len(row) == 2:
+            query_id, query = row
+            return query_id, query, {}
+        query_id, query, metadata = row
+        return query_id, query, metadata
 
     @staticmethod
     def _raw_filename(query_id: str) -> str:
@@ -286,6 +318,13 @@ class DistillationPipeline:
                     "query_id": record["query_id"],
                     "raw_path": str(path.relative_to(raw_dir.parent)),
                     "success": record.get("metadata", {}).get("success"),
+                    "difficulty": record.get("metadata", {}).get("difficulty"),
+                    "teacher_model": record.get("metadata", {}).get("teacher_model"),
+                    "teacher_revision": record.get("metadata", {}).get("teacher_revision"),
+                    "snapshot_version": record.get("metadata", {}).get("snapshot_version"),
+                    "number_of_turns": record.get("metadata", {}).get("number_of_turns"),
+                    "token_usage": record.get("metadata", {}).get("token_usage", {}),
+                    "exceptions": record.get("metadata", {}).get("exceptions", []),
                     "latency_seconds": record.get("metadata", {}).get("latency_seconds"),
                     "tools_used": record.get("metadata", {}).get("tools_used", []),
                 }

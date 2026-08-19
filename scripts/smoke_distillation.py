@@ -50,8 +50,7 @@ def main() -> None:
             queries, output, root / "failed.jsonl"
         )
         records = [
-            TrajectoryRecord.model_validate_json(line)
-            for line in output.read_text().splitlines()
+            TrajectoryRecord.model_validate_json(line) for line in output.read_text().splitlines()
         ]
         accepted = [
             canonicalize_trajectory(record)

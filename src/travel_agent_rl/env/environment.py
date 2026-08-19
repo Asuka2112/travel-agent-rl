@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from time import perf_counter
 from pathlib import Path
 from jsonschema import ValidationError
+from pydantic import ValidationError as PydanticValidationError
+from uuid import uuid4
 
 from travel_agent_rl.tools.base import (
     ToolError,
@@ -147,7 +150,12 @@ class TravelEnvironment:
         path = self.cache_dir / f"{key}.json"
         if not path.exists():
             return None
-        response = ToolResponse.model_validate_json(path.read_text())
+        try:
+            response = ToolResponse.model_validate_json(path.read_text())
+        except (PydanticValidationError, UnicodeDecodeError):
+            quarantine = path.with_name(f"{path.name}.corrupt.{uuid4().hex}")
+            path.replace(quarantine)
+            return None
         self._cache[key] = response
         return response
 
@@ -155,6 +163,6 @@ class TravelEnvironment:
         if self.cache_dir is None:
             return
         target = self.cache_dir / f"{key}.json"
-        temporary = self.cache_dir / f".{key}.tmp"
+        temporary = self.cache_dir / f".{key}.{os.getpid()}.{uuid4().hex}.tmp"
         temporary.write_text(response.model_dump_json())
         temporary.replace(target)

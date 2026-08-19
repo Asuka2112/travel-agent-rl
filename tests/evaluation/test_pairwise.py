@@ -10,4 +10,3 @@ def test_pairwise_evaluation_swaps_position() -> None:
 def test_pairwise_rejects_identical_candidates() -> None:
     with pytest.raises(ValueError):
         bidirectional_pairs("base", "base")
-

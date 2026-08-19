@@ -36,9 +36,7 @@ class FirecrawlTool(BaseTool):
         self.client = client or httpx.Client(timeout=httpx.Timeout(30.0))
         self.http = JsonHttpClient(self.client, "firecrawl")
 
-    def _post(
-        self, endpoint: str, body: dict[str, Any]
-    ) -> tuple[dict[str, Any], dict[str, Any]]:
+    def _post(self, endpoint: str, body: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else None
         payload, metadata = self.http.request_json_with_metadata(
             "POST",

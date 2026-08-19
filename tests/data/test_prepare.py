@@ -99,4 +99,3 @@ def test_prepare_data_excludes_protected_and_freezes_disjoint_split(tmp_path: Pa
         for line in (tmp_path / "data/processed/candidate_train.jsonl").read_text().splitlines()
     }
     assert not set(frozen["ids"]) & train_ids
-

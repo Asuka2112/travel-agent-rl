@@ -42,15 +42,26 @@ class MockTeacherBackend:
         return ChatResult(content=content, model=self.model, usage=TokenUsage())
 
 
-def read_queries(path: Path, limit: int | None) -> list[tuple[str, str]]:
-    queries: list[tuple[str, str]] = []
+def read_queries(path: Path, limit: int | None) -> list[tuple[str, str, dict[str, object]]]:
+    queries: list[tuple[str, str, dict[str, object]]] = []
     with path.open(encoding="utf-8") as handle:
         for line_number, line in enumerate(handle, start=1):
             if not line.strip():
                 continue
             row = json.loads(line)
             try:
-                queries.append((str(row["query_id"]), str(row["query"])))
+                attributes = (
+                    row.get("attributes") if isinstance(row.get("attributes"), dict) else {}
+                )
+                difficulty = row.get("difficulty") or attributes.get("level")
+                query_metadata: dict[str, object] = {
+                    "difficulty": difficulty,
+                    "attributes": attributes,
+                    "source": row.get("source", {}),
+                    "canonical_sha256": row.get("canonical_sha256"),
+                    "constraint_sha256": row.get("constraint_sha256"),
+                }
+                queries.append((str(row["query_id"]), str(row["query"]), query_metadata))
             except KeyError as exc:
                 raise ValueError(f"missing query field on line {line_number}") from exc
             if limit is not None and len(queries) >= limit:
@@ -128,6 +139,10 @@ def main() -> None:
         session_factory,
         prompt,
         prompt_version=config["prompt_version"],
+        teacher_revision=config.get("model", {}).get("revision"),
+        snapshot_version=(
+            int(os.environ["WEB_SNAPSHOT_VERSION"]) if os.getenv("WEB_SNAPSHOT_VERSION") else None
+        ),
         max_model_calls=int(config["max_model_calls"]),
     )
     pipeline = DistillationPipeline(

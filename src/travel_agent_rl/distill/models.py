@@ -12,19 +12,24 @@ from .client import TokenUsage
 
 class TrajectoryMetadata(BaseModel):
     query_id: str
+    difficulty: str | None = None
     teacher_model: str
+    teacher_revision: str | None = None
     prompt_version: str
+    snapshot_version: int | None = Field(default=None, ge=1)
     started_at: datetime
     finished_at: datetime
     number_of_turns: int = Field(ge=0)
     number_of_model_calls: int = Field(default=0, ge=0)
     tools_used: list[str] = Field(default_factory=list)
+    tool_sequence: list[str] = Field(default_factory=list)
     success: bool
     exceptions: list[str] = Field(default_factory=list)
     protocol_errors: list[str] = Field(default_factory=list)
     token_usage: TokenUsage = Field(default_factory=TokenUsage)
     latency_seconds: float = Field(ge=0)
     estimated_api_cost_usd: float | None = Field(default=None, ge=0)
+    source_query_metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class TrajectoryRecord(BaseModel):

@@ -57,21 +57,38 @@ def _atomic_write(path: Path, payload: bytes) -> None:
 
 
 class WebSnapshotStore:
-    def __init__(self, root: Path, *, run_id: str = "unspecified") -> None:
+    def __init__(
+        self,
+        root: Path,
+        *,
+        run_id: str = "unspecified",
+        schema_version: int | None = None,
+    ) -> None:
         self.root = root
         self.run_id = run_id
-        self.requests_dir = root / f"v{SNAPSHOT_SCHEMA_VERSION}" / "requests"
-        self.documents_dir = root / f"v{SNAPSHOT_SCHEMA_VERSION}" / "documents"
-        self.locks_dir = root / f"v{SNAPSHOT_SCHEMA_VERSION}" / "locks"
-        self.events_path = root / f"v{SNAPSHOT_SCHEMA_VERSION}" / "events.jsonl"
+        resolved_version = schema_version
+        if resolved_version is None:
+            resolved_version = int(os.getenv("WEB_SNAPSHOT_VERSION", SNAPSHOT_SCHEMA_VERSION))
+        if resolved_version < 1:
+            raise ValueError("snapshot schema version must be positive")
+        self.schema_version = resolved_version
+        version_root = root / f"v{self.schema_version}"
+        self.requests_dir = version_root / "requests"
+        self.documents_dir = version_root / "documents"
+        self.locks_dir = version_root / "locks"
+        self.events_path = version_root / "events.jsonl"
         self.locks_dir.mkdir(parents=True, exist_ok=True)
 
     @staticmethod
-    def request_key(tool_name: str, arguments: dict[str, Any]) -> str:
+    def request_key(
+        tool_name: str,
+        arguments: dict[str, Any],
+        schema_version: int = SNAPSHOT_SCHEMA_VERSION,
+    ) -> str:
         return _sha256(
             _canonical_json(
                 {
-                    "schema_version": SNAPSHOT_SCHEMA_VERSION,
+                    "schema_version": schema_version,
                     "tool_name": tool_name,
                     "arguments": arguments,
                 }
@@ -113,7 +130,7 @@ class WebSnapshotStore:
         arguments: dict[str, Any],
         mode: WebMode,
     ) -> tuple[dict[str, Any], bool]:
-        key = self.request_key(tool.name, arguments)
+        key = self.request_key(tool.name, arguments, self.schema_version)
         lock_path = self.locks_dir / f"{key}.lock"
         with lock_path.open("a+") as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
@@ -167,7 +184,7 @@ class WebSnapshotStore:
                     "provider": exc.provider,
                 }
                 record = {
-                    "schema_version": SNAPSHOT_SCHEMA_VERSION,
+                    "schema_version": self.schema_version,
                     "request_key": key,
                     "tool_name": tool.name,
                     "request": arguments,
@@ -203,7 +220,7 @@ class WebSnapshotStore:
                 if not document_path.exists():
                     _atomic_write(document_path, _canonical_json(document))
             record = {
-                "schema_version": SNAPSHOT_SCHEMA_VERSION,
+                "schema_version": self.schema_version,
                 "request_key": key,
                 "tool_name": tool.name,
                 "request": arguments,

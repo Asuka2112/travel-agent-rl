@@ -5,4 +5,3 @@ def bidirectional_pairs(left: str, right: str) -> tuple[tuple[str, str], tuple[s
     if left == right:
         raise ValueError("pairwise candidates must be distinct")
     return ((left, right), (right, left))
-

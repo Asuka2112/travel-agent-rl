@@ -12,7 +12,9 @@ from travel_agent_rl.tools.firecrawl import FirecrawlScrape, FirecrawlSearch
 from travel_agent_rl.tools.web_snapshot import SnapshotWebTool, WebSnapshotStore
 
 
-def _calls(records: list[TrajectoryRecord]) -> list[tuple[str, dict[str, Any]]]:
+def _calls(
+    records: list[TrajectoryRecord], schema_version: int
+) -> list[tuple[str, dict[str, Any]]]:
     unique: dict[str, tuple[str, dict[str, Any]]] = {}
     for record in records:
         for call, observation in zip(record.tool_calls, record.tool_observations, strict=True):
@@ -22,7 +24,7 @@ def _calls(records: list[TrajectoryRecord]) -> list[tuple[str, dict[str, Any]]]:
             error_code = error.get("code") if isinstance(error, dict) else None
             if error_code == "tool_budget_exceeded":
                 continue
-            key = WebSnapshotStore.request_key(call.name, call.arguments)
+            key = WebSnapshotStore.request_key(call.name, call.arguments, schema_version)
             unique[key] = (call.name, call.arguments)
     return [unique[key] for key in sorted(unique)]
 
@@ -47,6 +49,7 @@ def main() -> None:
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--base-url", default="http://127.0.0.1:9/v1")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--snapshot-version", type=int, default=1)
     args = parser.parse_args()
 
     records = [
@@ -54,7 +57,11 @@ def main() -> None:
         for line in args.input.read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
-    store = WebSnapshotStore(args.snapshot_path, run_id=args.run_id)
+    store = WebSnapshotStore(
+        args.snapshot_path,
+        run_id=args.run_id,
+        schema_version=args.snapshot_version,
+    )
     tools = {
         "web_search": SnapshotWebTool(
             FirecrawlSearch(
@@ -75,7 +82,7 @@ def main() -> None:
             mode=args.mode,
         ),
     }
-    calls = _calls(records)
+    calls = _calls(records, args.snapshot_version)
     provider_errors: dict[str, int] = {}
     snapshot_misses = 0
     returned = 0

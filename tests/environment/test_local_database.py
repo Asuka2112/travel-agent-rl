@@ -9,6 +9,7 @@ from travel_agent_rl.tools.local_database import (
     LocalTravelNearbySearch,
     LocalTravelPoiSearch,
 )
+from travel_agent_rl.tools.simulator import TrainSearchSimulator
 
 
 def _database(tmp_path: Path) -> Path:
@@ -113,3 +114,33 @@ def test_local_nearby_and_ground_route_are_deterministic(tmp_path: Path) -> None
     assert nearby["count"] == 1
     assert nearby["items"][0]["distance_m"] < 20
     assert route["route"]["estimated_cost_usd"] == 45
+
+
+def test_train_simulator_applies_versioned_route_to_requested_date(tmp_path: Path) -> None:
+    inventory = tmp_path / "trains.json"
+    inventory.write_text(
+        '[{"number":"T1","operator":"sim","origin":"Boston",'
+        '"destination":"New York City","departure":"08:00","arrival":"12:00",'
+        '"duration":"4h","price_usd":40.0}]',
+        encoding="utf-8",
+    )
+    result = TrainSearchSimulator(inventory).run(
+        {"origin": "boston", "destination": "NEW YORK CITY", "date": "2022-06-07"}
+    )
+
+    assert result["count"] == 1
+    assert result["simulator"] is True
+    assert result["options"][0]["date"] == "2022-06-07"
+    assert result["options"][0]["price_usd"] == 40.0
+
+
+def test_train_simulator_returns_consistent_empty_result(tmp_path: Path) -> None:
+    inventory = tmp_path / "trains.json"
+    inventory.write_text("[]", encoding="utf-8")
+
+    result = TrainSearchSimulator(inventory).run(
+        {"origin": "Boston", "destination": "Miami", "date": "2022-06-07"}
+    )
+
+    assert result["count"] == 0
+    assert "No simulated direct train route" in result["guidance"]

@@ -69,11 +69,11 @@ class JudgeBackend:
     def complete(self, messages, system_prompt):
         return ChatResult(
             model=self.model,
-            content='''```json
+            content="""```json
 {"scores":{"task_relevance":5,"completeness":4,"constraint_satisfaction":4,
 "factual_grounding":5,"tool_use_correctness":5,"tool_efficiency":4,
 "final_answer_quality":4},"rationale":"Grounded and efficient."}
-```''',
+```""",
             usage=TokenUsage(),
         )
 

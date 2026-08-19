@@ -31,12 +31,8 @@ def validate_snapshot(root: Path) -> dict[str, Any]:
     frozen_ids = {row["query_id"] for row in rows_by_name["frozen_test.jsonl"]}
     if train_ids & frozen_ids:
         raise ValueError("train and frozen query IDs overlap")
-    train_constraints = {
-        row["constraint_sha256"] for row in rows_by_name["candidate_train.jsonl"]
-    }
-    frozen_constraints = {
-        row["constraint_sha256"] for row in rows_by_name["frozen_test.jsonl"]
-    }
+    train_constraints = {row["constraint_sha256"] for row in rows_by_name["candidate_train.jsonl"]}
+    frozen_constraints = {row["constraint_sha256"] for row in rows_by_name["frozen_test.jsonl"]}
     if train_constraints & frozen_constraints:
         raise ValueError("train and frozen constraint fingerprints overlap")
 
@@ -52,4 +48,3 @@ def validate_snapshot(root: Path) -> dict[str, Any]:
         "train_frozen_id_overlap": 0,
         "train_frozen_constraint_overlap": 0,
     }
-

@@ -17,4 +17,3 @@ def combine_rewards(scores: Mapping[str, float], weights: Mapping[str, float]) -
     if unknown:
         raise ValueError(f"unknown reward components: {sorted(unknown)}")
     return sum(scores.get(name, 0.0) * weights.get(name, 0.0) for name in REWARD_COMPONENTS)
-

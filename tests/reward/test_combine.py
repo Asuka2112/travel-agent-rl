@@ -13,4 +13,3 @@ def test_six_required_reward_components_are_explicit() -> None:
 def test_unknown_reward_is_rejected() -> None:
     with pytest.raises(ValueError):
         combine_rewards({"opaque_reward": 1.0}, {})
-

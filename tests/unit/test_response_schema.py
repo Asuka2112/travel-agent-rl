@@ -17,4 +17,3 @@ def test_success_response_rejects_error() -> None:
             status=ToolStatus.OK,
             error=ToolError(code="bad", message="bad"),
         )
-

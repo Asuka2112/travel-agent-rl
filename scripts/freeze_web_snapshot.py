@@ -29,9 +29,10 @@ def main() -> None:
         "--snapshot-path", type=Path, default=Path("data/intermediate/web_snapshot")
     )
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--version", type=int, default=1)
     args = parser.parse_args()
 
-    version_root = args.snapshot_path / "v1"
+    version_root = args.snapshot_path / f"v{args.version}"
     request_paths = sorted((version_root / "requests").rglob("*.json"))
     document_paths = sorted((version_root / "documents").rglob("*.json"))
     if not request_paths:
@@ -54,7 +55,7 @@ def main() -> None:
     )
     manifest = {
         "immutable": True,
-        "snapshot_schema_version": 1,
+        "snapshot_schema_version": args.version,
         "frozen_at": frozen_at,
         "snapshot_content_sha256": sha256_bytes(canonical(file_entries)),
         "request_records": len(request_paths),

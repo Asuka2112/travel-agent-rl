@@ -54,6 +54,23 @@ def test_generates_complete_multi_turn_trajectory() -> None:
     ]
 
 
+def test_generation_records_production_provenance() -> None:
+    backend = ScriptedBackend(["<answer>done</answer>"])
+    record = TrajectoryDistiller(
+        backend,
+        session_factory,
+        "prompt",
+        teacher_revision="revision-1",
+        snapshot_version=4,
+    ).generate("q1", "plan", {"difficulty": "Hard", "source": {"row": 1}})
+
+    assert record.metadata.difficulty == "Hard"
+    assert record.metadata.teacher_revision == "revision-1"
+    assert record.metadata.snapshot_version == 4
+    assert record.metadata.tool_sequence == record.metadata.tools_used
+    assert record.metadata.source_query_metadata["source"] == {"row": 1}
+
+
 def test_protocol_repair_is_audited_but_not_kept_in_clean_trajectory() -> None:
     backend = ScriptedBackend(
         [

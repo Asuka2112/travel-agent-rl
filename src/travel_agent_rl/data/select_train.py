@@ -160,8 +160,7 @@ def select_queries(
 
 def _jsonl_bytes(rows: list[dict[str, Any]]) -> bytes:
     return b"".join(
-        (json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
-        for row in rows
+        (json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8") for row in rows
     )
 
 

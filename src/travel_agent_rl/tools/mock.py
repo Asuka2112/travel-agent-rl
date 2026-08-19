@@ -90,9 +90,7 @@ MOCK_TOOL_DEFINITIONS: tuple[dict[str, Any], ...] = (
     {
         "name": "web_scraping",
         "description": "Extract text from a public web page.",
-        "schema": _object_schema(
-            ["url"], {"url": {"type": "string", "pattern": "^https?://"}}
-        ),
+        "schema": _object_schema(["url"], {"url": {"type": "string", "pattern": "^https?://"}}),
         "fixture": {"title": "Mock page", "text": "Offline fixture content."},
     },
     {

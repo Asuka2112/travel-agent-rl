@@ -12,7 +12,9 @@ def main() -> None:
     registry = build_mock_registry()
     environment = TravelEnvironment(registry)
     responses = [
-        environment.execute(ToolRequest(tool_name=name, arguments=arguments)).model_dump(mode="json")
+        environment.execute(ToolRequest(tool_name=name, arguments=arguments)).model_dump(
+            mode="json"
+        )
         for name, arguments in SMOKE_ARGUMENTS.items()
     ]
     if not all(response["status"] == "ok" for response in responses):

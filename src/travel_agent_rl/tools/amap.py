@@ -149,4 +149,3 @@ class AmapRoutePlanning(AmapTool):
             params["city"] = arguments["city"]
         payload = self._get(params)
         return {"mode": mode, "route": payload.get("route", {})}
-

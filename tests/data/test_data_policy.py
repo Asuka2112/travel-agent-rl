@@ -9,4 +9,3 @@ def test_official_test_split_is_disabled_for_data_pipeline() -> None:
     assert official_test["enabled"] is False
     assert official_test["policy"] == "evaluation_only"
     assert config["frozen_test_minimum"] >= 80
-

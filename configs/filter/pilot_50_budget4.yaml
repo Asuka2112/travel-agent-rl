@@ -1,0 +1,13 @@
+max_turns: 13
+judge_prompt_version: judge-v1
+judge_prompt_path: prompts/judge/v1.txt
+judge_mean_threshold: 4.0
+judge_minimum_dimension: 3.0
+judge_concurrency: 8
+judge_raw_dir: data/intermediate/distill/pilot_budget4_v1/judge-v1-mean4-min3
+input_path: data/intermediate/distill/pilot_budget4_v1/trajectories.jsonl
+rule_accepted_path: data/intermediate/distill/pilot_budget4_v1_filter/rule_accepted.jsonl
+canonical_path: data/intermediate/distill/pilot_budget4_v1_filter/canonical.jsonl
+judge_accepted_path: data/intermediate/distill/pilot_budget4_v1_filter/judge_accepted.jsonl
+audit_path: data/intermediate/distill/pilot_budget4_v1_filter/audit.jsonl
+stats_path: data/intermediate/distill/pilot_budget4_v1_filter/stats.json

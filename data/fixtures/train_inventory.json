@@ -1,6 +1,26 @@
 [
-  {"number": "G100", "origin": "Hangzhou", "destination": "Shanghai", "date": "2026-08-20", "departure": "08:00", "arrival": "08:48", "price_cny": 117.5},
-  {"number": "G102", "origin": "Hangzhou", "destination": "Shanghai", "date": "2026-08-20", "departure": "10:30", "arrival": "11:22", "price_cny": 109.0},
-  {"number": "D300", "origin": "Beijing", "destination": "Tianjin", "date": "2026-08-21", "departure": "12:00", "arrival": "12:35", "price_cny": 54.5}
+  {"number":"SIM-NE-101","operator":"Amtrak-simulated","origin":"Boston","destination":"New York City","departure":"07:00","arrival":"10:55","duration":"3h 55m","price_usd":64.0},
+  {"number":"SIM-NE-103","operator":"Amtrak-simulated","origin":"Boston","destination":"New York City","departure":"12:10","arrival":"16:15","duration":"4h 05m","price_usd":52.0},
+  {"number":"SIM-NE-102","operator":"Amtrak-simulated","origin":"New York City","destination":"Boston","departure":"08:00","arrival":"12:05","duration":"4h 05m","price_usd":58.0},
+  {"number":"SIM-NE-201","operator":"Amtrak-simulated","origin":"New York City","destination":"Philadelphia","departure":"08:15","arrival":"09:40","duration":"1h 25m","price_usd":31.0},
+  {"number":"SIM-NE-203","operator":"Amtrak-simulated","origin":"New York City","destination":"Philadelphia","departure":"14:00","arrival":"15:30","duration":"1h 30m","price_usd":27.0},
+  {"number":"SIM-NE-202","operator":"Amtrak-simulated","origin":"Philadelphia","destination":"New York City","departure":"09:05","arrival":"10:35","duration":"1h 30m","price_usd":29.0},
+  {"number":"SIM-NE-301","operator":"Amtrak-simulated","origin":"Philadelphia","destination":"Washington","departure":"07:40","arrival":"09:35","duration":"1h 55m","price_usd":34.0},
+  {"number":"SIM-NE-302","operator":"Amtrak-simulated","origin":"Washington","destination":"Philadelphia","departure":"17:00","arrival":"18:55","duration":"1h 55m","price_usd":36.0},
+  {"number":"SIM-VA-401","operator":"Amtrak-simulated","origin":"Washington","destination":"Richmond","departure":"08:30","arrival":"10:45","duration":"2h 15m","price_usd":25.0},
+  {"number":"SIM-VA-402","operator":"Amtrak-simulated","origin":"Richmond","destination":"Washington","departure":"16:10","arrival":"18:30","duration":"2h 20m","price_usd":25.0},
+  {"number":"SIM-PNW-501","operator":"Amtrak-simulated","origin":"Portland","destination":"Seattle","departure":"08:20","arrival":"11:50","duration":"3h 30m","price_usd":38.0},
+  {"number":"SIM-PNW-502","operator":"Amtrak-simulated","origin":"Seattle","destination":"Portland","departure":"09:10","arrival":"12:45","duration":"3h 35m","price_usd":39.0},
+  {"number":"SIM-CA-601","operator":"Amtrak-simulated","origin":"Los Angeles","destination":"San Diego","departure":"07:25","arrival":"10:20","duration":"2h 55m","price_usd":35.0},
+  {"number":"SIM-CA-602","operator":"Amtrak-simulated","origin":"San Diego","destination":"Los Angeles","departure":"16:00","arrival":"18:55","duration":"2h 55m","price_usd":35.0},
+  {"number":"SIM-MW-701","operator":"Amtrak-simulated","origin":"Chicago","destination":"Milwaukee","departure":"08:05","arrival":"09:34","duration":"1h 29m","price_usd":24.0},
+  {"number":"SIM-MW-702","operator":"Amtrak-simulated","origin":"Milwaukee","destination":"Chicago","departure":"17:20","arrival":"18:49","duration":"1h 29m","price_usd":24.0},
+  {"number":"SIM-MW-801","operator":"Amtrak-simulated","origin":"Chicago","destination":"St. Louis","departure":"07:15","arrival":"12:45","duration":"5h 30m","price_usd":42.0},
+  {"number":"SIM-MW-802","operator":"Amtrak-simulated","origin":"St. Louis","destination":"Chicago","departure":"14:00","arrival":"19:30","duration":"5h 30m","price_usd":42.0},
+  {"number":"SIM-CA-901","operator":"Amtrak-simulated","origin":"Sacramento","destination":"Oakland","departure":"08:40","arrival":"10:35","duration":"1h 55m","price_usd":29.0},
+  {"number":"SIM-CA-902","operator":"Amtrak-simulated","origin":"Oakland","destination":"Sacramento","departure":"17:10","arrival":"19:05","duration":"1h 55m","price_usd":29.0},
+  {"number":"SIM-SE-1001","operator":"Amtrak-simulated","origin":"Raleigh","destination":"Charlotte","departure":"06:30","arrival":"09:40","duration":"3h 10m","price_usd":31.0},
+  {"number":"SIM-SE-1002","operator":"Amtrak-simulated","origin":"Charlotte","destination":"Raleigh","departure":"17:00","arrival":"20:10","duration":"3h 10m","price_usd":31.0},
+  {"number":"SIM-NE-1101","operator":"Amtrak-simulated","origin":"New Haven","destination":"New York City","departure":"07:30","arrival":"09:25","duration":"1h 55m","price_usd":23.0},
+  {"number":"SIM-NE-1102","operator":"Amtrak-simulated","origin":"New York City","destination":"New Haven","departure":"18:05","arrival":"20:00","duration":"1h 55m","price_usd":23.0}
 ]
-

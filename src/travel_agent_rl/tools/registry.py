@@ -131,16 +131,12 @@ def build_distillation_registry(
         )
         web_tools = [
             SnapshotWebTool(
-                FirecrawlSearch(
-                    firecrawl_key, base_url=base_url, backend=backend_name
-                ),
+                FirecrawlSearch(firecrawl_key, base_url=base_url, backend=backend_name),
                 store,
                 mode=resolved_mode,
             ),
             SnapshotWebTool(
-                FirecrawlScrape(
-                    firecrawl_key, base_url=base_url, backend=backend_name
-                ),
+                FirecrawlScrape(firecrawl_key, base_url=base_url, backend=backend_name),
                 store,
                 mode=resolved_mode,
             ),

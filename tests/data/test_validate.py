@@ -34,9 +34,7 @@ def test_validate_snapshot_checks_hashes_and_split_overlap(tmp_path: Path) -> No
         }
     manifest_dir = tmp_path / "data/manifests"
     manifest_dir.mkdir(parents=True)
-    (manifest_dir / "data_snapshot.json").write_text(
-        json.dumps({"artifacts": artifact_manifest})
-    )
+    (manifest_dir / "data_snapshot.json").write_text(json.dumps({"artifacts": artifact_manifest}))
     frozen_path = tmp_path / "data/processed/frozen_test.jsonl"
     (manifest_dir / "frozen_test_ids.json").write_text(
         json.dumps({"ids": ["test:1"], "artifact_sha256": sha256_file(frozen_path)})
@@ -46,4 +44,3 @@ def test_validate_snapshot_checks_hashes_and_split_overlap(tmp_path: Path) -> No
     frozen_path.write_text(frozen_path.read_text() + "\n")
     with pytest.raises(ValueError, match="hash mismatch"):
         validate_snapshot(tmp_path)
-

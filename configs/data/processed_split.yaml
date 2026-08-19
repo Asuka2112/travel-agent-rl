@@ -1,0 +1,12 @@
+seed: 20261022
+sft_size: 881
+rl_size: 200
+judge_accepted_path: data/intermediate/cleaning/judge_accepted.jsonl
+frozen_queries_path: data/manifests/train_queries_1835.jsonl
+frozen_manifest_path: data/manifests/train_queries_1835_manifest.json
+coverage_dev_path: data/manifests/train_tool_coverage_24.jsonl
+sft_path: data/processed/sft.jsonl
+rl_path: data/processed/rl_queries.jsonl
+dev_path: data/processed/dev.jsonl
+manifest_path: data/manifests/processed_split_manifest.json
+contamination_report_path: reports/contamination_report.md

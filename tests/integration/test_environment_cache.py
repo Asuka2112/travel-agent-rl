@@ -1,7 +1,7 @@
 import pytest
 
 from travel_agent_rl.env import TravelEnvironment
-from travel_agent_rl.tools import ToolRequest, build_mock_registry
+from travel_agent_rl.tools import ToolRequest, ToolStatus, build_mock_registry
 
 
 @pytest.mark.integration
@@ -49,3 +49,19 @@ def test_disk_cache_isolated_by_namespace(tmp_path) -> None:
 
     assert first.cached is False
     assert second.cached is False
+
+
+@pytest.mark.integration
+def test_corrupt_persistent_cache_is_quarantined_and_rebuilt(tmp_path) -> None:
+    request = ToolRequest(tool_name="web_search", arguments={"query": "Hangzhou"})
+    first = TravelEnvironment(build_mock_registry(), cache_dir=tmp_path, cache_namespace="corrupt")
+    response = first.execute(request)
+    cache_file = next(tmp_path.glob("*.json"))
+    cache_file.write_text(response.model_dump_json() + "trailing")
+
+    second = TravelEnvironment(build_mock_registry(), cache_dir=tmp_path, cache_namespace="corrupt")
+    rebuilt = second.execute(request)
+
+    assert rebuilt.status is ToolStatus.OK
+    assert rebuilt.cached is False
+    assert len(list(tmp_path.glob("*.corrupt.*"))) == 1

@@ -1,0 +1,31 @@
+seed: 20261021
+prompt_version: teacher-v4+production-web-budget-v1
+prompt_path: prompts/teacher/v4.txt
+max_turns: 13
+max_model_calls: 18
+max_public_web_actions: 4
+concurrency: 8
+input_path: data/manifests/train_queries_1835.jsonl
+output_path: data/intermediate/distill/trajectories_1835.jsonl
+failed_path: data/intermediate/distill/failed_1835.jsonl
+raw_dir: data/intermediate/distill/raw
+index_path: data/intermediate/distill/index.jsonl
+checkpoint_path: data/intermediate/distill/checkpoint_1835.json
+checkpoint_every: 50
+tool_registry: local_travel_database
+database_path: data/processed/agent_star_travel.sqlite3
+tool_cache_namespace: agent-star-travel-db-985c8c7-production-v1
+provider:
+  base_url_env: TEACHER_BASE_URL
+  api_key_env: TEACHER_API_KEY
+  model_env: TEACHER_MODEL
+  max_attempts: 3
+  temperature: 0.0
+  seed: 20260850
+model:
+  repository: Qwen/Qwen3-30B-A3B-Instruct-2507
+  revision: 0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe
+  license: apache-2.0
+  tensor_parallel_size: 4
+  max_model_len: 32768
+  served_model_name: qwen3-30b-teacher

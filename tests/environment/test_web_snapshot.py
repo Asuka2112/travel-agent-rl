@@ -73,3 +73,20 @@ def test_capture_failure_is_versioned_and_replayed_without_provider_call(tmp_pat
     assert provider.calls == 1
     request_file = next((tmp_path / "v1" / "requests").rglob("*.json"))
     assert json.loads(request_file.read_text())["response_error"]["code"] == ("upstream_rejected")
+
+
+def test_snapshot_versions_have_independent_keys_and_storage(tmp_path) -> None:
+    provider = FakeSearch()
+    v1 = WebSnapshotStore(tmp_path, run_id="v1", schema_version=1)
+    v2 = WebSnapshotStore(tmp_path, run_id="v2", schema_version=2)
+    arguments = {"query": "versioned", "limit": 5}
+
+    SnapshotWebTool(provider, v1, mode="online_capture").run(arguments)
+    with pytest.raises(ToolExecutionError, match="no versioned web snapshot"):
+        SnapshotWebTool(provider, v2, mode="replay_only").run(arguments)
+
+    assert WebSnapshotStore.request_key("web_search", arguments, 1) != (
+        WebSnapshotStore.request_key("web_search", arguments, 2)
+    )
+    assert len(list((tmp_path / "v1" / "requests").rglob("*.json"))) == 1
+    assert not list((tmp_path / "v2" / "requests").rglob("*.json"))

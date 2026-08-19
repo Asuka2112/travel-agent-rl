@@ -39,11 +39,7 @@ def test_selection_is_deterministic_and_stratified() -> None:
         for level in ("easy", "medium", "hard")
         for index in range(10)
     ]
-    first, quotas = select_queries(
-        candidates, size=12, seed=42, near_duplicate_threshold=100.0
-    )
-    second, _ = select_queries(
-        candidates, size=12, seed=42, near_duplicate_threshold=100.0
-    )
+    first, quotas = select_queries(candidates, size=12, seed=42, near_duplicate_threshold=100.0)
+    second, _ = select_queries(candidates, size=12, seed=42, near_duplicate_threshold=100.0)
     assert quotas == {"easy": 4, "medium": 4, "hard": 4}
     assert [row["query_id"] for row in first] == [row["query_id"] for row in second]
