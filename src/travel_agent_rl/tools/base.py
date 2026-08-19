@@ -51,6 +51,21 @@ class ToolExecutionError(RuntimeError):
     code = "tool_execution_error"
     retryable = False
 
+    def __init__(
+        self,
+        message: str,
+        *,
+        code: str | None = None,
+        retryable: bool | None = None,
+        provider: str | None = None,
+    ) -> None:
+        super().__init__(message)
+        if code is not None:
+            self.code = code
+        if retryable is not None:
+            self.retryable = retryable
+        self.provider = provider
+
 
 class TransientToolError(ToolExecutionError):
     code = "transient_tool_error"
@@ -80,4 +95,3 @@ class BaseTool(ABC):
     @abstractmethod
     def run(self, arguments: dict[str, Any]) -> dict[str, Any]:
         """Execute an already validated call."""
-

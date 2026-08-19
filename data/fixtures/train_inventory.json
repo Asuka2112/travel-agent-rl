@@ -1,0 +1,6 @@
+[
+  {"number": "G100", "origin": "Hangzhou", "destination": "Shanghai", "date": "2026-08-20", "departure": "08:00", "arrival": "08:48", "price_cny": 117.5},
+  {"number": "G102", "origin": "Hangzhou", "destination": "Shanghai", "date": "2026-08-20", "departure": "10:30", "arrival": "11:22", "price_cny": 109.0},
+  {"number": "D300", "origin": "Beijing", "destination": "Tianjin", "date": "2026-08-21", "departure": "12:00", "arrival": "12:35", "price_cny": 54.5}
+]
+

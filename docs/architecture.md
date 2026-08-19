@@ -22,9 +22,19 @@ maps stable tool names to adapters. Every response carries status, normalized
 error information, attempt count, cache state, and latency. Mock adapters are
 deterministic and share the same schema as future live adapters.
 
+Production adapters use AMap Web Service for POI, nearby, weather, and routes;
+Firecrawl v2 for web search/scrape; and committed deterministic inventories for
+flight/train results. Provider HTTP failures, invalid JSON, rate limits, and
+timeouts are normalized at the boundary. Successful responses can be persisted
+in an atomic disk cache; API keys are accepted only from environment variables.
+
 The agent state machine owns turns and termination. Tools never decide whether
 an answer is final. A scheduler will bridge that state machine to ms-swift's
 `MultiTurnScheduler`, preserving genuine model/environment alternation.
+
+The state machine rejects malformed protocol blocks, unknown tools and invalid
+arguments through structured observations, detects repeated identical actions,
+and enters a force-answer state at the configured action-turn limit.
 
 ## Fault tolerance
 
@@ -40,4 +50,3 @@ an answer is final. A scheduler will bridge that state machine to ms-swift's
 The desired final layout is vLLM on two GPUs and ZeRO-3 training on six GPUs.
 Numeric GPU IDs are assigned only at job launch after a fresh ownership and
 free-memory check; static IDs in a config are targets, not reservations.
-

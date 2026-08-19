@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+import os
+from pathlib import Path
 
 from .base import BaseTool
 from .mock import MOCK_TOOL_DEFINITIONS, DeterministicMockTool
@@ -36,3 +38,38 @@ def build_mock_registry() -> ToolRegistry:
         for item in MOCK_TOOL_DEFINITIONS
     )
 
+
+def build_live_registry(
+    root: Path,
+    *,
+    amap_api_key: str | None = None,
+    firecrawl_api_key: str | None = None,
+) -> ToolRegistry:
+    from .amap import AmapNearbySearch, AmapPoiSearch, AmapRoutePlanning, AmapWeather
+    from .firecrawl import FirecrawlScrape, FirecrawlSearch
+    from .simulator import FlightSearchSimulator, TrainSearchSimulator
+
+    amap_key = amap_api_key or os.getenv("AMAP_API_KEY")
+    firecrawl_key = firecrawl_api_key or os.getenv("FIRECRAWL_API_KEY")
+    missing = [
+        name
+        for name, value in (
+            ("AMAP_API_KEY", amap_key),
+            ("FIRECRAWL_API_KEY", firecrawl_key),
+        )
+        if not value
+    ]
+    if missing:
+        raise ValueError(f"missing live-tool credentials: {', '.join(missing)}")
+    return ToolRegistry(
+        (
+            AmapPoiSearch(amap_key),
+            AmapNearbySearch(amap_key),
+            AmapWeather(amap_key),
+            AmapRoutePlanning(amap_key),
+            FirecrawlSearch(firecrawl_key),
+            FirecrawlScrape(firecrawl_key),
+            FlightSearchSimulator(root / "data/fixtures/flight_inventory.json"),
+            TrainSearchSimulator(root / "data/fixtures/train_inventory.json"),
+        )
+    )

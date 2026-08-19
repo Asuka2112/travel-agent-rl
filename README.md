@@ -13,6 +13,7 @@ multi-turn GRPO, and frozen evaluation.
 | Eight-tool mock environment | completed | environment tests and smoke script |
 | CUDA 12.4 stack + vLLM inference | completed | compatibility record and smoke evidence |
 | Public-data acquisition and frozen split | completed | `docs/data_report.md` and manifests |
+| Production tool environment | running | offline tests pass; live provider key gate remains |
 | Teacher distillation | planned | no API-backed run yet |
 | SFT | planned | no checkpoint or metric claimed |
 | Agentic GRPO | planned | blocked until GPUs are available |

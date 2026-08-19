@@ -1,0 +1,13 @@
+mode: mock
+max_attempts: 3
+timeout_seconds:
+  amap: 10
+  firecrawl: 30
+cache_dir: data/intermediate/tool_cache
+credentials:
+  amap: AMAP_API_KEY
+  firecrawl: FIRECRAWL_API_KEY
+simulators:
+  flight_inventory: data/fixtures/flight_inventory.json
+  train_inventory: data/fixtures/train_inventory.json
+

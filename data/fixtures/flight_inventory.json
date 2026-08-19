@@ -1,0 +1,6 @@
+[
+  {"number": "TA100", "origin": "HGH", "destination": "PEK", "date": "2026-08-20", "departure": "08:10", "arrival": "10:20", "price_cny": 680},
+  {"number": "TA102", "origin": "HGH", "destination": "PEK", "date": "2026-08-20", "departure": "14:30", "arrival": "16:45", "price_cny": 620},
+  {"number": "TA200", "origin": "PVG", "destination": "CAN", "date": "2026-08-21", "departure": "09:00", "arrival": "11:35", "price_cny": 740}
+]
+
