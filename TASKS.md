@@ -25,7 +25,7 @@
 - [x] Implement parser, validator, repeat detection, and force-answer state machine.
 - [ ] Run credentialed live-tool smoke (`AMAP_API_KEY`, `FIRECRAWL_API_KEY`).
 
-## M3 - Teacher distillation and filtering (planned)
+## M3 - Teacher distillation and filtering (running: provider gate)
 
 - [x] Version teacher and judge prompts.
 - [x] Implement concurrent resumable trajectory generation.
