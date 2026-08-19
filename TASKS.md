@@ -27,9 +27,9 @@
 
 ## M3 - Teacher distillation and filtering (planned)
 
-- [ ] Version teacher and judge prompts.
-- [ ] Implement concurrent resumable trajectory generation.
-- [ ] Implement rule, canonical-format, and structured judge stages.
+- [x] Version teacher and judge prompts.
+- [x] Implement concurrent resumable trajectory generation.
+- [x] Implement rule, canonical-format, and structured judge stages.
 - [ ] Produce SFT/RL datasets and full stage-by-stage statistics.
 
 ## M4 - LoRA SFT (planned)

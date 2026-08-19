@@ -1,0 +1,14 @@
+seed: 20260819
+prompt_version: teacher-v1
+prompt_path: prompts/teacher/v1.txt
+max_turns: 13
+max_model_calls: 15
+concurrency: 4
+checkpoint_every_record: true
+input_path: data/processed/candidate_train.jsonl
+output_path: data/intermediate/teacher_trajectories.jsonl
+failed_path: data/intermediate/teacher_failures.jsonl
+provider:
+  base_url_env: TEACHER_BASE_URL
+  api_key_env: TEACHER_API_KEY
+  model_env: TEACHER_MODEL
