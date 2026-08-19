@@ -10,6 +10,7 @@ requires-python = ">=3.10,<3.11"
 dependencies = [
   "pydantic==2.11.7",
   "PyYAML==6.0.2",
+  "rapidfuzz==3.14.1",
 ]
 
 [tool.setuptools.packages.find]
@@ -27,4 +28,3 @@ markers = [
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-

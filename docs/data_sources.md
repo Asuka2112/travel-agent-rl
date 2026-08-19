@@ -5,7 +5,7 @@ source must pass revision, checksum, split, and license verification first.
 
 | Source | Candidate use | Observed license | Split policy |
 | --- | --- | --- | --- |
-| OSU TravelPlanner | schema, train/validation candidates, benchmark context | MIT repository; verify dataset artifacts and transitive source terms | official test is evaluation-only and excluded from all training/distillation |
+| OSU TravelPlanner | schema and protected benchmark reference | dataset card declares CC-BY-4.0; code repository is MIT | official validation/test are protected and excluded from all training/distillation |
 | Agent-STAR TravelDataset | primary synthetic query candidates | Hugging Face card declares MIT | exclude bundled TravelPlanner validation from training; use synthetic 17K pool with deduplication |
 
 Primary references:
@@ -28,4 +28,3 @@ then run exact hash, canonical hash, high character/token similarity, and
 semantic-nearest-neighbor checks against all official test/validation items.
 Flagged records are reviewed or excluded. The frozen test set is created once,
 stored with checksums, and never used in prompts, distillation, SFT, or RL.
-

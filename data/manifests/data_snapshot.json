@@ -1,0 +1,79 @@
+{
+  "artifacts": {
+    "candidate_train.jsonl": {
+      "path": "data/processed/candidate_train.jsonl",
+      "records": 17386,
+      "sha256": "36a575c22ba0af78e2b2cde9be639fcf325365b116fb9702e0472452aeaca358"
+    },
+    "contamination_excluded.jsonl": {
+      "path": "data/processed/contamination_excluded.jsonl",
+      "records": 108,
+      "sha256": "8c70ffdc976f884c0833573fbfc313cd843f50d5d0c09f2f82f83048d28aeb8b"
+    },
+    "frozen_test.jsonl": {
+      "path": "data/processed/frozen_test.jsonl",
+      "records": 100,
+      "sha256": "d467d87a9afd6eb7bd5d7b1bf6689d2034d30e796ee7848fa68fca27a0cbb665"
+    },
+    "query_catalog.jsonl": {
+      "path": "data/processed/query_catalog.jsonl",
+      "records": 17486,
+      "sha256": "07e31c397f504560b90b619a63e608cfab04e2b8e6f19477e446c1296c81c572"
+    }
+  },
+  "pipeline_version": 1,
+  "seed": 20260819,
+  "source_files": [
+    {
+      "bytes": 11437103,
+      "path": "data/raw/agent_star/TravelTotal_17K.jsonl",
+      "records": 17594,
+      "sha256": "91abb62a589340117747feed3cf3c9ca612ec0d39224930934795b7fca268606"
+    },
+    {
+      "bytes": 113526,
+      "path": "data/raw/agent_star/TravelPlanner_Val180.jsonl",
+      "records": 180,
+      "sha256": "1ca09e5795080c2183ddaf8aa73ee452fbcb6337b9d2d695a9e178a1c2886926"
+    },
+    {
+      "bytes": 4833771,
+      "path": "data/raw/travelplanner/validation.csv",
+      "records": 180,
+      "sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80"
+    },
+    {
+      "bytes": 26743834,
+      "path": "data/raw/travelplanner/test.csv",
+      "records": 1000,
+      "sha256": "d1c8918683455ee9986e2e61a1aa31cf8f7a493a775b6d7ff59f26a421b89cc1"
+    }
+  ],
+  "source_revisions": {
+    "agent_star": {
+      "declared_license": "mit",
+      "repository": "xxwu/Agent-STAR-TravelDataset",
+      "revision": "d644daaffe2c6a1ec63d86c70fe4c639215f28ee",
+      "url": "https://huggingface.co/datasets/xxwu/Agent-STAR-TravelDataset"
+    },
+    "travelplanner": {
+      "declared_license": "cc-by-4.0",
+      "repository": "osunlp/TravelPlanner",
+      "revision": "8736504ecfc31b7f8b7e40122873c337e83fff7c",
+      "url": "https://huggingface.co/datasets/osunlp/TravelPlanner"
+    }
+  },
+  "stats": {
+    "accepted_unique": 17486,
+    "excluded_total": 108,
+    "exclusion_counts": {
+      "duplicate_constraints": 86,
+      "duplicate_query": 2,
+      "protected_constraint_fingerprint": 22
+    },
+    "frozen_test": 100,
+    "protected_reference_queries": 1360,
+    "raw_candidates": 17594,
+    "train_candidates": 17386
+  }
+}

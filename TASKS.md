@@ -9,13 +9,13 @@
 - [x] Validate pinned CUDA 12.4 training dependencies and real vLLM inference.
 - [x] Record exact package lock and model revision.
 
-## M1 - Licensed data and frozen splits (planned)
+## M1 - Licensed data and frozen splits (completed)
 
-- [ ] Download license-cleared source revisions with checksums.
-- [ ] Normalize and deduplicate at least 1,500 candidate queries.
-- [ ] Exclude all official test examples from training candidates.
-- [ ] Create and freeze an independent test split of at least 80 examples.
-- [ ] Generate provenance, statistics, and contamination reports.
+- [x] Download license-cleared source revisions with checksums.
+- [x] Normalize and deduplicate at least 1,500 candidate queries.
+- [x] Exclude all official test examples from training candidates.
+- [x] Create and freeze an independent test split of at least 80 examples.
+- [x] Generate provenance, statistics, and contamination reports.
 
 ## M2 - Production tool environment (planned)
 

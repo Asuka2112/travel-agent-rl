@@ -12,7 +12,7 @@ multi-turn GRPO, and frozen evaluation.
 | Repository skeleton | completed | source tree and CI |
 | Eight-tool mock environment | completed | environment tests and smoke script |
 | CUDA 12.4 stack + vLLM inference | completed | compatibility record and smoke evidence |
-| Public-data acquisition | planned | license gate must pass first |
+| Public-data acquisition and frozen split | completed | `docs/data_report.md` and manifests |
 | Teacher distillation | planned | no API-backed run yet |
 | SFT | planned | no checkpoint or metric claimed |
 | Agentic GRPO | planned | blocked until GPUs are available |

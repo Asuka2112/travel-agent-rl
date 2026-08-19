@@ -1,0 +1,28 @@
+retrieved_at: "2026-08-19"
+sources:
+  agent_star:
+    repository: xxwu/Agent-STAR-TravelDataset
+    repository_type: dataset
+    revision: d644daaffe2c6a1ec63d86c70fe4c639215f28ee
+    declared_license: mit
+    url: https://huggingface.co/datasets/xxwu/Agent-STAR-TravelDataset
+    candidate_file: data/raw/agent_star/TravelTotal_17K.jsonl
+    protected_files:
+      - data/raw/agent_star/TravelPlanner_Val180.jsonl
+  travelplanner:
+    repository: osunlp/TravelPlanner
+    repository_type: dataset
+    revision: 8736504ecfc31b7f8b7e40122873c337e83fff7c
+    declared_license: cc-by-4.0
+    url: https://huggingface.co/datasets/osunlp/TravelPlanner
+    protected_files:
+      - data/raw/travelplanner/validation.csv
+      - data/raw/travelplanner/test.csv
+    context_only_files:
+      - data/raw/travelplanner/train.csv
+policy:
+  frozen_test_size: 100
+  minimum_candidates_after_cleaning: 1500
+  fuzzy_contamination_threshold: 92.0
+  seed: 20260819
+
