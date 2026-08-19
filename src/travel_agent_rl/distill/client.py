@@ -40,6 +40,7 @@ class OpenAICompatibleChatBackend:
     timeout_seconds: float = 90.0
     max_tokens: int = 4096
     temperature: float = 0.1
+    seed: int | None = None
     encode_tool_as_user: bool = True
 
     def complete(self, messages: Sequence[AgentMessage], system_prompt: str) -> ChatResult:
@@ -58,6 +59,8 @@ class OpenAICompatibleChatBackend:
             "max_tokens": self.max_tokens,
             "temperature": self.temperature,
         }
+        if self.seed is not None:
+            payload["seed"] = self.seed
         request = Request(
             endpoint,
             data=json.dumps(payload).encode("utf-8"),

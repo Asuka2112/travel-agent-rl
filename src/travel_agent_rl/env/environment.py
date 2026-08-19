@@ -64,20 +64,22 @@ class TravelEnvironment:
             )
 
         key = self._cache_key(request)
-        cached_response = self._load_cached(key)
-        if cached_response is not None:
-            cached = cached_response.model_copy(deep=True)
-            cached.request_id = request.request_id
-            cached.cached = True
-            cached.latency_ms = (perf_counter() - started) * 1000
-            return cached
+        if tool.cacheable:
+            cached_response = self._load_cached(key)
+            if cached_response is not None:
+                cached = cached_response.model_copy(deep=True)
+                cached.request_id = request.request_id
+                cached.cached = True
+                cached.latency_ms = (perf_counter() - started) * 1000
+                return cached
 
         for attempt in range(1, self.max_attempts + 1):
             try:
                 response = tool.invoke(request)
                 response.attempts = attempt
-                self._cache[key] = response.model_copy(deep=True)
-                self._store_cached(key, response)
+                if tool.cacheable:
+                    self._cache[key] = response.model_copy(deep=True)
+                    self._store_cached(key, response)
                 return response
             except ValidationError as exc:
                 return self._error(

@@ -21,6 +21,24 @@ class JsonHttpClient:
         json_body: dict[str, Any] | None = None,
         headers: dict[str, str] | None = None,
     ) -> dict[str, Any]:
+        payload, _ = self.request_json_with_metadata(
+            method,
+            url,
+            params=params,
+            json_body=json_body,
+            headers=headers,
+        )
+        return payload
+
+    def request_json_with_metadata(
+        self,
+        method: str,
+        url: str,
+        *,
+        params: dict[str, Any] | None = None,
+        json_body: dict[str, Any] | None = None,
+        headers: dict[str, str] | None = None,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
         try:
             response = self.client.request(
                 method,
@@ -74,5 +92,12 @@ class JsonHttpClient:
                 code="invalid_provider_schema",
                 provider=self.provider,
             )
-        return payload
-
+        metadata = {
+            "status_code": response.status_code,
+            "headers": {
+                name: response.headers[name]
+                for name in ("content-type", "date", "x-request-id")
+                if name in response.headers
+            },
+        }
+        return payload, metadata

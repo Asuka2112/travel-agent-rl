@@ -94,7 +94,11 @@ def main() -> None:
         if missing:
             raise SystemExit(f"missing teacher settings: {', '.join(missing)}")
         backend = RetryingChatBackend(
-            OpenAICompatibleChatBackend(**required),
+            OpenAICompatibleChatBackend(
+                **required,
+                temperature=float(provider.get("temperature", 0.0)),
+                seed=int(provider.get("seed", config["seed"])),
+            ),
             max_attempts=int(provider.get("max_attempts", 3)),
         )
         if config.get("tool_registry") == "local_travel_database":
@@ -135,6 +139,12 @@ def main() -> None:
         queries,
         root / config["output_path"],
         root / config["failed_path"],
+        raw_dir=root / config["raw_dir"] if config.get("raw_dir") else None,
+        index_path=root / config["index_path"] if config.get("index_path") else None,
+        checkpoint_path=(
+            root / config["checkpoint_path"] if config.get("checkpoint_path") else None
+        ),
+        checkpoint_every=int(config.get("checkpoint_every", 50)),
     )
     print(json.dumps(stats, indent=2, sort_keys=True))
 

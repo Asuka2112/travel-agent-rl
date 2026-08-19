@@ -5,6 +5,7 @@ from .registry import (
     build_live_registry,
     build_mock_registry,
 )
+from .web_snapshot import SnapshotWebTool, WebSnapshotStore
 
 __all__ = [
     "BaseTool",
@@ -12,6 +13,8 @@ __all__ = [
     "ToolRequest",
     "ToolResponse",
     "ToolStatus",
+    "SnapshotWebTool",
+    "WebSnapshotStore",
     "build_mock_registry",
     "build_live_registry",
     "build_distillation_registry",

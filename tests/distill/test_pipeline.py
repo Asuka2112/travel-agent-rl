@@ -46,7 +46,28 @@ def test_generates_complete_multi_turn_trajectory() -> None:
     assert record.final_answer == "Visit the returned museum."
     assert record.metadata.tools_used == ["poi_search"]
     assert record.metadata.token_usage.total_tokens == 30
-    assert [message.role for message in record.messages] == ["user", "assistant", "tool", "assistant"]
+    assert [message.role for message in record.messages] == [
+        "user",
+        "assistant",
+        "tool",
+        "assistant",
+    ]
+
+
+def test_protocol_repair_is_audited_but_not_kept_in_clean_trajectory() -> None:
+    backend = ScriptedBackend(
+        [
+            '<tool-call>{"name":"poi_search","arguments":{}}</tool-result>',
+            "<answer>Recovered after explicit correction.</answer>",
+        ]
+    )
+    record = TrajectoryDistiller(backend, session_factory, "prompt").generate("q1", "plan")
+
+    assert record.metadata.success
+    assert record.metadata.number_of_model_calls == 2
+    assert len(record.metadata.protocol_errors) == 1
+    assert [message.role for message in record.messages] == ["user", "assistant"]
+    assert record.final_answer == "Recovered after explicit correction."
 
 
 def test_pipeline_resumes_completed_ids(tmp_path: Path) -> None:
@@ -70,9 +91,7 @@ def test_failure_is_checkpointed(tmp_path: Path) -> None:
     distiller = TrajectoryDistiller(backend, session_factory, "prompt", max_model_calls=1)
     output = tmp_path / "out.jsonl"
     failed = tmp_path / "failed.jsonl"
-    stats = DistillationPipeline(distiller).run(
-        [("bad", "bad")], output, failed
-    )
+    stats = DistillationPipeline(distiller).run([("bad", "bad")], output, failed)
     assert stats["failed"] == 1
     assert not output.exists()
     failed_record = json.loads(failed.read_text())
@@ -104,3 +123,49 @@ def test_failed_query_is_retried_instead_of_resumed(tmp_path: Path) -> None:
 
     assert stats == {"submitted": 1, "resumed": 0, "succeeded": 1, "failed": 0}
     assert json.loads(output.read_text())["metadata"]["success"] is True
+
+
+def test_per_query_raw_files_rebuild_checkpoint_and_resume(tmp_path: Path) -> None:
+    output = tmp_path / "out.jsonl"
+    failed = tmp_path / "failed.jsonl"
+    raw_dir = tmp_path / "raw"
+    index = tmp_path / "index.jsonl"
+    checkpoint = tmp_path / "checkpoint.json"
+    first = DistillationPipeline(
+        TrajectoryDistiller(
+            ScriptedBackend(["<answer>one</answer>", "<answer>two</answer>"]),
+            session_factory,
+            "prompt",
+        ),
+        max_workers=1,
+    )
+    stats = first.run(
+        [("q1", "one"), ("q2", "two")],
+        output,
+        failed,
+        raw_dir=raw_dir,
+        index_path=index,
+        checkpoint_path=checkpoint,
+        checkpoint_every=1,
+    )
+
+    assert stats["succeeded"] == 2
+    assert len(list(raw_dir.glob("*.json"))) == 2
+    assert len(index.read_text().splitlines()) == 2
+    assert json.loads(checkpoint.read_text())["processed_this_run"] == 2
+
+    output.unlink()
+    index.unlink()
+    second = DistillationPipeline(
+        TrajectoryDistiller(ScriptedBackend([]), session_factory, "prompt")
+    )
+    resumed = second.run(
+        [("q1", "one"), ("q2", "two")],
+        output,
+        failed,
+        raw_dir=raw_dir,
+        index_path=index,
+    )
+    assert resumed == {"submitted": 0, "resumed": 2, "succeeded": 0, "failed": 0}
+    assert len(output.read_text().splitlines()) == 2
+    assert len(index.read_text().splitlines()) == 2

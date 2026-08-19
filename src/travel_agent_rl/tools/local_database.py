@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import re
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -78,6 +79,9 @@ class LocalTravelPoiSearch(SQLiteTravelTool):
             "accommodations",
             "hotel",
             "hotels",
+            "home",
+            "lodging",
+            "rental",
             "room",
             "stay",
         }
@@ -93,12 +97,60 @@ class LocalTravelPoiSearch(SQLiteTravelTool):
         if not selected:
             selected = {"restaurant", "accommodation", "attraction"}
 
+        accommodation_filters = self._accommodation_filters(folded)
+        if "accommodation" in selected:
+            ignored = {
+                "allow",
+                "allowed",
+                "children",
+                "capacity",
+                "entire",
+                "for",
+                "guest",
+                "guests",
+                "group",
+                "home",
+                "maximum",
+                "night",
+                "nights",
+                "no",
+                "non-shared",
+                "not",
+                "of",
+                "people",
+                "permit",
+                "permitted",
+                "person",
+                "pets",
+                "private",
+                "restriction",
+                "restrictions",
+                "room",
+                "shared",
+                "smoking",
+                "to",
+                "under",
+                "up",
+                "visitor",
+                "visitors",
+                "without",
+            }
+            terms = [term for term in terms if term not in ignored and not term.isdigit()]
+
         items: list[dict[str, Any]] = []
         with self._connect() as connection:
             if "restaurant" in selected:
                 items.extend(self._restaurants(connection, city, terms, limit))
             if "accommodation" in selected:
-                items.extend(self._accommodations(connection, city, terms, limit))
+                items.extend(
+                    self._accommodations(
+                        connection,
+                        city,
+                        terms,
+                        limit,
+                        **accommodation_filters,
+                    )
+                )
             if "attraction" in selected:
                 items.extend(self._attractions(connection, city, terms, limit))
         items = items[:limit]
@@ -108,6 +160,48 @@ class LocalTravelPoiSearch(SQLiteTravelTool):
             "city": city,
             "query": query,
             "source": "agent-star-travel-database@985c8c7",
+            "applied_filters": accommodation_filters if "accommodation" in selected else {},
+            "guidance": (
+                "Do not search for airport names or codes. flight_search accepts exact "
+                "city names directly; if no flight exists, try route_planning once."
+                if "airport" in folded
+                else None
+            ),
+        }
+
+    @staticmethod
+    def _accommodation_filters(query: str) -> dict[str, Any]:
+        room_type = None
+        if "entire" in query:
+            room_type = "Entire home/apt"
+        elif "private" in query:
+            room_type = "Private room"
+        elif "shared" in query and "not shared" not in query and "non-shared" not in query:
+            room_type = "Shared room"
+
+        allowed_rules: list[str] = []
+        allowed_cues = ("allow", "permitted", "without restriction")
+        if any(cue in query for cue in allowed_cues):
+            for phrase, prohibition in (
+                ("smoking", "No smoking"),
+                ("visitor", "No visitors"),
+                ("pet", "No pets"),
+                ("children under 10", "No children under 10"),
+            ):
+                if phrase in query:
+                    allowed_rules.append(prohibition)
+
+        capacity_match = re.search(
+            r"(?:capacity(?: of)?|for|group of)\s+(\d+)\s+(?:people|persons?|guests?)",
+            query,
+        )
+        nights_match = re.search(r"(?:for|maximum|up to)\s+(\d+)\s+nights?", query)
+        return {
+            "room_type": room_type,
+            "exclude_shared": "not shared" in query or "non-shared" in query,
+            "allowed_rules": allowed_rules,
+            "capacity": int(capacity_match.group(1)) if capacity_match else None,
+            "maximum_minimum_nights": int(nights_match.group(1)) if nights_match else None,
         }
 
     @staticmethod
@@ -155,8 +249,28 @@ class LocalTravelPoiSearch(SQLiteTravelTool):
         city: str,
         terms: list[str],
         limit: int,
+        *,
+        room_type: str | None,
+        exclude_shared: bool,
+        allowed_rules: list[str],
+        capacity: int | None,
+        maximum_minimum_nights: int | None,
     ) -> list[dict[str, Any]]:
         where, params = self._where_terms(("name", "room_type", "house_rules"), terms)
+        if room_type is not None:
+            where += " AND room_type = ? COLLATE NOCASE"
+            params.append(room_type)
+        if exclude_shared:
+            where += " AND room_type != 'Shared room' COLLATE NOCASE"
+        for prohibition in allowed_rules:
+            where += " AND COALESCE(house_rules, '') NOT LIKE ? COLLATE NOCASE"
+            params.append(_like(prohibition))
+        if capacity is not None:
+            where += " AND maximum_occupancy >= ?"
+            params.append(str(capacity))
+        if maximum_minimum_nights is not None:
+            where += " AND minimum_nights <= ?"
+            params.append(str(maximum_minimum_nights))
         rows = connection.execute(
             "SELECT name,room_type,price,minimum_nights,review_rate,house_rules,"
             "maximum_occupancy,city FROM accommodations "
@@ -323,6 +437,11 @@ class LocalFlightSearch(SQLiteTravelTool):
             "options": options,
             "count": len(options),
             "source": "agent-star-travel-database@985c8c7",
+            "guidance": (
+                None
+                if options
+                else "No exact-city flight found; try route_planning once, not an airport search."
+            ),
         }
 
 

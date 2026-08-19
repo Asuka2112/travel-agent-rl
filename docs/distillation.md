@@ -3,10 +3,10 @@
 Status: implemented, mock-validated, and local-teacher smoke-validated; full dataset
 production remains pending.
 
-The distillation runner is append-only at record granularity. On restart it reads the
-existing trajectory JSONL, skips completed `query_id` values, and appends each new result
-only after a complete trajectory has been validated. Failures are written separately, so
-successful work is never discarded when an endpoint or process stops.
+The distillation runner checkpoints at record granularity. Each successful query is first
+written atomically to an immutable raw JSON file. Aggregate JSONL and index files are
+reconstructed from those raw records on startup and every configured checkpoint interval,
+so interruption between writes is recoverable. Failures remain separate.
 
 Every trajectory records the teacher model, prompt version, UTC timestamps, turns, tools,
 normalized exceptions, token usage, latency, and an optional cost estimate. The three
@@ -21,9 +21,9 @@ Offline pipeline smoke (the output is marked mock and must not enter research da
 .venv/bin/python scripts/filter_trajectories.py --skip-judge
 ```
 
-Credentialed generation reads `TEACHER_*`, `JUDGE_*`, `AMAP_API_KEY`, and
-`FIRECRAWL_API_KEY` from the job environment. Secrets are never read from repository
-configuration or written to tracked files.
+Credentialed generation reads `TEACHER_*`, `JUDGE_*`, and `AMAP_API_KEY` from the job
+environment. Formal web capture is self-hosted and needs no Firecrawl Cloud key. Secrets
+are never read from repository configuration or written to tracked files.
 
 The reproducible local path uses the fixed
 `Qwen/Qwen3-30B-A3B-Instruct-2507` revision recorded in
@@ -53,3 +53,12 @@ mean cumulative teacher input was 42,127 tokens, and mean output was 757 tokens.
 executed public-web count was at most two per record and the estimated API cost remained
 unset because teacher and judge inference were localhost-only. These are pilot results,
 not full-dataset metrics.
+
+The frozen production pilots subsequently passed with teacher-v2 plus audited protocol
+repair. The 50-query gate generated 50/50 and retained 43/50 after Rule, Format, and the
+unchanged structured Judge (86%). The nested 200-query pilot generated 200/200 and retained
+172/200 (86%): seven trajectories were rule-rejected for repeated actions and 21 additional
+trajectories were below the Judge threshold. There were no invalid tool names or unknown
+exceptions. Full metrics are in `reports/distillation_pilot_50.md` and
+`reports/distillation_pilot_200.md`. The project is intentionally stopped before the
+1,835-query production distillation.

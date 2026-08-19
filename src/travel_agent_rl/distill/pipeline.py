@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import hashlib
 from collections.abc import Callable, Iterable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -43,31 +45,62 @@ class TrajectoryDistiller:
         started = perf_counter()
         session = self.session_factory()
         messages = [AgentMessage(role="user", content=query)]
+        recorded_messages = list(messages)
         tool_calls: list[ToolCall] = []
         observations: list[dict[str, object]] = []
         exceptions: list[str] = []
+        protocol_errors: list[str] = []
         final_answer: str | None = None
         input_tokens = output_tokens = total_tokens = 0
         teacher_model = self.backend.model
 
-        for _ in range(self.max_model_calls):
+        model_calls = 0
+        for model_call in range(1, self.max_model_calls + 1):
             try:
                 result = self.backend.complete(messages, self.system_prompt)
+                model_calls = model_call
                 teacher_model = result.model
                 input_tokens += result.usage.input_tokens
                 output_tokens += result.usage.output_tokens
                 total_tokens += result.usage.total_tokens
-                messages.append(AgentMessage(role="assistant", content=result.content))
+                assistant_message = AgentMessage(role="assistant", content=result.content)
                 try:
                     parsed = parse_agent_output(result.content)
-                    if isinstance(parsed, ToolCall):
-                        tool_calls.append(parsed)
-                except (ValueError, TypeError, json.JSONDecodeError):
-                    pass
+                except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                    protocol_errors.append(
+                        f"{type(exc).__name__}: {exc}; raw={result.content[:2000]!r}"
+                    )
+                    messages.append(assistant_message)
+                    messages.append(
+                        AgentMessage(
+                            role="tool",
+                            content=json.dumps(
+                                {
+                                    "status": "error",
+                                    "error": {
+                                        "code": "invalid_agent_output",
+                                        "message": (
+                                            "Discard that malformed response. Return exactly one "
+                                            "complete <tool-call>...</tool-call> or "
+                                            "<answer>...</answer> block with no outside text."
+                                        ),
+                                    },
+                                },
+                                sort_keys=True,
+                            ),
+                        )
+                    )
+                    continue
+                messages.append(assistant_message)
+                recorded_messages.append(assistant_message)
+                if isinstance(parsed, ToolCall):
+                    tool_calls.append(parsed)
 
                 transition = session.step(result.content)
                 if transition.observation is not None:
-                    messages.append(AgentMessage(role="tool", content=transition.observation))
+                    tool_message = AgentMessage(role="tool", content=transition.observation)
+                    messages.append(tool_message)
+                    recorded_messages.append(tool_message)
                     try:
                         observations.append(json.loads(transition.observation.splitlines()[0]))
                     except json.JSONDecodeError:
@@ -95,9 +128,11 @@ class TrajectoryDistiller:
             started_at=started_at,
             finished_at=finished_at,
             number_of_turns=session.turns_used,
+            number_of_model_calls=model_calls,
             tools_used=[call.name for call in tool_calls],
             success=bool(final_answer) and not exceptions,
             exceptions=exceptions,
+            protocol_errors=protocol_errors,
             token_usage=usage,
             latency_seconds=perf_counter() - started,
             estimated_api_cost_usd=cost,
@@ -105,7 +140,7 @@ class TrajectoryDistiller:
         return TrajectoryRecord(
             query_id=query_id,
             query=query,
-            messages=messages,
+            messages=recorded_messages,
             tool_calls=tool_calls,
             tool_observations=observations,
             final_answer=final_answer,
@@ -136,12 +171,27 @@ class DistillationPipeline:
         queries: Iterable[tuple[str, str]],
         output_path: Path,
         failed_path: Path,
+        *,
+        raw_dir: Path | None = None,
+        index_path: Path | None = None,
+        checkpoint_path: Path | None = None,
+        checkpoint_every: int = 50,
     ) -> dict[str, int]:
+        if checkpoint_every < 1:
+            raise ValueError("checkpoint_every must be positive")
+        query_rows = list(queries)
+        query_ids = {query_id for query_id, _ in query_rows}
         output_path.parent.mkdir(parents=True, exist_ok=True)
         failed_path.parent.mkdir(parents=True, exist_ok=True)
-        completed = self._completed_ids(output_path)
-        pending = [(query_id, query) for query_id, query in queries if query_id not in completed]
+        if raw_dir is not None:
+            raw_dir.mkdir(parents=True, exist_ok=True)
+            completed = self._completed_raw_ids(raw_dir) & query_ids
+            self._rebuild_outputs(raw_dir, output_path, index_path)
+        else:
+            completed = self._completed_ids(output_path)
+        pending = [(query_id, query) for query_id, query in query_rows if query_id not in completed]
         stats = {"submitted": len(pending), "resumed": len(completed), "succeeded": 0, "failed": 0}
+        processed_since_start = 0
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = {
                 executor.submit(self.distiller.generate, query_id, query): query_id
@@ -157,17 +207,117 @@ class DistillationPipeline:
                         {"query_id": query_id, "error": f"{type(exc).__name__}: {exc}"},
                     )
                     stats["failed"] += 1
-                    continue
-                if record.metadata.success:
-                    self._append_jsonl(output_path, record.model_dump(mode="json"))
-                    stats["succeeded"] += 1
                 else:
-                    self._append_jsonl(
-                        failed_path,
-                        record.model_dump(mode="json"),
-                    )
-                    stats["failed"] += 1
+                    if record.metadata.success:
+                        payload = record.model_dump(mode="json")
+                        if raw_dir is None:
+                            self._append_jsonl(output_path, payload)
+                        else:
+                            self._write_raw(raw_dir, payload)
+                        stats["succeeded"] += 1
+                    else:
+                        self._append_jsonl(
+                            failed_path,
+                            record.model_dump(mode="json"),
+                        )
+                        stats["failed"] += 1
+                processed_since_start += 1
+                if checkpoint_path is not None and processed_since_start % checkpoint_every == 0:
+                    if raw_dir is not None:
+                        self._rebuild_outputs(raw_dir, output_path, index_path)
+                    self._write_checkpoint(checkpoint_path, stats)
+        if raw_dir is not None:
+            self._rebuild_outputs(raw_dir, output_path, index_path)
+        if checkpoint_path is not None:
+            self._write_checkpoint(checkpoint_path, stats)
         return stats
+
+    @staticmethod
+    def _raw_filename(query_id: str) -> str:
+        readable = re.sub(r"[^A-Za-z0-9_.-]+", "_", query_id).strip("._")[:80] or "query"
+        digest = hashlib.sha256(query_id.encode("utf-8")).hexdigest()[:12]
+        return f"{readable}__{digest}.json"
+
+    @classmethod
+    def _completed_raw_ids(cls, raw_dir: Path) -> set[str]:
+        completed: set[str] = set()
+        for path in sorted(raw_dir.glob("*.json")):
+            try:
+                row = json.loads(path.read_text(encoding="utf-8"))
+                if row.get("metadata", {}).get("success") is True:
+                    completed.add(row["query_id"])
+            except (json.JSONDecodeError, KeyError) as exc:
+                raise ValueError(f"invalid immutable raw trajectory: {path}") from exc
+        return completed
+
+    def _write_raw(self, raw_dir: Path, payload: dict[str, object]) -> None:
+        path = raw_dir / self._raw_filename(str(payload["query_id"]))
+        encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8") + b"\n"
+        with self._write_lock:
+            if path.exists():
+                if path.read_bytes() != encoded:
+                    raise ValueError(f"refusing to overwrite immutable raw trajectory: {path}")
+                return
+            temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+            with temporary.open("wb") as handle:
+                handle.write(encoded)
+                handle.flush()
+                os.fsync(handle.fileno())
+            temporary.replace(path)
+
+    @classmethod
+    def _rebuild_outputs(
+        cls,
+        raw_dir: Path,
+        output_path: Path,
+        index_path: Path | None,
+    ) -> None:
+        records: list[tuple[Path, dict[str, object]]] = []
+        for path in sorted(raw_dir.glob("*.json")):
+            try:
+                record = json.loads(path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"invalid immutable raw trajectory: {path}") from exc
+            records.append((path, record))
+        cls._atomic_jsonl(output_path, [record for _, record in records])
+        if index_path is not None:
+            rows = [
+                {
+                    "query_id": record["query_id"],
+                    "raw_path": str(path.relative_to(raw_dir.parent)),
+                    "success": record.get("metadata", {}).get("success"),
+                    "latency_seconds": record.get("metadata", {}).get("latency_seconds"),
+                    "tools_used": record.get("metadata", {}).get("tools_used", []),
+                }
+                for path, record in records
+            ]
+            cls._atomic_jsonl(index_path, rows)
+
+    @staticmethod
+    def _atomic_jsonl(path: Path, rows: Iterable[dict[str, object]]) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+        with temporary.open("w", encoding="utf-8") as handle:
+            for row in rows:
+                handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(path)
+
+    @staticmethod
+    def _write_checkpoint(path: Path, stats: dict[str, int]) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            **stats,
+            "processed_this_run": stats["succeeded"] + stats["failed"],
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }
+        temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+        temporary.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        temporary.replace(path)
 
     @staticmethod
     def _completed_ids(path: Path) -> set[str]:

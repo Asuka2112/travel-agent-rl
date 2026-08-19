@@ -8,15 +8,15 @@
 | `nearby_search` | AMap `/v3/place/around` | deterministic mock |
 | `weather` | AMap `/v3/weather/weatherInfo` | deterministic mock |
 | `route_planning` | AMap v3 walking/driving/transit | deterministic mock |
-| `web_search` | Firecrawl `/v2/search` | deterministic mock |
-| `web_scraping` | Firecrawl `/v2/scrape` | deterministic mock |
+| `web_search` | self-hosted Firecrawl `/v1/search` + SearXNG | versioned replay / deterministic mock |
+| `web_scraping` | self-hosted Firecrawl `/v1/scrape` + Playwright | versioned replay / deterministic mock |
 | `flight_search` | local versioned inventory | same local simulator |
 | `train_search` | local versioned inventory | same local simulator |
 
 For Agent-STAR distillation, `build_distillation_registry` replaces US-oriented
 POI, nearby, flight, and ground-route calls with the fixed-revision
-Agent-STAR TravelDatabase. Weather remains AMap-backed, Firecrawl remains an
-optional public-web fallback, and train search remains a deterministic fixture.
+Agent-STAR TravelDatabase. Weather remains AMap-backed, self-hosted Firecrawl supplies
+public-web capture/replay, and train search remains a deterministic fixture.
 Each provider/data revision gets a distinct tool-cache namespace so cached
 responses cannot cross provider boundaries.
 
@@ -29,17 +29,21 @@ Official references:
 
 ## Credentials
 
-Set `AMAP_API_KEY` and `FIRECRAWL_API_KEY` in the job environment. Keys are
-never accepted in configuration files or serialized tool responses. Run:
+Formal distillation requires `AMAP_API_KEY`; self-hosted web capture does not require a
+Firecrawl API key. `FIRECRAWL_API_KEY` is used only by the separately confirmed Cloud
+smoke/fallback workflow. Keys are never accepted in configuration files or serialized
+tool responses. Run:
 
 ```bash
 source .venv/bin/activate
 python scripts/smoke_live_tools.py
 ```
 
-The smoke makes paid/quota-bearing provider calls and must not run until both
+The Cloud smoke makes paid/quota-bearing provider calls and must not run until both
 credentials and intended quota use are confirmed. Missing credentials fail
 before a request is sent.
+
+See `docs/selfhosted_web.md` for backend selection and versioned replay semantics.
 
 ## Reliability
 

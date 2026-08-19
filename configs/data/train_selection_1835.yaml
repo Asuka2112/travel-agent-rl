@@ -1,0 +1,16 @@
+input_path: data/processed/candidate_train.jsonl
+source_manifest_path: data/manifests/data_snapshot.json
+frozen_ids_path: data/manifests/frozen_test_ids.json
+protected_paths:
+  - data/raw/agent_star/TravelPlanner_Val180.jsonl
+  - data/raw/travelplanner/validation.csv
+  - data/raw/travelplanner/test.csv
+selection_size: 1835
+seed: 20260819
+pilot_seed: 20260850
+near_duplicate_threshold: 98.5
+contamination_fuzzy_threshold: 92.0
+output_path: data/manifests/train_queries_1835.jsonl
+manifest_path: data/manifests/train_queries_1835_manifest.json
+pilot_50_path: data/manifests/distill_pilot_50.jsonl
+pilot_200_path: data/manifests/distill_pilot_200.jsonl

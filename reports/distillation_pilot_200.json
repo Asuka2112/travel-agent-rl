@@ -1,0 +1,75 @@
+{
+  "acceptance": {
+    "final_pass_at_least_85_percent": true,
+    "firecrawl_cloud_zero": true,
+    "generation_at_least_95_percent": true,
+    "replay_live_web_zero": true,
+    "unknown_exceptions_zero": true
+  },
+  "average_generation_latency_seconds": 28.63713959949091,
+  "average_model_calls": 10.885,
+  "average_turns": 9.78,
+  "estimated_generation_hours_for_1835": 1.8246233043425633,
+  "exception_distribution": {},
+  "exception_rate": 0.0,
+  "exception_records": 0,
+  "final_accepted": 172,
+  "final_pass_rate": 86.0,
+  "firecrawl_cloud_credit_usage": 0,
+  "firecrawl_cloud_requests": 0,
+  "generated_at": "2026-08-19T20:53:16.497405+08:00",
+  "generation_succeeded": 200,
+  "generation_success_rate": 100.0,
+  "invalid_tool_calls": 0,
+  "invalid_tool_rate": 0.0,
+  "judge_drop_reasons": {
+    "judge_below_threshold": 21
+  },
+  "live_public_web_requests": 244,
+  "manifest_records": 200,
+  "protocol_error_count": 15,
+  "protocol_error_records": 12,
+  "repeated_action_rate": 3.5,
+  "repeated_action_records": 7,
+  "replay_verification": {
+    "firecrawl_cloud_requests": 0,
+    "live_public_web_requests": 0,
+    "mode": "replay_only",
+    "provider_errors_replayed": {
+      "provider_client_error": 2,
+      "provider_server_error": 23,
+      "timeout": 9
+    },
+    "returned": 204,
+    "run_id": "pilot_200_v3_replay_verify",
+    "snapshot_hits": 238,
+    "snapshot_misses": 0,
+    "snapshot_not_preexisting": 0,
+    "unique_requests": 238
+  },
+  "rule_drop_reasons": {
+    "repeated_action": 7
+  },
+  "tool_error_distribution": {
+    "answer_required": 6,
+    "provider_client_error": 3,
+    "provider_server_error": 29,
+    "repeated_action": 7,
+    "timeout": 8,
+    "tool_budget_exceeded": 138
+  },
+  "tool_usage": {
+    "flight_search": 338,
+    "nearby_search": 47,
+    "poi_search": 1023,
+    "route_planning": 151,
+    "train_search": 0,
+    "weather": 9,
+    "web_scraping": 103,
+    "web_search": 291
+  },
+  "web_cache_hit_rate": 27.810650887573964,
+  "web_snapshot_hits": 94,
+  "web_snapshot_misses": 244,
+  "web_snapshot_requests": 338
+}

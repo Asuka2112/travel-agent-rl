@@ -76,6 +76,7 @@ class BaseTool(ABC):
     name: str
     description: str
     argument_schema: dict[str, Any]
+    cacheable: bool = True
 
     def validate_arguments(self, arguments: dict[str, Any]) -> None:
         Draft202012Validator(self.argument_schema).validate(arguments)

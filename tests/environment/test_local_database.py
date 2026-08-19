@@ -46,7 +46,9 @@ def _database(tmp_path: Path) -> Path:
                  'https://museum.test', 'Seattle');
             INSERT INTO accommodations VALUES
                 ('Quiet Private Room', 'Private room', 90, 2, 4.8,
-                 'No smoking', 2, 'Seattle');
+                 'No smoking', 2, 'Seattle'),
+                ('Visitor Friendly Home', 'Entire home/apt', 140, 2, 4.7,
+                 'No pets', 8, 'Seattle');
             INSERT INTO restaurants VALUES
                 ('BBQ Place', 'Seattle', 'BBQ, American', 30, 4.7);
             INSERT INTO distances VALUES
@@ -77,6 +79,21 @@ def test_local_poi_search_covers_travel_categories(tmp_path: Path) -> None:
     assert restaurant["items"][0]["category"] == "restaurant"
     assert accommodation["items"][0]["category"] == "accommodation"
     assert attraction["items"][0]["category"] == "attraction"
+
+
+def test_local_accommodation_search_interprets_allowed_rules_and_capacity(
+    tmp_path: Path,
+) -> None:
+    result = LocalTravelPoiSearch(_database(tmp_path)).run(
+        {
+            "city": "Seattle",
+            "query": "entire home visitors allowed for 7 people for 3 nights",
+        }
+    )
+
+    assert [item["name"] for item in result["items"]] == ["Visitor Friendly Home"]
+    assert result["applied_filters"]["allowed_rules"] == ["No visitors"]
+    assert result["applied_filters"]["capacity"] == 7
 
 
 def test_local_nearby_and_ground_route_are_deterministic(tmp_path: Path) -> None:
