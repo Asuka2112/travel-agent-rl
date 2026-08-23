@@ -1,0 +1,50 @@
+model: models/Qwen3-4B-Instruct-2507
+model_revision: cdbee75f17c01a7cc42f958dc650907174af0554
+dataset: data/intermediate/sft/ms_swift_agent_881.jsonl
+source_dataset: data/processed/sft.jsonl
+dev_dataset: data/processed/dev.jsonl
+template: qwen3_nothinking
+agent_template: hermes
+loss_scale: default
+tuner_type: lora
+lora_rank: 128
+lora_alpha: 256
+lora_dropout: 0.05
+target_modules: all-linear
+epochs: 2
+max_length: 32768
+dtype: bfloat16
+attention_backend: flash_attn
+padding_free: true
+packing: false
+gradient_checkpointing: true
+use_liger_kernel: true
+sequence_parallel_size: 1
+deepspeed: none
+offload_optimizer: none
+offload_parameters: none
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 4
+expected_world_size: 4
+global_batch_size: 16
+learning_rate: 0.00002
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+weight_decay: 0.01
+max_grad_norm: 1.0
+seed: 20260819
+data_seed: 20260819
+save_steps: 25
+logging_steps: 1
+validation_note: >-
+  The immutable synthetic dev contains query-only Train Search coverage cases and no
+  assistant labels. It is evaluated interactively and cannot yield supervised loss.
+learning_rate_basis: >-
+  A 320-example, 40-step Agent smoke comparison found 1e-4 over-aggressive for
+  native tool-call/final-answer balance. The 2e-5 run preserved legal tool calls,
+  reduced malformed output to zero at step 40, and is used unchanged in production.
+memory_strategy_note: >-
+  The required 32768-token shape passed with sequence_parallel_size=4 and ZeRO-3 CPU
+  offload while GPU 0 retained an external 4.5 GiB allocation. The immutable 881-row
+  corpus has a measured maximum of 7401 tokens, so production uses faster four-rank
+  DDP; max_length remains 32768 and no example is truncated.

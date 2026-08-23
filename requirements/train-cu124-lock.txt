@@ -84,6 +84,7 @@ jsonschema==4.25.0
 jsonschema-specifications==2025.9.1
 kiwisolver==1.5.0
 lark==1.2.2
+liger_kernel==0.5.10
 llguidance==0.7.30
 llvmlite==0.44.0
 lm-format-enforcer==0.10.12

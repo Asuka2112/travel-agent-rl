@@ -1,0 +1,23 @@
+{
+  "agent_template": "hermes",
+  "created_at": "2026-08-23T17:24:11.179433+00:00",
+  "format": "ms-swift-native-agent-v1",
+  "loss_scale": "default",
+  "output": "data/intermediate/sft/ms_swift_agent_881.jsonl",
+  "output_sha256": "f9b8b2be0289f48bb89ce769a351bf652d2b74de61706d8a57d3b6644a346111",
+  "row_count": 881,
+  "source": "data/processed/sft.jsonl",
+  "source_sha256": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008",
+  "template": "qwen3_nothinking",
+  "tool_count": 8,
+  "tool_names": [
+    "poi_search",
+    "nearby_search",
+    "weather",
+    "route_planning",
+    "web_search",
+    "web_scraping",
+    "flight_search",
+    "train_search"
+  ]
+}

@@ -8,5 +8,6 @@ fastapi==0.115.12
 starlette==0.46.2
 deepspeed==0.16.9
 flash-attn==2.7.4.post1
+liger-kernel==0.5.10
 gradio==5.32.1
 wheel==0.45.1
