@@ -1,14 +1,16 @@
 # Current task
 
-Run the Formal Parameter Probe with Replay Policy v2:
+Run the one-time 200-query Formal Full-Parameter GRPO experiment with Replay Policy v2:
 
-- dataset: 8–16 frozen RL queries (currently `data/intermediate/grpo/smoke_tool_12.jsonl`)
+- dataset: `data/processed/rl_queries.jsonl` (200 frozen RL queries)
 - num_generations: 6
 - max_turns: 13
-- optimizer steps: at least 3
+- optimizer steps: enough to cover all 200 unique queries exactly once at G=6
 - topology: choose from a fresh GPU0–7 audit; include idle-safe GPU6
-- fixed Judge: immutable Base model, GPU-backed and proven non-fallback before trainer launch
+- initialization: `outputs/models/qwen3_4b_sft_merged`
+- training: 100% full parameters; no LoRA
+- fixed Judge: immutable Base model, GPU-backed and already validated non-fallback in Probe
 - web mode: replay_only
 - snapshot: immutable v4
 
-On success: verify OOM/reward variance/advantage/multi-turn/weight sync/checkpoint/resource gates, stop Probe services, commit the milestone, then re-audit GPU0–7 before the one-time 200-query Formal Full-Parameter GRPO run.
+This is the single formal main run. Do not tune rewards, seeds, model, dataset, G, max turns, replay semantics, or evaluation protocol. On completion, stop project services, validate the final checkpoint and training artifacts, commit the milestone, and proceed directly to unified Base/SFT/RL evaluation.
