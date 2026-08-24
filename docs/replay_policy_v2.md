@@ -41,6 +41,5 @@ failure count, mask/logprob alignment, and public-network count. The previous
 
 ## Provenance
 
-The implementing Git commit is recorded after regression verification. Until
-that commit is created, reports identify the working-tree base commit and the
-final reproducibility manifest supplies the implementing commit.
+The implementation and verified regression gate are recorded by Git commit
+`f83bd733478602f8f194fe1817fabe43e621c411`.
