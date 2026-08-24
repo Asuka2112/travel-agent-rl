@@ -1,6 +1,6 @@
 {
   "captured_at": "2026-08-24T18:41:13+08:00",
-  "current_git_commit": "3286e70a3a95f33a4f8e21cb2971d19585d0c03a",
+  "current_git_commit": "c22677e",
   "current_checkpoint": "outputs/grpo/pilot_4gpu_v1/v1-20260824-164724/checkpoint-16",
   "replay_policy_version": 2,
   "web_mode": "replay_only",
