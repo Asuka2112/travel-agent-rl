@@ -2,7 +2,8 @@
 
 Run the one-time 200-query Formal Full-Parameter GRPO experiment with Replay Policy v2:
 
-- dataset: `data/processed/rl_queries.jsonl` (200 frozen RL queries)
+- dataset: `data/intermediate/grpo/formal_200.jsonl` (deterministic execution view of all 200 frozen RL queries)
+- frozen source: `data/processed/rl_queries.jsonl` (unchanged SHA-256 `ca941165…e9c80`)
 - num_generations: 6
 - max_turns: 13
 - optimizer steps: enough to cover all 200 unique queries exactly once at G=6

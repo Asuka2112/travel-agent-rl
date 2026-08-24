@@ -17,8 +17,9 @@
     "rl_queries.jsonl": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80",
     "dev.jsonl": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712",
     "frozen_test_ids.json": "4b699d9e80737d15854e097badeb0886b20b711dc5ba4b8245ac1e4455329050",
-    "grpo_subsets_manifest.json": "8854621f7fc6726426c663a2f6e56029e9e0b25924f557476f112bd1287dbd5a",
+    "grpo_subsets_manifest.json": "fb53860b67fb0577ed8cbbd9c250ab8c30e64208c2e4eac55d8884bb134352a3",
     "pilot_48.jsonl": "3eda7c2f4840fa913e67802eb43ee03d7abd741db4d3107548875636e78630de",
+    "formal_200.jsonl": "ffd31823539d803e81526133573d31da28df748c26bf936823e49c96e0314da1",
     "smoke_tool_12.jsonl": "844bb65ec77efcf33c79e56d8a086a1b7feac25fb5f96fa019b232248cf2f437",
     "replay_v2_regression_3.jsonl": "2a6e66024c2ded1d19deeb5c61ead17cd2e28e93d6d6c1f01c234a11a765e6c2"
   },
@@ -131,5 +132,5 @@
   "next_stage_recommendation": "Use the freshly audited maximum safe topology. The validated four-GPU topology is sufficient if no additional GPUs become safely available; never preempt external work.",
   "exact_next_command": "cd /data/home/zhourunfeng/travel-agent-rl && .venv/bin/python scripts/audit_gpu_resources.py --selected-gpu-ids '' --output outputs/grpo/resource_snapshots/formal_grpo_preflight.json",
   "next_config": "configs/grpo/formal_4gpu.yaml",
-  "next_dataset": "data/processed/rl_queries.jsonl"
+  "next_dataset": "data/intermediate/grpo/formal_200.jsonl"
 }

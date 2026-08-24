@@ -16,6 +16,7 @@ SOURCE = Path("data/processed/rl_queries.jsonl")
 OUTPUTS = {
     "smoke": (12, Path("data/intermediate/grpo/smoke_12.jsonl")),
     "pilot": (48, Path("data/intermediate/grpo/pilot_48.jsonl")),
+    "formal": (200, Path("data/intermediate/grpo/formal_200.jsonl")),
 }
 SEED = 20260819
 

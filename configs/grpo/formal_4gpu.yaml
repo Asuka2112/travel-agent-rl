@@ -1,7 +1,9 @@
 stage: formal_grpo_200
 model: outputs/models/qwen3_4b_sft_merged
-dataset: data/processed/rl_queries.jsonl
-dataset_sha256: ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80
+dataset: data/intermediate/grpo/formal_200.jsonl
+dataset_sha256: ffd31823539d803e81526133573d31da28df748c26bf936823e49c96e0314da1
+source_dataset: data/processed/rl_queries.jsonl
+source_dataset_sha256: ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80
 dataset_queries: 200
 rlhf_type: grpo
 training_strategy: full
