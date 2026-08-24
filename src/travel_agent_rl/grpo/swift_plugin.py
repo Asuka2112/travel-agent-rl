@@ -79,7 +79,7 @@ class ToolEfficiencyORM(_TrajectoryORM):
 
 
 class FixedLocalJudgeORM(ORM):
-    """Call the fixed, CPU-hosted Base judge; failures deterministically score zero."""
+    """Call the fixed local Base judge; failures deterministically score zero."""
 
     def __call__(
         self,

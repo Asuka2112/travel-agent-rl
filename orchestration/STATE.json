@@ -1,0 +1,110 @@
+{
+  "captured_at": "2026-08-24T18:41:13+08:00",
+  "current_git_commit": "3286e70a3a95f33a4f8e21cb2971d19585d0c03a",
+  "current_checkpoint": "outputs/grpo/pilot_4gpu_v1/v1-20260824-164724/checkpoint-16",
+  "replay_policy_version": 2,
+  "web_mode": "replay_only",
+  "snapshot": {
+    "version": 4,
+    "content_sha256": "dbd160b6de284208c3906e9da0768cabfe3a77315e64280ea59685eefff15f92",
+    "immutable": true,
+    "public_network_requests_in_regression": 0
+  },
+  "dataset_hashes": {
+    "train_queries_1835.jsonl": "cf2f694419f7a96e868d07507a0a26d648cfd885ce69cda7daae36b3d3d82e6e",
+    "train_queries_1835_manifest.json": "6a3a5d1384ef4632b755648ad14b24f7c1404cbf8944f9b123ca97c5e5e04f9e",
+    "sft.jsonl": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008",
+    "rl_queries.jsonl": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80",
+    "dev.jsonl": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712",
+    "frozen_test_ids.json": "4b699d9e80737d15854e097badeb0886b20b711dc5ba4b8245ac1e4455329050",
+    "grpo_subsets_manifest.json": "8854621f7fc6726426c663a2f6e56029e9e0b25924f557476f112bd1287dbd5a",
+    "pilot_48.jsonl": "3eda7c2f4840fa913e67802eb43ee03d7abd741db4d3107548875636e78630de",
+    "smoke_tool_12.jsonl": "844bb65ec77efcf33c79e56d8a086a1b7feac25fb5f96fa019b232248cf2f437",
+    "replay_v2_regression_3.jsonl": "2a6e66024c2ded1d19deeb5c61ead17cd2e28e93d6d6c1f01c234a11a765e6c2"
+  },
+  "completed_stages": [
+    "1835-query freeze, distillation, three-stage cleaning, and SFT/RL split",
+    "Qwen3-4B full-parameter SFT and Base/SFT eight-tool evaluation",
+    "six rewards, multi-turn scheduler, mask/logprob, and checkpoint tests",
+    "five-step full-parameter GRPO smoke through checkpoint-5",
+    "Replay Policy v2 implementation and 84-test/ruff regression",
+    "Replay Policy v2 real rollout plus optimizer step 6 through checkpoint-6",
+    "48-query G=4/max_turns=8 full-parameter GRPO Pilot through checkpoint-16"
+  ],
+  "replay_v2_regression": {
+    "gate_pass": true,
+    "rollouts": 6,
+    "snapshot_misses": 6,
+    "unique_snapshot_misses": 1,
+    "miss_recovered": 6,
+    "miss_final_failure": 0,
+    "public_network_requests": 0,
+    "reward_mean": 3.02750015,
+    "reward_std": 0.34743637,
+    "advantage_nonzero_ratio": 0.6666666666666666,
+    "kl": 0.00024581,
+    "parameters_changed": true,
+    "no_nan_oom_nccl": true
+  },
+  "pilot_48": {
+    "gate_pass": true,
+    "checkpoint": "outputs/grpo/pilot_4gpu_v1/v1-20260824-164724/checkpoint-16",
+    "optimizer_steps": 16,
+    "rollouts": 192,
+    "unique_queries": 48,
+    "generations_per_query": 4,
+    "query_count_distribution": {"4": 48},
+    "reward_mean": 3.717907904375,
+    "reward_std_mean": 0.274222819375,
+    "advantage_nonzero_ratio": 0.4444444444444444,
+    "kl_mean": 0.000765724375,
+    "parameters_changed": true,
+    "snapshot_misses": 250,
+    "miss_recovered": 236,
+    "miss_final_failure": 14,
+    "public_network_requests": 0,
+    "fixed_judge_mean": 0.0,
+    "fixed_judge_limitation": "CPU inference exceeded the 300-second reward timeout and deterministically fell back to zero; GPU Judge support is required and tested before Formal Probe.",
+    "no_nan_oom_nccl": true,
+    "report": "reports/GRPO_PILOT_REPORT.md",
+    "feasibility_metrics": "outputs/grpo/pilot_4gpu_v1/validation/feasibility.json"
+  },
+  "current_gpu_state": {
+    "captured_from": "outputs/grpo/resource_snapshots/replay_v2_regression_final.json",
+    "gpu0": "4520 MiB external use by lyudong; 19692 MiB free; 0% utilization",
+    "gpu1": "idle; 24197 MiB free",
+    "gpu2": "idle; 24197 MiB free",
+    "gpu3": "idle; 24197 MiB free",
+    "gpu4": "5958 MiB external use by lyudong; 18253 MiB free",
+    "gpu5": "19410 MiB external use by lyudong; 4801 MiB free",
+    "gpu6": "idle; 24197 MiB free",
+    "gpu7": "11496 MiB external use by zhangyanning; 12715 MiB free"
+  },
+  "running_processes": {
+    "grpo_trainer": false,
+    "grpo_rollout_server": false,
+    "fixed_judge": false,
+    "resource_monitor": false,
+    "tmux_sessions": []
+  },
+  "current_stage": "Formal Parameter Probe preflight",
+  "status": "ready",
+  "gpu_topology": {
+    "rollout": [6],
+    "trainer": [1, 2, 3]
+  },
+  "running_processes_detail": [],
+  "last_successful_step": "48-query full-parameter GRPO Pilot through checkpoint-16",
+  "next_action": "Freshly audit GPU0-7, validate fixed Base Judge on a safe GPU, then run at least three G=6/max_turns=13 full-parameter Probe optimizer steps",
+  "routing_validation": {
+    "requested_model": "gpt-5.6-luna",
+    "worker_self_identification": "GPT-5 Codex",
+    "explicit_luna_resolution_confirmed": false,
+    "delegation_policy": "primary thread only"
+  },
+  "pending_next_stage": "G=6/max_turns=13 Formal Parameter Probe",
+  "next_stage_recommendation": "Use the freshly audited maximum safe topology, explicitly include idle-safe GPU6, and prove the fixed Base Judge returns real non-fallback scores before training.",
+  "exact_next_command": "cd /data/home/zhourunfeng/travel-agent-rl && .venv/bin/python scripts/audit_gpu_resources.py --selected-gpu-ids '' --output outputs/grpo/resource_snapshots/formal_probe_preflight.json",
+  "next_config": "configs/grpo/target.yaml",
+  "next_dataset": "data/intermediate/grpo/smoke_tool_12.jsonl"
+}

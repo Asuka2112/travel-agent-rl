@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Serve the immutable Base-model Judge on CPU for GRPO reward calls."""
+"""Serve the immutable Base-model Judge for GRPO reward calls."""
 from __future__ import annotations
 
 import argparse
@@ -23,6 +23,7 @@ MODEL: Any = None
 TOKENIZER: Any = None
 PROMPT = ""
 MODEL_PATH = ""
+MODEL_DEVICE = torch.device("cpu")
 GENERATION_LOCK = threading.Lock()
 
 
@@ -62,7 +63,7 @@ def health() -> dict[str, Any]:
         "status": "ok" if MODEL is not None else "loading",
         "model": MODEL_PATH,
         "judge_prompt_sha256": sha256_file(Path("prompts/judge/v1.txt")),
-        "device": "cpu",
+        "device": str(MODEL_DEVICE),
         "policy_model": False,
     }
 
@@ -86,6 +87,7 @@ def judge(request: JudgeRequest) -> dict[str, Any]:
         for conversation in conversations
     ]
     batch = TOKENIZER(rendered, return_tensors="pt", padding=True, truncation=True, max_length=30000)
+    batch = {name: tensor.to(MODEL_DEVICE) for name, tensor in batch.items()}
     with GENERATION_LOCK, torch.inference_mode():
         outputs = MODEL.generate(
             **batch,
@@ -119,13 +121,21 @@ def judge(request: JudgeRequest) -> dict[str, Any]:
 
 
 def main() -> None:
-    global MODEL, MODEL_PATH, PROMPT, TOKENIZER
+    global MODEL, MODEL_DEVICE, MODEL_PATH, PROMPT, TOKENIZER
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8019)
     parser.add_argument("--torch-threads", type=int, default=64)
+    parser.add_argument(
+        "--device",
+        default="cpu",
+        help="Torch device for the fixed Judge (for example: cpu or cuda:0).",
+    )
     args = parser.parse_args()
+    MODEL_DEVICE = torch.device(args.device)
+    if MODEL_DEVICE.type == "cuda" and not torch.cuda.is_available():
+        parser.error(f"CUDA device requested but CUDA is unavailable: {MODEL_DEVICE}")
     torch.set_num_threads(args.torch_threads)
     torch.set_num_interop_threads(min(8, args.torch_threads))
     MODEL_PATH = str(args.model)
@@ -139,7 +149,7 @@ def main() -> None:
         local_files_only=True,
         torch_dtype=torch.bfloat16,
         attn_implementation="sdpa",
-        device_map="cpu",
+        device_map=MODEL_DEVICE,
     ).eval()
     uvicorn.run(app, host=args.host, port=args.port, log_level="info")
 
