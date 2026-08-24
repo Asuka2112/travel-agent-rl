@@ -222,6 +222,12 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
     total_attempts = sum(r["valid_tool_calls"] + r["invalid_tool_calls"] for r in records)
     valid_calls = sum(r["valid_tool_calls"] for r in records)
     invalid_calls = sum(r["invalid_tool_calls"] for r in records)
+    tool_efficiency = statistics.fmean(
+        0.0
+        if not r["tool_calls"]
+        else (1.0 if r["final_answer_present"] else 0.5) * (0.0 if r["loop"] else 1.0)
+        for r in records
+    )
     return {
         "queries": len(records),
         "normal_answer_completion_rate": sum(bool(r["final_answer"]) for r in records)
@@ -236,6 +242,7 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
         "average_turns": statistics.fmean(r["turns"] for r in records),
         "average_tool_calls": statistics.fmean(r["tool_calls"] for r in records),
         "loop_rate": sum(r["loop"] for r in records) / len(records),
+        "tool_efficiency": tool_efficiency,
         "tool_usage": dict(Counter(tool for r in records for tool in r["tool_sequence"])),
         "unknown_exceptions": sum(r["unknown_exception"] for r in records),
         "replay_misses": sum(r["replay_misses"] for r in records),
