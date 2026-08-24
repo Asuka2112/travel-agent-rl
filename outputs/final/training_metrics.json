@@ -1,0 +1,172 @@
+{
+  "formal_grpo_200": {
+    "advantage_nonzero_ratio": 0.9701492537313433,
+    "checkpoint": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+    "feasibility_metrics": "outputs/grpo/formal_4gpu_v1/feasibility.json",
+    "gate_pass": true,
+    "gpu_peak_used_mib": {
+      "1": 22388,
+      "2": 11004,
+      "3": 11044,
+      "6": 15352
+    },
+    "grad_norm_mean": 2.5979048003000003,
+    "kl_mean": 0.008047504,
+    "loss_mean": 0.0003755681000000001,
+    "max_turns": 13,
+    "miss_final_failure": 48,
+    "miss_recovered": 1350,
+    "no_nan_oom_nccl": true,
+    "num_generations": 6,
+    "optimizer_steps": 200,
+    "parameters_changed": true,
+    "public_network_requests": 0,
+    "query_count_distribution": {
+      "6": 200
+    },
+    "report": "reports/GRPO_FORMAL_REPORT.md",
+    "resource_peaks": {
+      "gpu_peak_used_mib": {
+        "1": 22388,
+        "2": 11004,
+        "3": 11044,
+        "6": 15352
+      },
+      "gpu_peak_utilization_percent": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "6": 100
+      },
+      "host_ram_used_peak_gib": 255.1674041748047,
+      "project_rss_peak_gib": 175.3039894104004
+    },
+    "reward_components": {
+      "FinalAnswerBoundaryORM": {
+        "mean": 0.97833333185,
+        "mean_logged_std": 0.0429878202,
+        "nonconstant": true
+      },
+      "FixedLocalJudgeORM": {
+        "mean": 0.54687323715,
+        "mean_logged_std": 0.028230689500000003,
+        "nonconstant": true
+      },
+      "StageAwarenessORM": {
+        "mean": 1.0,
+        "mean_logged_std": 0.0,
+        "nonconstant": false
+      },
+      "ToolEfficiencyORM": {
+        "mean": 0.9748102795,
+        "mean_logged_std": 0.0447320052,
+        "nonconstant": true
+      },
+      "ValidAgentStepORM": {
+        "mean": 0.99922619295,
+        "mean_logged_std": 0.0015352786,
+        "nonconstant": true
+      },
+      "ValidToolCallORM": {
+        "mean": 1.0,
+        "mean_logged_std": 0.0,
+        "nonconstant": false
+      }
+    },
+    "reward_mean": 4.5118380472,
+    "reward_std_mean": 0.0899533458,
+    "rollouts": 1200,
+    "snapshot_misses": 1398,
+    "topology_log": "outputs/grpo/resource_snapshots/formal_grpo_retry2_topology.json",
+    "train_runtime_hms": "7h 9m 58s",
+    "train_runtime_seconds": 25796.0687,
+    "unique_queries": 200
+  },
+  "formal_parameter_probe": {
+    "advantage_nonzero_ratio": 1.0,
+    "checkpoint": "outputs/grpo/formal_probe_4gpu_v1/v0-20260824-184748/checkpoint-3",
+    "feasibility_metrics": "outputs/grpo/formal_probe_4gpu_v1/validation/feasibility.json",
+    "fixed_judge_mean": 0.36211639999999995,
+    "fixed_judge_nonconstant": true,
+    "gate_pass": true,
+    "gpu_peak_used_mib": {
+      "1": 21730,
+      "2": 10062,
+      "3": 10524,
+      "6": 15348
+    },
+    "kl_mean": 7.939333333333334e-05,
+    "max_turns": 13,
+    "miss_final_failure": 4,
+    "miss_recovered": 63,
+    "no_nan_oom_nccl": true,
+    "num_generations": 6,
+    "optimizer_steps": 3,
+    "parameters_changed": true,
+    "public_network_requests": 0,
+    "report": "reports/GRPO_FORMAL_PROBE_REPORT.md",
+    "reward_mean": 3.9818255133333333,
+    "reward_std_mean": 0.5040362899999999,
+    "rollouts": 18,
+    "snapshot_misses": 67,
+    "topology_log": "outputs/grpo/resource_snapshots/formal_probe_topology.json"
+  },
+  "generated_at": "2026-08-24T19:49:39.815199+00:00",
+  "pilot_48": {
+    "advantage_nonzero_ratio": 0.4444444444444444,
+    "checkpoint": "outputs/grpo/pilot_4gpu_v1/v1-20260824-164724/checkpoint-16",
+    "feasibility_metrics": "outputs/grpo/pilot_4gpu_v1/validation/feasibility.json",
+    "fixed_judge_limitation": "CPU inference exceeded the 300-second reward timeout and deterministically fell back to zero; GPU Judge support is required and tested before Formal Probe.",
+    "fixed_judge_mean": 0.0,
+    "gate_pass": true,
+    "generations_per_query": 4,
+    "kl_mean": 0.000765724375,
+    "miss_final_failure": 14,
+    "miss_recovered": 236,
+    "no_nan_oom_nccl": true,
+    "optimizer_steps": 16,
+    "parameters_changed": true,
+    "public_network_requests": 0,
+    "query_count_distribution": {
+      "4": 48
+    },
+    "report": "reports/GRPO_PILOT_REPORT.md",
+    "reward_mean": 3.717907904375,
+    "reward_std_mean": 0.274222819375,
+    "rollouts": 192,
+    "snapshot_misses": 250,
+    "unique_queries": 48
+  },
+  "replay_v2_regression": {
+    "advantage_nonzero_ratio": 0.6666666666666666,
+    "gate_pass": true,
+    "kl": 0.00024581,
+    "miss_final_failure": 0,
+    "miss_recovered": 6,
+    "no_nan_oom_nccl": true,
+    "parameters_changed": true,
+    "public_network_requests": 0,
+    "reward_mean": 3.02750015,
+    "reward_std": 0.34743637,
+    "rollouts": 6,
+    "snapshot_misses": 6,
+    "unique_snapshot_misses": 1
+  },
+  "sft": {
+    "adapter_checkpoint": "outputs/train/sft_qwen3_4b_lora_r128_production/v0-20260824-032206/checkpoint-110",
+    "aggregate_train_loss": 0.2780154,
+    "epochs": 2,
+    "heldout_validation_loss": 0.22384709301830985,
+    "heldout_validation_token_accuracy": 0.927895705910986,
+    "initialization": "models/Qwen3-4B-Instruct-2507",
+    "last_grad_norm": 0.41995385,
+    "last_train_loss": 0.22089405,
+    "merged_load_verified": true,
+    "merged_model": "outputs/models/qwen3_4b_sft_merged",
+    "merged_parameter_count": 4022468096,
+    "optimizer_steps": 110,
+    "peak_reported_gpu_memory_gib": 16.81,
+    "train_runtime_seconds": 1034.157,
+    "train_token_accuracy": 0.9297293097696185
+  }
+}

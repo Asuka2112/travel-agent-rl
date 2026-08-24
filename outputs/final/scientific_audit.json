@@ -1,0 +1,159 @@
+{
+  "checkpoint_provenance": {
+    "base": "models/Qwen3-4B-Instruct-2507",
+    "parameter_change": {
+      "after": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+      "before": "outputs/models/qwen3_4b_sft_merged",
+      "comparisons": [
+        {
+          "after_sha256": "1290eea2aba5a86285a4f9a7fe489bf19667d2c1fd3e7b66965d1641baa3c988",
+          "before_sha256": "4f1b3e2fb4942fd11801d9fd386cd835057f3dc8665bb7712edd070bc0224fe6",
+          "changed_elements": 759557,
+          "max_absolute_delta": 6.103515625e-05,
+          "mean_absolute_delta": 7.380145348179212e-07,
+          "name": "model.layers.0.self_attn.q_proj.weight",
+          "shape": [
+            4096,
+            2560
+          ]
+        },
+        {
+          "after_sha256": "ad42a3779e0e49f08452e436d67411ad04a3537fed0769179f2ad7faf1ad7116",
+          "before_sha256": "e53a9b292c7499f62d0f95113d2e13473f8a4812dfb4e4226f568a11cd71a906",
+          "changed_elements": 5316971,
+          "max_absolute_delta": 6.103515625e-05,
+          "mean_absolute_delta": 1.9673670976771973e-06,
+          "name": "model.layers.1.mlp.down_proj.weight",
+          "shape": [
+            2560,
+            9728
+          ]
+        },
+        {
+          "after_sha256": "05a898b9ee9552cafda5ef4328b23b11940e65d95692b5a5e580d79733dcc48d",
+          "before_sha256": "ac0c2edb3b0a4d9559d688ebef73512805d1a1b9806b40d3e80f4cd805e6feea",
+          "changed_elements": 849715,
+          "max_absolute_delta": 6.103515625e-05,
+          "mean_absolute_delta": 9.091164656638284e-07,
+          "name": "model.layers.10.self_attn.o_proj.weight",
+          "shape": [
+            2560,
+            4096
+          ]
+        }
+      ],
+      "generated_at": "2026-08-24T19:06:37.960539+00:00",
+      "parameters_changed": true
+    },
+    "rl": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+    "sft": "outputs/models/qwen3_4b_sft_merged"
+  },
+  "checks": {
+    "checkpoint_provenance_complete": true,
+    "dataset_hashes_match": true,
+    "evaluation_backend_parity": true,
+    "evaluation_dev_hash_parity": true,
+    "evaluation_public_network_zero": true,
+    "evaluation_query_count_parity": true,
+    "evaluation_training_overlap_zero": true,
+    "formal_full_parameter_verified": true,
+    "formal_parameter_change_verified": true,
+    "formal_replay_v2_gate_passed": true,
+    "frozen_benchmark_overlap_zero": true,
+    "judge_has_no_failures": true,
+    "judge_model_parity": true,
+    "judge_prompt_parity": true,
+    "pairwise_judge_has_no_failures": true,
+    "pairwise_true_bidirectional_calls_complete": true,
+    "protected_benchmark_overlap_zero": true,
+    "rl_response_mask_verified": true,
+    "sft_merge_contains_no_lora_parameters": true,
+    "sft_merged_load_verified": true,
+    "sft_rl_overlap_zero": true,
+    "snapshot_hash_matches_system_of_record": true,
+    "snapshot_v4_immutable": true,
+    "training_public_network_zero": true
+  },
+  "dataset_hash_checks": {
+    "dev": true,
+    "rl": true,
+    "sft": true
+  },
+  "evaluation_parity": {
+    "dev_sha256": true,
+    "judge_model": true,
+    "judge_prompt_sha256": true,
+    "query_count": true,
+    "tool_backend": true
+  },
+  "failure_summary": {
+    "base": {
+      "error_types": {
+        "ValueError": 2
+      },
+      "failure_queries": 2,
+      "invalid_tool_calls": 2,
+      "loops": 0,
+      "queries": 16,
+      "snapshot_misses": 0,
+      "unknown_exceptions": 0
+    },
+    "rl": {
+      "error_types": {},
+      "failure_queries": 0,
+      "invalid_tool_calls": 0,
+      "loops": 0,
+      "queries": 16,
+      "snapshot_misses": 0,
+      "unknown_exceptions": 0
+    },
+    "sft": {
+      "error_types": {},
+      "failure_queries": 6,
+      "invalid_tool_calls": 0,
+      "loops": 5,
+      "queries": 16,
+      "snapshot_misses": 30,
+      "unknown_exceptions": 0
+    }
+  },
+  "generated_at": "2026-08-24T19:49:39.815199+00:00",
+  "overall_pass": true,
+  "reward_definition": {
+    "config": "configs/grpo/rewards.yaml",
+    "config_sha256": "f980d6a47045f7a622eadc726e0009a47838eceae8e3ed3f727fd7a90761e57d",
+    "formal_components": {
+      "FinalAnswerBoundaryORM": {
+        "mean": 0.97833333185,
+        "mean_logged_std": 0.0429878202,
+        "nonconstant": true
+      },
+      "FixedLocalJudgeORM": {
+        "mean": 0.54687323715,
+        "mean_logged_std": 0.028230689500000003,
+        "nonconstant": true
+      },
+      "StageAwarenessORM": {
+        "mean": 1.0,
+        "mean_logged_std": 0.0,
+        "nonconstant": false
+      },
+      "ToolEfficiencyORM": {
+        "mean": 0.9748102795,
+        "mean_logged_std": 0.0447320052,
+        "nonconstant": true
+      },
+      "ValidAgentStepORM": {
+        "mean": 0.99922619295,
+        "mean_logged_std": 0.0015352786,
+        "nonconstant": true
+      },
+      "ValidToolCallORM": {
+        "mean": 1.0,
+        "mean_logged_std": 0.0,
+        "nonconstant": false
+      }
+    }
+  },
+  "snapshot_content_sha256": "dbd160b6de284208c3906e9da0768cabfe3a77315e64280ea59685eefff15f92"
+}

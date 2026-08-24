@@ -1,0 +1,148 @@
+{
+  "artifacts": {
+    "configs/grpo/formal_4gpu.yaml": {
+      "bytes": 1244,
+      "sha256": "af96f0672c588b48971f4011692050a84f2851260262645adf5139d6551d1e5f"
+    },
+    "configs/grpo/rewards.yaml": {
+      "bytes": 313,
+      "sha256": "f980d6a47045f7a622eadc726e0009a47838eceae8e3ed3f727fd7a90761e57d"
+    },
+    "configs/sft/production.yaml": {
+      "bytes": 1722,
+      "sha256": "fb605ba86bf227ace2ea196c7852fc3f9f9779f6f0c81b6abc2b990f2d70952d"
+    },
+    "data/manifests/processed_split_manifest.json": {
+      "bytes": 1049,
+      "sha256": "b26e305780d455cd89b9464d4d5efb0f5facc8d9f78db51bdeba9c88c0da8da9"
+    },
+    "data/manifests/web_snapshot_production_1835_v4_manifest.json": {
+      "bytes": 1735736,
+      "sha256": "3a128e62d81f7ffde2ef40936d4cd8e1b09bc718b9824f24b7e2fa682511f57e"
+    },
+    "data/processed/dev.jsonl": {
+      "bytes": 11644,
+      "sha256": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712"
+    },
+    "data/processed/rl_queries.jsonl": {
+      "bytes": 200870,
+      "sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80"
+    },
+    "data/processed/sft.jsonl": {
+      "bytes": 25629057,
+      "sha256": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008"
+    },
+    "outputs/final/failure_analysis.json": {
+      "bytes": 5884,
+      "sha256": "495b07609564e4ad3a66ed1f54a8dd87e224aae2fd43c6b8947931e7c11407f0"
+    },
+    "outputs/final/final_metrics.json": {
+      "bytes": 3116,
+      "sha256": "e7bc4b68e3245abc2445c7a89d5ee2a64c2c904f7f5238fd883996e80d9a5e49"
+    },
+    "outputs/final/pairwise_metrics.json": {
+      "bytes": 346836,
+      "sha256": "1010e1cd8c0e0ec35aa55ec7a1b3f5d3e071134b2f09bb69a97bd4a394df4161"
+    },
+    "outputs/final/scientific_audit.json": {
+      "bytes": 5034,
+      "sha256": "b7123553135caf3cca84d1f3e01cbf83aad7013a7e3a62dd38cf5ac08b13b40d"
+    },
+    "outputs/final/training_metrics.json": {
+      "bytes": 5461,
+      "sha256": "bc1496184fec1d35eb9d15f5e5e17403b0999f2e521ddf82fc725788c241946b"
+    },
+    "outputs/grpo/formal_4gpu_v1/feasibility.json": {
+      "bytes": 15967,
+      "sha256": "cfd0dae87d4d482e8274e10125e9259a1c545f7376de94876a35a3ee3b6fb920"
+    },
+    "outputs/grpo/formal_4gpu_v1/parameter_change.json": {
+      "bytes": 1535,
+      "sha256": "713a5ad8ddede98c108ea894d312e10f118b332776617842e02bfddc0acceb0a"
+    },
+    "prompts/judge/pairwise_v1.txt": {
+      "bytes": 865,
+      "sha256": "59584211aa357e8aa57096b66dedc3ffb6e7c866c5b1839ac70bd13aea8ca6ec"
+    },
+    "prompts/judge/v1.txt": {
+      "bytes": 539,
+      "sha256": "a67adfec206097df6e39c75b92c6c74db8b5877fe569906ccbde6d5950626e38"
+    }
+  },
+  "commands": {
+    "final_validation": ".venv-train/bin/pytest -q && .venv/bin/ruff check .",
+    "fixed_judge": "scripts/evaluate_fixed_local_judge.py with models/Qwen3-4B-Instruct-2507 and prompts/judge/v1.txt",
+    "formal_training": "bash scripts/run_grpo_training.sh --config configs/grpo/formal_4gpu.yaml",
+    "pairwise": "scripts/evaluate_pairwise_local_judge.py with true A/B and B/A orientations, Path=30%, Final=70%",
+    "unified_evaluation": "scripts/evaluate_agent_model.py with identical full_replay, seed=20260819, max_turns=13, max_new_tokens=768 for Base/SFT/RL"
+  },
+  "frozen_protocol": {
+    "evaluation_seed": 20260819,
+    "formal_full_parameter": true,
+    "max_turns": 13,
+    "model": "Qwen3-4B-Instruct-2507",
+    "num_generations": 6,
+    "public_network_requests": 0,
+    "replay_policy_version": 2,
+    "snapshot_content_sha256": "dbd160b6de284208c3906e9da0768cabfe3a77315e64280ea59685eefff15f92",
+    "snapshot_version": 4,
+    "web_mode": "replay_only"
+  },
+  "generated_at": "2026-08-24T19:49:39.815199+00:00",
+  "hardware": {
+    "evaluation_topology": "outputs/evaluation/unified_20260825/resource_topology.json",
+    "formal_topology": "outputs/grpo/resource_snapshots/formal_grpo_retry2_topology.json",
+    "profile": "docs/machine_profile.md"
+  },
+  "model_lineage": {
+    "base": "models/Qwen3-4B-Instruct-2507",
+    "parameter_change": {
+      "after": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+      "before": "outputs/models/qwen3_4b_sft_merged",
+      "comparisons": [
+        {
+          "after_sha256": "1290eea2aba5a86285a4f9a7fe489bf19667d2c1fd3e7b66965d1641baa3c988",
+          "before_sha256": "4f1b3e2fb4942fd11801d9fd386cd835057f3dc8665bb7712edd070bc0224fe6",
+          "changed_elements": 759557,
+          "max_absolute_delta": 6.103515625e-05,
+          "mean_absolute_delta": 7.380145348179212e-07,
+          "name": "model.layers.0.self_attn.q_proj.weight",
+          "shape": [
+            4096,
+            2560
+          ]
+        },
+        {
+          "after_sha256": "ad42a3779e0e49f08452e436d67411ad04a3537fed0769179f2ad7faf1ad7116",
+          "before_sha256": "e53a9b292c7499f62d0f95113d2e13473f8a4812dfb4e4226f568a11cd71a906",
+          "changed_elements": 5316971,
+          "max_absolute_delta": 6.103515625e-05,
+          "mean_absolute_delta": 1.9673670976771973e-06,
+          "name": "model.layers.1.mlp.down_proj.weight",
+          "shape": [
+            2560,
+            9728
+          ]
+        },
+        {
+          "after_sha256": "05a898b9ee9552cafda5ef4328b23b11940e65d95692b5a5e580d79733dcc48d",
+          "before_sha256": "ac0c2edb3b0a4d9559d688ebef73512805d1a1b9806b40d3e80f4cd805e6feea",
+          "changed_elements": 849715,
+          "max_absolute_delta": 6.103515625e-05,
+          "mean_absolute_delta": 9.091164656638284e-07,
+          "name": "model.layers.10.self_attn.o_proj.weight",
+          "shape": [
+            2560,
+            4096
+          ]
+        }
+      ],
+      "generated_at": "2026-08-24T19:06:37.960539+00:00",
+      "parameters_changed": true
+    },
+    "rl": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+    "sft": "outputs/models/qwen3_4b_sft_merged"
+  },
+  "repository": "/data/home/zhourunfeng/travel-agent-rl",
+  "source_commit_before_finalization": "acb12951b69bc0957c07b64bfd238ed32136df28"
+}

@@ -19,6 +19,9 @@ data/processed/*
 !data/**/.gitkeep
 outputs/*
 !outputs/.gitkeep
+!outputs/final/
+outputs/final/*
+!outputs/final/*.json
 logs/*
 !logs/.gitkeep
 checkpoints/

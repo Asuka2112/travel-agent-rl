@@ -1,30 +1,35 @@
-# Replay v2 handoff
+# Final project handoff
 
-Replay Policy v2 is implemented and committed at
-`f83bd733478602f8f194fe1817fabe43e621c411`. The full-parameter regression
-resumed checkpoint-5, completed real optimizer step 6, and saved checkpoint-6.
-All 6 deterministic snapshot misses became structured observations; all 6
-continued to another tool, with zero public-network requests. The v2 Gate,
-parameter-change check, 84 tests, and ruff all pass. No GRPO/Judge/monitor tmux
-session is running.
+The Travel Agentic RL reproduction is complete through Data, Distillation, Filtering,
+SFT, one Formal Full-Parameter GRPO run, unified Base/SFT/RL evaluation, true
+bidirectional pairwise evaluation, failure analysis, final scientific audit, and
+reproduction manifest.
 
-Do not modify snapshot v4 (`dbd160b6de284208c3906e9da0768cabfe3a77315e64280ea59685eefff15f92`),
-capture public web data, change frozen datasets, kill/reset other users' GPU
-processes, or use the synthetic regression set as Pilot/Formal data.
+Formal GRPO completed 200/200 optimizer steps at
+`outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200` with exactly 1,200
+rollouts (200 unique queries x G=6), max_turns=13, full-parameter updates, immutable
+snapshot v4, Replay Policy v2, and zero public-network requests. The gate and sampled
+parameter-change proof pass; no OOM/NCCL/NaN/Inf occurred.
 
-Work is intentionally paused before the 48-query Pilot. On explicit instruction,
-start with the exact GPU-audit command in `orchestration/STATE.json`, then select
-the safe dynamic topology and run the frozen `pilot_48.jsonl` using
-`configs/grpo/pilot_4gpu.yaml`. Do not start the G=6 Probe or Formal GRPO unless
-the user expands the boundary again.
+Unified evaluation used the identical 16-query dev set and fixed Base Judge for all
+models. Task success was Base 0.875, SFT 0.6875, RL 1.0. True A/B+B/A pairwise results
+were Base vs SFT 10/4/2, Base vs RL 10/4/2, and SFT vs RL 0/10/6 (left win/tie/loss).
+The disagreement between independent Judge scores and direct pairwise judgments is
+retained and discussed in `FINAL_REPORT.md`.
 
-Key artifacts:
+Authoritative deliverables:
 
-- checkpoint: `outputs/grpo/replay_v2_regression_4gpu_v1/v0-20260824-150953/checkpoint-6`
-- metrics: `outputs/grpo/replay_v2_regression_4gpu_v1/metrics.json`
-- telemetry: `outputs/grpo/rollout_telemetry/replay_v2_regression.jsonl`
-- parameter check: `outputs/grpo/replay_v2_regression_4gpu_v1/parameter_change.json`
-- report: `reports/GRPO_REPLAY_V2_REGRESSION.md`
-- policy: `docs/replay_policy_v2.md`
-- final GPU snapshot: `outputs/grpo/resource_snapshots/replay_v2_regression_final.json`
-- run scripts: `scripts/run_grpo_rollout_server.sh`, `scripts/run_grpo_training.sh`
+- `FINAL_REPORT.md`
+- `outputs/final/final_metrics.json`
+- `outputs/final/training_metrics.json`
+- `outputs/final/pairwise_metrics.json`
+- `outputs/final/failure_analysis.json`
+- `outputs/final/scientific_audit.json`
+- `outputs/final/repro_manifest.json`
+- `orchestration/STATE.json`
+
+All project trainer, rollout, Judge, monitor, evaluation, and pairwise services are
+stopped. External GPU processes were never modified. Do not rerun completed stages unless
+starting a separately named follow-up experiment. Resolve the final source commit with
+`git rev-parse HEAD`; the final commit message is
+`feat: complete travel agentic RL reproduction`.

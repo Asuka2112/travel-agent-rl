@@ -1,0 +1,231 @@
+{
+  "generated_at": "2026-08-24T19:31:37.420680+00:00",
+  "query_ids_identical": true,
+  "inputs": {
+    "base": {
+      "directory": "outputs/evaluation/unified_20260825/base",
+      "summary_sha256": "902806164778bf3a3d0389bd8963b6f491515cde6a90f633589431089aa77bec"
+    },
+    "sft": {
+      "directory": "outputs/evaluation/unified_20260825/sft",
+      "summary_sha256": "eb54c2e6c3c8d8d7d24ac8f2829be19d1026c092e0950091f06e0601d921e38b"
+    },
+    "rl": {
+      "directory": "outputs/evaluation/unified_20260825/rl",
+      "summary_sha256": "60b840a518e983283f93a19b2d4e6653805f37a3671a1489ab0adc84ff5e1182"
+    }
+  },
+  "models": {
+    "base": {
+      "queries": 16,
+      "failure_queries": 2,
+      "error_types": {
+        "ValueError": 2
+      },
+      "snapshot_misses": 0,
+      "loops": 0,
+      "invalid_tool_calls": 2,
+      "unknown_exceptions": 0,
+      "records": [
+        {
+          "query_id": "coverage:train:v1:13",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer",
+            "invalid_tool_call"
+          ],
+          "errors": [
+            "ValueError: malformed or mixed tool-call output"
+          ],
+          "tool_sequence": [
+            "train_search"
+          ],
+          "task_score": 0.25
+        },
+        {
+          "query_id": "coverage:train:v1:15",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer",
+            "invalid_tool_call"
+          ],
+          "errors": [
+            "ValueError: malformed or mixed tool-call output"
+          ],
+          "tool_sequence": [
+            "train_search"
+          ],
+          "task_score": 0.25
+        }
+      ]
+    },
+    "sft": {
+      "queries": 16,
+      "failure_queries": 6,
+      "error_types": {},
+      "snapshot_misses": 30,
+      "loops": 5,
+      "invalid_tool_calls": 0,
+      "unknown_exceptions": 0,
+      "records": [
+        {
+          "query_id": "coverage:train:v1:01",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer",
+            "loop",
+            "snapshot_miss_observed"
+          ],
+          "errors": [],
+          "tool_sequence": [
+            "train_search",
+            "poi_search",
+            "poi_search",
+            "poi_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search"
+          ],
+          "task_score": 0.5
+        },
+        {
+          "query_id": "coverage:train:v1:02",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer",
+            "loop",
+            "snapshot_miss_observed"
+          ],
+          "errors": [],
+          "tool_sequence": [
+            "train_search",
+            "poi_search",
+            "poi_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search"
+          ],
+          "task_score": 0.5
+        },
+        {
+          "query_id": "coverage:train:v1:04",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer",
+            "loop",
+            "snapshot_miss_observed"
+          ],
+          "errors": [],
+          "tool_sequence": [
+            "train_search",
+            "poi_search",
+            "poi_search",
+            "poi_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search"
+          ],
+          "task_score": 0.5
+        },
+        {
+          "query_id": "coverage:train:v1:05",
+          "reasons": [
+            "loop",
+            "snapshot_miss_observed"
+          ],
+          "errors": [],
+          "tool_sequence": [
+            "train_search",
+            "poi_search",
+            "poi_search",
+            "poi_search",
+            "nearby_search",
+            "web_search",
+            "web_scraping",
+            "poi_search"
+          ],
+          "task_score": 1.0
+        },
+        {
+          "query_id": "coverage:train:v1:08",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer"
+          ],
+          "errors": [],
+          "tool_sequence": [
+            "train_search",
+            "poi_search",
+            "poi_search",
+            "poi_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search",
+            "nearby_search"
+          ],
+          "task_score": 0.5
+        },
+        {
+          "query_id": "coverage:train:v1:12",
+          "reasons": [
+            "task_incomplete",
+            "missing_final_answer",
+            "loop",
+            "snapshot_miss_observed"
+          ],
+          "errors": [],
+          "tool_sequence": [
+            "train_search",
+            "poi_search",
+            "poi_search",
+            "poi_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search",
+            "web_search"
+          ],
+          "task_score": 0.5
+        }
+      ]
+    },
+    "rl": {
+      "queries": 16,
+      "failure_queries": 0,
+      "error_types": {},
+      "snapshot_misses": 0,
+      "loops": 0,
+      "invalid_tool_calls": 0,
+      "unknown_exceptions": 0,
+      "records": []
+    }
+  }
+}
