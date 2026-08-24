@@ -1,7 +1,7 @@
 {
-  "captured_at": "2026-08-24T19:02:55+08:00",
-  "current_git_commit": "39220e9",
-  "current_checkpoint": "outputs/grpo/formal_probe_4gpu_v1/v0-20260824-184748/checkpoint-3",
+  "captured_at": "2026-08-25T03:07:28+08:00",
+  "current_git_commit": "21b1869",
+  "current_checkpoint": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
   "replay_policy_version": 2,
   "web_mode": "replay_only",
   "snapshot": {
@@ -31,7 +31,8 @@
     "Replay Policy v2 implementation and 84-test/ruff regression",
     "Replay Policy v2 real rollout plus optimizer step 6 through checkpoint-6",
     "48-query G=4/max_turns=8 full-parameter GRPO Pilot through checkpoint-16",
-    "G=6/max_turns=13 full-parameter Formal Parameter Probe through checkpoint-3"
+    "G=6/max_turns=13 full-parameter Formal Parameter Probe through checkpoint-3",
+    "200-query G=6/max_turns=13 Formal Full-Parameter GRPO through checkpoint-200"
   ],
   "replay_v2_regression": {
     "gate_pass": true,
@@ -95,8 +96,32 @@
     "report": "reports/GRPO_FORMAL_PROBE_REPORT.md",
     "feasibility_metrics": "outputs/grpo/formal_probe_4gpu_v1/validation/feasibility.json"
   },
+  "formal_grpo_200": {
+    "gate_pass": true,
+    "checkpoint": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+    "optimizer_steps": 200,
+    "rollouts": 1200,
+    "unique_queries": 200,
+    "num_generations": 6,
+    "max_turns": 13,
+    "query_count_distribution": {"6": 200},
+    "reward_mean": 4.5118380472,
+    "reward_std_mean": 0.0899533458,
+    "advantage_nonzero_ratio": 0.9701492537313433,
+    "kl_mean": 0.008047504,
+    "parameters_changed": true,
+    "snapshot_misses": 1398,
+    "miss_recovered": 1350,
+    "miss_final_failure": 48,
+    "public_network_requests": 0,
+    "gpu_peak_used_mib": {"1": 22388, "2": 11004, "3": 11044, "6": 15352},
+    "no_nan_oom_nccl": true,
+    "topology_log": "outputs/grpo/resource_snapshots/formal_grpo_retry2_topology.json",
+    "report": "reports/GRPO_FORMAL_REPORT.md",
+    "feasibility_metrics": "outputs/grpo/formal_4gpu_v1/feasibility.json"
+  },
   "current_gpu_state": {
-    "captured_from": "outputs/grpo/resource_snapshots/replay_v2_regression_final.json",
+    "captured_from": "outputs/evaluation/unified_20260825/resource_preflight.json",
     "gpu0": "4520 MiB external use by lyudong; 19692 MiB free; 0% utilization",
     "gpu1": "idle; 24197 MiB free",
     "gpu2": "idle; 24197 MiB free",
@@ -113,24 +138,24 @@
     "resource_monitor": false,
     "tmux_sessions": []
   },
-  "current_stage": "200-query Formal Full-Parameter GRPO preflight",
-  "status": "ready",
+  "current_stage": "Base / SFT / RL unified evaluation",
+  "status": "in_progress",
   "gpu_topology": {
-    "rollout": [6],
-    "trainer": [1, 2, 3]
+    "evaluation": [6],
+    "idle_reserve": [1, 2, 3]
   },
   "running_processes_detail": [],
-  "last_successful_step": "G=6/max_turns=13 full-parameter Formal Parameter Probe through checkpoint-3",
-  "next_action": "Freshly audit GPU0-7, freeze the selected Formal topology log, then start the one-time 200-query G=6/max_turns=13 full-parameter GRPO run from the SFT merged initialization",
+  "last_successful_step": "200-query G=6/max_turns=13 Formal Full-Parameter GRPO through checkpoint-200",
+  "next_action": "Run parity-locked Base, SFT, and RL evaluation sequentially on GPU6, then fixed-Judge, unified, pairwise, and failure reports",
   "routing_validation": {
     "requested_model": "gpt-5.6-luna",
     "worker_self_identification": "GPT-5 Codex",
     "explicit_luna_resolution_confirmed": false,
     "delegation_policy": "primary thread only"
   },
-  "pending_next_stage": "200-query Formal Full-Parameter GRPO",
-  "next_stage_recommendation": "Use the freshly audited maximum safe topology. The validated four-GPU topology is sufficient if no additional GPUs become safely available; never preempt external work.",
-  "exact_next_command": "cd /data/home/zhourunfeng/travel-agent-rl && .venv/bin/python scripts/audit_gpu_resources.py --selected-gpu-ids '' --output outputs/grpo/resource_snapshots/formal_grpo_preflight.json",
-  "next_config": "configs/grpo/formal_4gpu.yaml",
-  "next_dataset": "data/intermediate/grpo/formal_200.jsonl"
+  "pending_next_stage": "Base / SFT / RL unified evaluation",
+  "next_stage_recommendation": "Use the frozen 16-query dev set and identical full_replay protocol for all three models; keep external GPU workloads untouched.",
+  "exact_next_command": "CUDA_VISIBLE_DEVICES=6 .venv-train/bin/python scripts/evaluate_agent_model.py --model models/Qwen3-4B-Instruct-2507 --dev data/processed/dev.jsonl --output-dir outputs/evaluation/unified_20260825/base --report reports/EVAL_BASE_UNIFIED.md --label Base --max-turns 13 --max-new-tokens 768 --seed 20260819 --device cuda:0 --attn-impl flash_attn --tool-backend full_replay",
+  "next_config": null,
+  "next_dataset": "data/processed/dev.jsonl"
 }

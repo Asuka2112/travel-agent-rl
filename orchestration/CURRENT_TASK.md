@@ -1,17 +1,12 @@
 # Current task
 
-Run the one-time 200-query Formal Full-Parameter GRPO experiment with Replay Policy v2:
+Run the parity-locked Base/SFT/RL unified evaluation after the successful Formal GRPO run:
 
-- dataset: `data/intermediate/grpo/formal_200.jsonl` (deterministic execution view of all 200 frozen RL queries)
-- frozen source: `data/processed/rl_queries.jsonl` (unchanged SHA-256 `ca941165…e9c80`)
-- num_generations: 6
-- max_turns: 13
-- optimizer steps: enough to cover all 200 unique queries exactly once at G=6
-- topology: choose from a fresh GPU0–7 audit; include idle-safe GPU6
-- initialization: `outputs/models/qwen3_4b_sft_merged`
-- training: 100% full parameters; no LoRA
-- fixed Judge: immutable Base model, GPU-backed and already validated non-fallback in Probe
-- web mode: replay_only
-- snapshot: immutable v4
+- frozen dev: `data/processed/dev.jsonl` (16 rows, SHA-256 `66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712`)
+- models: immutable Base, merged full-parameter SFT, and Formal RL `checkpoint-200`
+- protocol: same `full_replay` backend, seed, template, max turns, generation limit, and fixed local Base Judge
+- selected resource: idle-safe GPU6, with Base/SFT/RL evaluated sequentially
+- public network: zero
+- outputs: immutable per-query records, summaries, Judge dimensions, unified comparison, pairwise evaluation, and failure analysis
 
-This is the single formal main run. Do not tune rewards, seeds, model, dataset, G, max turns, replay semantics, or evaluation protocol. On completion, stop project services, validate the final checkpoint and training artifacts, commit the milestone, and proceed directly to unified Base/SFT/RL evaluation.
+Do not modify the frozen dev set, replay snapshot, Judge model/prompt, or evaluation settings between models. After evaluation, generate the final metrics and reproduction manifest, run tests/ruff and repository audits, then create the final commit.
