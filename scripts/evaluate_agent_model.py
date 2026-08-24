@@ -120,8 +120,14 @@ class OfflineWeatherTool(BaseTool):
 
 
 def build_full_replay_environment(root: Path) -> TravelEnvironment:
+    # The replay-only registry constructor still instantiates AmapWeather before
+    # this evaluator replaces it with OfflineWeatherTool. Give that unreachable
+    # live adapter a non-secret sentinel so evaluation never depends on an
+    # online credential. No request can use it because replacement happens
+    # before the TravelEnvironment is constructed.
     live_registry = build_distillation_registry(
         root,
+        amap_api_key="replay-only-disabled",
         web_mode="replay_only",
         web_backend="selfhosted",
         snapshot_path=root / "data/intermediate/web_snapshot",
