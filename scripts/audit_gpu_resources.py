@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Capture a read-only GPU/process audit for the fixed resource policy."""
+"""Capture a read-only GPU/process audit for the dynamic shared-server policy."""
+
 from __future__ import annotations
 
 import argparse
@@ -9,16 +10,11 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-AUTHORIZED = {0, 1, 2, 3}
-PROHIBITED = {4, 5, 6, 7}
-
 
 def query(command: list[str]) -> list[list[str]]:
     output = subprocess.check_output(command, text=True)
     return [
-        [value.strip() for value in line.split(",")]
-        for line in output.splitlines()
-        if line.strip()
+        [value.strip() for value in line.split(",")] for line in output.splitlines() if line.strip()
     ]
 
 
@@ -35,9 +31,7 @@ def process_info(pid: int) -> dict[str, object]:
             .strip()
         )
         elapsed = int(
-            subprocess.check_output(
-                ["ps", "-o", "etimes=", "-p", str(pid)], text=True
-            ).strip()
+            subprocess.check_output(["ps", "-o", "etimes=", "-p", str(pid)], text=True).strip()
         )
         return {"pid": pid, "user": username, "elapsed_seconds": elapsed, "command": command}
     except (FileNotFoundError, ProcessLookupError, StopIteration, KeyError, ValueError):
@@ -48,11 +42,17 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--project-marker", default="travel-agent-rl")
+    parser.add_argument(
+        "--selected-gpu-ids",
+        default="",
+        help="Comma-separated GPU ids selected after the read-only safety audit.",
+    )
     args = parser.parse_args()
+    selected = {int(value) for value in args.selected_gpu_ids.split(",") if value.strip()}
     gpu_rows = query(
         [
             "nvidia-smi",
-            "--query-gpu=index,uuid,name,memory.used,memory.total",
+            "--query-gpu=index,uuid,name,memory.used,memory.free,memory.total,utilization.gpu,temperature.gpu",
             "--format=csv,noheader,nounits",
         ]
     )
@@ -70,26 +70,50 @@ def main() -> None:
         info["project_process"] = args.project_marker in str(info.get("command") or "")
         processes_by_uuid.setdefault(uuid, []).append(info)
     gpus = []
-    for index_value, uuid, name, used_value, total_value in gpu_rows:
+    for (
+        index_value,
+        uuid,
+        name,
+        used_value,
+        free_value,
+        total_value,
+        utilization_value,
+        temperature_value,
+    ) in gpu_rows:
         index = int(index_value)
+        processes = processes_by_uuid.get(uuid, [])
+        external_processes = [process for process in processes if not process["project_process"]]
         gpus.append(
             {
                 "index": index,
                 "uuid": uuid,
                 "name": name,
                 "used_memory_mib": int(used_value),
+                "free_memory_mib": int(free_value),
                 "total_memory_mib": int(total_value),
-                "policy": "authorized" if index in AUTHORIZED else "prohibited",
-                "processes": processes_by_uuid.get(uuid, []),
+                "utilization_percent": int(utilization_value),
+                "temperature_c": int(temperature_value),
+                "selected_for_project": index in selected,
+                "external_process_count": len(external_processes),
+                "resource_state": (
+                    "idle_safe"
+                    if not external_processes and int(used_value) <= 64
+                    else "shared_selected"
+                    if index in selected
+                    else "external_in_use"
+                ),
+                "processes": processes,
             }
         )
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "authorized_gpu_ids": sorted(AUTHORIZED),
-        "prohibited_gpu_ids": sorted(PROHIBITED),
-        "safe_authorized_gpu_count": 4,
-        "formal_grpo_resource_gate_met": False,
-        "reason": "only GPU0-3 are authorized; formal GRPO requires at least seven safe GPUs",
+        "resource_policy": "dynamic_shared_server_v2",
+        "selected_gpu_ids": sorted(selected),
+        "selected_gpu_count": len(selected),
+        "selection_note": (
+            "Selection is an explicit stage decision; external processes are never killed, "
+            "reset, or preempted."
+        ),
         "gpus": gpus,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

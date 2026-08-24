@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Aggregate immutable smoke/pilot GRPO artifacts into an auditable report."""
+
 from __future__ import annotations
 
 import argparse
@@ -44,9 +45,7 @@ def aggregate_resources(path: Path) -> dict[str, Any]:
         for row in csv.DictReader(handle):
             gpu = int(row["gpu_index"])
             gpu_peak[gpu] = max(gpu_peak.get(gpu, 0), int(row["gpu_used_mib"]))
-            gpu_util_peak[gpu] = max(
-                gpu_util_peak.get(gpu, 0), int(row["gpu_utilization_percent"])
-            )
+            gpu_util_peak[gpu] = max(gpu_util_peak.get(gpu, 0), int(row["gpu_utilization_percent"]))
             host_used_peak = max(
                 host_used_peak,
                 int(row["host_ram_total_bytes"]) - int(row["host_ram_available_bytes"]),
@@ -82,11 +81,7 @@ def main() -> None:
     steps = [int(item["global_step/max_steps"].split("/")[0]) for item in step_logs]
     rewards = [float(item["reward"]) for item in step_logs]
     reward_stds = [float(item["reward_std"]) for item in step_logs]
-    advantages = [
-        float(value)
-        for batch in completions
-        for value in batch.get("advantages", [])
-    ]
+    advantages = [float(value) for batch in completions for value in batch.get("advantages", [])]
     component_names = sorted(
         {
             key.removeprefix("rewards/").removesuffix("/mean")
@@ -98,22 +93,18 @@ def main() -> None:
     component_stats = {
         name: {
             "mean": mean([float(item[f"rewards/{name}/mean"]) for item in step_logs]),
-            "mean_logged_std": mean(
-                [float(item[f"rewards/{name}/std"]) for item in step_logs]
-            ),
+            "mean_logged_std": mean([float(item[f"rewards/{name}/std"]) for item in step_logs]),
             "nonconstant": any(float(item[f"rewards/{name}/std"]) > 0 for item in step_logs),
         }
         for name in component_names
     }
-    tool_usage = Counter(
-        tool for item in telemetry for tool in item.get("tool_sequence", [])
-    )
+    tool_usage = Counter(tool for item in telemetry for tool in item.get("tool_sequence", []))
+    replay_miss_details = [
+        detail for item in telemetry for detail in item.get("replay_miss_details", [])
+    ]
     all_errors = Counter(error for item in telemetry for error in item.get("errors", []))
     checkpoints = sorted(
-        str(path)
-        for run in run_dirs
-        for path in run.glob("checkpoint-*")
-        if path.is_dir()
+        str(path) for run in run_dirs for path in run.glob("checkpoint-*") if path.is_dir()
     )
     parameter_change = (
         json.loads(args.parameter_change.read_text())
@@ -140,9 +131,7 @@ def main() -> None:
         "reward_variance_observed": any(value > 0 for value in reward_stds),
         "reward_components": component_stats,
         "advantage_nonzero_ratio": (
-            sum(abs(value) > 1e-8 for value in advantages) / len(advantages)
-            if advantages
-            else None
+            sum(abs(value) > 1e-8 for value in advantages) / len(advantages) if advantages else None
         ),
         "losses": [float(item["loss"]) for item in step_logs],
         "grad_norms": [float(item["grad_norm"]) for item in step_logs],
@@ -151,6 +140,7 @@ def main() -> None:
             [float(item["completions/mean_length"]) for item in step_logs]
         ),
         "logged_average_turns": mean([float(item["num_turns"]) for item in step_logs]),
+        "average_turns": mean([float(item.get("num_turns", 0)) for item in telemetry]),
         "rollouts": len(telemetry),
         "average_rollout_latency_seconds": mean(
             [float(item["rollout_latency_seconds"]) for item in telemetry]
@@ -174,9 +164,7 @@ def main() -> None:
         ),
         "error_distribution": dict(sorted(all_errors.items())),
         "unknown_exceptions": sum(
-            count
-            for error, count in all_errors.items()
-            if error not in {"answer_required", "repeated_action", "snapshot_miss"}
+            count for error, count in all_errors.items() if error.startswith("unhandled_tool_error")
         ),
         "invalid_tool_errors": sum(
             count
@@ -184,6 +172,32 @@ def main() -> None:
             if error.startswith(("invalid_tool", "unknown_tool", "invalid_arguments"))
         ),
         "replay_misses": sum(int(item.get("replay_misses", 0)) for item in telemetry),
+        "replay_miss_unique": len(
+            {
+                json.dumps(
+                    {
+                        "tool": item.get("tool"),
+                        "arguments": item.get("arguments", {}),
+                    },
+                    sort_keys=True,
+                    separators=(",", ":"),
+                )
+                for item in replay_miss_details
+            }
+        ),
+        "replay_miss_affected_queries": sorted(
+            {
+                str(item.get("query_id"))
+                for item in telemetry
+                if item.get("query_id") is not None and item.get("replay_misses", 0)
+            }
+        ),
+        "replay_miss_recovered": sum(
+            int(item.get("replay_miss_recovered", 0)) for item in telemetry
+        ),
+        "replay_miss_final_failure": sum(
+            int(item.get("replay_miss_final_failure", 0)) for item in telemetry
+        ),
         "public_network_requests": sum(
             int(item.get("public_network_requests", 0)) for item in telemetry
         ),
@@ -194,27 +208,58 @@ def main() -> None:
             int(item.get("observation_count", 0)) == int(item.get("tool_calls", 0))
             for item in telemetry
         ),
+        "rollout_alignment_verified": bool(telemetry)
+        and all(bool(item.get("alignment_verified")) for item in telemetry),
+        "tool_observations_excluded_from_policy_loss": bool(telemetry)
+        and all(
+            bool(item.get("tool_observations_excluded_from_policy_loss")) for item in telemetry
+        ),
         "no_nan_or_inf": finite_numbers(logs)
         and finite_numbers(completions)
         and finite_numbers(telemetry),
         "parameter_change": parameter_change,
         "resources": aggregate_resources(args.resources),
     }
+    metrics["replay_misses_all_logged"] = len(replay_miss_details) == metrics["replay_misses"]
+    metrics["replay_misses_all_deterministic"] = all(
+        detail.get("structured") is True
+        and detail.get("error_code") == "snapshot_miss"
+        and detail.get("retryable") is False
+        and detail.get("public_network_used") is False
+        for detail in replay_miss_details
+    )
+    metrics["replay_misses_nonfabricated"] = all(
+        detail.get("results_empty") is True and detail.get("status") == "error"
+        for detail in replay_miss_details
+    )
+    metrics["rollout_continued_after_replay_miss"] = bool(
+        metrics["replay_misses"] == 0 or metrics["replay_miss_recovered"] > 0
+    )
     metrics["pipeline_feasibility_pass"] = bool(
         metrics["optimizer_steps"] >= args.minimum_steps
         and metrics["reward_variance_observed"]
         and metrics["advantage_nonzero_ratio"] not in {None, 0.0}
         and metrics["all_rollouts_saw_eight_tools"]
         and metrics["observation_backfill_consistent"]
+        and metrics["rollout_alignment_verified"]
+        and metrics["tool_observations_excluded_from_policy_loss"]
         and metrics["public_network_requests"] == 0
         and metrics["unknown_exceptions"] == 0
         and metrics["invalid_tool_errors"] == 0
         and metrics["no_nan_or_inf"]
         and (parameter_change is None or parameter_change["parameters_changed"])
     )
-    metrics["strict_replay_gate_pass"] = metrics["replay_misses"] == 0
+    metrics["replay_policy_version"] = 2
+    metrics["replay_policy_v2_gate_pass"] = bool(
+        metrics["public_network_requests"] == 0
+        and metrics["replay_misses_all_logged"]
+        and metrics["replay_misses_all_deterministic"]
+        and metrics["replay_misses_nonfabricated"]
+        and metrics["rollout_continued_after_replay_miss"]
+    )
+    metrics["strict_replay_gate_pass"] = metrics["replay_policy_v2_gate_pass"]
     metrics["gate_pass"] = bool(
-        metrics["pipeline_feasibility_pass"] and metrics["strict_replay_gate_pass"]
+        metrics["pipeline_feasibility_pass"] and metrics["replay_policy_v2_gate_pass"]
     )
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(metrics, indent=2, sort_keys=True) + "\n")
@@ -226,14 +271,14 @@ def main() -> None:
         "",
         f"- Gate pass: **{metrics['gate_pass']}**",
         f"- Full-parameter pipeline feasibility: {metrics['pipeline_feasibility_pass']}",
-        f"- Strict replay gate: {metrics['strict_replay_gate_pass']}",
+        f"- Replay policy v2 gate: {metrics['replay_policy_v2_gate_pass']}",
         f"- Optimizer steps: {metrics['optimizer_steps']} (minimum {args.minimum_steps})",
         f"- Full-parameter trainer: {metrics['full_parameter']}",
         f"- Checkpoints: {metrics['checkpoint_count']}",
         f"- Checkpoint resume observed: {metrics['resume_observed']}",
         f"- Rollouts: {metrics['rollouts']}",
         f"- Mean rollout latency: {metrics['average_rollout_latency_seconds']}",
-        f"- Mean turns: {metrics['logged_average_turns']}",
+        f"- Mean turns: {metrics['average_turns']}",
         f"- Mean tool calls: {metrics['average_tool_calls']}",
         f"- Reward mean / mean group std: {metrics['reward_mean']} / {metrics['reward_std_mean']}",
         f"- Advantage non-zero ratio: {metrics['advantage_nonzero_ratio']}",
@@ -241,6 +286,9 @@ def main() -> None:
         f"- Eight schemas visible in every rollout: {metrics['all_rollouts_saw_eight_tools']}",
         f"- Tool/observation counts aligned: {metrics['observation_backfill_consistent']}",
         f"- Replay misses / public requests: {metrics['replay_misses']} / {metrics['public_network_requests']}",
+        f"- Replay miss unique / affected queries: {metrics['replay_miss_unique']} / {len(metrics['replay_miss_affected_queries'])}",
+        f"- Miss recovered / final failure: {metrics['replay_miss_recovered']} / {metrics['replay_miss_final_failure']}",
+        f"- Misses deterministic / logged / non-fabricated: {metrics['replay_misses_all_deterministic']} / {metrics['replay_misses_all_logged']} / {metrics['replay_misses_nonfabricated']}",
         f"- No NaN/Inf: {metrics['no_nan_or_inf']}",
         "",
         "## Tool usage",

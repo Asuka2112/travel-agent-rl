@@ -48,8 +48,7 @@ def build_replay_session(max_turns: int) -> AgentSession:
         web_run_id=os.getenv("WEB_RUN_ID", "grpo_replay_v4"),
     )
     tools = [
-        OfflineWeatherTool() if name == "weather" else registry.get(name)
-        for name in registry.names
+        OfflineWeatherTool() if name == "weather" else registry.get(name) for name in registry.names
     ]
     if any(tool is None for tool in tools):
         raise AssertionError("the GRPO registry must expose all eight tools")
@@ -140,15 +139,22 @@ def validate_rollout_alignment(
         raise AssertionError("response token/mask outer lengths differ")
     if len(response_token_ids) != len(rollout_logprobs):
         raise AssertionError("response token/logprob outer lengths differ")
-    for ids, mask, logprobs in zip(
-        response_token_ids, response_loss_mask, rollout_logprobs
-    ):
+    for ids, mask, logprobs in zip(response_token_ids, response_loss_mask, rollout_logprobs):
         if len(ids) != len(mask):
             raise AssertionError("response token/mask inner lengths differ")
         if any(value not in {0, 1} for value in mask):
             raise AssertionError("response loss mask is not binary")
         if logprobs is not None and len(ids) != len(logprobs):
             raise AssertionError("response token/logprob inner lengths differ")
+
+
+def _structured_observation(observation: str) -> dict[str, Any] | None:
+    """Parse the JSON envelope while tolerating the appended force-answer line."""
+    try:
+        payload = json.loads(observation.splitlines()[0])
+    except (json.JSONDecodeError, TypeError, IndexError):
+        return None
+    return payload if isinstance(payload, dict) else None
 
 
 class TravelAgentRolloutScheduler(MultiTurnScheduler):
@@ -201,14 +207,15 @@ class TravelAgentRolloutScheduler(MultiTurnScheduler):
         action_signatures: list[str] = []
         errors: list[str] = []
         replay_misses = 0
+        replay_miss_details: list[dict[str, Any]] = []
+        unresolved_replay_misses: list[int] = []
+        replay_miss_recovered = 0
         forced_terminal = False
         final_answer_present = False
         response = None
 
         for current_turn in range(1, self.max_turns + 1):
-            response = await self.infer_engine.infer_async(
-                infer_request, request_config, **kwargs
-            )
+            response = await self.infer_engine.infer_async(infer_request, request_config, **kwargs)
             choice = response.choices[0]
             content = (choice.message.content or "").strip()
             token_ids = list(choice.token_ids or [])
@@ -227,6 +234,8 @@ class TravelAgentRolloutScheduler(MultiTurnScheduler):
                 break
             if kind == "answer":
                 final_answer_present = True
+                replay_miss_recovered += len(unresolved_replay_misses)
+                unresolved_replay_misses.clear()
                 break
             assert isinstance(payload, dict)
             tool_sequence.append(str(payload["name"]))
@@ -240,10 +249,33 @@ class TravelAgentRolloutScheduler(MultiTurnScheduler):
             if transition.error_code:
                 errors.append(transition.error_code)
             if transition.observation is not None:
-                replay_misses += int("snapshot_miss" in transition.observation)
-                messages.append(
-                    {"role": "tool_response", "content": transition.observation}
-                )
+                observation_payload = _structured_observation(transition.observation)
+                error_payload = (
+                    observation_payload.get("error", {}) if observation_payload is not None else {}
+                ) or {}
+                data_payload = (
+                    observation_payload.get("data", {}) if observation_payload is not None else {}
+                ) or {}
+                is_snapshot_miss = error_payload.get("code") == "snapshot_miss"
+                if is_snapshot_miss:
+                    replay_misses += 1
+                    detail = {
+                        "turn": current_turn,
+                        "tool": str(payload["name"]),
+                        "arguments": payload.get("arguments", {}),
+                        "status": observation_payload.get("status"),
+                        "error_code": error_payload.get("code"),
+                        "retryable": error_payload.get("retryable"),
+                        "public_network_used": data_payload.get("public_network_used"),
+                        "results_empty": data_payload.get("results") == [],
+                        "structured": observation_payload is not None,
+                    }
+                    replay_miss_details.append(detail)
+                    unresolved_replay_misses.append(len(replay_miss_details) - 1)
+                elif observation_payload is not None and observation_payload.get("status") == "ok":
+                    replay_miss_recovered += len(unresolved_replay_misses)
+                    unresolved_replay_misses.clear()
+                messages.append({"role": "tool_response", "content": transition.observation})
             if current_turn >= self.max_turns:
                 forced_terminal = True
                 terminal, terminal_ids = self._forced_terminal()
@@ -279,12 +311,20 @@ class TravelAgentRolloutScheduler(MultiTurnScheduler):
             ),
             "errors": errors,
             "replay_misses": replay_misses,
+            "replay_miss_details": replay_miss_details,
+            "replay_miss_recovered": replay_miss_recovered,
+            "replay_miss_final_failure": len(unresolved_replay_misses),
             "public_network_requests": 0,
             "forced_terminal": forced_terminal,
             "final_answer_present": final_answer_present,
             "finish_reason": getattr(response.choices[0], "finish_reason", None),
             "tool_schema_source": tool_schema_source,
             "tool_schema_count": tool_schema_count,
+            "alignment_verified": True,
+            "response_turn_count": len(response_token_ids),
+            "response_mask_turn_count": len(response_loss_mask),
+            "rollout_logprob_turn_count": len(rollout_logprobs),
+            "tool_observations_excluded_from_policy_loss": True,
         }
         _append_rollout_telemetry(telemetry)
         return RolloutOutput(
@@ -299,11 +339,16 @@ class TravelAgentRolloutScheduler(MultiTurnScheduler):
                 "repeated_action": len(action_signatures) != len(set(action_signatures)),
                 "errors": errors,
                 "replay_misses": replay_misses,
+                "replay_miss_details": replay_miss_details,
+                "replay_miss_recovered": replay_miss_recovered,
+                "replay_miss_final_failure": len(unresolved_replay_misses),
                 "public_network_requests": 0,
                 "tool_schema_source": tool_schema_source,
                 "tool_schema_count": tool_schema_count,
                 "forced_terminal": forced_terminal,
                 "final_answer_present": final_answer_present,
+                "alignment_verified": True,
+                "tool_observations_excluded_from_policy_loss": True,
                 "rollout_logprobs": rollout_logprobs,
                 "logprob_source": (
                     "rollout_server"

@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-08-24T07:04:28.720019+00:00",
+  "output": "data/intermediate/grpo/replay_v2_regression_3.jsonl",
+  "output_sha256": "2a6e66024c2ded1d19deeb5c61ead17cd2e28e93d6d6c1f01c234a11a765e6c2",
+  "purpose": "synthetic replay-policy regression only; excluded from frozen train/eval",
+  "record_count": 3,
+  "required_snapshot_miss_query": "flights from Fort Lauderdale to North Carolina cities March 2022",
+  "snapshot_version": 4,
+  "source": "data/intermediate/grpo/smoke_tool_12.jsonl",
+  "source_query_id": "agent_star:hard_trsd60",
+  "source_sha256": "844bb65ec77efcf33c79e56d8a086a1b7feac25fb5f96fa019b232248cf2f437",
+  "web_mode": "replay_only"
+}

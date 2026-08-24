@@ -15,6 +15,10 @@ EPOCHS=${GRPO_EPOCHS:-1}
 GRAD_ACCUM=${GRPO_GRAD_ACCUM:-2}
 SAVE_STEPS=${GRPO_SAVE_STEPS:-1}
 RESUME_CHECKPOINT=${GRPO_RESUME_CHECKPOINT:-}
+TRAINER_GPUS=${GRPO_TRAINER_GPUS:-1,2,3}
+NPROC=${GRPO_NPROC_PER_NODE:-$(awk -F, '{print NF}' <<<"${TRAINER_GPUS}")}
+SNAPSHOT_VERSION=${WEB_SNAPSHOT_VERSION:-4}
+MODEL=${GRPO_MODEL:-outputs/models/qwen3_4b_sft_merged}
 
 extra_args=()
 if [[ -n "${RESUME_CHECKPOINT}" ]]; then
@@ -22,18 +26,18 @@ if [[ -n "${RESUME_CHECKPOINT}" ]]; then
 fi
 
 exec env \
-  CUDA_VISIBLE_DEVICES=1,2,3 \
-  NPROC_PER_NODE=3 \
+  CUDA_VISIBLE_DEVICES="${TRAINER_GPUS}" \
+  NPROC_PER_NODE="${NPROC}" \
   PYTHONPATH=src \
   WEB_MODE=replay_only \
   WEB_BACKEND=selfhosted \
-  WEB_SNAPSHOT_VERSION=4 \
+  WEB_SNAPSHOT_VERSION="${SNAPSHOT_VERSION}" \
   FIXED_JUDGE_ENDPOINT=http://127.0.0.1:8019/judge \
   GRPO_SCHEDULE_MAX_STEPS="${GRPO_SCHEDULE_MAX_STEPS:-${MAX_STEPS}}" \
   PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
   .venv-train/bin/swift rlhf \
     --rlhf_type grpo \
-    --model outputs/models/qwen3_4b_sft_merged \
+    --model "${MODEL}" \
     --dataset "${DATASET}" \
     --split_dataset_ratio 0 \
     --train_type full \

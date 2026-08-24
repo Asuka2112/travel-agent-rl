@@ -181,10 +181,22 @@ class AgentSession:
         response = self.environment.execute(
             ToolRequest(tool_name=parsed.name, arguments=parsed.arguments)
         )
-        response_for_model = response.model_copy(
-            update={"data": {**response.data, "_agent_state": self._agent_state()}},
-            deep=True,
-        )
+        response_data = {**response.data, "_agent_state": self._agent_state()}
+        if response.error and response.error.code == "snapshot_miss":
+            # Replay policy v2 exposes a deterministic, non-fabricated miss as a
+            # normal tool observation.  Keeping the original arguments in the
+            # observation makes the miss auditable and gives the agent enough
+            # context to re-plan with another tool.
+            response_data.update(
+                {
+                    "query": parsed.arguments.get("query"),
+                    "url": parsed.arguments.get("url"),
+                    "results": [],
+                    "retryable": False,
+                    "public_network_used": False,
+                }
+            )
+        response_for_model = response.model_copy(update={"data": response_data}, deep=True)
         observation = _render_tool_observation(response_for_model)
         if self.turns_used >= self.max_turns:
             self.status = SessionStatus.FORCE_ANSWER

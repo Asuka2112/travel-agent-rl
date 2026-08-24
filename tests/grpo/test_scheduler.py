@@ -18,6 +18,7 @@ from travel_agent_rl.grpo import (
     validate_rollout_alignment,
 )
 from travel_agent_rl.tools.base import BaseTool
+from travel_agent_rl.tools.base import ToolExecutionError
 from travel_agent_rl.tools.registry import ToolRegistry
 
 
@@ -33,6 +34,25 @@ class EchoTool(BaseTool):
 
     def run(self, arguments):
         return {"value": arguments["value"]}
+
+
+class SnapshotMissTool(BaseTool):
+    name = "web_search"
+    description = "deterministic replay miss"
+    argument_schema = {
+        "type": "object",
+        "properties": {"query": {"type": "string"}},
+        "required": ["query"],
+        "additionalProperties": False,
+    }
+
+    def run(self, arguments):
+        raise ToolExecutionError(
+            f"no snapshot for {arguments['query']}",
+            code="snapshot_miss",
+            retryable=False,
+            provider="web_snapshot",
+        )
 
 
 class FakeTokenizer:
@@ -147,12 +167,45 @@ def test_trainer_side_server_marker_does_not_require_tokenizer() -> None:
 def test_server_mode_hydrates_dataset_tools_before_prompt_rendering() -> None:
     request = RolloutInferRequest(
         messages=[{"role": "user", "content": "query"}],
-        data_dict={
-            "tools": '[{"type":"function","function":{"name":"echo"}}]'
-        },
+        data_dict={"tools": '[{"type":"function","function":{"name":"echo"}}]'},
     )
     assert request.tools is None
     assert hydrate_request_tools(request) == "data_dict"
-    assert request.tools == [
-        {"type": "function", "function": {"name": "echo"}}
-    ]
+    assert request.tools == [{"type": "function", "function": {"name": "echo"}}]
+
+
+def test_snapshot_miss_is_structured_and_rollout_recovers() -> None:
+    miss = '<tool_call>{"name":"web_search","arguments":{"query":"uncached route"}}</tool_call>'
+    fallback = '<tool_call>{"name":"echo","arguments":{"value":"fallback"}}</tool_call>'
+    scheduler = TravelAgentRolloutScheduler(
+        infer_engine=FakeEngine([miss, fallback, "grounded fallback answer"]),
+        max_turns=3,
+        tokenizer=FakeTokenizer(),
+        session_factory=lambda: AgentSession(
+            TravelEnvironment(ToolRegistry([SnapshotMissTool(), EchoTool()])),
+            max_turns=3,
+        ),
+    )
+    output = asyncio.run(
+        scheduler.run(
+            RolloutInferRequest(messages=[{"role": "user", "content": "query"}]),
+            object(),
+        )
+    )
+    miss_observation = next(
+        message["content"]
+        for message in output.messages
+        if message["role"] == "tool_response" and "snapshot_miss" in message["content"]
+    )
+    payload = __import__("json").loads(miss_observation)
+    assert payload["error"]["code"] == "snapshot_miss"
+    assert payload["error"]["retryable"] is False
+    assert payload["data"]["query"] == "uncached route"
+    assert payload["data"]["results"] == []
+    assert payload["data"]["public_network_used"] is False
+    assert output.rollout_infos["replay_misses"] == 1
+    assert output.rollout_infos["replay_miss_recovered"] == 1
+    assert output.rollout_infos["replay_miss_final_failure"] == 0
+    assert output.rollout_infos["final_answer_present"] is True
+    assert output.rollout_infos["alignment_verified"] is True
+    assert output.rollout_infos["tool_observations_excluded_from_policy_loss"] is True

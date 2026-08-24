@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Append auditable GPU/CPU samples for the project GRPO processes."""
+
 from __future__ import annotations
 
 import argparse
@@ -21,9 +22,7 @@ def project_rss_bytes(marker: str) -> int:
         try:
             if entry.stat().st_uid != uid:
                 continue
-            command = (entry / "cmdline").read_bytes().replace(b"\0", b" ").decode(
-                errors="replace"
-            )
+            command = (entry / "cmdline").read_bytes().replace(b"\0", b" ").decode(errors="replace")
             if marker not in command:
                 continue
             for line in (entry / "status").read_text().splitlines():
@@ -43,7 +42,7 @@ def host_memory() -> tuple[int, int]:
     return values["MemTotal"], values["MemAvailable"]
 
 
-def gpu_samples() -> list[tuple[int, int, int, int]]:
+def gpu_samples(gpu_ids: set[int]) -> list[tuple[int, int, int, int]]:
     output = subprocess.check_output(
         [
             "nvidia-smi",
@@ -55,7 +54,7 @@ def gpu_samples() -> list[tuple[int, int, int, int]]:
     rows = []
     for line in output.splitlines():
         index, used, total, utilization = (int(value.strip()) for value in line.split(","))
-        if index <= 3:
+        if index in gpu_ids:
             rows.append((index, used, total, utilization))
     return rows
 
@@ -65,7 +64,13 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--interval", type=float, default=5.0)
     parser.add_argument("--marker", default="travel-agent-rl")
+    parser.add_argument(
+        "--gpu-ids",
+        default="0,1,2,3,4,5,6,7",
+        help="Comma-separated physical GPU ids to sample.",
+    )
     args = parser.parse_args()
+    gpu_ids = {int(value) for value in args.gpu_ids.split(",") if value.strip()}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     running = True
 
@@ -96,7 +101,7 @@ def main() -> None:
             timestamp = datetime.now(timezone.utc).isoformat()
             total, available = host_memory()
             rss = project_rss_bytes(args.marker)
-            for gpu, used, gpu_total, utilization in gpu_samples():
+            for gpu, used, gpu_total, utilization in gpu_samples(gpu_ids):
                 writer.writerow(
                     [timestamp, gpu, used, gpu_total, utilization, total, available, rss]
                 )
