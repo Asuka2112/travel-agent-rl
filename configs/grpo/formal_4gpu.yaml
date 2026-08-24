@@ -1,0 +1,36 @@
+stage: formal_grpo_200
+model: outputs/models/qwen3_4b_sft_merged
+dataset: data/processed/rl_queries.jsonl
+dataset_sha256: ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80
+dataset_queries: 200
+rlhf_type: grpo
+training_strategy: full
+trainer_gpus: [1, 2, 3]
+rollout_gpus: [6]
+fixed_judge_gpu: 1
+topology_audit: outputs/grpo/resource_snapshots/formal_grpo_preflight.json
+topology_log: outputs/grpo/resource_snapshots/formal_grpo_topology.json
+rollout_mode: server
+deepspeed: configs/sft/zero3_cpu_offload.json
+num_generations: 6
+max_turns: 13
+max_completion_length_per_round: 512
+optimizer_steps: 200
+gradient_accumulation_steps: 2
+learning_rate: 0.0000005
+beta: 0.04
+epsilon: 0.2
+temperature: 0.9
+checkpoint_interval_steps: 10
+checkpoint_retention: 10
+vllm_tensor_parallel_size: 1
+vllm_gpu_memory_utilization: 0.60
+vllm_max_model_len: 8192
+snapshot_version: 4
+replay_policy_version: 2
+web_mode: replay_only
+public_network_allowed: false
+seed: 20260819
+judge_model: models/Qwen3-4B-Instruct-2507
+judge_prompt: prompts/judge/v1.txt
+judge_schedule: "0.2 + 0.8 * min(1, global_step / 200)"

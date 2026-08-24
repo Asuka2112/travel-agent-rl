@@ -1,6 +1,6 @@
 {
   "captured_at": "2026-08-24T19:02:55+08:00",
-  "current_git_commit": "f20994f",
+  "current_git_commit": "39220e9",
   "current_checkpoint": "outputs/grpo/formal_probe_4gpu_v1/v0-20260824-184748/checkpoint-3",
   "replay_policy_version": 2,
   "web_mode": "replay_only",
@@ -130,6 +130,6 @@
   "pending_next_stage": "200-query Formal Full-Parameter GRPO",
   "next_stage_recommendation": "Use the freshly audited maximum safe topology. The validated four-GPU topology is sufficient if no additional GPUs become safely available; never preempt external work.",
   "exact_next_command": "cd /data/home/zhourunfeng/travel-agent-rl && .venv/bin/python scripts/audit_gpu_resources.py --selected-gpu-ids '' --output outputs/grpo/resource_snapshots/formal_grpo_preflight.json",
-  "next_config": "configs/grpo/target.yaml",
+  "next_config": "configs/grpo/formal_4gpu.yaml",
   "next_dataset": "data/processed/rl_queries.jsonl"
 }
