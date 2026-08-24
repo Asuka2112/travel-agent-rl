@@ -1,0 +1,26 @@
+{
+  "algorithm": "hard-only-fixed-sha256-prefix-v1",
+  "generated_at": "2026-08-24T01:43:12.493168+00:00",
+  "output": "data/intermediate/grpo/smoke_tool_12.jsonl",
+  "purpose": "engineering tool-chain coverage only; not a new train/eval split",
+  "query_ids": [
+    "agent_star:hard_yji8ic",
+    "agent_star:hard_79a6wm",
+    "agent_star:hard_1zyh37",
+    "agent_star:hard_i6ysnl",
+    "agent_star:hard_gxd7xr",
+    "agent_star:hard_bc4cr7",
+    "agent_star:hard_z3z0m5",
+    "agent_star:hard_aez3qe",
+    "agent_star:hard_ly58ro",
+    "agent_star:hard_v8lwc5",
+    "agent_star:hard_0g5t6z",
+    "agent_star:hard_trsd60"
+  ],
+  "rows": 12,
+  "seed": 20260819,
+  "sha256": "844bb65ec77efcf33c79e56d8a086a1b7feac25fb5f96fa019b232248cf2f437",
+  "source": "data/processed/rl_queries.jsonl",
+  "source_rows": 200,
+  "source_sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80"
+}

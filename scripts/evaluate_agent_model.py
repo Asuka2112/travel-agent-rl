@@ -22,8 +22,12 @@ from travel_agent_rl.evaluation.agent_eval import (
 )
 from travel_agent_rl.env import TravelEnvironment
 from travel_agent_rl.sft.data import build_agent_tool_schemas, sha256_file
-from travel_agent_rl.tools.base import ToolRequest
-from travel_agent_rl.tools.registry import build_mock_registry
+from travel_agent_rl.tools.base import BaseTool, ToolExecutionError, ToolRequest
+from travel_agent_rl.tools.registry import (
+    ToolRegistry,
+    build_distillation_registry,
+    build_mock_registry,
+)
 from travel_agent_rl.tools.simulator import TrainSearchSimulator
 
 
@@ -42,7 +46,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--attn-impl", default="sdpa")
     parser.add_argument("--max-cases", type=int)
     parser.add_argument(
-        "--tool-backend", choices=("frozen_train", "mock_all"), default="frozen_train"
+        "--tool-backend",
+        choices=("frozen_train", "mock_all", "full_replay"),
+        default="frozen_train",
     )
     return parser.parse_args()
 
@@ -94,6 +100,47 @@ def _observation(
     }
 
 
+class OfflineWeatherTool(BaseTool):
+    """Expose the frozen weather protocol without making a public-network request."""
+
+    name = "weather"
+    description = "Offline evaluation weather boundary; live public requests are disabled."
+    argument_schema = next(
+        tool["function"]["parameters"]
+        for tool in build_agent_tool_schemas()
+        if tool["function"]["name"] == "weather"
+    )
+
+    def run(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        raise ToolExecutionError(
+            "live weather is disabled in frozen replay evaluation",
+            code="offline_weather_unavailable",
+            provider="frozen_evaluation",
+        )
+
+
+def build_full_replay_environment(root: Path) -> TravelEnvironment:
+    live_registry = build_distillation_registry(
+        root,
+        web_mode="replay_only",
+        web_backend="selfhosted",
+        snapshot_path=root / "data/intermediate/web_snapshot",
+        web_run_id="night_full_eval_v1",
+    )
+    tools = [
+        OfflineWeatherTool() if name == "weather" else live_registry.get(name)
+        for name in live_registry.names
+    ]
+    if any(tool is None for tool in tools):
+        raise AssertionError("full replay registry is incomplete")
+    return TravelEnvironment(
+        ToolRegistry(tools),
+        max_attempts=1,
+        cache_dir=root / "outputs/night_run/eval_tool_cache",
+        cache_namespace="full_replay_snapshot_v4",
+    )
+
+
 def evaluate_one(
     row, model, tokenizer, template, tools, train_tool, mock_environment, args
 ) -> dict[str, Any]:
@@ -104,6 +151,7 @@ def evaluate_one(
     errors: list[str] = []
     repeated = False
     invalid = 0
+    replay_misses = 0
     final_answer = None
     for _turn in range(1, args.max_turns + 1):
         output = _generate(model, tokenizer, template, messages, tools, args.max_new_tokens)
@@ -135,6 +183,8 @@ def evaluate_one(
             {"role": "tool_call", "content": json.dumps(payload, ensure_ascii=False)}
         )
         observation = _observation(payload, train_tool, mock_environment)
+        if (observation.get("error") or {}).get("code") == "snapshot_miss":
+            replay_misses += 1
         messages.append(
             {
                 "role": "tool_response",
@@ -159,6 +209,10 @@ def evaluate_one(
         "latency_seconds": perf_counter() - started,
         "unknown_exception": False,
     }
+    result["constraint_satisfied"] = bool(
+        result["final_answer_present"] and row["expected_tool"] in result["tool_sequence"]
+    )
+    result["replay_misses"] = replay_misses
     result["task_score"] = completion_score(result)
     result["task_complete"] = result["task_score"] == 1.0
     return result
@@ -176,12 +230,16 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
         "invalid_tool_call_rate": invalid_calls / total_attempts if total_attempts else 0.0,
         "final_answer_rate": sum(r["final_answer_present"] for r in records) / len(records),
         "task_completion_rate": sum(r["task_complete"] for r in records) / len(records),
+        "constraint_satisfaction_rate": sum(r["constraint_satisfied"] for r in records)
+        / len(records),
         "mean_task_score": statistics.fmean(r["task_score"] for r in records),
         "average_turns": statistics.fmean(r["turns"] for r in records),
         "average_tool_calls": statistics.fmean(r["tool_calls"] for r in records),
         "loop_rate": sum(r["loop"] for r in records) / len(records),
         "tool_usage": dict(Counter(tool for r in records for tool in r["tool_sequence"])),
         "unknown_exceptions": sum(r["unknown_exception"] for r in records),
+        "replay_misses": sum(r["replay_misses"] for r in records),
+        "public_network_requests": 0,
         "average_latency_seconds": statistics.fmean(r["latency_seconds"] for r in records),
     }
 
@@ -249,9 +307,12 @@ def main() -> None:
     template.set_mode("vllm")
     tools = build_agent_tool_schemas()
     train_tool = TrainSearchSimulator(Path("data/fixtures/train_inventory.json"))
-    mock_environment = (
-        TravelEnvironment(build_mock_registry()) if args.tool_backend == "mock_all" else None
-    )
+    if args.tool_backend == "mock_all":
+        mock_environment = TravelEnvironment(build_mock_registry())
+    elif args.tool_backend == "full_replay":
+        mock_environment = build_full_replay_environment(Path.cwd())
+    else:
+        mock_environment = None
     rows = _load_rows(args.dev)
     if args.max_cases is not None:
         rows = rows[: args.max_cases]
@@ -280,6 +341,8 @@ def main() -> None:
                 "errors": [f"{type(exc).__name__}: {exc}"],
                 "latency_seconds": 0.0,
                 "unknown_exception": True,
+                "constraint_satisfied": False,
+                "replay_misses": 0,
                 "task_score": 0.0,
                 "task_complete": False,
             }

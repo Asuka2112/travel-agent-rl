@@ -1,0 +1,28 @@
+stage: smoke_protocol_fix
+model: outputs/models/qwen3_4b_sft_merged
+dataset: data/intermediate/grpo/smoke_tool_12.jsonl
+dataset_sha256: 844bb65ec77efcf33c79e56d8a086a1b7feac25fb5f96fa019b232248cf2f437
+dataset_policy: hard-only deterministic engineering view of frozen RL queries
+rlhf_type: grpo
+training_strategy: full
+trainer_gpus: [1, 2, 3]
+rollout_gpus: [0]
+rollout_mode: server
+deepspeed: configs/sft/zero3_cpu_offload.json
+num_generations: 2
+max_turns: 3
+max_completion_length_per_round: 512
+optimizer_steps: 5
+interruption_after_steps: 3
+resume_to_steps: 5
+learning_rate: 0.0000005
+beta: 0.04
+epsilon: 0.2
+temperature: 0.9
+vllm_tensor_parallel_size: 1
+vllm_gpu_memory_utilization: 0.60
+vllm_utilization_probe_failures: [0.40, 0.50]
+snapshot_version: 4
+web_mode: replay_only
+seed: 20260819
+judge_schedule: "0.2 + 0.8 * min(1, global_step / 5)"

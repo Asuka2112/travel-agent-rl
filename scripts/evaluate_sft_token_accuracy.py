@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute exact teacher-forced token accuracy without materializing full-sequence logits."""
+"""Compute exact teacher-forced loss/accuracy without full-sequence logits."""
 from __future__ import annotations
 
 import argparse
@@ -11,6 +11,7 @@ from time import perf_counter
 
 import torch
 import torch.distributed as dist
+import torch.nn.functional as F
 from peft import PeftModel
 from swift.llm import get_model_tokenizer, get_template
 
@@ -68,6 +69,7 @@ def main() -> None:
     base = model.get_base_model()
     correct = 0
     count = 0
+    negative_log_likelihood = 0.0
     local_rows = 0
     started = perf_counter()
     for index in range(rank, len(rows), world_size):
@@ -88,13 +90,22 @@ def main() -> None:
             targets = targets[selected]
             for start in range(0, targets.numel(), args.vocab_chunk_tokens):
                 end = start + args.vocab_chunk_tokens
-                predictions = base.lm_head(hidden[start:end]).argmax(dim=-1)
+                logits = base.lm_head(hidden[start:end]).float()
+                chunk_targets = targets[start:end]
+                negative_log_likelihood += float(
+                    F.cross_entropy(logits, chunk_targets, reduction="sum").item()
+                )
+                predictions = logits.argmax(dim=-1)
                 correct += int(predictions.eq(targets[start:end]).sum().item())
                 count += int(targets[start:end].numel())
         local_rows += 1
         if local_rows % 25 == 0:
             print(f"rank {rank}: {local_rows} rows", flush=True)
-    totals = torch.tensor([correct, count, local_rows], dtype=torch.long, device=device)
+    totals = torch.tensor(
+        [negative_log_likelihood, float(correct), float(count), float(local_rows)],
+        dtype=torch.float64,
+        device=device,
+    )
     if world_size > 1:
         dist.all_reduce(totals, op=dist.ReduceOp.SUM)
     if rank == 0:
@@ -105,12 +116,17 @@ def main() -> None:
             "adapter": str(args.adapter),
             "data": str(args.data),
             "data_sha256": sha256_file(args.data),
-            "rows": int(totals[2].item()),
-            "correct_tokens": int(totals[0].item()),
-            "evaluated_tokens": int(totals[1].item()),
-            "token_accuracy": float(totals[0].item() / totals[1].item()),
+            "rows": int(totals[3].item()),
+            "negative_log_likelihood": float(totals[0].item()),
+            "validation_loss": float(totals[0].item() / totals[2].item()),
+            "correct_tokens": int(totals[1].item()),
+            "evaluated_tokens": int(totals[2].item()),
+            "token_accuracy": float(totals[1].item() / totals[2].item()),
             "world_size": world_size,
-            "method": "exact chunked lm_head argmax on all unmasked causal targets",
+            "method": (
+                "exact summed cross-entropy and chunked lm_head argmax on all "
+                "unmasked causal targets"
+            ),
             "elapsed_seconds": elapsed,
         }
         args.output.parent.mkdir(parents=True, exist_ok=True)

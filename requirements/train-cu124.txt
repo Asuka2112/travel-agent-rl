@@ -3,6 +3,7 @@
 torch==2.6.0
 transformers==4.53.3
 ms-swift==3.8.3
+math_verify==0.5.2
 vllm==0.8.5.post1
 fastapi==0.115.12
 starlette==0.46.2

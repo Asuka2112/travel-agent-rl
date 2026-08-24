@@ -1,0 +1,93 @@
+{
+  "algorithm": "fixed-sha256-prefix-v1",
+  "generated_at": "2026-08-23T23:35:03.880254+00:00",
+  "seed": 20260819,
+  "source": "data/processed/rl_queries.jsonl",
+  "source_rows": 200,
+  "source_sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80",
+  "subsets": {
+    "pilot": {
+      "difficulty": {
+        "easy": 25,
+        "hard": 8,
+        "medium": 15
+      },
+      "path": "data/intermediate/grpo/pilot_48.jsonl",
+      "query_ids": [
+        "agent_star:easy_qalld5",
+        "agent_star:easy_grysjn",
+        "agent_star:medium_038f33",
+        "agent_star:medium_lneyre",
+        "agent_star:medium_sfhyyc",
+        "agent_star:easy_8om94b",
+        "agent_star:easy_qiedi8",
+        "agent_star:easy_6b8ey6",
+        "agent_star:medium_avy1sr",
+        "agent_star:easy_9osmot",
+        "agent_star:easy_nyrc0h",
+        "agent_star:medium_ikbmqr",
+        "agent_star:hard_reui0g",
+        "agent_star:easy_xqs9ju",
+        "agent_star:easy_1rxo42",
+        "agent_star:easy_cafjr9",
+        "agent_star:medium_u5okof",
+        "agent_star:easy_j4ai8b",
+        "agent_star:easy_hjm73g",
+        "agent_star:easy_c7tk1y",
+        "agent_star:easy_nouc73",
+        "agent_star:medium_kupqa7",
+        "agent_star:hard_m90ez6",
+        "agent_star:medium_jizp1w",
+        "agent_star:medium_m9vwkp",
+        "agent_star:hard_1zyh37",
+        "agent_star:easy_h90eex",
+        "agent_star:easy_2s0354",
+        "agent_star:hard_x3iw3t",
+        "agent_star:easy_eni041",
+        "agent_star:hard_ja2rsa",
+        "agent_star:medium_noipix",
+        "agent_star:hard_js1297",
+        "agent_star:easy_go7xqz",
+        "agent_star:medium_0dop6p",
+        "agent_star:easy_cnoh8f",
+        "agent_star:easy_4aj1cr",
+        "agent_star:medium_9p942s",
+        "agent_star:medium_uqlakn",
+        "agent_star:hard_bg1eag",
+        "agent_star:medium_0oik82",
+        "agent_star:easy_vwe7n2",
+        "agent_star:medium_td4a7u",
+        "agent_star:easy_qiczla",
+        "agent_star:easy_6nazix",
+        "agent_star:easy_xcp32q",
+        "agent_star:hard_u8pwbz",
+        "agent_star:easy_dhjux0"
+      ],
+      "rows": 48,
+      "sha256": "3eda7c2f4840fa913e67802eb43ee03d7abd741db4d3107548875636e78630de"
+    },
+    "smoke": {
+      "difficulty": {
+        "easy": 7,
+        "medium": 5
+      },
+      "path": "data/intermediate/grpo/smoke_12.jsonl",
+      "query_ids": [
+        "agent_star:easy_qalld5",
+        "agent_star:easy_grysjn",
+        "agent_star:medium_038f33",
+        "agent_star:medium_lneyre",
+        "agent_star:medium_sfhyyc",
+        "agent_star:easy_8om94b",
+        "agent_star:easy_qiedi8",
+        "agent_star:easy_6b8ey6",
+        "agent_star:medium_avy1sr",
+        "agent_star:easy_9osmot",
+        "agent_star:easy_nyrc0h",
+        "agent_star:medium_ikbmqr"
+      ],
+      "rows": 12,
+      "sha256": "4fe835e4413183a5feeb8fe29959568074e149ff92f750e0d66eb7ac97fd4e53"
+    }
+  }
+}
