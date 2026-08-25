@@ -27,6 +27,14 @@ The contamination re-audit scanned 2,932 training-derived rows with all overlap 
 zero. No retraining or post-result tuning occurred, and all frozen model files—including
 checkpoint-200—passed post-evaluation hash verification.
 
+The subsequent read-only failure decomposition reproduced every official aggregate
+numerator from 540 per-task verdict sets. It found a systematic adapter/schema defect:
+all 166 RL final answers have an adapter finding, all 106 delivered RL plans fail
+completeness/city-route/transportation, and the 411 micro passes include 318 vacuous
+restaurant/attraction/accommodation passes on missing fields. No confirmed official
+database mismatch was isolated. No fix or rerun was performed; see the decomposition
+report before authorizing any adapter-only follow-up.
+
 Authoritative deliverables:
 
 - `FINAL_REPORT.md`
@@ -40,6 +48,8 @@ Authoritative deliverables:
 - `outputs/final/external_validation_scientific_audit.json`
 - `outputs/final/external_validation_repro_manifest.json`
 - `reports/TRAVELPLANNER_EXTERNAL_VALIDATION.md`
+- `outputs/final/travelplanner_failure_decomposition.json`
+- `reports/TRAVELPLANNER_FAILURE_DECOMPOSITION.md`
 - `orchestration/STATE.json`
 
 All project trainer, rollout, Judge, monitor, evaluation, and pairwise services are

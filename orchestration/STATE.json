@@ -36,7 +36,8 @@
     "Base/SFT/RL parity-locked unified evaluation and fixed local Judge",
     "true A/B plus B/A pairwise evaluation and failure analysis",
     "final scientific audit and reproduction manifest",
-    "frozen official TravelPlanner 180-query Base/SFT/RL external validation"
+    "frozen official TravelPlanner 180-query Base/SFT/RL external validation",
+    "read-only TravelPlanner per-task failure decomposition and manual audit"
   ],
   "replay_v2_regression": {
     "gate_pass": true,
@@ -183,10 +184,12 @@
     "external_validation_report": "reports/TRAVELPLANNER_EXTERNAL_VALIDATION.md",
     "external_validation_scientific_audit": "outputs/final/external_validation_scientific_audit.json",
     "external_validation_repro_manifest": "outputs/final/external_validation_repro_manifest.json",
+    "travelplanner_failure_decomposition": "outputs/final/travelplanner_failure_decomposition.json",
+    "travelplanner_failure_report": "reports/TRAVELPLANNER_FAILURE_DECOMPOSITION.md",
     "scientific_audit_pass": true
   },
   "final_validation": {
-    "tests": "95/95 passed",
+    "tests": "98/98 passed",
     "ruff": "passed",
     "scientific_audit": "passed",
     "required_artifacts": "passed",
@@ -221,7 +224,7 @@
     "idle_reserve": [1, 2, 3]
   },
   "running_processes_detail": [],
-  "last_successful_step": "official TravelPlanner external validation and 95-test/ruff/scientific audit passed; all project services stopped",
+  "last_successful_step": "read-only TravelPlanner failure decomposition, manual 20-task audit, 98 tests, ruff, and checkpoint hash audit passed",
   "next_action": "No work remains; resolve the final commit as git HEAD",
   "routing_validation": {
     "requested_model": "gpt-5.6-luna",
