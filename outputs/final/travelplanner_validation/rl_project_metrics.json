@@ -1,0 +1,48 @@
+{
+  "average_latency_seconds": 23.26608264980217,
+  "average_tool_calls": 6.416666666666667,
+  "average_turns": 7.338888888888889,
+  "final_answer_numerator": 166,
+  "final_answer_rate": 0.9222222222222223,
+  "generated_at": "2026-08-25T17:19:02.632486+00:00",
+  "invalid_tool_calls": 0,
+  "label": "rl",
+  "loop_rate": 0.03888888888888889,
+  "model": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+  "n": 180,
+  "protocol": {
+    "adapter": "deterministic final-answer-only interface adapter",
+    "decoding": "greedy (do_sample=false)",
+    "max_new_tokens": 768,
+    "max_turns": 13,
+    "prompt": "raw query only; no system or benchmark-specific cue",
+    "seed": 20260819,
+    "template": "qwen3_nothinking + native hermes agent format",
+    "tool_backend": "full_replay_snapshot_v4"
+  },
+  "public_network_requests": 0,
+  "replay_misses": 41,
+  "submission_sha256": "612cdf0f7fa379e9e8801abc2c50f7b25fcfed050cde9d5c82bb86e4cbc6d1e1",
+  "task_success": {
+    "ci95_wilson": [
+      0.36308178444241596,
+      0.506370948613799
+    ],
+    "definition": "final answer adapted to exactly the requested number of official-schema days",
+    "denominator": 180,
+    "numerator": 78,
+    "rate": 0.43333333333333335
+  },
+  "tool_usage": {
+    "flight_search": 379,
+    "nearby_search": 1,
+    "poi_search": 609,
+    "route_planning": 116,
+    "train_search": 3,
+    "web_search": 47
+  },
+  "unknown_exceptions": 0,
+  "valid_tool_calls": 1155,
+  "valid_tool_rate": 1.0,
+  "validation_sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80"
+}

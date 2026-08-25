@@ -20,6 +20,7 @@ The end-to-end Data -> Distillation -> Filtering -> SFT -> Full-Parameter Agenti
 | Formal GRPO | 200 steps, 1,200 rollouts, checkpoint-200, gate passed | `reports/GRPO_FORMAL_REPORT.md` |
 | Unified evaluation | Base/SFT/RL same 16-query dev and fixed Judge | `outputs/final/final_metrics.json` |
 | Pairwise evaluation | Base vs SFT, Base vs RL, SFT vs RL; true A/B+B/A | `outputs/final/pairwise_metrics.json` |
+| TravelPlanner validation | Official frozen 180-query deterministic evaluation | `reports/TRAVELPLANNER_EXTERNAL_VALIDATION.md` |
 | Final audit | tests, ruff, scientific integrity and repro manifest | `FINAL_REPORT.md` |
 
 ## Headline metrics
@@ -44,6 +45,26 @@ results establish the completed reproduction on that frozen protocol; they are n
 broad travel-planning benchmark claim. See `FINAL_REPORT.md` for limitations and full
 provenance.
 
+## Official TravelPlanner validation
+
+Frozen post-hoc evaluation used the official 180-query validation split and the unmodified
+official evaluator at commit `e52c87f4ac348a3410c46dc3553c519db5ec5e23`.
+
+| Official deterministic metric | Base | SFT | RL |
+| --- | ---: | ---: | ---: |
+| Commonsense Constraint Micro | 2.7778% | 1.8750% | 28.5417% |
+| Commonsense Constraint Macro | 0.0000% | 0.0000% | 0.0000% |
+| Hard Constraint Micro | 0.0000% | 0.0000% | 0.0000% |
+| Hard Constraint Macro | 0.0000% | 0.0000% | 0.0000% |
+| Final Pass Rate | 0/180 | 0/180 | 0/180 |
+
+The 95% Wilson interval for each Final Pass estimate is 0.0000%-2.0895%. Project Task
+Success—an interface/delivery metric distinct from official Final Pass—was Base 6/180
+(3.3333%), SFT 5/180 (2.7778%), and RL 78/180 (43.3333%). The contamination re-audit
+scanned 2,932 training-derived rows and found zero overlap. No validation-specific tuning
+or retraining was performed. Deterministic benchmark, internal pointwise Judge, and
+internal pairwise Judge results are reported separately in `FINAL_REPORT.md`.
+
 ## Reproduction entry points
 
 Create the base environment and run deterministic checks:
@@ -58,6 +79,7 @@ ruff check .
 ```
 
 The exact frozen inputs, hashes, model lineage, topology logs, commands, and output
-artifacts are listed in `outputs/final/repro_manifest.json`. The orchestration system of
+artifacts are listed in `outputs/final/repro_manifest.json` and
+`outputs/final/external_validation_repro_manifest.json`. The orchestration system of
 record is `orchestration/STATE.json`; detailed stage commands are documented in
 `docs/reproduction.md` and the stage reports.

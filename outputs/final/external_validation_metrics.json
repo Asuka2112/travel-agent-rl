@@ -1,0 +1,340 @@
+{
+  "generated_at": "2026-08-25T17:27:43.043665+00:00",
+  "evaluation_type": "frozen post-hoc official TravelPlanner validation",
+  "n": 180,
+  "contamination_audit": {
+    "gate": "passed",
+    "candidate_rows_scanned": 2932,
+    "overlaps": {
+      "exact_or_canonical_overlaps": 0,
+      "constraint_fingerprint_overlaps": 0,
+      "fuzzy_overlaps_at_or_above_threshold": 0
+    }
+  },
+  "deterministic_rule_based": {
+    "base": {
+      "Delivery Rate": {
+        "numerator": 8,
+        "denominator": 180,
+        "rate": 0.044444444444444446
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 40,
+        "denominator": 1440,
+        "rate": 0.027777777777777776
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    },
+    "sft": {
+      "Delivery Rate": {
+        "numerator": 6,
+        "denominator": 180,
+        "rate": 0.03333333333333333
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 27,
+        "denominator": 1440,
+        "rate": 0.01875
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    },
+    "rl": {
+      "Delivery Rate": {
+        "numerator": 106,
+        "denominator": 180,
+        "rate": 0.5888888888888889
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 411,
+        "denominator": 1440,
+        "rate": 0.28541666666666665
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    }
+  },
+  "project_metrics": {
+    "base": {
+      "average_latency_seconds": 11.92561876769695,
+      "average_tool_calls": 1.1833333333333333,
+      "average_turns": 2.1777777777777776,
+      "final_answer_numerator": 30,
+      "final_answer_rate": 0.16666666666666666,
+      "generated_at": "2026-08-25T15:02:27.538875+00:00",
+      "invalid_tool_calls": 149,
+      "label": "base",
+      "loop_rate": 0.0,
+      "model": "models/Qwen3-4B-Instruct-2507",
+      "n": 180,
+      "protocol": {
+        "adapter": "deterministic final-answer-only interface adapter",
+        "decoding": "greedy (do_sample=false)",
+        "max_new_tokens": 768,
+        "max_turns": 13,
+        "prompt": "raw query only; no system or benchmark-specific cue",
+        "seed": 20260819,
+        "template": "qwen3_nothinking + native hermes agent format",
+        "tool_backend": "full_replay_snapshot_v4"
+      },
+      "public_network_requests": 0,
+      "replay_misses": 59,
+      "submission_sha256": "77f6e1a86fdb887a1f48bd006227bf1eebb2fe130592ff6ceaf071374152385c",
+      "task_success": {
+        "ci95_wilson": [
+          0.015364790984832809,
+          0.0708043404086727
+        ],
+        "definition": "final answer adapted to exactly the requested number of official-schema days",
+        "denominator": 180,
+        "numerator": 6,
+        "rate": 0.03333333333333333
+      },
+      "tool_usage": {
+        "flight_search": 32,
+        "nearby_search": 15,
+        "poi_search": 62,
+        "route_planning": 39,
+        "train_search": 3,
+        "weather": 3,
+        "web_scraping": 21,
+        "web_search": 38
+      },
+      "unknown_exceptions": 0,
+      "valid_tool_calls": 213,
+      "valid_tool_rate": 0.5883977900552486,
+      "validation_sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80"
+    },
+    "sft": {
+      "average_latency_seconds": 22.156689446812702,
+      "average_tool_calls": 12.305555555555555,
+      "average_turns": 12.444444444444445,
+      "final_answer_numerator": 25,
+      "final_answer_rate": 0.1388888888888889,
+      "generated_at": "2026-08-25T16:09:04.942875+00:00",
+      "invalid_tool_calls": 0,
+      "label": "sft",
+      "loop_rate": 0.23333333333333334,
+      "model": "outputs/models/qwen3_4b_sft_merged",
+      "n": 180,
+      "protocol": {
+        "adapter": "deterministic final-answer-only interface adapter",
+        "decoding": "greedy (do_sample=false)",
+        "max_new_tokens": 768,
+        "max_turns": 13,
+        "prompt": "raw query only; no system or benchmark-specific cue",
+        "seed": 20260819,
+        "template": "qwen3_nothinking + native hermes agent format",
+        "tool_backend": "full_replay_snapshot_v4"
+      },
+      "public_network_requests": 0,
+      "replay_misses": 753,
+      "submission_sha256": "1784503b84fcd27687c415c073704241ac41f38d686c137f586384e534e9f56c",
+      "task_success": {
+        "ci95_wilson": [
+          0.011922122033089549,
+          0.06336807044843389
+        ],
+        "definition": "final answer adapted to exactly the requested number of official-schema days",
+        "denominator": 180,
+        "numerator": 5,
+        "rate": 0.027777777777777776
+      },
+      "tool_usage": {
+        "flight_search": 293,
+        "nearby_search": 14,
+        "poi_search": 954,
+        "route_planning": 142,
+        "train_search": 10,
+        "weather": 13,
+        "web_scraping": 3,
+        "web_search": 786
+      },
+      "unknown_exceptions": 0,
+      "valid_tool_calls": 2215,
+      "valid_tool_rate": 1.0,
+      "validation_sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80"
+    },
+    "rl": {
+      "average_latency_seconds": 23.26608264980217,
+      "average_tool_calls": 6.416666666666667,
+      "average_turns": 7.338888888888889,
+      "final_answer_numerator": 166,
+      "final_answer_rate": 0.9222222222222223,
+      "generated_at": "2026-08-25T17:19:02.632486+00:00",
+      "invalid_tool_calls": 0,
+      "label": "rl",
+      "loop_rate": 0.03888888888888889,
+      "model": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+      "n": 180,
+      "protocol": {
+        "adapter": "deterministic final-answer-only interface adapter",
+        "decoding": "greedy (do_sample=false)",
+        "max_new_tokens": 768,
+        "max_turns": 13,
+        "prompt": "raw query only; no system or benchmark-specific cue",
+        "seed": 20260819,
+        "template": "qwen3_nothinking + native hermes agent format",
+        "tool_backend": "full_replay_snapshot_v4"
+      },
+      "public_network_requests": 0,
+      "replay_misses": 41,
+      "submission_sha256": "612cdf0f7fa379e9e8801abc2c50f7b25fcfed050cde9d5c82bb86e4cbc6d1e1",
+      "task_success": {
+        "ci95_wilson": [
+          0.36308178444241596,
+          0.506370948613799
+        ],
+        "definition": "final answer adapted to exactly the requested number of official-schema days",
+        "denominator": 180,
+        "numerator": 78,
+        "rate": 0.43333333333333335
+      },
+      "tool_usage": {
+        "flight_search": 379,
+        "nearby_search": 1,
+        "poi_search": 609,
+        "route_planning": 116,
+        "train_search": 3,
+        "web_search": 47
+      },
+      "unknown_exceptions": 0,
+      "valid_tool_calls": 1155,
+      "valid_tool_rate": 1.0,
+      "validation_sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80"
+    }
+  },
+  "internal_frozen_eval": {
+    "n": 16,
+    "task_success": {
+      "base": {
+        "numerator": 14,
+        "denominator": 16,
+        "rate": 0.875
+      },
+      "sft": {
+        "numerator": 11,
+        "denominator": 16,
+        "rate": 0.6875
+      },
+      "rl": {
+        "numerator": 16,
+        "denominator": 16,
+        "rate": 1.0
+      }
+    }
+  },
+  "pointwise_judge": {
+    "scope": "internal frozen 16-query evaluation only",
+    "score_1_to_5": {
+      "base": 4.776785714285714,
+      "sft": 4.071428571428571,
+      "rl": 4.991071428571429
+    }
+  },
+  "pairwise_judge": {
+    "scope": "preserved internal frozen 16-query A/B plus B/A evaluation only",
+    "judge_calls": 96,
+    "judge_failures": 0,
+    "pairs": [
+      {
+        "left": "base",
+        "right": "sft",
+        "queries": 16,
+        "win": 10,
+        "tie": 4,
+        "loss": 2,
+        "position_disagreement": 4,
+        "pairwise_score": 0.75
+      },
+      {
+        "left": "base",
+        "right": "rl",
+        "queries": 16,
+        "win": 10,
+        "tie": 4,
+        "loss": 2,
+        "position_disagreement": 4,
+        "pairwise_score": 0.75
+      },
+      {
+        "left": "sft",
+        "right": "rl",
+        "queries": 16,
+        "win": 0,
+        "tie": 10,
+        "loss": 6,
+        "position_disagreement": 10,
+        "pairwise_score": 0.3125
+      }
+    ],
+    "position_disagreement_total": 18
+  }
+}

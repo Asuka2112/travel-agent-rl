@@ -1,0 +1,50 @@
+{
+  "average_latency_seconds": 22.156689446812702,
+  "average_tool_calls": 12.305555555555555,
+  "average_turns": 12.444444444444445,
+  "final_answer_numerator": 25,
+  "final_answer_rate": 0.1388888888888889,
+  "generated_at": "2026-08-25T16:09:04.942875+00:00",
+  "invalid_tool_calls": 0,
+  "label": "sft",
+  "loop_rate": 0.23333333333333334,
+  "model": "outputs/models/qwen3_4b_sft_merged",
+  "n": 180,
+  "protocol": {
+    "adapter": "deterministic final-answer-only interface adapter",
+    "decoding": "greedy (do_sample=false)",
+    "max_new_tokens": 768,
+    "max_turns": 13,
+    "prompt": "raw query only; no system or benchmark-specific cue",
+    "seed": 20260819,
+    "template": "qwen3_nothinking + native hermes agent format",
+    "tool_backend": "full_replay_snapshot_v4"
+  },
+  "public_network_requests": 0,
+  "replay_misses": 753,
+  "submission_sha256": "1784503b84fcd27687c415c073704241ac41f38d686c137f586384e534e9f56c",
+  "task_success": {
+    "ci95_wilson": [
+      0.011922122033089549,
+      0.06336807044843389
+    ],
+    "definition": "final answer adapted to exactly the requested number of official-schema days",
+    "denominator": 180,
+    "numerator": 5,
+    "rate": 0.027777777777777776
+  },
+  "tool_usage": {
+    "flight_search": 293,
+    "nearby_search": 14,
+    "poi_search": 954,
+    "route_planning": 142,
+    "train_search": 10,
+    "weather": 13,
+    "web_scraping": 3,
+    "web_search": 786
+  },
+  "unknown_exceptions": 0,
+  "valid_tool_calls": 2215,
+  "valid_tool_rate": 1.0,
+  "validation_sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80"
+}

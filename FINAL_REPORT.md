@@ -1,6 +1,6 @@
 # Travel Agentic RL Final Report
 
-Generated from immutable project artifacts on 2026-08-25. Machine-readable JSON under
+Generated from immutable project artifacts on 2026-08-26. Machine-readable JSON under
 `outputs/final/` is the source of truth for all reported values.
 
 ## 1. Hardware
@@ -16,7 +16,9 @@ GPU availability was re-audited before each expensive stage. The Formal GRPO run
 GPU6 for vLLM rollout, GPUs1/2/3 for the ZeRO-3 full-parameter trainer, and a fixed Base
 Judge co-located on GPU1. External jobs on GPUs0/4/5/7 were never killed, reset,
 preempted, or shared without proof of non-interference. Unified and pairwise evaluation
-ran sequentially on idle-safe GPU6.
+ran sequentially on idle-safe GPU6. External validation also ran Base, SFT, and RL
+sequentially on GPU6 after a fresh resource gate found it free; it was never co-scheduled
+with another user's GPU6 process.
 
 ## 3. Dataset
 
@@ -24,7 +26,9 @@ The frozen production set contains 1,835 queries selected from an audited 17,486
 catalog. After trajectory filtering, the immutable split contains 881 SFT trajectories,
 200 RL queries, and 16 synthetic engineering dev queries. SFT/RL query-ID overlap,
 dev/training overlap, protected benchmark overlap, and frozen benchmark overlap are all
-zero. Key hashes are recorded in `orchestration/STATE.json` and
+zero. A second post-hoc audit scanned 2,932 training-derived rows against all 180 official
+TravelPlanner validation queries and again found zero exact/canonical, constraint-fingerprint,
+or >=99 fuzzy overlaps. Key hashes are recorded in `orchestration/STATE.json` and
 `outputs/final/repro_manifest.json`.
 
 ## 4. Distillation
@@ -79,9 +83,9 @@ The six explicit reward components remained fixed. Formal component means were:
 Tool observations were verified outside the policy response-loss mask, response tokens
 and masks remained aligned, and all eight tool schemas were visible in every rollout.
 
-## 9. Base / SFT / RL unified evaluation
+## 9. Internal frozen Base / SFT / RL evaluation
 
-All three models used the identical 16-query dev hash, `full_replay` backend,
+All three models used the identical 16-query internal dev hash (n=16), `full_replay` backend,
 qwen3_nothinking/Hermes format, seed 20260819, max_turns=13, generation limit 768,
 and fixed unmodified Base Judge with the same prompt hash.
 
@@ -100,7 +104,56 @@ and fixed unmodified Base Judge with the same prompt hash.
 
 No model made a public-network request or produced an unknown exception.
 
-## 10. Pairwise evaluation
+## 10. Official TravelPlanner external validation
+
+This was a frozen post-hoc evaluation on the official 180-query TravelPlanner validation
+split. Base, SFT, and checkpoint-200 used identical raw-query prompts, greedy decoding,
+qwen3_nothinking/Hermes formatting, eight-tool replay environment, seed 20260819,
+max_turns=13, 768 generated tokens per turn, deterministic final-answer-only interface
+adapter, and post-processing. Neither validation reference information nor evaluator rules
+were exposed to the model. No prompt, tool logic, data, reward, checkpoint, seed, or
+hyperparameter was changed after predictions. Raw trajectories, final answers, adapted
+plans, and official submissions are retained under
+`outputs/final/travelplanner_validation/`.
+
+The unmodified official evaluator from TravelPlanner commit
+`e52c87f4ac348a3410c46dc3553c519db5ec5e23` produced:
+
+| Deterministic official metric | Base | SFT | RL |
+| --- | ---: | ---: | ---: |
+| Commonsense Constraint Micro | 40/1,440 (2.7778%) | 27/1,440 (1.8750%) | 411/1,440 (28.5417%) |
+| Commonsense Constraint Macro | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+| Hard Constraint Micro | 0/420 (0.0000%) | 0/420 (0.0000%) | 0/420 (0.0000%) |
+| Hard Constraint Macro | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+| Final Pass Rate | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+
+The 95% Wilson interval for each 0/180 Final Pass estimate is 0.0000%-2.0895%.
+RL substantially increased delivered official plans and commonsense micro passes, but no
+model passed every commonsense and applicable hard constraint for any query. Therefore the
+official deterministic result does **not** establish an RL Final Pass improvement.
+
+Project trajectory metrics, kept separate from official pass metrics, were:
+
+| Project metric | Base | SFT | RL |
+| --- | ---: | ---: | ---: |
+| Task Success | 6/180 (3.3333%) | 5/180 (2.7778%) | 78/180 (43.3333%) |
+| Task Success 95% Wilson CI | 1.5365%-7.0804% | 1.1922%-6.3368% | 36.3082%-50.6371% |
+| Valid Tool Rate | 58.8398% | 100.0000% | 100.0000% |
+| Final Answer Rate | 16.6667% | 13.8889% | 92.2222% |
+| Average Turns | 2.1778 | 12.4444 | 7.3389 |
+| Average Tool Calls | 1.1833 | 12.3056 | 6.4167 |
+| Loop Rate | 0.0000% | 23.3333% | 3.8889% |
+
+Here project Task Success means only that the final answer adapted to exactly the requested
+number of official-schema days. It is an interface/delivery statistic and is not the
+official Final Pass Rate.
+
+## 11. Pointwise and pairwise Judge evaluation
+
+Pointwise Judge metrics apply only to the internal n=16 frozen evaluation: Base 4.7768/5,
+SFT 4.0714/5, and RL 4.9911/5. They are not TravelPlanner rule-based metrics.
+
+The preserved internal pairwise results are:
 
 | Left vs right | Left wins | Ties | Left losses | Position disagreement | Pairwise score |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -120,14 +173,19 @@ queries and 10/16 SFT/RL queries. This is evidence of prompt/context and positio
 sensitivity in the small fixed Judge, so neither view is suppressed or treated as the
 sole scientific conclusion.
 
-## 11. Failure analysis
+Pairwise position disagreement totaled 18/48 comparisons: Base/SFT 4/16, Base/RL 4/16,
+and SFT/RL 10/16. Deterministic official metrics, internal pointwise Judge metrics, and
+internal pairwise Judge metrics are three distinct evidence streams; none overwrites
+another.
+
+## 12. Failure analysis
 
 Base failed 2/16 queries due to invalid native tool-call formatting. SFT failed 6/16,
 with 30 deterministic snapshot misses, 5 loop cases, and no invalid tool calls or unknown
 exceptions. RL failed 0/16. These outcomes are reported without threshold, seed, or
 checkpoint cherry-picking.
 
-## 12. Snapshot misses
+## 13. Snapshot misses
 
 Snapshot v4 is immutable with content SHA-256
 `dbd160b6de284208c3906e9da0768cabfe3a77315e64280ea59685eefff15f92`.
@@ -136,20 +194,23 @@ continued agent execution and 48 remained explicit final failures. No miss fabri
 result or fell through to the public network. Unified evaluation recorded 30 misses for
 SFT and zero for Base/RL.
 
-## 13. Resource usage
+External validation recorded 59/753/41 deterministic replay misses for Base/SFT/RL,
+respectively, without public fallback.
+
+## 14. Resource usage
 
 Formal peak GPU memory was 22,388 MiB on GPU1, 11,004 MiB on GPU2, 11,044 MiB on
 GPU3, and 15,352 MiB on GPU6. Peak project RSS was 175.304 GiB and peak host RAM use
 was 255.167 GiB. All selected GPUs reached 100% measured utilization while external GPU
 processes remained untouched.
 
-## 14. Training time
+## 15. Training time
 
 Production SFT took 1,034.157 seconds (17m 14s). Formal GRPO took 25,796.069 seconds
 (7h 9m 58s). Pilot, Probe, evaluation, and Judge timings are retained in their logs and
 machine-readable artifacts.
 
-## 15. Reproducibility
+## 16. Reproducibility
 
 `outputs/final/repro_manifest.json` records source/data/config/prompt/artifact hashes,
 model lineage, fixed protocol settings, topology logs, environment versions, and exact
@@ -157,17 +218,26 @@ entry-point commands. `outputs/final/scientific_audit.json` validates dataset ov
 contamination, snapshot integrity, masks, reward definition, evaluation/Judge parity,
 public-network isolation, and checkpoint provenance.
 
-## 16. Limitations
+`outputs/final/external_validation_repro_manifest.json` adds the frozen external protocol,
+all three model tree hashes, official evaluator revision/hashes, official submissions,
+and external artifact hashes. `outputs/final/external_validation_scientific_audit.json`
+rechecked every frozen model file after evaluation and passed all controls.
+
+## 17. Limitations
 
 The interactive dev set has only 16 synthetic engineering queries focused on tool
 coverage, so the perfect RL point estimate is not a broad travel-planning benchmark
-claim. The same Base model acts as the fixed Judge, which can introduce model-family
+claim. Conversely, official TravelPlanner validation is broader, but the models were not
+trained to emit the official daily JSON schema and the deterministic adapter is deliberately
+non-inferential. This produced zero Final Pass for all three models even though RL improved
+commonsense micro coverage and plan delivery. The same Base model acts as the fixed Judge,
+which can introduce model-family
 bias. Replay-only evaluation cannot answer unseen public-Web requests and intentionally
 returns deterministic misses. SFT used a LoRA training stage before merge, while GRPO
 itself was a verified 100% full-parameter update. No confidence interval is claimed for
-the small dev set.
+the small internal dev set. The official Final Pass confidence intervals are reported above.
 
-## 17. Final conclusion
+## 18. Final conclusion
 
 The end-to-end Data -> Distillation -> Filtering -> SFT -> Full-Parameter Agentic GRPO
 -> Evaluation pipeline completed with immutable provenance and zero public-network
@@ -177,3 +247,7 @@ Base and SFT on task success, constraint satisfaction, tool efficiency, and inde
 fixed-Judge score. True pairwise judging preferred RL over SFT but preferred Base over
 RL, with material position disagreement. The behavioral result is positive, while the
 conflicting Judge views and small synthetic dev set prevent a broad superiority claim.
+On official TravelPlanner validation (n=180), RL achieved much higher commonsense micro
+coverage and project delivery/task-success statistics than Base/SFT, but Base, SFT, and RL
+all had 0/180 official Final Pass. This negative deterministic result is retained without
+retraining or post-result tuning.
