@@ -1,0 +1,25 @@
+Flights API loaded.
+Accommodations loaded.
+Restaurants loaded.
+GoogleDistanceMatrix loaded.
+Attractions loaded.
+Flights API loaded.
+Accommodations loaded.
+Restaurants loaded.
+GoogleDistanceMatrix loaded.
+Attractions loaded.
+a hotel in downtown Atlanta (budget-friendly options available) can not be parsed, '-' will be used instead.
+a hotel in downtown Atlanta (budget-friendly options available) can not be parsed, '-' will be used instead.
+Book an entire home/apt for 4 people. can not be parsed, '-' will be used instead.
+Book an entire home/apt for 4 people. can not be parsed, '-' will be used instead.
+a hotel with private rooms can not be parsed, '-' will be used instead.
+Stay in a hotel with private rooms. Ensure the room is suitable for a group of three people. can not be parsed, '-' will be used instead.
+a hotel with private rooms can not be parsed, '-' will be used instead.
+Sunny + Spacious Master Bedroom with Outdoor Deck ($109/night) can not be parsed, '-' will be used instead.
+the same private room can not be parsed, '-' will be used instead.
+Cozy bedroom in LES apartment ($18 can not be parsed, '-' will be used instead.
+Sunny + Spacious Master Bedroom with Outdoor Deck ($109/night) can not be parsed, '-' will be used instead.
+Stay at the same place as Day 1. can not be parsed, '-' will be used instead.
+Beautiful and big 1BR sublet close by Central Park (New York) can not be parsed, '-' will be used instead.
+Stay at the same place as Day 3. can not be parsed, '-' will be used instead.
+No stay required. can not be parsed, '-' will be used instead.

@@ -1,0 +1,65 @@
+{
+  "audit_version": 1,
+  "generated_at": "2026-08-25T18:22:34.699442+00:00",
+  "policy": {
+    "protected_split": "official TravelPlanner validation",
+    "fuzzy_metric": "rapidfuzz.fuzz.ratio on canonical query",
+    "fuzzy_threshold": 99.0,
+    "constraint_fields": [
+      "org",
+      "dest",
+      "days",
+      "date",
+      "visiting_city_number",
+      "people_number",
+      "local_constraint",
+      "budget"
+    ]
+  },
+  "validation": {
+    "path": "data/raw/travelplanner/validation.csv",
+    "sha256": "0e54b26b13c0b6d50e8683765e930bffca949488c44634e530da899914d40e80",
+    "rows": 180
+  },
+  "candidate_artifacts": [
+    {
+      "path": "data/manifests/train_queries_1835.jsonl",
+      "sha256": "cf2f694419f7a96e868d07507a0a26d648cfd885ce69cda7daae36b3d3d82e6e",
+      "rows": 1835,
+      "exact_or_canonical_overlaps": [],
+      "constraint_fingerprint_overlaps": [],
+      "fuzzy_overlaps_at_or_above_threshold": []
+    },
+    {
+      "path": "data/processed/sft.jsonl",
+      "sha256": "b63a8464d58191cd5825cdd54899f443d1f90f57cece678a89fff23839de8008",
+      "rows": 881,
+      "exact_or_canonical_overlaps": [],
+      "constraint_fingerprint_overlaps": [],
+      "fuzzy_overlaps_at_or_above_threshold": []
+    },
+    {
+      "path": "data/processed/rl_queries.jsonl",
+      "sha256": "ca9411657993bb3cc4c754ec4a47583d3207ab6dc9cb4bfa8451e934148e9c80",
+      "rows": 200,
+      "exact_or_canonical_overlaps": [],
+      "constraint_fingerprint_overlaps": [],
+      "fuzzy_overlaps_at_or_above_threshold": []
+    },
+    {
+      "path": "data/processed/dev.jsonl",
+      "sha256": "66d8d8f5ce4ac9e42a265da3f2c28634a54d14a3628150e36b008bb1496c5712",
+      "rows": 16,
+      "exact_or_canonical_overlaps": [],
+      "constraint_fingerprint_overlaps": [],
+      "fuzzy_overlaps_at_or_above_threshold": []
+    }
+  ],
+  "totals": {
+    "candidate_rows_scanned": 2932,
+    "exact_or_canonical_overlaps": 0,
+    "constraint_fingerprint_overlaps": 0,
+    "fuzzy_overlaps_at_or_above_threshold": 0
+  },
+  "gate": "passed"
+}

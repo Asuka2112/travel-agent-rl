@@ -1,0 +1,11 @@
+/Users/zhourunfeng/Documents/Codex/2026-08-24/files-pasted-by-the-user-travel/work/tp-eval-venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+Generating validation split:   0%|          | 0/180 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 180/180 [00:00<00:00, 3991.41 examples/s]
+
+  0%|          | 0/180 [00:00<?, ?it/s]
+ 10%|█         | 18/180 [00:00<00:01, 84.83it/s]
+ 52%|█████▏    | 93/180 [00:00<00:00, 161.60it/s]
+ 99%|█████████▉| 179/180 [00:00<00:00, 255.01it/s]
+100%|██████████| 180/180 [00:00<00:00, 223.85it/s]

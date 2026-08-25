@@ -1,0 +1,1114 @@
+{
+  "generated_at": "2026-08-25T18:20:43.006440+00:00",
+  "evaluation_status": {
+    "old": "invalid / adapter-contaminated external evaluation",
+    "corrected": "adapter-corrected frozen-output evaluation"
+  },
+  "n_per_model": 180,
+  "old_metrics_preserved": {
+    "base": {
+      "Delivery Rate": {
+        "numerator": 8,
+        "denominator": 180,
+        "rate": 0.044444444444444446
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 40,
+        "denominator": 1440,
+        "rate": 0.027777777777777776
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    },
+    "sft": {
+      "Delivery Rate": {
+        "numerator": 6,
+        "denominator": 180,
+        "rate": 0.03333333333333333
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 27,
+        "denominator": 1440,
+        "rate": 0.01875
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    },
+    "rl": {
+      "Delivery Rate": {
+        "numerator": 106,
+        "denominator": 180,
+        "rate": 0.5888888888888889
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 411,
+        "denominator": 1440,
+        "rate": 0.28541666666666665
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    }
+  },
+  "corrected_official_metrics": {
+    "base": {
+      "Delivery Rate": {
+        "numerator": 8,
+        "denominator": 180,
+        "rate": 0.044444444444444446
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 30,
+        "denominator": 1440,
+        "rate": 0.02083333333333333
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    },
+    "sft": {
+      "Delivery Rate": {
+        "numerator": 6,
+        "denominator": 180,
+        "rate": 0.03333333333333333
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 21,
+        "denominator": 1440,
+        "rate": 0.014583333333333332
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    },
+    "rl": {
+      "Delivery Rate": {
+        "numerator": 106,
+        "denominator": 180,
+        "rate": 0.5888888888888889
+      },
+      "Commonsense Constraint Micro Pass Rate": {
+        "numerator": 429,
+        "denominator": 1440,
+        "rate": 0.29791666666666666
+      },
+      "Commonsense Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Hard Constraint Micro Pass Rate": {
+        "numerator": 0,
+        "denominator": 420,
+        "rate": 0.0
+      },
+      "Hard Constraint Macro Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "Final Pass Rate": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0,
+        "ci95_wilson": [
+          0.0,
+          0.02089549792161305
+        ]
+      }
+    }
+  },
+  "adapter_rates": {
+    "base": {
+      "parsed_delivered": {
+        "numerator": 8,
+        "denominator": 180,
+        "rate": 0.044444444444444446
+      },
+      "schema_valid_overall": {
+        "numerator": 8,
+        "denominator": 180,
+        "rate": 0.044444444444444446
+      },
+      "schema_valid_given_parsed": {
+        "numerator": 8,
+        "denominator": 8,
+        "rate": 1.0
+      },
+      "completeness_gate_pass": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "parser_failure": {
+        "numerator": 172,
+        "denominator": 180,
+        "rate": 0.9555555555555556
+      },
+      "sandbox_pass": {
+        "numerator": 2,
+        "denominator": 180,
+        "rate": 0.011111111111111112
+      },
+      "hard_constraints_executed": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      }
+    },
+    "sft": {
+      "parsed_delivered": {
+        "numerator": 6,
+        "denominator": 180,
+        "rate": 0.03333333333333333
+      },
+      "schema_valid_overall": {
+        "numerator": 6,
+        "denominator": 180,
+        "rate": 0.03333333333333333
+      },
+      "schema_valid_given_parsed": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "completeness_gate_pass": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "parser_failure": {
+        "numerator": 174,
+        "denominator": 180,
+        "rate": 0.9666666666666667
+      },
+      "sandbox_pass": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "hard_constraints_executed": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      }
+    },
+    "rl": {
+      "parsed_delivered": {
+        "numerator": 106,
+        "denominator": 180,
+        "rate": 0.5888888888888889
+      },
+      "schema_valid_overall": {
+        "numerator": 106,
+        "denominator": 180,
+        "rate": 0.5888888888888889
+      },
+      "schema_valid_given_parsed": {
+        "numerator": 106,
+        "denominator": 106,
+        "rate": 1.0
+      },
+      "completeness_gate_pass": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      },
+      "parser_failure": {
+        "numerator": 74,
+        "denominator": 180,
+        "rate": 0.4111111111111111
+      },
+      "sandbox_pass": {
+        "numerator": 13,
+        "denominator": 180,
+        "rate": 0.07222222222222222
+      },
+      "hard_constraints_executed": {
+        "numerator": 0,
+        "denominator": 180,
+        "rate": 0.0
+      }
+    }
+  },
+  "constraint_diagnostics": {
+    "base": {
+      "commonsense_status_counts": {
+        "is_reasonable_visiting_city": {
+          "not_evaluated": 172,
+          "fail": 8
+        },
+        "is_valid_restaurants": {
+          "not_evaluated": 172,
+          "pass": 8
+        },
+        "is_valid_attractions": {
+          "not_evaluated": 172,
+          "pass": 8
+        },
+        "is_valid_accommodation": {
+          "not_evaluated": 172,
+          "pass": 8
+        },
+        "is_valid_transportation": {
+          "not_evaluated": 172,
+          "fail": 6,
+          "pass": 2
+        },
+        "is_valid_information_in_current_city": {
+          "not_evaluated": 172,
+          "fail": 6,
+          "pass": 2
+        },
+        "is_valid_information_in_sandbox": {
+          "not_evaluated": 172,
+          "fail": 6,
+          "pass": 2
+        },
+        "is_not_absent": {
+          "not_evaluated": 172,
+          "fail": 8
+        }
+      },
+      "completeness_pass": 0,
+      "sandbox_pass": 2,
+      "hard_constraints_executed": 0
+    },
+    "sft": {
+      "commonsense_status_counts": {
+        "is_reasonable_visiting_city": {
+          "not_evaluated": 174,
+          "fail": 6
+        },
+        "is_valid_restaurants": {
+          "not_evaluated": 174,
+          "pass": 6
+        },
+        "is_valid_attractions": {
+          "not_evaluated": 174,
+          "pass": 6
+        },
+        "is_valid_accommodation": {
+          "not_evaluated": 174,
+          "pass": 6
+        },
+        "is_valid_transportation": {
+          "not_evaluated": 174,
+          "fail": 4,
+          "pass": 2
+        },
+        "is_valid_information_in_current_city": {
+          "not_evaluated": 174,
+          "fail": 5,
+          "pass": 1
+        },
+        "is_valid_information_in_sandbox": {
+          "not_evaluated": 174,
+          "fail": 6
+        },
+        "is_not_absent": {
+          "not_evaluated": 174,
+          "fail": 6
+        }
+      },
+      "completeness_pass": 0,
+      "sandbox_pass": 0,
+      "hard_constraints_executed": 0
+    },
+    "rl": {
+      "commonsense_status_counts": {
+        "is_reasonable_visiting_city": {
+          "not_evaluated": 74,
+          "fail": 99,
+          "pass": 7
+        },
+        "is_valid_restaurants": {
+          "not_evaluated": 74,
+          "pass": 105,
+          "fail": 1
+        },
+        "is_valid_attractions": {
+          "not_evaluated": 74,
+          "pass": 106
+        },
+        "is_valid_accommodation": {
+          "not_evaluated": 74,
+          "pass": 106
+        },
+        "is_valid_transportation": {
+          "not_evaluated": 74,
+          "pass": 64,
+          "fail": 42
+        },
+        "is_valid_information_in_current_city": {
+          "not_evaluated": 74,
+          "fail": 78,
+          "pass": 28
+        },
+        "is_valid_information_in_sandbox": {
+          "not_evaluated": 74,
+          "fail": 93,
+          "pass": 13
+        },
+        "is_not_absent": {
+          "not_evaluated": 74,
+          "fail": 106
+        }
+      },
+      "completeness_pass": 0,
+      "sandbox_pass": 13,
+      "hard_constraints_executed": 0
+    }
+  },
+  "adapter": {
+    "sha256": "73c4f17184ea0d50793418fb244b83562474f56051386d4b7b0182ca6050a270",
+    "type": "deterministic_no_llm",
+    "parser_model": null,
+    "parser_prompt_sha256": null,
+    "manual_audit": {
+      "reviewed_records": 60,
+      "reviewed_per_label": {
+        "base": 20,
+        "sft": 20,
+        "rl": 20
+      },
+      "counts": {
+        "faithful_extraction": 40,
+        "field_loss": 20,
+        "hallucinated_field": 0,
+        "wrong_field_assignment": 0,
+        "entity_mutation": 0
+      },
+      "decision": "adapter_frozen_candidate",
+      "validation_metrics_seen_during_audit": false
+    }
+  },
+  "raw_answers": {
+    "all_unchanged": true,
+    "hash_definition": "sha256(exact UTF-8 final_answer bytes)",
+    "ordered_hash_sha256": {
+      "base": "d80c5cfab41b4d5adba4af878ab1dc7ca7c412a2acdb8c3aa2dacd48317d1bd8",
+      "sft": "3b2df6e9d86f9eb887c9db0c77c1d846d53c6ef1c1c76689624b437424b44683",
+      "rl": "2d9be2cbb64d74b07f7bff27a08868bd8d285075fc592c8b34edeb259fe04d97"
+    }
+  },
+  "models": {
+    "base": {
+      "path": "models/Qwen3-4B-Instruct-2507",
+      "tree_manifest_sha256": "d12ae104099c24b2c3a8131d677043f4cbd8efcdf6de074b437203f619271405"
+    },
+    "sft": {
+      "path": "outputs/models/qwen3_4b_sft_merged",
+      "tree_manifest_sha256": "d0bc741cadea98fd392e3e1931229c81f61b0816773e24e0240df718729e6f06"
+    },
+    "rl": {
+      "path": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
+      "tree_manifest_sha256": "6af8b25ff92c0b131b18f0c0c91efb8f15e6e15bc831168536044c633d1c8c13"
+    }
+  },
+  "official": {
+    "revision": "e52c87f4ac348a3410c46dc3553c519db5ec5e23",
+    "contract_file_hashes": {
+      "postprocess/parsing.py": "9354585d9007cb8ccd0272567b1c05e26fb160e21db130df19ed7cfec297f77f",
+      "postprocess/element_extraction.py": "a2885d4ebd5d671b9389b42fd25a70db0be049750840a0b33ec2b782be9d527e",
+      "postprocess/combination.py": "ee73d615e62a26f9d6fa4c75fb9c77a868ab985d72fb41d302087490d5f40ea4",
+      "postprocess/example_evaluation.jsonl": "50af8a77602f23b6e8365c264bc5feddb1e39c8703d4d9d91cc95c4f860961dd",
+      "postprocess/format_check.py": "e5ffcab2f4d2289e6fd9425aca5d4f00b9dfb2df5e72eecdc865a4909d01628e",
+      "evaluation/eval.py": "89dbb9e51c951e700f0a4a39798315f9c8fb4658b30f5bdb72727498c4676fb2"
+    }
+  },
+  "formal_run": {
+    "status": "completed",
+    "started_at": "2026-08-25T18:15:30.879707+00:00",
+    "completed_at": "2026-08-25T18:15:31.077431+00:00",
+    "adapter_sha256": "73c4f17184ea0d50793418fb244b83562474f56051386d4b7b0182ca6050a270",
+    "formal_generation_attempt": 1,
+    "model_inference_runs": 0,
+    "summaries": {
+      "base": {
+        "n": 180,
+        "parser_valid": 8,
+        "schema_valid": 8,
+        "parser_failure": 172,
+        "parsed_records_sha256": "2b1e15752205355f49f4c89c199446eb40902f8fcb2898a0698b3e1d94d932d9",
+        "official_submission_sha256": "55ca6260c3aa0ff559defdcb68f8867347a974d3fb9e514b47856e9163a489fd"
+      },
+      "sft": {
+        "n": 180,
+        "parser_valid": 6,
+        "schema_valid": 6,
+        "parser_failure": 174,
+        "parsed_records_sha256": "751a662c955d09f7f271b4f9390a2a9c8a3c38797e488e10de5f83b363b6a526",
+        "official_submission_sha256": "81dd940f358208888bfbe90b3c96c3c4e21c009762280409f25b5aa2e02182b3"
+      },
+      "rl": {
+        "n": 180,
+        "parser_valid": 106,
+        "schema_valid": 106,
+        "parser_failure": 74,
+        "parsed_records_sha256": "1aaf872b980a997f7ee6e3ab941a1c69dc5f2e917bc90c275fd17b51078e6475",
+        "official_submission_sha256": "4cc9b1d339fafe761da52146519f2308159f11c3f995afaed7bbb97a606c97c8"
+      }
+    }
+  },
+  "scientific_checks": {
+    "all_540_raw_final_answers_unchanged": true,
+    "formal_generation_attempt_exactly_one": true,
+    "formal_model_inference_runs_zero": true,
+    "adapter_hash_matches_freeze": true,
+    "manual_audit_hallucinated_field_zero": true,
+    "manual_audit_entity_mutation_zero": true,
+    "all_frozen_model_files_unchanged_at_freeze": true,
+    "official_revision_correct": true,
+    "one_corrected_official_result_per_model": true
+  },
+  "raw_answer_checks": {
+    "base/001": true,
+    "base/002": true,
+    "base/003": true,
+    "base/004": true,
+    "base/005": true,
+    "base/006": true,
+    "base/007": true,
+    "base/008": true,
+    "base/009": true,
+    "base/010": true,
+    "base/011": true,
+    "base/012": true,
+    "base/013": true,
+    "base/014": true,
+    "base/015": true,
+    "base/016": true,
+    "base/017": true,
+    "base/018": true,
+    "base/019": true,
+    "base/020": true,
+    "base/021": true,
+    "base/022": true,
+    "base/023": true,
+    "base/024": true,
+    "base/025": true,
+    "base/026": true,
+    "base/027": true,
+    "base/028": true,
+    "base/029": true,
+    "base/030": true,
+    "base/031": true,
+    "base/032": true,
+    "base/033": true,
+    "base/034": true,
+    "base/035": true,
+    "base/036": true,
+    "base/037": true,
+    "base/038": true,
+    "base/039": true,
+    "base/040": true,
+    "base/041": true,
+    "base/042": true,
+    "base/043": true,
+    "base/044": true,
+    "base/045": true,
+    "base/046": true,
+    "base/047": true,
+    "base/048": true,
+    "base/049": true,
+    "base/050": true,
+    "base/051": true,
+    "base/052": true,
+    "base/053": true,
+    "base/054": true,
+    "base/055": true,
+    "base/056": true,
+    "base/057": true,
+    "base/058": true,
+    "base/059": true,
+    "base/060": true,
+    "base/061": true,
+    "base/062": true,
+    "base/063": true,
+    "base/064": true,
+    "base/065": true,
+    "base/066": true,
+    "base/067": true,
+    "base/068": true,
+    "base/069": true,
+    "base/070": true,
+    "base/071": true,
+    "base/072": true,
+    "base/073": true,
+    "base/074": true,
+    "base/075": true,
+    "base/076": true,
+    "base/077": true,
+    "base/078": true,
+    "base/079": true,
+    "base/080": true,
+    "base/081": true,
+    "base/082": true,
+    "base/083": true,
+    "base/084": true,
+    "base/085": true,
+    "base/086": true,
+    "base/087": true,
+    "base/088": true,
+    "base/089": true,
+    "base/090": true,
+    "base/091": true,
+    "base/092": true,
+    "base/093": true,
+    "base/094": true,
+    "base/095": true,
+    "base/096": true,
+    "base/097": true,
+    "base/098": true,
+    "base/099": true,
+    "base/100": true,
+    "base/101": true,
+    "base/102": true,
+    "base/103": true,
+    "base/104": true,
+    "base/105": true,
+    "base/106": true,
+    "base/107": true,
+    "base/108": true,
+    "base/109": true,
+    "base/110": true,
+    "base/111": true,
+    "base/112": true,
+    "base/113": true,
+    "base/114": true,
+    "base/115": true,
+    "base/116": true,
+    "base/117": true,
+    "base/118": true,
+    "base/119": true,
+    "base/120": true,
+    "base/121": true,
+    "base/122": true,
+    "base/123": true,
+    "base/124": true,
+    "base/125": true,
+    "base/126": true,
+    "base/127": true,
+    "base/128": true,
+    "base/129": true,
+    "base/130": true,
+    "base/131": true,
+    "base/132": true,
+    "base/133": true,
+    "base/134": true,
+    "base/135": true,
+    "base/136": true,
+    "base/137": true,
+    "base/138": true,
+    "base/139": true,
+    "base/140": true,
+    "base/141": true,
+    "base/142": true,
+    "base/143": true,
+    "base/144": true,
+    "base/145": true,
+    "base/146": true,
+    "base/147": true,
+    "base/148": true,
+    "base/149": true,
+    "base/150": true,
+    "base/151": true,
+    "base/152": true,
+    "base/153": true,
+    "base/154": true,
+    "base/155": true,
+    "base/156": true,
+    "base/157": true,
+    "base/158": true,
+    "base/159": true,
+    "base/160": true,
+    "base/161": true,
+    "base/162": true,
+    "base/163": true,
+    "base/164": true,
+    "base/165": true,
+    "base/166": true,
+    "base/167": true,
+    "base/168": true,
+    "base/169": true,
+    "base/170": true,
+    "base/171": true,
+    "base/172": true,
+    "base/173": true,
+    "base/174": true,
+    "base/175": true,
+    "base/176": true,
+    "base/177": true,
+    "base/178": true,
+    "base/179": true,
+    "base/180": true,
+    "sft/001": true,
+    "sft/002": true,
+    "sft/003": true,
+    "sft/004": true,
+    "sft/005": true,
+    "sft/006": true,
+    "sft/007": true,
+    "sft/008": true,
+    "sft/009": true,
+    "sft/010": true,
+    "sft/011": true,
+    "sft/012": true,
+    "sft/013": true,
+    "sft/014": true,
+    "sft/015": true,
+    "sft/016": true,
+    "sft/017": true,
+    "sft/018": true,
+    "sft/019": true,
+    "sft/020": true,
+    "sft/021": true,
+    "sft/022": true,
+    "sft/023": true,
+    "sft/024": true,
+    "sft/025": true,
+    "sft/026": true,
+    "sft/027": true,
+    "sft/028": true,
+    "sft/029": true,
+    "sft/030": true,
+    "sft/031": true,
+    "sft/032": true,
+    "sft/033": true,
+    "sft/034": true,
+    "sft/035": true,
+    "sft/036": true,
+    "sft/037": true,
+    "sft/038": true,
+    "sft/039": true,
+    "sft/040": true,
+    "sft/041": true,
+    "sft/042": true,
+    "sft/043": true,
+    "sft/044": true,
+    "sft/045": true,
+    "sft/046": true,
+    "sft/047": true,
+    "sft/048": true,
+    "sft/049": true,
+    "sft/050": true,
+    "sft/051": true,
+    "sft/052": true,
+    "sft/053": true,
+    "sft/054": true,
+    "sft/055": true,
+    "sft/056": true,
+    "sft/057": true,
+    "sft/058": true,
+    "sft/059": true,
+    "sft/060": true,
+    "sft/061": true,
+    "sft/062": true,
+    "sft/063": true,
+    "sft/064": true,
+    "sft/065": true,
+    "sft/066": true,
+    "sft/067": true,
+    "sft/068": true,
+    "sft/069": true,
+    "sft/070": true,
+    "sft/071": true,
+    "sft/072": true,
+    "sft/073": true,
+    "sft/074": true,
+    "sft/075": true,
+    "sft/076": true,
+    "sft/077": true,
+    "sft/078": true,
+    "sft/079": true,
+    "sft/080": true,
+    "sft/081": true,
+    "sft/082": true,
+    "sft/083": true,
+    "sft/084": true,
+    "sft/085": true,
+    "sft/086": true,
+    "sft/087": true,
+    "sft/088": true,
+    "sft/089": true,
+    "sft/090": true,
+    "sft/091": true,
+    "sft/092": true,
+    "sft/093": true,
+    "sft/094": true,
+    "sft/095": true,
+    "sft/096": true,
+    "sft/097": true,
+    "sft/098": true,
+    "sft/099": true,
+    "sft/100": true,
+    "sft/101": true,
+    "sft/102": true,
+    "sft/103": true,
+    "sft/104": true,
+    "sft/105": true,
+    "sft/106": true,
+    "sft/107": true,
+    "sft/108": true,
+    "sft/109": true,
+    "sft/110": true,
+    "sft/111": true,
+    "sft/112": true,
+    "sft/113": true,
+    "sft/114": true,
+    "sft/115": true,
+    "sft/116": true,
+    "sft/117": true,
+    "sft/118": true,
+    "sft/119": true,
+    "sft/120": true,
+    "sft/121": true,
+    "sft/122": true,
+    "sft/123": true,
+    "sft/124": true,
+    "sft/125": true,
+    "sft/126": true,
+    "sft/127": true,
+    "sft/128": true,
+    "sft/129": true,
+    "sft/130": true,
+    "sft/131": true,
+    "sft/132": true,
+    "sft/133": true,
+    "sft/134": true,
+    "sft/135": true,
+    "sft/136": true,
+    "sft/137": true,
+    "sft/138": true,
+    "sft/139": true,
+    "sft/140": true,
+    "sft/141": true,
+    "sft/142": true,
+    "sft/143": true,
+    "sft/144": true,
+    "sft/145": true,
+    "sft/146": true,
+    "sft/147": true,
+    "sft/148": true,
+    "sft/149": true,
+    "sft/150": true,
+    "sft/151": true,
+    "sft/152": true,
+    "sft/153": true,
+    "sft/154": true,
+    "sft/155": true,
+    "sft/156": true,
+    "sft/157": true,
+    "sft/158": true,
+    "sft/159": true,
+    "sft/160": true,
+    "sft/161": true,
+    "sft/162": true,
+    "sft/163": true,
+    "sft/164": true,
+    "sft/165": true,
+    "sft/166": true,
+    "sft/167": true,
+    "sft/168": true,
+    "sft/169": true,
+    "sft/170": true,
+    "sft/171": true,
+    "sft/172": true,
+    "sft/173": true,
+    "sft/174": true,
+    "sft/175": true,
+    "sft/176": true,
+    "sft/177": true,
+    "sft/178": true,
+    "sft/179": true,
+    "sft/180": true,
+    "rl/001": true,
+    "rl/002": true,
+    "rl/003": true,
+    "rl/004": true,
+    "rl/005": true,
+    "rl/006": true,
+    "rl/007": true,
+    "rl/008": true,
+    "rl/009": true,
+    "rl/010": true,
+    "rl/011": true,
+    "rl/012": true,
+    "rl/013": true,
+    "rl/014": true,
+    "rl/015": true,
+    "rl/016": true,
+    "rl/017": true,
+    "rl/018": true,
+    "rl/019": true,
+    "rl/020": true,
+    "rl/021": true,
+    "rl/022": true,
+    "rl/023": true,
+    "rl/024": true,
+    "rl/025": true,
+    "rl/026": true,
+    "rl/027": true,
+    "rl/028": true,
+    "rl/029": true,
+    "rl/030": true,
+    "rl/031": true,
+    "rl/032": true,
+    "rl/033": true,
+    "rl/034": true,
+    "rl/035": true,
+    "rl/036": true,
+    "rl/037": true,
+    "rl/038": true,
+    "rl/039": true,
+    "rl/040": true,
+    "rl/041": true,
+    "rl/042": true,
+    "rl/043": true,
+    "rl/044": true,
+    "rl/045": true,
+    "rl/046": true,
+    "rl/047": true,
+    "rl/048": true,
+    "rl/049": true,
+    "rl/050": true,
+    "rl/051": true,
+    "rl/052": true,
+    "rl/053": true,
+    "rl/054": true,
+    "rl/055": true,
+    "rl/056": true,
+    "rl/057": true,
+    "rl/058": true,
+    "rl/059": true,
+    "rl/060": true,
+    "rl/061": true,
+    "rl/062": true,
+    "rl/063": true,
+    "rl/064": true,
+    "rl/065": true,
+    "rl/066": true,
+    "rl/067": true,
+    "rl/068": true,
+    "rl/069": true,
+    "rl/070": true,
+    "rl/071": true,
+    "rl/072": true,
+    "rl/073": true,
+    "rl/074": true,
+    "rl/075": true,
+    "rl/076": true,
+    "rl/077": true,
+    "rl/078": true,
+    "rl/079": true,
+    "rl/080": true,
+    "rl/081": true,
+    "rl/082": true,
+    "rl/083": true,
+    "rl/084": true,
+    "rl/085": true,
+    "rl/086": true,
+    "rl/087": true,
+    "rl/088": true,
+    "rl/089": true,
+    "rl/090": true,
+    "rl/091": true,
+    "rl/092": true,
+    "rl/093": true,
+    "rl/094": true,
+    "rl/095": true,
+    "rl/096": true,
+    "rl/097": true,
+    "rl/098": true,
+    "rl/099": true,
+    "rl/100": true,
+    "rl/101": true,
+    "rl/102": true,
+    "rl/103": true,
+    "rl/104": true,
+    "rl/105": true,
+    "rl/106": true,
+    "rl/107": true,
+    "rl/108": true,
+    "rl/109": true,
+    "rl/110": true,
+    "rl/111": true,
+    "rl/112": true,
+    "rl/113": true,
+    "rl/114": true,
+    "rl/115": true,
+    "rl/116": true,
+    "rl/117": true,
+    "rl/118": true,
+    "rl/119": true,
+    "rl/120": true,
+    "rl/121": true,
+    "rl/122": true,
+    "rl/123": true,
+    "rl/124": true,
+    "rl/125": true,
+    "rl/126": true,
+    "rl/127": true,
+    "rl/128": true,
+    "rl/129": true,
+    "rl/130": true,
+    "rl/131": true,
+    "rl/132": true,
+    "rl/133": true,
+    "rl/134": true,
+    "rl/135": true,
+    "rl/136": true,
+    "rl/137": true,
+    "rl/138": true,
+    "rl/139": true,
+    "rl/140": true,
+    "rl/141": true,
+    "rl/142": true,
+    "rl/143": true,
+    "rl/144": true,
+    "rl/145": true,
+    "rl/146": true,
+    "rl/147": true,
+    "rl/148": true,
+    "rl/149": true,
+    "rl/150": true,
+    "rl/151": true,
+    "rl/152": true,
+    "rl/153": true,
+    "rl/154": true,
+    "rl/155": true,
+    "rl/156": true,
+    "rl/157": true,
+    "rl/158": true,
+    "rl/159": true,
+    "rl/160": true,
+    "rl/161": true,
+    "rl/162": true,
+    "rl/163": true,
+    "rl/164": true,
+    "rl/165": true,
+    "rl/166": true,
+    "rl/167": true,
+    "rl/168": true,
+    "rl/169": true,
+    "rl/170": true,
+    "rl/171": true,
+    "rl/172": true,
+    "rl/173": true,
+    "rl/174": true,
+    "rl/175": true,
+    "rl/176": true,
+    "rl/177": true,
+    "rl/178": true,
+    "rl/179": true,
+    "rl/180": true
+  }
+}

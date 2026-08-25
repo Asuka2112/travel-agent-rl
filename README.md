@@ -20,7 +20,7 @@ The end-to-end Data -> Distillation -> Filtering -> SFT -> Full-Parameter Agenti
 | Formal GRPO | 200 steps, 1,200 rollouts, checkpoint-200, gate passed | `reports/GRPO_FORMAL_REPORT.md` |
 | Unified evaluation | Base/SFT/RL same 16-query dev and fixed Judge | `outputs/final/final_metrics.json` |
 | Pairwise evaluation | Base vs SFT, Base vs RL, SFT vs RL; true A/B+B/A | `outputs/final/pairwise_metrics.json` |
-| TravelPlanner validation | Official frozen 180-query deterministic evaluation | `reports/TRAVELPLANNER_EXTERNAL_VALIDATION.md` |
+| TravelPlanner validation | Official frozen 180-query deterministic evaluation | `reports/TRAVELPLANNER_CORRECTED_VALIDATION.md` |
 | Final audit | tests, ruff, scientific integrity and repro manifest | `FINAL_REPORT.md` |
 
 ## Headline metrics
@@ -50,13 +50,25 @@ provenance.
 Frozen post-hoc evaluation used the official 180-query validation split and the unmodified
 official evaluator at commit `e52c87f4ac348a3410c46dc3553c519db5ec5e23`.
 
-| Official deterministic metric | Base | SFT | RL |
+The first submission was subsequently shown to be adapter-contaminated: day prose was
+placed wholesale in `attraction`, while other official fields were dropped. That original
+0/180 result and its metrics remain immutable, but are labeled invalid for scientific
+comparison. A deterministic adapter was unit-tested, audited on a fixed 20+20+20 sample,
+hash-frozen, and applied once to the unchanged saved final answers without model inference.
+
+| Corrected official deterministic metric | Base | SFT | RL |
 | --- | ---: | ---: | ---: |
-| Commonsense Constraint Micro | 2.7778% | 1.8750% | 28.5417% |
+| Commonsense Constraint Micro | 2.0833% | 1.4583% | 29.7917% |
 | Commonsense Constraint Macro | 0.0000% | 0.0000% | 0.0000% |
 | Hard Constraint Micro | 0.0000% | 0.0000% | 0.0000% |
 | Hard Constraint Macro | 0.0000% | 0.0000% | 0.0000% |
 | Final Pass Rate | 0/180 | 0/180 | 0/180 |
+
+Among parsed plans, structural schema validity was 8/8 Base, 6/6 SFT, and 106/106 RL.
+However, official completeness was 0/180 for every model, so hard constraints executed for
+0/180 tasks. The corrected result therefore confirms a remaining frozen-output
+delivery/completeness/generalization gap, not a universal residual schema bug. See
+`reports/TRAVELPLANNER_ADAPTER_REPAIR.md` for the audit trail.
 
 The 95% Wilson interval for each Final Pass estimate is 0.0000%-2.0895%. Project Task
 Success—an interface/delivery metric distinct from official Final Pass—was Base 6/180

@@ -1,6 +1,6 @@
 {
-  "captured_at": "2026-08-26T01:30:00+08:00",
-  "current_git_commit": "c97931b (external protocol freeze; final state resolves to git HEAD)",
+  "captured_at": "2026-08-26T02:30:00+08:00",
+  "current_git_commit": "0bb26016054ca8ea9f1e0701a0c4ada8e76a9e5f (adapter-v2 pre-formal freeze; final state resolves to git HEAD)",
   "current_checkpoint": "outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200",
   "replay_policy_version": 2,
   "web_mode": "replay_only",
@@ -37,7 +37,8 @@
     "true A/B plus B/A pairwise evaluation and failure analysis",
     "final scientific audit and reproduction manifest",
     "frozen official TravelPlanner 180-query Base/SFT/RL external validation",
-    "read-only TravelPlanner per-task failure decomposition and manual audit"
+    "read-only TravelPlanner per-task failure decomposition and manual audit",
+    "frozen-output TravelPlanner adapter-v2 repair, one-shot official reevaluation, and final scientific audit"
   ],
   "replay_v2_regression": {
     "gate_pass": true,
@@ -156,6 +157,7 @@
     "artifact": "outputs/final/pairwise_metrics.json"
   },
   "travelplanner_external_validation": {
+    "status": "invalid / adapter-contaminated external evaluation; retained unchanged",
     "split": "official validation",
     "queries": 180,
     "official_revision": "e52c87f4ac348a3410c46dc3553c519db5ec5e23",
@@ -172,6 +174,34 @@
     "artifact": "outputs/final/external_validation_metrics.json",
     "report": "reports/TRAVELPLANNER_EXTERNAL_VALIDATION.md"
   },
+  "travelplanner_adapter_corrected_validation": {
+    "status": "adapter-corrected frozen-output evaluation",
+    "queries_per_model": 180,
+    "official_revision": "e52c87f4ac348a3410c46dc3553c519db5ec5e23",
+    "adapter_sha256": "73c4f17184ea0d50793418fb244b83562474f56051386d4b7b0182ca6050a270",
+    "parser_model": null,
+    "parser_prompt_sha256": null,
+    "formal_postprocess_attempts": 1,
+    "model_inference_runs": 0,
+    "raw_final_answers_unchanged": "540/540",
+    "manual_audit": {"sample": "20 Base + 20 SFT + 20 RL", "hallucinated_field": 0, "wrong_field_assignment": 0, "entity_mutation": 0},
+    "official_metrics": {
+      "base": {"commonsense_micro": "30/1440", "commonsense_macro": "0/180", "hard_micro": "0/420", "hard_macro": "0/180", "final_pass": "0/180"},
+      "sft": {"commonsense_micro": "21/1440", "commonsense_macro": "0/180", "hard_micro": "0/420", "hard_macro": "0/180", "final_pass": "0/180"},
+      "rl": {"commonsense_micro": "429/1440", "commonsense_macro": "0/180", "hard_micro": "0/420", "hard_macro": "0/180", "final_pass": "0/180"}
+    },
+    "parser_schema_completeness": {
+      "base": {"parsed": "8/180", "schema_valid_given_parsed": "8/8", "completeness": "0/180"},
+      "sft": {"parsed": "6/180", "schema_valid_given_parsed": "6/6", "completeness": "0/180"},
+      "rl": {"parsed": "106/180", "schema_valid_given_parsed": "106/106", "completeness": "0/180"}
+    },
+    "hard_constraints_executed": {"base": "0/180", "sft": "0/180", "rl": "0/180"},
+    "contamination_gate": "passed; 2932 rows scanned; all overlap counts zero",
+    "scientific_audit": "passed",
+    "metrics": "outputs/final/travelplanner_corrected_metrics.json",
+    "repair_report": "reports/TRAVELPLANNER_ADAPTER_REPAIR.md",
+    "validation_report": "reports/TRAVELPLANNER_CORRECTED_VALIDATION.md"
+  },
   "final_artifacts": {
     "report": "FINAL_REPORT.md",
     "final_metrics": "outputs/final/final_metrics.json",
@@ -186,10 +216,15 @@
     "external_validation_repro_manifest": "outputs/final/external_validation_repro_manifest.json",
     "travelplanner_failure_decomposition": "outputs/final/travelplanner_failure_decomposition.json",
     "travelplanner_failure_report": "reports/TRAVELPLANNER_FAILURE_DECOMPOSITION.md",
+    "travelplanner_corrected_metrics": "outputs/final/travelplanner_corrected_metrics.json",
+    "travelplanner_adapter_repair_report": "reports/TRAVELPLANNER_ADAPTER_REPAIR.md",
+    "travelplanner_corrected_validation_report": "reports/TRAVELPLANNER_CORRECTED_VALIDATION.md",
+    "travelplanner_adapter_scientific_audit": "outputs/final/travelplanner_adapter_v2/scientific_audit.json",
+    "travelplanner_adapter_reproduction_manifest": "outputs/final/travelplanner_adapter_v2/reproduction_manifest.json",
     "scientific_audit_pass": true
   },
   "final_validation": {
-    "tests": "98/98 passed",
+    "tests": "110/110 passed",
     "ruff": "passed",
     "scientific_audit": "passed",
     "required_artifacts": "passed",
@@ -224,7 +259,7 @@
     "idle_reserve": [1, 2, 3]
   },
   "running_processes_detail": [],
-  "last_successful_step": "read-only TravelPlanner failure decomposition, manual 20-task audit, 98 tests, ruff, and checkpoint hash audit passed",
+  "last_successful_step": "adapter-v2 one-shot frozen-output evaluation, 60-task faithfulness audit, 110 tests, ruff, contamination and full model/raw hash audits passed",
   "next_action": "No work remains; resolve the final commit as git HEAD",
   "routing_validation": {
     "requested_model": "gpt-5.6-luna",

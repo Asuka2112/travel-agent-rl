@@ -1,0 +1,54 @@
+Flights API loaded.
+Accommodations loaded.
+Restaurants loaded.
+GoogleDistanceMatrix loaded.
+Attractions loaded.
+Flights API loaded.
+Accommodations loaded.
+Restaurants loaded.
+GoogleDistanceMatrix loaded.
+Attractions loaded.
+"Spacious private room close St can not be parsed, '-' will be used instead.
+$324. can not be parsed, '-' will be used instead.
+$324. can not be parsed, '-' will be used instead.
+a hotel in Minneapolis can not be parsed, '-' will be used instead.
+a hotel in Minneapolis can not be parsed, '-' will be used instead.
+a hotel in Charlotte can not be parsed, '-' will be used instead.
+a local restaurant can not be parsed, '-' will be used instead.
+a hotel in downtown LA can not be parsed, '-' will be used instead.
+a hotel in Old Town San Diego can not be parsed, '-' will be used instead.
+a hotel in Denver can not be parsed, '-' will be used instead.
+a hotel in Denver can not be parsed, '-' will be used instead.
+a hotel in Orlando can not be parsed, '-' will be used instead.
+a hotel in Miami can not be parsed, '-' will be used instead.
+a hotel in New York can not be parsed, '-' will be used instead.
+a hotel in Austin with a visitors-friendly house rule can not be parsed, '-' will be used instead.
+a shared room in Milwaukee can not be parsed, '-' will be used instead.
+a shared room in Madison can not be parsed, '-' will be used instead.
+a shared room in Milwaukee can not be parsed, '-' will be used instead.
+a private room in Detroit for 2 nights (no direct match found can not be parsed, '-' will be used instead.
+a private room in Detroit for 2 nights (no direct match found can not be parsed, '-' will be used instead.
+a hotel in Dallas can not be parsed, '-' will be used instead.
+a hotel in Austin can not be parsed, '-' will be used instead.
+a hotel in Dallas can not be parsed, '-' will be used instead.
+a hotel in Austin can not be parsed, '-' will be used instead.
+a pet-friendly hotel in Orlando (no direct results can not be parsed, '-' will be used instead.
+a pet-friendly hotel in Miami (no direct results can not be parsed, '-' will be used instead.
+a pet-friendly hotel in Orlando (no direct results can not be parsed, '-' will be used instead.
+a smoking-allowed hotel in Macon (none found in database can not be parsed, '-' will be used instead.
+a hotel in Dallas can not be parsed, '-' will be used instead.
+a hotel in LA can not be parsed, '-' will be used instead.
+a 3-night entire home in Denver (no direct match in database can not be parsed, '-' will be used instead.
+a 3-night entire home in Boulder (no direct match can not be parsed, '-' will be used instead.
+a 3-night entire home in Colorado Springs (no direct match can not be parsed, '-' will be used instead.
+a 3-night entire home in Denver (no direct match in database can not be parsed, '-' will be used instead.
+Sr can not be parsed, '-' will be used instead.
+a non-shared room in Los Angeles can not be parsed, '-' will be used instead.
+a non-shared room in San Francisco can not be parsed, '-' will be used instead.
+a non-shared room can not be parsed, '-' will be used instead.
+a pet-friendly accommodation in Charlotte (no results found in database can not be parsed, '-' will be used instead.
+a pet-friendly accommodation in Asheville (no results found in database can not be parsed, '-' will be used instead.
+a pet-friendly accommodation in Charlotte (no results found in database can not be parsed, '-' will be used instead.
+THE WHITE HOUSE BEDROOM 1 (rebook for 2nd night) can not be parsed, '-' will be used instead.
+a smoking-allowed entire home in Coeur d'Alene can not be parsed, '-' will be used instead.
+a smoking-allowed entire home in Idaho Falls can not be parsed, '-' will be used instead.

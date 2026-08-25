@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "started_at": "2026-08-25T18:15:30.879707+00:00",
+  "completed_at": "2026-08-25T18:15:31.077431+00:00",
+  "adapter_sha256": "73c4f17184ea0d50793418fb244b83562474f56051386d4b7b0182ca6050a270",
+  "formal_generation_attempt": 1,
+  "model_inference_runs": 0,
+  "summaries": {
+    "base": {
+      "n": 180,
+      "parser_valid": 8,
+      "schema_valid": 8,
+      "parser_failure": 172,
+      "parsed_records_sha256": "2b1e15752205355f49f4c89c199446eb40902f8fcb2898a0698b3e1d94d932d9",
+      "official_submission_sha256": "55ca6260c3aa0ff559defdcb68f8867347a974d3fb9e514b47856e9163a489fd"
+    },
+    "sft": {
+      "n": 180,
+      "parser_valid": 6,
+      "schema_valid": 6,
+      "parser_failure": 174,
+      "parsed_records_sha256": "751a662c955d09f7f271b4f9390a2a9c8a3c38797e488e10de5f83b363b6a526",
+      "official_submission_sha256": "81dd940f358208888bfbe90b3c96c3c4e21c009762280409f25b5aa2e02182b3"
+    },
+    "rl": {
+      "n": 180,
+      "parser_valid": 106,
+      "schema_valid": 106,
+      "parser_failure": 74,
+      "parsed_records_sha256": "1aaf872b980a997f7ee6e3ab941a1c69dc5f2e917bc90c275fd17b51078e6475",
+      "official_submission_sha256": "4cc9b1d339fafe761da52146519f2308159f11c3f995afaed7bbb97a606c97c8"
+    }
+  }
+}

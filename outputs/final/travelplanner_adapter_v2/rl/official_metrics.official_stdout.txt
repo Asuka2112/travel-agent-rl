@@ -1,0 +1,63 @@
+Flights API loaded.
+Accommodations loaded.
+Restaurants loaded.
+GoogleDistanceMatrix loaded.
+Attractions loaded.
+Flights API loaded.
+Accommodations loaded.
+Restaurants loaded.
+GoogleDistanceMatrix loaded.
+Attractions loaded.
+"Spacious private room close St can not be parsed, '-' will be used instead.
+$324. can not be parsed, '-' will be used instead.
+$324. can not be parsed, '-' will be used instead.
+a hotel in Minneapolis can not be parsed, '-' will be used instead.
+a hotel in Minneapolis can not be parsed, '-' will be used instead.
+a hotel in Charlotte can not be parsed, '-' will be used instead.
+a local restaurant can not be parsed, '-' will be used instead.
+a hotel in downtown LA can not be parsed, '-' will be used instead.
+a hotel in Old Town San Diego can not be parsed, '-' will be used instead.
+a hotel in Denver can not be parsed, '-' will be used instead.
+a hotel in Denver can not be parsed, '-' will be used instead.
+a hotel in Orlando can not be parsed, '-' will be used instead.
+a hotel in Miami can not be parsed, '-' will be used instead.
+a hotel in New York can not be parsed, '-' will be used instead.
+a hotel in Austin with a visitors-friendly house rule can not be parsed, '-' will be used instead.
+a shared room in Milwaukee can not be parsed, '-' will be used instead.
+a shared room in Madison can not be parsed, '-' will be used instead.
+a shared room in Milwaukee can not be parsed, '-' will be used instead.
+a private room in Detroit for 2 nights (no direct match found can not be parsed, '-' will be used instead.
+a private room in Detroit for 2 nights (no direct match found can not be parsed, '-' will be used instead.
+a hotel in Dallas can not be parsed, '-' will be used instead.
+a hotel in Austin can not be parsed, '-' will be used instead.
+a hotel in Dallas can not be parsed, '-' will be used instead.
+a hotel in Austin can not be parsed, '-' will be used instead.
+a pet-friendly hotel in Orlando (no direct results can not be parsed, '-' will be used instead.
+a pet-friendly hotel in Miami (no direct results can not be parsed, '-' will be used instead.
+a pet-friendly hotel in Orlando (no direct results can not be parsed, '-' will be used instead.
+a smoking-allowed hotel in Macon (none found in database can not be parsed, '-' will be used instead.
+a hotel in Dallas can not be parsed, '-' will be used instead.
+a hotel in LA can not be parsed, '-' will be used instead.
+a 3-night entire home in Denver (no direct match in database can not be parsed, '-' will be used instead.
+a 3-night entire home in Boulder (no direct match can not be parsed, '-' will be used instead.
+a 3-night entire home in Colorado Springs (no direct match can not be parsed, '-' will be used instead.
+a 3-night entire home in Denver (no direct match in database can not be parsed, '-' will be used instead.
+Sr can not be parsed, '-' will be used instead.
+a non-shared room in Los Angeles can not be parsed, '-' will be used instead.
+a non-shared room in San Francisco can not be parsed, '-' will be used instead.
+a non-shared room can not be parsed, '-' will be used instead.
+a pet-friendly accommodation in Charlotte (no results found in database can not be parsed, '-' will be used instead.
+a pet-friendly accommodation in Asheville (no results found in database can not be parsed, '-' will be used instead.
+a pet-friendly accommodation in Charlotte (no results found in database can not be parsed, '-' will be used instead.
+THE WHITE HOUSE BEDROOM 1 (rebook for 2nd night) can not be parsed, '-' will be used instead.
+a smoking-allowed entire home in Coeur d'Alene can not be parsed, '-' will be used instead.
+a smoking-allowed entire home in Idaho Falls can not be parsed, '-' will be used instead.
+Delivery Rate: 58.88888888888889%
+Commonsense Constraint Micro Pass Rate: 29.791666666666668%
+Commonsense Constraint Macro Pass Rate: 0.0%
+Hard Constraint Micro Pass Rate: 0.0%
+Hard Constraint Macro Pass Rate: 0.0%
+Final Pass Rate: 0.0%
+------------------
+{'Commonsense Constraint': {'easy': {3: {'Reasonable City Route': {'true': 0, 'false': 7, 'total': 20}, 'Diverse Restaurants': {'true': 7, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 7, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 7, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 5, 'false': 2, 'total': 20}, 'Within Current City': {'true': 0, 'false': 7, 'total': 20}, 'Within Sandbox': {'true': 0, 'false': 7, 'total': 20}, 'Complete Information': {'true': 0, 'false': 7, 'total': 20}}, 5: {'Reasonable City Route': {'true': 0, 'false': 16, 'total': 20}, 'Diverse Restaurants': {'true': 16, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 16, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 16, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 5, 'false': 11, 'total': 20}, 'Within Current City': {'true': 6, 'false': 10, 'total': 20}, 'Within Sandbox': {'true': 4, 'false': 12, 'total': 20}, 'Complete Information': {'true': 0, 'false': 16, 'total': 20}}, 7: {'Reasonable City Route': {'true': 2, 'false': 8, 'total': 20}, 'Diverse Restaurants': {'true': 10, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 10, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 10, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 3, 'false': 7, 'total': 20}, 'Within Current City': {'true': 4, 'false': 6, 'total': 20}, 'Within Sandbox': {'true': 3, 'false': 7, 'total': 20}, 'Complete Information': {'true': 0, 'false': 10, 'total': 20}}}, 'medium': {3: {'Reasonable City Route': {'true': 0, 'false': 8, 'total': 20}, 'Diverse Restaurants': {'true': 8, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 8, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 8, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 7, 'false': 1, 'total': 20}, 'Within Current City': {'true': 1, 'false': 7, 'total': 20}, 'Within Sandbox': {'true': 0, 'false': 8, 'total': 20}, 'Complete Information': {'true': 0, 'false': 8, 'total': 20}}, 5: {'Reasonable City Route': {'true': 1, 'false': 17, 'total': 20}, 'Diverse Restaurants': {'true': 18, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 18, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 18, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 13, 'false': 5, 'total': 20}, 'Within Current City': {'true': 5, 'false': 13, 'total': 20}, 'Within Sandbox': {'true': 4, 'false': 14, 'total': 20}, 'Complete Information': {'true': 0, 'false': 18, 'total': 20}}, 7: {'Reasonable City Route': {'true': 0, 'false': 12, 'total': 20}, 'Diverse Restaurants': {'true': 12, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 12, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 12, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 4, 'false': 8, 'total': 20}, 'Within Current City': {'true': 5, 'false': 7, 'total': 20}, 'Within Sandbox': {'true': 2, 'false': 10, 'total': 20}, 'Complete Information': {'true': 0, 'false': 12, 'total': 20}}}, 'hard': {3: {'Reasonable City Route': {'true': 1, 'false': 8, 'total': 20}, 'Diverse Restaurants': {'true': 9, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 9, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 9, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 9, 'false': 0, 'total': 20}, 'Within Current City': {'true': 1, 'false': 8, 'total': 20}, 'Within Sandbox': {'true': 0, 'false': 9, 'total': 20}, 'Complete Information': {'true': 0, 'false': 9, 'total': 20}}, 5: {'Reasonable City Route': {'true': 1, 'false': 15, 'total': 20}, 'Diverse Restaurants': {'true': 15, 'false': 1, 'total': 20}, 'Diverse Attractions': {'true': 16, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 16, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 11, 'false': 5, 'total': 20}, 'Within Current City': {'true': 3, 'false': 13, 'total': 20}, 'Within Sandbox': {'true': 0, 'false': 16, 'total': 20}, 'Complete Information': {'true': 0, 'false': 16, 'total': 20}}, 7: {'Reasonable City Route': {'true': 2, 'false': 8, 'total': 20}, 'Diverse Restaurants': {'true': 10, 'false': 0, 'total': 20}, 'Diverse Attractions': {'true': 10, 'false': 0, 'total': 20}, 'Minimum Nights Stay': {'true': 10, 'false': 0, 'total': 20}, 'Non-conf. Transportation': {'true': 7, 'false': 3, 'total': 20}, 'Within Current City': {'true': 3, 'false': 7, 'total': 20}, 'Within Sandbox': {'true': 0, 'false': 10, 'total': 20}, 'Complete Information': {'true': 0, 'false': 10, 'total': 20}}}}, 'Hard Constraint': {'easy': {3: {}, 5: {}, 7: {}}, 'medium': {3: {}, 5: {}, 7: {}}, 'hard': {3: {}, 5: {}, 7: {}}}}
+------------------

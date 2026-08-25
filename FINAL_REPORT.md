@@ -116,8 +116,11 @@ hyperparameter was changed after predictions. Raw trajectories, final answers, a
 plans, and official submissions are retained under
 `outputs/final/travelplanner_validation/`.
 
-The unmodified official evaluator from TravelPlanner commit
-`e52c87f4ac348a3410c46dc3553c519db5ec5e23` produced:
+The first official submission was later diagnosed as adapter-contaminated: its fallback
+placed the entire day prose in `attraction` and dropped the remaining official fields. The
+unmodified official evaluator from TravelPlanner commit
+`e52c87f4ac348a3410c46dc3553c519db5ec5e23` originally produced the following retained but
+**invalid / adapter-contaminated external evaluation**:
 
 | Deterministic official metric | Base | SFT | RL |
 | --- | ---: | ---: | ---: |
@@ -126,6 +129,28 @@ The unmodified official evaluator from TravelPlanner commit
 | Hard Constraint Micro | 0/420 (0.0000%) | 0/420 (0.0000%) | 0/420 (0.0000%) |
 | Hard Constraint Macro | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
 | Final Pass Rate | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+
+After official-contract study, non-validation unit tests, a fixed 20 Base + 20 SFT + 20 RL
+faithfulness audit, and a pre-score adapter freeze, the deterministic adapter was applied
+once to the unchanged saved final answers. No inference, training, model/prompt/tool change,
+entity replacement, or plan repair occurred. The **adapter-corrected frozen-output
+evaluation** is:
+
+| Corrected deterministic official metric | Base | SFT | RL |
+| --- | ---: | ---: | ---: |
+| Commonsense Constraint Micro | 30/1,440 (2.0833%) | 21/1,440 (1.4583%) | 429/1,440 (29.7917%) |
+| Commonsense Constraint Macro | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+| Hard Constraint Micro | 0/420 (0.0000%) | 0/420 (0.0000%) | 0/420 (0.0000%) |
+| Hard Constraint Macro | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+| Final Pass Rate | 0/180 (0.0000%) | 0/180 (0.0000%) | 0/180 (0.0000%) |
+
+Parsed/schema-valid counts were Base 8/180, SFT 6/180, and RL 106/180; conditional
+schema validity was 100% for all three. Official completeness nevertheless remained 0/180
+for every model, so no task reached the completeness+sandbox gate and hard constraints
+executed for 0/180 tasks. The corrected evidence shows real adapter contamination in the
+old constraint inputs, but rejects a universal remaining schema bug. The residual 0/180 is
+a genuine frozen-output delivery/completeness/generalization gap under this conservative,
+faithfulness-first adapter.
 
 The 95% Wilson interval for each 0/180 Final Pass estimate is 0.0000%-2.0895%.
 RL substantially increased delivered official plans and commonsense micro passes, but no
@@ -247,7 +272,9 @@ Base and SFT on task success, constraint satisfaction, tool efficiency, and inde
 fixed-Judge score. True pairwise judging preferred RL over SFT but preferred Base over
 RL, with material position disagreement. The behavioral result is positive, while the
 conflicting Judge views and small synthetic dev set prevent a broad superiority claim.
-On official TravelPlanner validation (n=180), RL achieved much higher commonsense micro
-coverage and project delivery/task-success statistics than Base/SFT, but Base, SFT, and RL
-all had 0/180 official Final Pass. This negative deterministic result is retained without
-retraining or post-result tuning.
+On adapter-corrected official TravelPlanner validation (n=180), RL achieved higher
+commonsense micro coverage (429/1,440) and project delivery/task-success statistics than
+Base/SFT, but Base, SFT, and RL all had 0/180 official Final Pass. Delivered plans were
+structurally valid, while official completeness was 0/180 and hard constraints never
+executed. This negative deterministic result and the invalid adapter-contaminated precursor
+are both retained without retraining, regeneration, or post-result tuning.

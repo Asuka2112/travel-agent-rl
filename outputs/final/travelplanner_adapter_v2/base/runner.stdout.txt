@@ -1,0 +1,36 @@
+{
+  "Delivery Rate": {
+    "numerator": 8,
+    "denominator": 180,
+    "rate": 0.044444444444444446
+  },
+  "Commonsense Constraint Micro Pass Rate": {
+    "numerator": 30,
+    "denominator": 1440,
+    "rate": 0.02083333333333333
+  },
+  "Commonsense Constraint Macro Pass Rate": {
+    "numerator": 0,
+    "denominator": 180,
+    "rate": 0.0
+  },
+  "Hard Constraint Micro Pass Rate": {
+    "numerator": 0,
+    "denominator": 420,
+    "rate": 0.0
+  },
+  "Hard Constraint Macro Pass Rate": {
+    "numerator": 0,
+    "denominator": 180,
+    "rate": 0.0
+  },
+  "Final Pass Rate": {
+    "numerator": 0,
+    "denominator": 180,
+    "rate": 0.0,
+    "ci95_wilson": [
+      0.0,
+      0.02089549792161305
+    ]
+  }
+}

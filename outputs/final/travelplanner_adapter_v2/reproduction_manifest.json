@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-08-25T18:23:39.451424+00:00",
+  "evaluation": "adapter-corrected frozen-output evaluation",
+  "pre_formal_git_commit": "0bb26016054ca8ea9f1e0701a0c4ada8e76a9e5f",
+  "adapter_sha256": "73c4f17184ea0d50793418fb244b83562474f56051386d4b7b0182ca6050a270",
+  "parser_model": null,
+  "parser_prompt_sha256": null,
+  "official_revision": "e52c87f4ac348a3410c46dc3553c519db5ec5e23",
+  "raw_answer_ordered_hashes": {
+    "base": "d80c5cfab41b4d5adba4af878ab1dc7ca7c412a2acdb8c3aa2dacd48317d1bd8",
+    "sft": "3b2df6e9d86f9eb887c9db0c77c1d846d53c6ef1c1c76689624b437424b44683",
+    "rl": "2d9be2cbb64d74b07f7bff27a08868bd8d285075fc592c8b34edeb259fe04d97"
+  },
+  "model_tree_manifest_hashes": {
+    "base": "d12ae104099c24b2c3a8131d677043f4cbd8efcdf6de074b437203f619271405",
+    "sft": "d0bc741cadea98fd392e3e1931229c81f61b0816773e24e0240df718729e6f06",
+    "rl": "6af8b25ff92c0b131b18f0c0c91efb8f15e6e15bc831168536044c633d1c8c13"
+  },
+  "commands": {
+    "formal_postprocess": "python scripts/run_travelplanner_adapter_v2_formal.py",
+    "official_format_check": "python <official>/postprocess/format_check.py --evaluation_file_path <label>/official_submission.jsonl",
+    "official_evaluation": "python scripts/run_travelplanner_official_eval.py --official-root <official> --submission <label>/official_submission.jsonl --output <label>/official_metrics.json",
+    "constraint_diagnostics": "python scripts/analyze_travelplanner_adapter_v2_results.py --official-root <official> --validation <validation.csv> --results-root <adapter-results> --output <diagnostics.json>"
+  },
+  "artifacts": [
+    {
+      "path": "docs/TRAVELPLANNER_ADAPTER_SPEC.md",
+      "bytes": 4786,
+      "sha256": "f338132c428ad509558a55f29fc62fa757305c839888824c28a40e3fcc80e21b"
+    },
+    {
+      "path": "reports/TRAVELPLANNER_ADAPTER_REPAIR.md",
+      "bytes": 2056,
+      "sha256": "a08a36bc392b7409f421387317823e132323fc2b987b4e8d5030301ec3219629"
+    },
+    {
+      "path": "reports/TRAVELPLANNER_CORRECTED_VALIDATION.md",
+      "bytes": 3142,
+      "sha256": "54eefcee6c81c0422a2ee20fb3bb492f3e1fc821fed5d14ace7e40a2f8d2f739"
+    },
+    {
+      "path": "outputs/final/travelplanner_corrected_metrics.json",
+      "bytes": 26712,
+      "sha256": "44dee6f75c5c1327b1174c51c2b01ee37090f55a45307499c79bcc4c900be6a6"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/adapter_freeze_manifest.json",
+      "bytes": 123372,
+      "sha256": "a1798e877fe1486d42605d412319849d42be35a79b643d672e68f78460e67c9d"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/formal_run_lock.json",
+      "bytes": 1260,
+      "sha256": "d1e5651a265ffbb42df761964881151427294821301cba5aabb166fe71822949"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/constraint_diagnostics.json",
+      "bytes": 395730,
+      "sha256": "c2fd07a93d33d3349b21e08e67f86edf99e4ab190e4dff7a8caf8bb71e9de380"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/contamination_audit.post_adapter.json",
+      "bytes": 2032,
+      "sha256": "d090f966aecaee7ebd19b31f44707c0af824dbd1b149339962e6869dbeccb19e"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/base/official_submission.jsonl",
+      "bytes": 65064,
+      "sha256": "55ca6260c3aa0ff559defdcb68f8867347a974d3fb9e514b47856e9163a489fd"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/sft/official_submission.jsonl",
+      "bytes": 64622,
+      "sha256": "81dd940f358208888bfbe90b3c96c3c4e21c009762280409f25b5aa2e02182b3"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/rl/official_submission.jsonl",
+      "bytes": 173836,
+      "sha256": "4cc9b1d339fafe761da52146519f2308159f11c3f995afaed7bbb97a606c97c8"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/base/official_metrics.json",
+      "bytes": 2054,
+      "sha256": "b8da3c05b4d6afcb927c9fa3dacd28d173ee61f618cb3d0d0986c225bc96ca31"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/sft/official_metrics.json",
+      "bytes": 2050,
+      "sha256": "bb09b9937ad534da347d377dd4a7bb26de19708558e592426d444f8988c36357"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/rl/official_metrics.json",
+      "bytes": 2047,
+      "sha256": "7eea0f30d5e9863c81cfed49440193e246081b2486d49e3262f36123208ab105"
+    },
+    {
+      "path": "outputs/final/travelplanner_adapter_v2/scientific_audit.json",
+      "bytes": 4759,
+      "sha256": "8631be2c0b19c800312f2ffeccb8cc6cf9c6b15de94f661e8d872a01bc484bdc"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-08-25T18:16:48.204814+00:00",
+  "protocol": "unmodified official TravelPlanner evaluation/eval.py --set_type validation",
+  "official_repository": "https://github.com/OSU-NLP-Group/TravelPlanner",
+  "official_revision": "e52c87f4ac348a3410c46dc3553c519db5ec5e23",
+  "evaluator_sha256": "89dbb9e51c951e700f0a4a39798315f9c8fb4658b30f5bdb72727498c4676fb2",
+  "commonsense_evaluator_sha256": "13cfda27b03d3c638a3a597a8a5f9cbb21ab49fe482745f13db435c9b0c88a6d",
+  "hard_evaluator_sha256": "18ffc300e9b61b87bcaf27fd54c5aa09c1319a4f403f308b53df3b696e5185b5",
+  "submission": "work/adapter-formal/sft/official_submission.jsonl",
+  "submission_sha256": "81dd940f358208888bfbe90b3c96c3c4e21c009762280409f25b5aa2e02182b3",
+  "n": 180,
+  "metrics": {
+    "Delivery Rate": {
+      "numerator": 6,
+      "denominator": 180,
+      "rate": 0.03333333333333333
+    },
+    "Commonsense Constraint Micro Pass Rate": {
+      "numerator": 21,
+      "denominator": 1440,
+      "rate": 0.014583333333333332
+    },
+    "Commonsense Constraint Macro Pass Rate": {
+      "numerator": 0,
+      "denominator": 180,
+      "rate": 0.0
+    },
+    "Hard Constraint Micro Pass Rate": {
+      "numerator": 0,
+      "denominator": 420,
+      "rate": 0.0
+    },
+    "Hard Constraint Macro Pass Rate": {
+      "numerator": 0,
+      "denominator": 180,
+      "rate": 0.0
+    },
+    "Final Pass Rate": {
+      "numerator": 0,
+      "denominator": 180,
+      "rate": 0.0,
+      "ci95_wilson": [
+        0.0,
+        0.02089549792161305
+      ]
+    }
+  },
+  "command": [
+    "/Users/zhourunfeng/Documents/Codex/2026-08-24/files-pasted-by-the-user-travel/work/tp-eval-venv/bin/python",
+    "eval.py",
+    "--set_type",
+    "validation",
+    "--evaluation_file_path",
+    "/Users/zhourunfeng/Documents/Codex/2026-08-24/files-pasted-by-the-user-travel/work/adapter-formal/sft/official_submission.jsonl"
+  ],
+  "raw_stdout": "work/adapter-formal/sft/official_metrics.official_stdout.txt",
+  "raw_stderr": "work/adapter-formal/sft/official_metrics.official_stderr.txt"
+}
