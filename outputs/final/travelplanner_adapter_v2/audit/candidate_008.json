@@ -1,0 +1,1805 @@
+{
+  "candidate": "candidate_008",
+  "adapter_sha256": "73c4f17184ea0d50793418fb244b83562474f56051386d4b7b0182ca6050a270",
+  "selection_file_sha256": "b9c240583f324d8f7f37ffc29abb30e455b9557697f12e2bbc05695a53c9c922",
+  "records": [
+    {
+      "label": "base",
+      "task_id": 12,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 19,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 24,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 28,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 30,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 31,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 33,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 37,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 40,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 45,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 53,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 55,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 80,
+      "query_id": null,
+      "raw_final_answer_sha256": "64e107c8abb9b34703e89eb69e0addeb8c32337a3aacfb287eef6e86a9cc2c36",
+      "raw_final_answer": "I'm sorry, but I'm unable to provide specific accommodation recommendations for Chicago with entire rooms for two people due to limitations in accessing up-to-date or versioned web data. \n\nHowever, I can summarize the trip details based on the available information:\n\n1. **Travel Dates**: March 24–26, 2022.\n2. **Flight Details**:\n   - **Outbound (Atlanta → Chicago)**: The cheapest flight on March 24 is $129 (e.g., F3886041, departing 11:18).\n   - **Return (Chicago → Atlanta)**: The cheapest flight on March 26 is $130 (e.g., F3523450, departing 05:56).\n   - **Total Flight Cost**: Approximately $259.\n\n3. **Driving Option**: Driving from Atlanta to Chicago takes about 10 hours and 44 minutes, covering 1,154 km. This is not recommended for a 3-day trip due to the long duration and lack of accommodations with entire rooms.\n\n4. **Accommodations**: The database does not list any accommodations in Chicago with entire rooms. I recommend checking popular travel websites like Tripadvisor or Booking.com for hotels offering private rooms or entire apartments for two people.\n\nTo stay within your $1,900 budget:\n- Allocate $259 for flights.\n- Reserve accommodations for Chicago (aim for $600–$800 for 2 nights).\n- Plan activities and meals for the remaining budget.\n\nI suggest manually searching for hotels in Chicago with private rooms using trusted travel platforms. Let me know if you'd like help with other aspects of the trip!",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 102,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 122,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 131,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 137,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 154,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 155,
+      "query_id": null,
+      "raw_final_answer_sha256": "0c6aaf16ef2e743842d0d18e454f96b1d6593204ecb58502554a84f3857fa0bd",
+      "raw_final_answer": "Here is a 5-day travel itinerary from Boston to New York for two people, staying between March 7th and March 11th, 2022, with a focus on accommodations that allow parties and rooms not shared, and without flying. The trip includes visits to Boston and New York, with a stop in a nearby city (Boston and New York are the only cities between them, so we are focusing on these two).\n\n---\n\n### **Travel Itinerary: Boston to New York (March 7–11, 2022)**\n\n#### **Day 1: March 7 – Arrival in Boston**\n- **Travel**: Drive from your starting point to Boston (3 hours 46 minutes, 347 km).\n- **Accommodation**:  \n  - **Option**: *Huge amazing 1bdrm, Upper Manhattan* (Boston)  \n    - Price: $350/night  \n    - Room Type: Entire home/apt  \n    - Minimum Nights: 5  \n    - House Rules: No children under 10, No parties  \n    - Total Cost (1 night): $350  \n- **Activities**:  \n  - Visit **Faneuil Hall Marketplace** (a historic marketplace).  \n  - Explore **Boston Common** and **Public Garden**.  \n  - Take a walk around the **Old State House** and **Paul Revere House**.\n\n#### **Day 2: March 8 – Boston Exploration**\n- **Accommodation**: Stay at the same place as Day 1.  \n- **Activities**:  \n  - Visit the **New England Aquarium** (one of the largest in the U.S.).  \n  - Explore the **Boston Tea Party Ships & Museum**.  \n  - Enjoy a meal at a local restaurant in the South End.\n\n#### **Day 3: March 9 – Drive to New York**\n- **Travel**: Drive from Boston to New York (3 hours 46 minutes, 347 km).  \n- **Accommodation**:  \n  - **Option**: *Beautiful and big 1BR sublet close by Central Park* (New York)  \n    - Price: $983/night  \n    - Room Type: Private room  \n    - Minimum Nights: 5  \n    - House Rules: No parties, No children under 10  \n    - Total Cost (1 night): $983  \n- **Activities**:  \n  - Visit **One World Observatory** (sky-high views of NYC).  \n  - Explore **9/11 Memorial & Museum**.  \n  - Walk across the **Brooklyn Bridge**.\n\n#### **Day 4: March 10 – New York Exploration**\n- **Accommodation**: Stay at the same place as Day 3.  \n- **Activities**:  \n  - Visit **The Battery** and **MUSEUM OF ICE CREAM**.  \n  - Take a scenic walk along the **High Line**.  \n  - Enjoy a dinner at a local restaurant in the Flatiron District.\n\n#### **Day 5: March 11 – Departure from New York**\n- **Travel**: Drive back to your starting point (3 hours 46 minutes, 347 km).  \n- **Accommodation**: No stay required.\n\n---\n\n### **Budget Summary**\n- **Accommodation (2 nights in Boston + 3 nights in New York)**:  \n  - Boston: 2 nights × $350 = $700  \n  - New York: 3 nights × $983 = $2,949  \n  - **Total Accommodation**: $3,649  \n- **Travel",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from your starting point to Boston",
+          "transportation": "Self-driving from your starting point to Boston (3 hours 46 minutes, 347 km)",
+          "breakfast": "-",
+          "attraction": "Faneuil Hall Marketplace (a historic marketplace); Boston Common and Public Garden; the Old State House and Paul Revere House",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "Huge amazing 1bdrm, Upper Manhattan (Boston)"
+        },
+        {
+          "day": "2",
+          "current_city": "Boston",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the New England Aquarium (one of the largest in the U.S.); the Boston Tea Party Ships & Museum",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "Stay at the same place as Day 1."
+        },
+        {
+          "day": "3",
+          "current_city": "from Boston to New York",
+          "transportation": "Self-driving from Boston to New York (3 hours 46 minutes, 347 km)",
+          "breakfast": "-",
+          "attraction": "One World Observatory (sky-high views of NYC)",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "Beautiful and big 1BR sublet close by Central Park (New York)"
+        },
+        {
+          "day": "4",
+          "current_city": "New York",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "The Battery and MUSEUM OF ICE CREAM",
+          "lunch": "-",
+          "dinner": "a local restaurant in the Flatiron District",
+          "accommodation": "Stay at the same place as Day 3."
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Drive back to your starting point (3 hours 46 minutes, 347 km)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "No stay required."
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "base",
+      "task_id": 161,
+      "query_id": null,
+      "raw_final_answer_sha256": "8cc1015bc44b115e58b6e564aff23a78c3fc6b9e9b08177f9d081429f730f692",
+      "raw_final_answer": "I've analyzed your trip plan from Pittsburgh to New York with a focus on visiting three different cities in New York, sampling French, Italian, Chinese, and American cuisines, and staying in accommodations that allow visitors. Here's a summary of the findings:\n\n### Driving Itinerary\n- **Pittsburgh to New York**: Approximately 598 km, taking about 6 hours and 1 minute.\n- **New York to Boston**: Approximately 346 km, taking about 3 hours and 41 minutes.\n- **Boston to Philadelphia**: Approximately 497 km, taking about 5 hours and 2 minutes.\n\n### Dining Options in New York\n- **French Cuisine**: \n  - Green Chick Chop (average cost: $26, rating: 3.3)\n- **Italian Cuisine**: \n  - Seasons 52 Fresh Grill (average cost: $30, rating: 4.4)\n- **Chinese Cuisine**: \n  - Lord of the Drinks Forum (average cost: $71, rating: 4.2)\n  - Kamal Chat Bhandar (average cost: $36, rating: 0.0)\n- **American Cuisine**: \n  - 736 A.D. (average cost: $99, rating: 4.1)\n  - Amchur (average cost: $67, rating: 2.9)\n\n### Accommodations\nUnfortunately, there are no accommodations in New York that specifically allow visitors based on the current database. This may be due to a lack of data or specific filtering criteria. I recommend checking with local hotels or booking platforms to find suitable lodging options that meet your needs.\n\n### Budget Considerations\nThe estimated costs for dining are quite high, especially for American and Chinese cuisine. For a week-long trip with two people, you'll need to carefully manage your budget. Consider splitting meals or looking for more affordable options to stay within your $5,300 budget.\n\nPlease let me know if you'd like further assistance with specific details or adjustments to your itinerary.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 1,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 9,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 11,
+      "query_id": null,
+      "raw_final_answer_sha256": "0c14e64af8d3947e150d49e4014c1d94a960973e772245c04bc5b1283beaaccd",
+      "raw_final_answer": "Travel plan from Minneapolis to Seattle (March 29–31, 2022), budget $1,800:\n\n- **Flights**:  \n  - Outbound: Flight F3527324 (Minneapolis to Seattle), March 29, 15:52–17:22, $430.  \n  - Return: Flight F3514340 (Seattle to Minneapolis), March 31, 13:45–19:01, $306.  \n  - Total flight cost: $736.\n\n- **Accommodation**:  \n  - Stay at \"New tidy room attached by PRIVATE FULL BATH\" (private room, $73/night, 3-night minimum).  \n  - Total: $219 (3 nights).\n\n- **Dining**:  \n  - Italian restaurant: Ting's Red Lantern (average cost $24 per person).  \n  - Estimated 3 meals: $72.\n\n- **Attractions**:  \n  - Visit Pike Place Market, Olympic Sculpture Park, and Chihuly Garden and Glass (free or low-cost entry).  \n  - Total estimated cost: $0–$50.\n\n- **Total estimated cost**: $736 (flights) + $219 (hotel) + $72 (meals) + $50 (attractions) = $1,077 (well under $1,800 budget).\n\n- **Alternative**: Driving (23h 48m, 2,666 km) is not recommended due to time and fatigue.  \n- **Weather**: No live data available; historical data suggests mild spring conditions in Seattle (March 2022).\n\nThis plan is feasible and within budget.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 39,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 45,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 48,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 62,
+      "query_id": null,
+      "raw_final_answer_sha256": "178d8315b54deb57662edf1498fbd930303fd09e6a6f3869227144dae238e16f",
+      "raw_final_answer": "3-day travel plan from Milwaukee to New York (March 24–26, 2022), budget $1,900, non-shared rooms:\n\n- **Flights**:  \n  - Outbound: Flight F3649645 (Milwaukee to New York), March 24, 10:50–14:22, $180.  \n  - Return: Flight F3644990 (New York to Milwaukee), March 26, 15:20–16:27, $218.  \n  - Total flight cost: $400.\n\n- **Accommodation**:  \n  - Spacious room to rest in NYC (private room, $980/night, 3 nights).  \n  - Total: $2,940 (exceeds budget).  \n  - Alternative: A Contemporary Homelike Stay (entire home, $228/night, 2-night minimum).  \n  - Total: $456 (within budget, but only 2 nights; not ideal for 3-day stay).\n\n- **Attractions**:  \n  - 9/11 Memorial & Museum  \n  - Central Park  \n  - Empire State Building  \n  - Brooklyn Bridge  \n  - One World Observatory  \n\n- **Dining**:  \n  - Seasons 52 Fresh Grill (Italian, seafood, desserts; average cost $30 per person).\n\n- **Alternative Transport**:  \n  - Driving: 13h 29m, 1,417 km (not recommended due to time and cost).\n\n- **Budget Summary**:  \n  - Flights: $400  \n  - Accommodation (2 nights): $456  \n  - Meals (3 days, 2 people): ~$180  \n  - Attractions: ~$100  \n  - Total: ~$1,136 (well under $1,900).\n\n**Recommendation**:  \n- Book the A Contemporary Homelike Stay (2 nights) and extend stay to March 26.  \n- Use flights for efficient travel.  \n- Visit top attractions and enjoy Italian dining.  \n- Consider adding a third night if budget allows.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 63,
+      "query_id": null,
+      "raw_final_answer_sha256": "30b026303bc3419a2705051957692017633a007b1071bd7594cbe0bbd87ba667",
+      "raw_final_answer": "3-day travel plan from Salt Lake City to Twin Falls (March 25–27, 2022), budget $1,600:\n\n- **Flights**:  \n  - Outbound: Flight F3809095, Salt Lake City to Twin Falls, March 25, 11:00–11:55 (55 min), $64.  \n  - Return: Flight F3807678, Twin Falls to Salt Lake City, March 27, 12:35–13:20 (45 min), $56.  \n  - Total flight cost: $120.\n\n- **Accommodation**:  \n  - Stay at \"2 BR Brownstone Retreat, 2nd Fl.\" (entire home/apt), $516/night.  \n  - 3-night stay: $1,548.  \n  - Meets occupancy (2 people), no children under 10 restriction, and minimum stay of 3 nights.  \n  - Total lodging cost: $1,548.\n\n- **Dining**:  \n  - Chinese: \"Food Fever\" (average cost $83/meal, rating 4.2) and \"Sri Balaji\" ($12/meal, rating 3.5).  \n  - Mexican: \"Fresc Co\" ($60/meal, rating 3.8) and \"New Sethi's\" ($10/meal, rating 0.0).  \n  - Estimated meals: $100–$150 for 3 days (2 meals/day).\n\n- **Attractions**:  \n  - Visit Evel Knievel Jump Monument, Bridge View Point, and Centennial Waterfront Park.  \n  - Explore Art Alley and Dierkes Lake Park for scenic views.\n\n- **Total estimated cost**: $120 (flights) + $1,548 (lodging) + $120 (meals) = $1,788.  \n  - **Note**: Exceeds $1,600 budget by $188. Consider reducing lodging cost or meal budget.\n\n- **Alternative lodging**:  \n  - \"Charming and bright place with a good vibe!\" ($105/night, 2-night minimum) would cost $210 for 3 nights, reducing total lodging to $1,758.  \n  - Still exceeds budget.\n\n- **Recommendation**:  \n  - Choose a lower-cost lodging option (e.g., private room at $283/night) for 3 nights: $849.  \n  - Total: $120 (flights) + $849 (lodging) + $120 (meals) = $1,089 (within budget).  \n  - Stay at \"Private room in E. Williamsburg!\" (no pets, 3-night minimum, $283/night).\n\nFinal plan:  \n- March 25: Fly to Twin Falls, check into private room, explore Art Alley and Evel Knievel Monument.  \n- March 26: Visit Centennial Waterfront Park, Dierkes Lake Park, and enjoy Chinese/Mexican meals.  \n- March 27: Return flight to Salt Lake City.  \n- Total cost: ~$1,089 (well under $1,600).",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 67,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 98,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 104,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 105,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 130,
+      "query_id": null,
+      "raw_final_answer_sha256": "94e7685ad421a0a8fc3a4f381c1325fc4365663dbe9f13976a0a8258e0d3a9a1",
+      "raw_final_answer": "3-day travel plan from South Bend to Atlanta (March 6–8, 2022), budget $1,500, no driving:\n\n- **Flights**:  \n  - Outbound: Flight F3648988 (South Bend → Atlanta), March 6, 12:30–14:21, $170.  \n  - Return: Flight F3637050 (Atlanta → South Bend), March 8, 10:26–12:06, $159.  \n  - Total flight cost: $329.\n\n- **Accommodation**:  \n  - \"Bright, Modern, Clean, Spacious, Brooklyn Home\" (entire home, 3-night minimum, $1,034/night).  \n  - Total: $3,102 (exceeds budget).  \n  - Alternative: \"Garden Apartment in Artist’s Historical Brownstone\" ($1,192/night, 1-night min, allows parties).  \n  - Total: $3,576 (exceeds budget).  \n  - No suitable entire-home option within $1,500 for 3 nights with party allowance.\n\n- **Cuisine**:  \n  - Mediterranean: Chaina Ram Sindhi Confectioners, Sam and Scrooge, Barkat, Punjab Restaurant.  \n  - American: El Pistolero, Daawat-e-Kashmir, Chef Style, Sethi's.  \n  - Chinese: Sautened Stories, Pizza Central, Caboose X Cafe & Lounge, Punjab Restaurant.  \n  - Indian: Pizza Central, Sethi's, Barkat, Caboose X Cafe & Lounge, Shri Rudram.\n\n- **Attractions**:  \n  - Atlanta Botanical Garden, Atlanta History Center, Centennial Olympic Park, Children's Museum of Atlanta, Georgia Aquarium, High Museum of Art, Fox Theatre, Fernbank Museum.\n\n**Budget Note**: No entire-home accommodation in Atlanta for 3 nights with party allowance and under $1,500. Consider adjusting budget or selecting a shared lodging option.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 133,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 135,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 146,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 159,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 162,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 171,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "sft",
+      "task_id": 172,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 8,
+      "query_id": null,
+      "raw_final_answer_sha256": "f6aee806ac0b596c7589c85b8424df44c767f70bc6a90823b86171c68be962eb",
+      "raw_final_answer": "3-day trip from Boston to San Juan, Puerto Rico (March 28–30, 2022) for one person:\n\n- **Outbound**: Flight F3774524 (Boston → San Juan), March 28, 2022, 09:16–14:05, $341.00  \n- **Return**: Flight F3764590 (San Juan → Boston), March 30, 2022, 18:50–23:02, $569.00  \n- **Total flight cost**: $910.00  \n\nRemaining budget: $560.00 for accommodations, meals, and activities.  \nSan Juan offers a range of lodging options (e.g., hotels, vacation rentals) and attractions (e.g., Old San Juan, El Morro National Monument).  \nAll flights are within the $1,400 budget.  \nNo additional tools needed for this plan.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 23,
+      "query_id": null,
+      "raw_final_answer_sha256": "87a2a25ebbded64be5f79be9465567346f93563be3789eec8cc5e15a66e75043",
+      "raw_final_answer": "5-day travel plan from Little Rock to Dallas, Austin, and back to Little Rock (March 14–18, 2022), within $3,900 budget:\n\n- **March 14 (Day 1)**: Fly from Little Rock to Dallas (F3599273, 10:17–11:44, $67).  \n- **March 15 (Day 2)**: Fly from Dallas to Austin (F4001105, 14:48–15:52, $37).  \n- **March 16 (Day 3)**: Explore Austin (e.g., Texas State Capitol, Lady Bird Lake, Barton Springs).  \n- **March 17 (Day 4)**: Visit nearby attractions (e.g., Austin Museum of Art, 6th Street Live Music District).  \n- **March 18 (Day 5)**: Drive from Austin to Little Rock (7h 26m, 827 km).  \n\nTotal flight cost: $104.  \nTotal driving cost: Estimated $150 (fuel, tolls, parking).  \nTotal estimated cost: $254 (well under $3,900 budget).  \n\nAll flights and driving routes are based on versioned 2022 data. No direct return flight from Austin to Little Rock was found; driving is the only viable option.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Little Rock to Dallas",
+          "transportation": "Flight Number: F3599273, from Little Rock to Dallas, Departure Time: 10:17, Arrival Time: 11:44, Cost: 67",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "2",
+          "current_city": "from Dallas to Austin",
+          "transportation": "Flight Number: F4001105, from Dallas to Austin, Departure Time: 14:48, Arrival Time: 15:52, Cost: 37",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "Austin Museum of Art, 6th Street Live Music District",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "from Austin to Little Rock",
+          "transportation": "Self-driving from Austin to Little Rock (7h 26m, 827 km)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 31,
+      "query_id": null,
+      "raw_final_answer_sha256": "1bdbe5c4bd71b627e8beaacdf3cee1ea64942b4d9fd9c9a09802a5f4aa392e46",
+      "raw_final_answer": "5-day travel plan from Cedar Rapids to Denver and Boulder, Colorado (March 23–27, 2022), for one person within $4,300 budget:\n\n- **March 23 (Day 1)**: Fly from Cedar Rapids to Denver (Flight F3894390, 08:57–10:03, $178). Check into a private room at \"Studio Style Basement in Shared Apartment\" ($498/night, 20-night minimum).  \n- **March 24 (Day 2)**: Drive from Denver to Boulder (approx. 1.5 hours, 60 miles). No direct flights; driving is the only viable option. Stay at a private room in Boulder (e.g., \"Bright room in Williamsburg loft\" at $636/night, 14-night minimum).  \n- **March 25 (Day 3)**: Explore Boulder (e.g., Red Rocks Amphitheatre, University of Colorado campus).  \n- **March 26 (Day 4)**: Visit Denver (e.g., Denver Art Museum, Denver Botanic Gardens).  \n- **March 27 (Day 5)**: Return to Cedar Rapids via flight (no direct return flight found; consider driving or alternative route).  \n\nTotal estimated cost: $178 (flight) + $498 (Denver stay, 2 nights) + $636 (Boulder stay, 2 nights) = $1,312 (well under $4,300 budget).  \nNote: No hotel options found in Boulder; driving is the only feasible option. Consider adjusting dates or adding a return flight if needed.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Cedar Rapids to Denver",
+          "transportation": "Flight Number: F3894390, from Cedar Rapids to Denver, Departure Time: 08:57, Arrival Time: 10:03, Cost: 178",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "a private room at \"Studio Style Basement in Shared Apartment\" ($498/night, 20-night minimum)"
+        },
+        {
+          "day": "2",
+          "current_city": "from Denver to Boulder",
+          "transportation": "Self-driving from Denver to Boulder",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "a private room in Boulder (e.g., \"Bright room in Williamsburg loft\" at $636/night, 14-night minimum)"
+        },
+        {
+          "day": "3",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "Denver Art Museum, Denver Botanic Gardens",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Return to Cedar Rapids via flight (no direct return flight found",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 54,
+      "query_id": null,
+      "raw_final_answer_sha256": "caf42751faa6aca606a2e5fce7e0bb37bf340973a831e13060c7d4e7889aab74",
+      "raw_final_answer": "7-day Texas travel plan (March 24–30, 2022) from Savannah:\n\n- **March 24**: Fly from Savannah to Dallas (F4011367, 11:11–12:43, $333).  \n- **March 25**: Fly from Dallas to Austin (F4012608, 07:31–08:19, $40).  \n- **March 26**: Drive from Austin to San Antonio (1h 19m, 128 km).  \n- **March 27–30**: Explore San Antonio (e.g., Alamo, River Walk, Mission San José).  \n- **Budget**: Total flight cost: $373. Remaining: $2,827 for lodging, meals, and activities.  \n\nAll flights and driving route confirmed via versioned 2022 databases. No direct flights from Austin to San Antonio; driving is the only viable option.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 57,
+      "query_id": null,
+      "raw_final_answer_sha256": "6c3fa150ef8f01f8bca72be044dd15aa2b728f4880294aea8dc5f70854ca547d",
+      "raw_final_answer": "7-day travel itinerary from Kona to California (San Francisco, Los Angeles, San Diego), March 10–16, 2022:\n\n- **March 10 (Day 1)**: Fly from Kona to San Francisco (F3888309, 14:03–21:11, $539).  \n- **March 11 (Day 2)**: Fly from San Francisco to Los Angeles (F3741962, 15:56–17:23, $76).  \n- **March 12 (Day 3)**: Fly from Los Angeles to San Diego (F3853028, 22:40–23:21, $25).  \n- **March 13–15 (Days 4–6)**: Explore San Diego (e.g., La Jolla Cove, Balboa Park, Gaslamp Quarter).  \n- **March 16 (Day 7)**: Fly from San Diego to Kona (F4006560, 10:02–15:03, $824).  \n\n**Total flight cost**: $539 + $76 + $25 + $824 = $1,464.  \nRemaining budget: $1,036 for lodging, meals, and activities.  \nAll flights are within the $2,500 limit.  \nAll cities are in California as requested.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Kona to San Francisco",
+          "transportation": "Flight Number: F3888309, from Kona to San Francisco, Departure Time: 14:03, Arrival Time: 21:11, Cost: 539",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "2",
+          "current_city": "from San Francisco to Los Angeles",
+          "transportation": "Flight Number: F3741962, from San Francisco to Los Angeles, Departure Time: 15:56, Arrival Time: 17:23, Cost: 76",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "from Los Angeles to San Diego",
+          "transportation": "Flight Number: F3853028, from Los Angeles to San Diego, Departure Time: 22:40, Arrival Time: 23:21, Cost: 25",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "7",
+          "current_city": "from San Diego to Kona",
+          "transportation": "Flight Number: F4006560, from San Diego to Kona, Departure Time: 10:02, Arrival Time: 15:03, Cost: 824",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 70,
+      "query_id": null,
+      "raw_final_answer_sha256": "83cc8799593fafdf48d6b579c13f24f5891effaa16ea1175d8807ecc771d85c5",
+      "raw_final_answer": "3-Day Travel Itinerary: Valparaiso to Belleville (March 3–5, 2022)\n\n- **March 3, 2022 (Day 1)**  \n  - Depart Valparaiso at 17:23 (Flight F3579167, $211)  \n  - Arrive in Belleville at 19:06  \n  - Dinner: RollsKing (Chinese, Bakery, BBQ, Pizza) – $27 per person  \n  - Total for 8: $216  \n\n- **March 4, 2022 (Day 2)**  \n  - Breakfast: Moti Mahal Delux (American, Cafe, Desserts) – $55 per person  \n  - Lunch: Tucks and Bao (Chinese, Tea, Pizza, Mexican, Bakery) – $94 per person  \n  - Dinner: Shanghai Cafe (Tea, Pizza, Bakery, Fast Food, Chinese) – $96 per person  \n  - Total for 8: $1,440  \n\n- **March 5, 2022 (Day 3)**  \n  - Breakfast: Ajeet Fast Food Corner (American, Mediterranean, Seafood) – $91 per person  \n  - Lunch: Chocolate Temptation (Chinese, Tea, Fast Food) – $16 per person  \n  - Depart Belleville at 17:15 (Flight F3571908, $124)  \n  - Arrive in Valparaiso at 18:55  \n  - Total for 8: $856  \n\n**Total Estimated Cost**: $2,512 (well under $6,600 budget)  \n**Total Flight Cost**: $335  \n**Total Dining Cost**: $2,168  \n**Remaining Budget**: $4,137  \n\nAll meals and flights are within the budget. No lodging or attraction costs were included, as per the query.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Valparaiso to Belleville",
+          "transportation": "Flight Number: F3579167, from Valparaiso to Belleville, Departure Time: 17:23, Arrival Time: 19:06, Cost: 211",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "RollsKing (Chinese, Bakery, BBQ, Pizza) – $27 per person",
+          "accommodation": "-"
+        },
+        {
+          "day": "2",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "Moti Mahal Delux (American, Cafe, Desserts) – $55 per person",
+          "attraction": "-",
+          "lunch": "Tucks and Bao (Chinese, Tea, Pizza, Mexican, Bakery) – $94 per person",
+          "dinner": "Shanghai Cafe (Tea, Pizza, Bakery, Fast Food, Chinese) – $96 per person",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "from Belleville to Valparaiso",
+          "transportation": "Flight Number: F3571908, from Belleville to Valparaiso, Departure Time: 17:15, Arrival Time: 18:55, Cost: 124",
+          "breakfast": "Ajeet Fast Food Corner (American, Mediterranean, Seafood) – $91 per person",
+          "attraction": "-",
+          "lunch": "Chocolate Temptation (Chinese, Tea, Fast Food) – $16 per person",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 71,
+      "query_id": null,
+      "raw_final_answer_sha256": "a2b29bbc70208176eed5c13bd550e4f855b8206970a91cc59eee192c08414f43",
+      "raw_final_answer": "Trip from Akron to Tampa (March 28–30, 2022) for two, within $2,500 budget:\n\n- **Flights**:  \n  - Outbound: F3620346, Akron → Tampa, March 28, 2022, 19:40–21:47 (2h 7m), $434 per person ($868 total).  \n  - Return: F3620300, Tampa → Akron, March 30, 2022, 17:00–19:18 (2h 18m), $438 per person ($876 total).  \n  - Total flight cost: $1,744.\n\n- **Cuisine Options in Tampa**:  \n  - Chinese: Gulati (rating 4.4, avg. $12/person), Chinese Delights (rating 3.5, avg. $33/person).  \n  - American: Giani's (rating 3.3, avg. $19/person), The Zaffran (rating 3.3, avg. $35/person), Alvi's Food Spot (rating 3.2, avg. $22/person), Club India Cafe & Restaurant (rating 2.9, avg. $98/person).\n\n- **Budget Remaining**: $2,500 – $1,744 = $756 for lodging, meals, and activities.\n\n- **Lodging**: No direct lodging data available. Recommend booking a hotel in Tampa (e.g., via external platform) within the remaining budget.\n\n- **Activities**: Nearby attractions in Tampa (e.g., Tampa Bay, Ybor City) can be explored using nearby_search, but no data available here.\n\nThis plan fits within budget and satisfies dining preferences. Consider booking a hotel and exploring local attractions upon arrival.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 85,
+      "query_id": null,
+      "raw_final_answer_sha256": "49fd1ad0abfabc2144a1f4163754a3121b3bdeb92b2cab03df9eb571285d85ee",
+      "raw_final_answer": "5-day travel itinerary from Salt Lake City to Dallas and Austin (March 14–18, 2022), group of 8, budget $12,000, with visitors-friendly accommodations:\n\n- **March 14 (Day 1)**: Depart Salt Lake City (F3522148, 22:25–01:50) to Dallas. Check into a hotel in Dallas with a visitors-friendly house rule (e.g., \"No smoking indoors\" or \"Pets allowed\"). Visit Dealey Plaza and Klyde Warren Park in the evening.\n\n- **March 15 (Day 2)**: Fly from Dallas to Austin (F4001105, 14:48–15:52). Check into a hotel in Austin with a visitors-friendly house rule. Explore the Austin Zoo and Blanton Museum of Art.\n\n- **March 16 (Day 3)**: Visit the Bullock Texas State History Museum and the Austin Aquarium. Enjoy a meal at a local restaurant in downtown Austin.\n\n- **March 17 (Day 4)**: Explore the Cathedral of Junk and Mayfield Park. Visit the Elisabet Ney Museum in the afternoon.\n\n- **March 18 (Day 5)**: Return to Salt Lake City via flight (e.g., F3522148, 22:25–01:50). Total flight cost: ~$650 (round-trip). Accommodations and attractions are within budget. No verified accommodations with house rules found in Dallas or Austin; consider alternative lodging options or adjust criteria.\n\nNote: No accommodations with explicit \"visitors-friendly\" house rules were found in Dallas or Austin. Budget allows for flights, lodging, and attractions. Consider using a third-party platform to find suitable accommodations.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Salt Lake City to Dallas",
+          "transportation": "Flight Number: F3522148, from Salt Lake City to Dallas, Departure Time: 22:25, Arrival Time: 01:50",
+          "breakfast": "-",
+          "attraction": "Dealey Plaza and Klyde Warren Park in the evening",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "a hotel in Dallas with a visitors-friendly house rule (e.g., \"No smoking indoors\" or \"Pets allowed\")"
+        },
+        {
+          "day": "2",
+          "current_city": "from Dallas to Austin",
+          "transportation": "Flight Number: F4001105, from Dallas to Austin, Departure Time: 14:48, Arrival Time: 15:52",
+          "breakfast": "-",
+          "attraction": "the Austin Zoo and Blanton Museum of Art",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "a hotel in Austin with a visitors-friendly house rule"
+        },
+        {
+          "day": "3",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the Bullock Texas State History Museum and the Austin Aquarium",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the Cathedral of Junk and Mayfield Park; the Elisabet Ney Museum in the afternoon",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Return to Salt Lake City via flight (e.g., F3522148, 22:25–01:50)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 94,
+      "query_id": null,
+      "raw_final_answer_sha256": "35be81e3a5d31edda9e3ff5fc1ac93c78b4e4f099a109a29c679d2326178af12",
+      "raw_final_answer": "5-day travel plan from Richmond to Dallas and Austin (March 6–10, 2022), budget $6,000:\n\n- **March 6 (Day 1)**: Fly from Richmond to Dallas (Flight F3693187, 15:31–18:03, $253). Check into a hotel in Dallas. Dinner at **Delhicacy** (Chinese, $67/person, 3.8 rating) or **Cafe Gatherings** (Indian, $17/person, 4.4 rating).\n\n- **March 7 (Day 2)**: Fly from Dallas to Austin (Flight F3709876, 12:27–13:44, $38). Check into a hotel in Austin. Dinner at **Chin Pokli** (Chinese, $15/person, 3.1 rating) or **Tandoori Nights** (Indian, $26/person, 3.0 rating).\n\n- **March 8 (Day 3)**: Explore Austin. Visit the Texas State Capitol and Lady Bird Lake. Lunch at **Cup-a-licious** (Chinese, $85/person) or **Cake o' Cuisine** (Indian, $71/person).\n\n- **March 9 (Day 4)**: Visit the Austin Museum of Art and Barton Springs. Dinner at **The Chinese Hut** (Chinese, $99/person) or **Goldy Da Dhaba** (Indian, $49/person).\n\n- **March 10 (Day 5)**: Return to Richmond via Dallas (Flight F3709876, 12:27–13:44, $38). Total flight cost: $253 + $38 + $38 = $329. Estimated dining cost: $1,200. Hotel stays: $1,500. Total estimated cost: $3,029 (well under $6,000 budget).\n\nAll meals include Chinese and Indian cuisine options. No train or driving routes used; flights are direct and efficient.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Richmond to Dallas",
+          "transportation": "Flight Number: F3693187, from Richmond to Dallas, Departure Time: 15:31, Arrival Time: 18:03, Cost: 253",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "Delhicacy (Chinese, $67/person, 3.8 rating) or Cafe Gatherings (Indian, $17/person, 4.4 rating)",
+          "accommodation": "a hotel in Dallas"
+        },
+        {
+          "day": "2",
+          "current_city": "from Dallas to Austin",
+          "transportation": "Flight Number: F3709876, from Dallas to Austin, Departure Time: 12:27, Arrival Time: 13:44, Cost: 38",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "Chin Pokli (Chinese, $15/person, 3.1 rating) or Tandoori Nights (Indian, $26/person, 3.0 rating)",
+          "accommodation": "a hotel in Austin"
+        },
+        {
+          "day": "3",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the Texas State Capitol and Lady Bird Lake",
+          "lunch": "Cup-a-licious (Chinese, $85/person) or Cake o' Cuisine (Indian, $71/person)",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the Austin Museum of Art and Barton Springs",
+          "lunch": "-",
+          "dinner": "The Chinese Hut (Chinese, $99/person) or Goldy Da Dhaba (Indian, $49/person)",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Return to Richmond via Dallas (Flight F3709876, 12:27–13:44, $38)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 96,
+      "query_id": null,
+      "raw_final_answer_sha256": "e80a2b09757ae6f2775cd362ca9d1107598565832a3ca9049a47c12296716bef",
+      "raw_final_answer": "5-day trip plan from Missoula to Dallas, Austin, and back to Missoula (March 26–30, 2022), for 5 people, within $7,200 budget:\n\n- **March 26 (Day 1)**: Fly from Missoula to Dallas (Flight F3604257, 14:21–18:19, $530).  \n- **March 27 (Day 2)**: Fly from Dallas to Austin (Flight F3598123, 07:58–08:47, $45).  \n- **March 28–29 (Days 3–4)**: Explore Austin and Dallas.  \n- **March 30 (Day 5)**: Drive from Austin to Missoula (2,905 km, 1 day 3 hours, no flight option).  \n\n**Total flight cost**: $575.  \n**Total driving cost**: Estimated $1,000 (based on average fuel and tolls for 2,905 km).  \n**Total estimated cost**: ~$1,575 (well under $7,200 budget).  \n\n**Cuisine highlights**:  \n- **Italian**: Try \"Pasta & Pizza\" in Dallas (rated 4.8, 100+ reviews) and \"Trattoria Bella\" in Austin (rated 4.7, 80+ reviews).  \n- **French**: Visit \"Le Petit Paris\" in Dallas (rated 4.9, 120+ reviews) and \"Bistro du Monde\" in Austin (rated 4.8, 90+ reviews).  \n\nAll options are within the budget and meet the group's preferences. No train options available for this route.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Missoula to Dallas",
+          "transportation": "Flight Number: F3604257, from Missoula to Dallas, Departure Time: 14:21, Arrival Time: 18:19, Cost: 530",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "2",
+          "current_city": "from Dallas to Austin",
+          "transportation": "Flight Number: F3598123, from Dallas to Austin, Departure Time: 07:58, Arrival Time: 08:47, Cost: 45",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "from Austin to Missoula",
+          "transportation": "Self-driving from Austin to Missoula (2,905 km, 1 day 3 hours, no flight option)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 99,
+      "query_id": null,
+      "raw_final_answer_sha256": "9a541953966e593dfd2d46919343ea9acabe2e584f1fb3a25a8fba120751736c",
+      "raw_final_answer": "Travel plan for 2 people from Lake Charles to Austin and Dallas (March 4–8, 2022), within $4,600 budget:\n\n- **March 4 (Day 1)**: Depart Lake Charles to Dallas via flight (F3589433, $115, 05:57–07:21). Stay at \"Luxury Williamsburg duplex, private roof terrace\" ($241/night, 4-night minimum, no visitors).  \n- **March 5 (Day 2)**: Explore Dallas.  \n- **March 6 (Day 3)**: Drive from Dallas to Austin (4h 39m, 494 km).  \n- **March 7 (Day 4)**: Explore Austin.  \n- **March 8 (Day 5)**: Return to Lake Charles via flight (F3602552, $116, 11:19–12:44).  \n\nTotal estimated cost: $115 (flight) + $241 × 4 (Dallas) + $116 (return flight) = $1,138.  \nBudget remains well under $4,600.  \nNote: No \"party allowed\" hotels found in either city; all accommodations have restrictions (e.g., \"No visitors\"). Consider adjusting preferences or selecting a different city pair.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Lake Charles to Dallas",
+          "transportation": "Flight Number: F3589433, from Lake Charles to Dallas, Departure Time: 05:57, Arrival Time: 07:21, Cost: 115",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "\"Luxury Williamsburg duplex, private roof terrace\" ($241/night, 4-night minimum, no visitors)"
+        },
+        {
+          "day": "2",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "from Dallas to Austin",
+          "transportation": "Self-driving from Dallas to Austin (4h 39m, 494 km)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Return to Lake Charles via flight (F3602552, $116, 11:19–12:44)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 118,
+      "query_id": null,
+      "raw_final_answer_sha256": "54301740c53252f12e2088e8a6fcd936f5cf93cd883583a6d6a375a2b2634a75",
+      "raw_final_answer": "7-day trip from St. Louis to Pennsylvania (Philadelphia, Pittsburgh, Harrisburg) from March 23–29, 2022, for two people within $7,200 budget:\n\n- **Flights**:  \n  - Outbound: F4008247 (St. Louis → Philadelphia), $231, departing 20:09, arriving 23:04.  \n  - Return: F3784639 (Philadelphia → St. Louis), $164, departing 15:12, arriving 16:49.  \n  - Total flight cost: $395.\n\n- **Cuisine Options**:  \n  - **Indian**: Red Ginger Sushi (Philadelphia), The Urban Foundry (Pittsburgh), Cafè Foreground (Harrisburg).  \n  - **American**: Red Mesa Cantina (Philadelphia), Via Delhi (Pittsburgh), Square - Sayaji Hotel (Harrisburg).\n\n- **Budget**: Total flight cost ($395) is well under $7,200. Additional lodging, meals, and activities can be planned within remaining budget.\n\nAll data sourced from versioned 2022 travel databases. No further tools needed.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 127,
+      "query_id": null,
+      "raw_final_answer_sha256": "5e3915ee3a5809d89815971d3aa6aa9c555df92ee85acf8a4b1283e8dd82e01a",
+      "raw_final_answer": "3-day travel plan from Daytona Beach to Atlanta (March 2–4, 2022), for 3 people, budget $2,100, no flights, entire home with children under 10 allowed:\n\n- **Transportation**: Drive from Daytona Beach to Atlanta (6h 18m, 696 km). No flights used as requested.\n\n- **Accommodation**:  \n  - **Bright, Modern, Clean, Spacious, Brooklyn Home** (entire home, 3-night minimum, $1,034/night).  \n  - Total: $3,102 (exceeds budget).  \n  - Alternative: **Garden Apartment in Artist’s Historical Brownstone** ($1,192/night, 1-night min, no child restrictions).  \n  - Total: $3,576 (exceeds budget).  \n  - No suitable entire home with child-friendly rules and 3-night stay within $2,100 found.\n\n- **Dining**:  \n  - Italian restaurants in Atlanta: Sam and Scrooge ($95 avg), Sizzler's Ranch ($36 avg), Hungry Minister ($97 avg), The Krib ($45 avg), Bimbos ($13 avg).  \n  - Budget-friendly option: Bimbos ($13 avg per person).\n\n- **Plan Adjustment**:  \n  - No entire home meeting all criteria (child-friendly, 3-night stay, $2,100) found.  \n  - Consider reducing stay to 2 nights or selecting a shared home with child-friendly rules.  \n  - Alternative: Use a shared home with child-friendly rules (e.g., Garden Apartment) and adjust budget accordingly.\n\nFinal note: No viable entire home option within budget and constraints. Recommend revising stay length or accepting shared accommodations.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 137,
+      "query_id": null,
+      "raw_final_answer_sha256": "26cd74770adf94c9b88ee5cded6c6e2742f9144d1d2bfe79341c90008526ee63",
+      "raw_final_answer": "Travel plan for 2 people from Cincinnati to Philadelphia (March 7–9, 2022), within $2,000 budget:\n\n- **Outbound Flight**:  \n  - Flight F3787889: Cincinnati to Philadelphia, March 7, 2022, 09:17–10:41, $155.00.\n\n- **Return Flight**:  \n  - Flight F3793489: Philadelphia to Cincinnati, March 9, 2022, 10:37–12:28, $107.00.\n\n- **Accommodation**:  \n  - \"PRIVATE BEDROOM and BATHROOM crown heights Aprtmnt\" (Philadelphia), private room, $1,047/night.  \n  - Total for 3 nights: $3,141 (exceeds budget).  \n  - Alternative: \"Top floor of an amazing duplex\" ($509/night, 3 nights = $1,527), but no children under 10 allowed.  \n  - No private room with children under 10 allowed found within budget.  \n  - Best available: \"Sunny Lower East Side bedroom\" ($961/night, 2 nights = $1,922), but max occupancy 1 person.\n\n- **Budget Note**: No private room in Philadelphia allowing children under 10 and within $2,000 for 3 nights is available. Consider adjusting occupancy or extending stay.\n\n- **Alternative**: Use a shared room with children under 10 allowed (e.g., \"Top floor of an amazing duplex\" at $509/night) or reduce stay to 2 nights.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 146,
+      "query_id": null,
+      "raw_final_answer_sha256": "2b52ea2af823375a3d8eb00dd5e9566cac16865959425f009464c531cefcf280",
+      "raw_final_answer": "5-day Texas trip from Evansville (March 12–16, 2022) for 4 people, avoiding airline transport:\n\n- **March 12**: Fly from Evansville to Dallas (F3598647, 06:43–08:45, $267).  \n- **March 13**: Drive from Dallas to Austin (13h 56m, 1,498 km).  \n- **March 14–15**: Stay in Austin (entire home, no party restrictions, 2 nights).  \n- **March 16**: Drive from Austin to Evansville (13h 56m, 1,498 km).  \n\nTotal estimated cost: $267 (flight) + $1,498 km driving cost (not available in database) + lodging (not available in database).  \nBudget of $9,500 is sufficient if driving costs are under $1,000.  \nAll accommodations and activities are within the versioned 2022 database constraints.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 148,
+      "query_id": null,
+      "raw_final_answer_sha256": "ead26abd674a3fa14acfdb1fa284c7e09b4af72218f77af8b5019310e257e4e6",
+      "raw_final_answer": "Travel Itinerary: Minneapolis to Nashville and Memphis (March 2–6, 2022)\n\n- **March 2 (Day 1)**: Depart Minneapolis. Drive to Nashville (approx. 3.5 hours, 280 miles). Stay at a private room in Nashville (e.g., FiDi Cozy room, $870/night, 1-night minimum, no parties, 2 guests). Evening: Explore downtown Nashville, visit the Country Music Hall of Fame, and enjoy dinner at a local restaurant.\n\n- **March 3 (Day 2)**: Full day in Nashville. Visit the Frist Art Museum, Andrew Jackson’s Hermitage, and the Bicentennial Capitol Mall State Park. Afternoon: Explore the Honky Tonk Highway and enjoy live music. Dinner at a local eatery.\n\n- **March 4 (Day 3)**: Drive from Nashville to Memphis (approx. 2.5 hours, 180 miles). Stay at a private room in Memphis (e.g., Large, sunny, private studio Apt 2R, $925/night, 2-night minimum, no children under 10, 5 guests). Evening: Visit Graceland and the Beale Street Entertainment District.\n\n- **March 5 (Day 4)**: Full day in Memphis. Explore the Memphis Museum of Science & History, Dixon Gallery & Gardens, and the Fire Museum. Afternoon: Stroll through the Memphis Botanic Garden. Dinner at a local restaurant.\n\n- **March 6 (Day 5)**: Depart Memphis. Return to Minneapolis via drive (approx. 3.5 hours, 280 miles).\n\nTotal estimated cost:  \n- Accommodations: $870 (Nashville) + $925 (Memphis) = $1,795  \n- Driving: ~$150 (fuel and tolls, estimated)  \n- Meals and attractions: ~$150  \n- Total: $2,095 (slightly over budget)\n\nNote: All accommodations are non-shared and allow smoking. No flights used. Budget exceeded by $95; consider reducing lodging cost or adjusting dates. All data sourced from versioned 2022 travel database.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Minneapolis to Nashville",
+          "transportation": "Self-driving from Minneapolis to Nashville (approx. 3.5 hours, 280 miles)",
+          "breakfast": "-",
+          "attraction": "the Country Music Hall of Fame",
+          "lunch": "-",
+          "dinner": "a local restaurant",
+          "accommodation": "a private room in Nashville (e.g., FiDi Cozy room, $870/night, 1-night minimum, no parties, 2 guests)"
+        },
+        {
+          "day": "2",
+          "current_city": "Nashville",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the Frist Art Museum, Andrew Jackson’s Hermitage, and the Bicentennial Capitol Mall State Park; the Honky Tonk Highway",
+          "lunch": "-",
+          "dinner": "a local eatery",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "from Nashville to Memphis",
+          "transportation": "Self-driving from Nashville to Memphis",
+          "breakfast": "-",
+          "attraction": "Graceland and the Beale Street Entertainment District",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "a private room in Memphis (e.g., Large, sunny, private studio Apt 2R, $925/night, 2-night minimum, no children under 10, 5 guests)"
+        },
+        {
+          "day": "4",
+          "current_city": "Memphis",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "the Memphis Museum of Science & History, Dixon Gallery & Gardens, and the Fire Museum; the Memphis Botanic Garden",
+          "lunch": "-",
+          "dinner": "a local restaurant",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "from Memphis to Minneapolis",
+          "transportation": "Self-driving from Memphis to Minneapolis (approx. 3.5 hours, 280 miles)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 149,
+      "query_id": null,
+      "raw_final_answer_sha256": "246b93b5783668eae3a73e482c869728200ac086ca48efa984ff2b89bc80a39f",
+      "raw_final_answer": "Travel plan for 3 people from Myrtle Beach to Boston, Massachusetts, March 12–16, 2022:\n\n- **March 12 (Day 1)**: Fly from Myrtle Beach to Boston (Flight F3613545, 18:13–20:03, $260). Check into Private Apartment In the Heart of Chelsea (entire home, $253/night, 5-night minimum, 3 guests, smoking allowed). Dinner at Red Mesa Restaurant (Indian, $65 avg).\n\n- **March 13 (Day 2)**: Explore Boston. Lunch at Club Cubana (Indian, Mexican, Mediterranean, $65 avg). Evening at the Museum of Fine Arts.\n\n- **March 14 (Day 3)**: Visit Faneuil Hall and Freedom Trail. Dinner at New Punjabi Dhaba (Mexican, Mediterranean, $52 avg).\n\n- **March 15 (Day 4)**: Explore South End. Lunch at Freshco (American, $93 avg). Dinner at Double Roti (Mediterranean, $78 avg).\n\n- **March 16 (Day 5)**: Fly back to Myrtle Beach (Flight F3627693, 06:05–08:06, $303). Total flight cost: $563. Total lodging: $759 (3 nights × $253). Total estimated cost: $1,322 (well under $3,800 budget).\n\nAll accommodations are entire homes with smoking allowed. All restaurants offer the requested cuisines. No train or transit options were needed.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Myrtle Beach to Boston",
+          "transportation": "Flight Number: F3613545, from Myrtle Beach to Boston, Departure Time: 18:13, Arrival Time: 20:03, Cost: 260",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "Red Mesa Restaurant (Indian, $65 avg)",
+          "accommodation": "Private Apartment In the Heart of Chelsea (entire home, $253/night, 5-night minimum, 3 guests, smoking allowed)"
+        },
+        {
+          "day": "2",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "Club Cubana (Indian, Mexican, Mediterranean, $65 avg)",
+          "dinner": "-",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "Faneuil Hall and Freedom Trail",
+          "lunch": "-",
+          "dinner": "New Punjabi Dhaba (Mexican, Mediterranean, $52 avg)",
+          "accommodation": "-"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "Freshco (American, $93 avg)",
+          "dinner": "Double Roti (Mediterranean, $78 avg)",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Fly back to Myrtle Beach (Flight F3627693, 06:05–08:06, $303)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 150,
+      "query_id": null,
+      "raw_final_answer_sha256": "a497c9f497c0f9d57e78827ba8796bb52fe2dac1334e81a184ac906099acbdd4",
+      "raw_final_answer": "5-day travel plan from Cedar Rapids to Dallas and Austin (March 11–15, 2022), no flights, budget $2,400:\n\n- **March 11 (Day 1)**: Drive from Cedar Rapids to Dallas (12h 26m, 1,324 km). Stay at \"Spacious cozy apartment\" (Dallas, $314/night, 2-night minimum, no children under 10). Dinner at Coconuts Fish Cafe (Mediterranean, $38).\n\n- **March 12 (Day 2)**: Explore Dallas. Lunch at Cafe Gatherings (Indian, $17). Dinner at Pirates of Grill (Italian, $72).\n\n- **March 13 (Day 3)**: Drive from Dallas to Austin (2h 53m, 314 km). Stay at \"Spacious Williamsburg 1 bedroom!\" (Austin, $455/night, 1-night minimum, no smoking). Dinner at Yo Tibet (Chinese, $96).\n\n- **March 14 (Day 4)**: Explore Austin. Lunch at Tandoori Khazana (Indian, $61). Dinner at Dilli Darbar (Mediterranean, Italian, $64).\n\n- **March 15 (Day 5)**: Return to Cedar Rapids (drive, ~12h 26m). Total estimated cost: $1,074 (lodging: $314 × 2 + $455 × 1 = $1,074; meals: ~$300). Well under $2,400 budget. All accommodations allow visitors. No flights used. All dining preferences met.",
+      "parsed_plan": [
+        {
+          "day": "1",
+          "current_city": "from Cedar Rapids to Dallas",
+          "transportation": "Self-driving from Cedar Rapids to Dallas (12h 26m, 1,324 km)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "Coconuts Fish Cafe (Mediterranean, $38)",
+          "accommodation": "\"Spacious cozy apartment\" (Dallas, $314/night, 2-night minimum, no children under 10)"
+        },
+        {
+          "day": "2",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "Cafe Gatherings (Indian, $17)",
+          "dinner": "Pirates of Grill (Italian, $72)",
+          "accommodation": "-"
+        },
+        {
+          "day": "3",
+          "current_city": "from Dallas to Austin",
+          "transportation": "Self-driving from Dallas to Austin (2h 53m, 314 km)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "Yo Tibet (Chinese, $96)",
+          "accommodation": "\"Spacious Williamsburg 1 bedroom!\" (Austin, $455/night, 1-night minimum, no smoking)"
+        },
+        {
+          "day": "4",
+          "current_city": "-",
+          "transportation": "-",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "Tandoori Khazana (Indian, $61)",
+          "dinner": "Dilli Darbar (Mediterranean, Italian, $64)",
+          "accommodation": "-"
+        },
+        {
+          "day": "5",
+          "current_city": "-",
+          "transportation": "Return to Cedar Rapids (drive, ~12h 26m)",
+          "breakfast": "-",
+          "attraction": "-",
+          "lunch": "-",
+          "dinner": "-",
+          "accommodation": "-"
+        }
+      ],
+      "parser_valid": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 161,
+      "query_id": null,
+      "raw_final_answer_sha256": "19565513435b61f0edf2cc847596cc9f90d263e9daa542b30051bb62605e5e67",
+      "raw_final_answer": "A week-long trip from Pittsburgh to New York (March 13–19, 2022) is feasible by driving, with a 6-hour 1-minute drive covering 598 km. New York offers numerous attractions, including the 9/11 Memorial & Museum, Central Park, Empire State Building, and Brooklyn Bridge. For dining, French cuisine is available at Green Chick Chop (average cost $26), Italian at Seasons 52 Fresh Grill ($30), Chinese at Lord of the Drinks Forum ($71), and American at 736 A.D. ($99). However, no lodging options in New York that allow visitors were found in the database. Consider checking external platforms or adjusting lodging preferences to include visitor-friendly accommodations. Total estimated cost for lodging, meals, and driving is under $5,300, well within budget.",
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    },
+    {
+      "label": "rl",
+      "task_id": 172,
+      "query_id": null,
+      "raw_final_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_final_answer": null,
+      "parsed_plan": null,
+      "parser_valid": false,
+      "schema_valid": false,
+      "schema_errors": [
+        "plan must be a non-empty list"
+      ],
+      "manual_audit": {
+        "faithful_extraction": null,
+        "field_loss": null,
+        "hallucinated_field": null,
+        "wrong_field_assignment": null,
+        "entity_mutation": null,
+        "notes": null
+      }
+    }
+  ]
+}
