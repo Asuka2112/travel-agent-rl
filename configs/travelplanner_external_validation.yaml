@@ -1,0 +1,43 @@
+protocol_version: 1
+status: frozen_before_predictions
+split: data/raw/travelplanner/validation.csv
+n: 180
+models:
+  base: models/Qwen3-4B-Instruct-2507
+  sft: outputs/models/qwen3_4b_sft_merged
+  rl: outputs/grpo/formal_4gpu_v1/v1-20260824-191232/checkpoint-200
+generation:
+  prompt: raw_query_only
+  system_prompt: null
+  template: qwen3_nothinking
+  agent_template: hermes
+  do_sample: false
+  seed: 20260819
+  max_turns: 13
+  max_new_tokens: 768
+  max_model_len: 32768
+  dtype: bfloat16
+tools:
+  schemas: eight_production_tools
+  backend: full_replay_snapshot_v4
+  public_network_requests: 0
+postprocessing:
+  adapter: deterministic_final_answer_only
+  missing_value: "-"
+  may_read_query: false
+  may_read_tool_observations: false
+  may_read_reference_information: false
+official_evaluation:
+  repository: https://github.com/OSU-NLP-Group/TravelPlanner
+  revision: e52c87f4ac348a3410c46dc3553c519db5ec5e23
+  entrypoint: evaluation/eval.py
+  set_type: validation
+project_task_success_definition: >-
+  Final answer deterministically adapts to exactly the requested number of rows in the
+  official TravelPlanner plan schema. This metric is not the official Final Pass Rate.
+prohibitions:
+  - validation_specific_prompt_changes
+  - validation_specific_tool_logic
+  - hard_coded_benchmark_rules
+  - validation_feedback_training
+  - post_result_tuning
