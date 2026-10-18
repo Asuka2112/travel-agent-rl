@@ -1,0 +1,285 @@
+{
+  "status": "partial_do_not_present_as_final80",
+  "queue_status": "in_progress",
+  "gemini_surface_cohort_filter": null,
+  "excluded_gemini_cohorts": [
+    "gemini_safari_shared_context_056",
+    "gemini_user_supplied_final_batch_057b"
+  ],
+  "surface_note": "Unfiltered continuation is heterogeneous across web surfaces; inspect cohort-only reports and mixed-surface orientation flags. Surface is confounded with queue position; not a randomized causal comparison.",
+  "judges": {
+    "gpt": {
+      "attempts_recorded": 480,
+      "expected_calls": 480,
+      "surface_cohort_counts": {
+        "consumer_web_pre050": 480
+      },
+      "failed_calls": 7,
+      "failure_categories": {
+        "archive_capture_failure": 1,
+        "provider_response_load_failure": 3,
+        "unscorable_response": 2,
+        "provider_account_restriction": 1
+      },
+      "pairs": {
+        "base__sft_v2": {
+          "valid_queries": 77,
+          "coverage_of_frozen80": 0.9625,
+          "win": 2,
+          "tie": 0,
+          "loss": 75,
+          "relative_score": 0.025974025974025976,
+          "relative_score_ci95": [
+            0.0,
+            0.06493506493506493
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.007152159807893181,
+            0.08984582779753134
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.025,
+            0.0625
+          ],
+          "position_disagreement": 0,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.0,
+            0.04751842528243408
+          ],
+          "weighted_left_minus_right": -0.2812987012987013,
+          "weighted_delta_ci95": [
+            -0.3104545454545455,
+            -0.25032467532467534
+          ]
+        },
+        "base__grpo_v1": {
+          "valid_queries": 78,
+          "coverage_of_frozen80": 0.975,
+          "win": 2,
+          "tie": 0,
+          "loss": 76,
+          "relative_score": 0.02564102564102564,
+          "relative_score_ci95": [
+            0.0,
+            0.0641025641025641
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.007060093472759203,
+            0.08875270035675845
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.025,
+            0.05
+          ],
+          "position_disagreement": 0,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.0,
+            0.04693780971219429
+          ],
+          "weighted_left_minus_right": -0.3176282051282051,
+          "weighted_delta_ci95": [
+            -0.34451923076923074,
+            -0.2892948717948718
+          ]
+        },
+        "sft_v2__grpo_v1": {
+          "valid_queries": 78,
+          "coverage_of_frozen80": 0.975,
+          "win": 16,
+          "tie": 9,
+          "loss": 53,
+          "relative_score": 0.26282051282051283,
+          "relative_score_ci95": [
+            0.17307692307692307,
+            0.3525641025641026
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.13039795219832023,
+            0.307539730452461
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.25625,
+            0.28125
+          ],
+          "position_disagreement": 9,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.061905106255333214,
+            0.20497013198481626
+          ],
+          "weighted_left_minus_right": -0.09076923076923077,
+          "weighted_delta_ci95": [
+            -0.12067307692307692,
+            -0.06115384615384616
+          ]
+        }
+      }
+    },
+    "gemini": {
+      "attempts_recorded": 473,
+      "expected_calls": 480,
+      "surface_cohort_counts": {
+        "consumer_web_pre050": 412,
+        "aistudio_keyless_3_1_pro_050": 51,
+        "gemini_membership_return_050c": 2,
+        "gemini_safari_ordinary_053": 2,
+        "gemini_safari_ordinary_053b": 1,
+        "gemini_fresh_continuation_051": 1,
+        "gemini_safari_serial_completion_055": 3,
+        "gemini_ordinary_chat_052": 1
+      },
+      "failed_calls": 29,
+      "failure_categories": {
+        "unscorable_response": 11,
+        "temporary_conversation_lost": 4,
+        "web_response_timeout": 8,
+        "web_transport_user_ended_wait": 2,
+        "provider_web_error": 3,
+        "provider_daily_quota_exhausted": 1
+      },
+      "pairs": {
+        "base__sft_v2": {
+          "valid_queries": 70,
+          "coverage_of_frozen80": 0.875,
+          "win": 2,
+          "tie": 4,
+          "loss": 64,
+          "relative_score": 0.05714285714285714,
+          "relative_score_ci95": [
+            0.014285714285714285,
+            0.10714285714285714
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.007870611945441225,
+            0.09832256118423902
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.05,
+            0.175
+          ],
+          "position_disagreement": 4,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.02244377910071125,
+            0.1379195047483823
+          ],
+          "weighted_left_minus_right": -0.22949999999999995,
+          "weighted_delta_ci95": [
+            -0.2662857142857143,
+            -0.19214285714285714
+          ]
+        },
+        "base__grpo_v1": {
+          "valid_queries": 71,
+          "coverage_of_frozen80": 0.8875,
+          "win": 1,
+          "tie": 3,
+          "loss": 67,
+          "relative_score": 0.035211267605633804,
+          "relative_score_ci95": [
+            0.007042253521126761,
+            0.07746478873239436
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.002490603270544213,
+            0.07556050520249005
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.03125,
+            0.14375
+          ],
+          "position_disagreement": 3,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.014473260620475319,
+            0.11702416040484681
+          ],
+          "weighted_left_minus_right": -0.3061619718309859,
+          "weighted_delta_ci95": [
+            -0.35267605633802823,
+            -0.2607394366197183
+          ]
+        },
+        "sft_v2__grpo_v1": {
+          "valid_queries": 71,
+          "coverage_of_frozen80": 0.8875,
+          "win": 6,
+          "tie": 12,
+          "loss": 53,
+          "relative_score": 0.16901408450704225,
+          "relative_score_ci95": [
+            0.09859154929577464,
+            0.24647887323943662
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.03930650771071112,
+            0.1723603821430428
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.15,
+            0.2625
+          ],
+          "position_disagreement": 12,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.09941454752428264,
+            0.2725912799863349
+          ],
+          "weighted_left_minus_right": -0.15133802816901407,
+          "weighted_delta_ci95": [
+            -0.1892605633802817,
+            -0.11267605633802817
+          ]
+        }
+      }
+    }
+  },
+  "judge_agreement": {
+    "base__sft_v2": {
+      "common_valid_queries": 69,
+      "exact_agreement": 0.927536231884058,
+      "cohen_kappa": 0.35634328358208994,
+      "exact_agreement_wilson_ci95": [
+        0.8413260579060098,
+        0.9686522285700185
+      ]
+    },
+    "base__grpo_v1": {
+      "common_valid_queries": 69,
+      "exact_agreement": 0.9565217391304348,
+      "cohen_kappa": 0.38938053097345215,
+      "exact_agreement_wilson_ci95": [
+        0.8797879725062087,
+        0.9851040961037877
+      ]
+    },
+    "sft_v2__grpo_v1": {
+      "common_valid_queries": 70,
+      "exact_agreement": 0.7571428571428571,
+      "cohen_kappa": 0.4536271808999081,
+      "exact_agreement_wilson_ci95": [
+        0.6450496077036256,
+        0.8424813887710942
+      ]
+    }
+  },
+  "incremental_cost_usd": 0,
+  "uncertainty_note": "Bootstrap resamples paired queries, not orientations. A degenerate bootstrap interval is not proof of certainty. Wilson intervals supplement binary rates. Missingness bounds assign every unscored frozen query either 0 or 1 relative score; not a confidence interval. Partial queue order is not a representative random sample of all80.",
+  "human_audit": "awaiting real human scores",
+  "publication": {
+    "source_artifact": "results/browser_independent_sensitivity_057.json",
+    "summary_only": true,
+    "removed_fields": "per-query rationales, per-query identifiers, full failure records",
+    "score_slots_not_independent_calls": true,
+    "per_query_bootstrap_does_not_model_batch_correlation": true,
+    "full_raw_evidence_retained_on_server": true
+  }
+}

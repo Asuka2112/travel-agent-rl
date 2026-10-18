@@ -1,0 +1,55 @@
+{
+  "checkpoint": "manual_completion_063",
+  "status": "all_960_score_slots_present_user_supplied_supplement_protocol",
+  "verified_reference_mappings": 960,
+  "valid_score_schema_roundtrips": 960,
+  "mapping_mismatches": 0,
+  "queue_sha256": "ede327adfae4423f4916cfa34ce05ea1897135a2c687fc527fa5889f2ccee380",
+  "original_primary_record_count": 960,
+  "original_primary_inventory_sha256": "7a01d3384afaf6126a2c3b8da5951c2175293549041b36145793f22444913ccc",
+  "original_primary_inventory_unchanged_from057": true,
+  "derived_overlay_inventory_sha256": "713b58e6850ab5a157a9549d897c44200b3728881605c204184aa074e9df8d06",
+  "supplemental_scores": 36,
+  "supplemental_gpt": 7,
+  "supplemental_gemini": 29,
+  "cohort_counts": {
+    "gemini / consumer_web_pre050": 389,
+    "gemini / manual_shared_context_batches_059": 29,
+    "gemini / aistudio_keyless_3_1_pro_050": 50,
+    "gemini / gemini_membership_return_050c": 1,
+    "gemini / gemini_safari_ordinary_053": 2,
+    "gemini / gemini_safari_shared_context_056": 2,
+    "gemini / gemini_user_supplied_final_batch_057b": 5,
+    "gemini / gemini_safari_serial_completion_055": 2,
+    "gpt / consumer_web_pre050": 473,
+    "gpt / gpt_manual_shared_context_batch_062": 7
+  },
+  "strict_prior_sensitivity_unchanged": true,
+  "paid_api_calls_by_agent": 0,
+  "incremental_cost_usd_by_agent": 0,
+  "actual_browser_input_bytes_verified_for_manual_supplements": false,
+  "manual_supplement_model_identity_independently_observed": false,
+  "independent_conversation_per_manual_packet": false,
+  "limitations": [
+    "Schema/reference audit does not prove provider provenance, exact actual transmission, model revision, sampling or statistical independence.",
+    "Multiple packets share context; batch effects not included in query-bootstrap intervals.",
+    "Reference primary failures retained; derived overlay is explicitly supplementary, not a rewritten primary run.",
+    "Real human ratings still absent; historical TravelPlanner 0/180 remains separate."
+  ],
+  "publication": {
+    "summary_only": true,
+    "omitted": "raw record inventories, per-request identities, browser/user attachment data",
+    "primary_counts": {
+      "gpt_valid": 473,
+      "gemini_valid": 451,
+      "gpt_failed_preserved": 7,
+      "gemini_failed_preserved": 29
+    },
+    "derived_counts": {
+      "gpt_valid": 480,
+      "gemini_valid": 480
+    },
+    "source_server_commit": "75c081ca03d968da54c57c0bb31733428b1cd709",
+    "archive_063_sha256": "2c0809efb750179cf2bb0a10b0eae504dfb71a33aa8e24bbe05c59e5421e84dc"
+  }
+}

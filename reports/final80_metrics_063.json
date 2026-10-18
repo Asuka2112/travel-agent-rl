@@ -1,0 +1,272 @@
+{
+  "status": "all_score_slots_present_with_labeled_manual_batch_supplements",
+  "queue_status": "all_primary_disposed",
+  "gemini_surface_cohort_filter": null,
+  "excluded_gemini_cohorts": [],
+  "surface_note": "Unfiltered continuation is heterogeneous across web surfaces; inspect cohort-only reports and mixed-surface orientation flags. Surface is confounded with queue position; not a randomized causal comparison.",
+  "judges": {
+    "gpt": {
+      "attempts_recorded": 480,
+      "expected_calls": 480,
+      "surface_cohort_counts": {
+        "consumer_web_pre050": 473,
+        "gpt_manual_shared_context_batch_062": 7
+      },
+      "failed_calls": 0,
+      "failure_categories": {},
+      "pairs": {
+        "base__sft_v2": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 2,
+          "tie": 0,
+          "loss": 78,
+          "relative_score": 0.025,
+          "relative_score_ci95": [
+            0.0,
+            0.0625
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.006882893202970648,
+            0.0866443298557801
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.025,
+            0.025
+          ],
+          "position_disagreement": 0,
+          "mixed_surface_queries": 3,
+          "position_disagreement_wilson_ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "weighted_left_minus_right": -0.283375,
+          "weighted_delta_ci95": [
+            -0.31271875,
+            -0.2529375
+          ]
+        },
+        "base__grpo_v1": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 2,
+          "tie": 1,
+          "loss": 77,
+          "relative_score": 0.03125,
+          "relative_score_ci95": [
+            0.0,
+            0.06875
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.006882893202970648,
+            0.0866443298557801
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.03125,
+            0.03125
+          ],
+          "position_disagreement": 1,
+          "mixed_surface_queries": 2,
+          "position_disagreement_wilson_ci95": [
+            0.0022099755204522745,
+            0.06746270077668665
+          ],
+          "weighted_left_minus_right": -0.31290625,
+          "weighted_delta_ci95": [
+            -0.34187500000000004,
+            -0.28359375
+          ]
+        },
+        "sft_v2__grpo_v1": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 16,
+          "tie": 9,
+          "loss": 55,
+          "relative_score": 0.25625,
+          "relative_score_ci95": [
+            0.16875,
+            0.34375
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.12702844043960787,
+            0.30046243728170835
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.25625,
+            0.25625
+          ],
+          "position_disagreement": 9,
+          "mixed_surface_queries": 2,
+          "position_disagreement_wilson_ci95": [
+            0.060326869466304764,
+            0.20018218092372875
+          ],
+          "weighted_left_minus_right": -0.09190625,
+          "weighted_delta_ci95": [
+            -0.12193749999999999,
+            -0.06271875000000002
+          ]
+        }
+      }
+    },
+    "gemini": {
+      "attempts_recorded": 480,
+      "expected_calls": 480,
+      "surface_cohort_counts": {
+        "consumer_web_pre050": 389,
+        "manual_shared_context_batches_059": 29,
+        "aistudio_keyless_3_1_pro_050": 50,
+        "gemini_membership_return_050c": 1,
+        "gemini_safari_ordinary_053": 2,
+        "gemini_safari_shared_context_056": 2,
+        "gemini_user_supplied_final_batch_057b": 5,
+        "gemini_safari_serial_completion_055": 2
+      },
+      "failed_calls": 0,
+      "failure_categories": {},
+      "pairs": {
+        "base__sft_v2": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 2,
+          "tie": 5,
+          "loss": 73,
+          "relative_score": 0.05625,
+          "relative_score_ci95": [
+            0.01875,
+            0.1
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.006882893202970648,
+            0.0866443298557801
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.05625,
+            0.05625
+          ],
+          "position_disagreement": 5,
+          "mixed_surface_queries": 9,
+          "position_disagreement_wilson_ci95": [
+            0.026989375670841982,
+            0.13810148767274424
+          ],
+          "weighted_left_minus_right": -0.24059375,
+          "weighted_delta_ci95": [
+            -0.27446875,
+            -0.20603124999999997
+          ]
+        },
+        "base__grpo_v1": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 1,
+          "tie": 5,
+          "loss": 74,
+          "relative_score": 0.04375,
+          "relative_score_ci95": [
+            0.0125,
+            0.08125
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.0022099755204522745,
+            0.06746270077668665
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.04375,
+            0.04375
+          ],
+          "position_disagreement": 5,
+          "mixed_surface_queries": 5,
+          "position_disagreement_wilson_ci95": [
+            0.026989375670841982,
+            0.13810148767274424
+          ],
+          "weighted_left_minus_right": -0.30465625,
+          "weighted_delta_ci95": [
+            -0.34809375,
+            -0.26240625
+          ]
+        },
+        "sft_v2__grpo_v1": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 8,
+          "tie": 15,
+          "loss": 57,
+          "relative_score": 0.19375,
+          "relative_score_ci95": [
+            0.125,
+            0.26875
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.05154761556738083,
+            0.18510688806104086
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.19375,
+            0.19375
+          ],
+          "position_disagreement": 14,
+          "mixed_surface_queries": 7,
+          "position_disagreement_wilson_ci95": [
+            0.10720636440977926,
+            0.2725754197883133
+          ],
+          "weighted_left_minus_right": -0.1411875,
+          "weighted_delta_ci95": [
+            -0.17709375,
+            -0.10590625000000001
+          ]
+        }
+      }
+    }
+  },
+  "judge_agreement": {
+    "base__sft_v2": {
+      "common_valid_queries": 80,
+      "exact_agreement": 0.925,
+      "cohen_kappa": 0.31623931623931695,
+      "exact_agreement_wilson_ci95": [
+        0.8458798391878072,
+        0.9651747507069949
+      ]
+    },
+    "base__grpo_v1": {
+      "common_valid_queries": 80,
+      "exact_agreement": 0.925,
+      "cohen_kappa": 0.3093525179856122,
+      "exact_agreement_wilson_ci95": [
+        0.8458798391878072,
+        0.9651747507069949
+      ]
+    },
+    "sft_v2__grpo_v1": {
+      "common_valid_queries": 80,
+      "exact_agreement": 0.7125,
+      "cohen_kappa": 0.3870752831445704,
+      "exact_agreement_wilson_ci95": [
+        0.6053965378701002,
+        0.8001307570773007
+      ]
+    }
+  },
+  "incremental_cost_usd": 0,
+  "uncertainty_note": "Bootstrap resamples paired queries, not orientations. A degenerate bootstrap interval is not proof of certainty. Wilson intervals supplement binary rates. Missingness bounds assign every unscored frozen query either 0 or 1 relative score; not a confidence interval. Partial queue order is not a representative random sample of all80.",
+  "human_audit": "awaiting real human scores",
+  "publication": {
+    "source_artifact": "results/browser_progress_manual_overlay_063.json",
+    "summary_only": true,
+    "removed_fields": "per-query rationales, per-query identifiers, full failure records",
+    "score_slots_not_independent_calls": true,
+    "per_query_bootstrap_does_not_model_batch_correlation": true,
+    "full_raw_evidence_retained_on_server": true
+  },
+  "cohort_note": "Gemini consumer web and AI Studio are one Gemini 3.1 Pro judge. Cohorts describe provenance/method limits, not separate model rankings."
+}

@@ -1,85 +1,115 @@
 # Travel Agentic RL
 
-Reproducible post-training pipeline for long-horizon travel tool use with
-Qwen3-4B-Instruct-2507, teacher trajectory distillation, SFT, full-parameter multi-turn
-GRPO, immutable replay, and parity-locked evaluation.
+An auditable post-training pipeline for long-horizon travel tool use with
+Qwen3-4B-Instruct-2507: trajectory construction and filtering, SFT cold start,
+multi-turn GRPO, reward design, frozen tool replay, and paired model evaluation.
 
-## Final status
+## Latest progress — 2026-10-19
 
-The end-to-end Data -> Distillation -> Filtering -> SFT -> Full-Parameter Agentic GRPO
--> Evaluation pipeline is complete.
+The frozen 80-query internal evaluation and the user-requested supplemental
+judging are complete. **GRPO-v1 remains the evidence-supported internal delivery
+model.** No new training, checkpoint changes, or paid API calls were needed to
+complete judging; experiments and automatic continuation are stopped.
 
-| Stage | Result | Primary evidence |
-| --- | --- | --- |
-| Frozen data | 1,835 queries; protected/frozen contamination 0 | `reports/distillation_1835.md` |
-| Distillation/filtering | 1,820 generated; 1,463 Judge-accepted | `reports/distillation_1835.json` |
-| SFT | 110 steps; merged Qwen3-4B model load verified | `reports/sft_training.md` |
-| Replay Policy v2 | gate passed; public network 0 | `reports/GRPO_REPLAY_V2_REGRESSION.md` |
-| GRPO Pilot | 48 queries, G=4, max_turns=8, checkpoint-16 | `reports/GRPO_PILOT_REPORT.md` |
-| Parameter Probe | G=6, max_turns=13, checkpoint-3 | `reports/GRPO_FORMAL_PROBE_REPORT.md` |
-| Formal GRPO | 200 steps, 1,200 rollouts, checkpoint-200, gate passed | `reports/GRPO_FORMAL_REPORT.md` |
-| Unified evaluation | Base/SFT/RL same 16-query dev and fixed Judge | `outputs/final/final_metrics.json` |
-| Pairwise evaluation | Base vs SFT, Base vs RL, SFT vs RL; true A/B+B/A | `outputs/final/pairwise_metrics.json` |
-| TravelPlanner validation | Official frozen 180-query deterministic evaluation | `reports/TRAVELPLANNER_CORRECTED_VALIDATION.md` |
-| Final audit | tests, ruff, scientific integrity and repro manifest | `FINAL_REPORT.md` |
+- **Four-model comparison:** Base, SFT-v2, GRPO-v1, and GRPO-v2 on the same frozen
+  queries and eight-tool replay protocol.
+- **Two Judges:** GPT and Gemini 3.1 Pro; three model pairs, with A/B and B/A swaps.
+- **Complete score-slot coverage:** 480/480 per Judge, 960/960 combined, including
+  36 explicitly labeled manual batch supplements. This is **not** a claim of
+  960 independent successful calls or fully independent blind judgments.
+- **Fixed weighting:** 30% tool-path quality and 70% final-answer quality; the
+  frozen test set, candidate outputs, and seven scoring dimensions are unchanged.
 
-## Headline metrics
+Read the [final metrics report](reports/final_metrics_report_063.md),
+[machine-readable metrics](reports/final80_metrics_063.json), and
+[publication/provenance notes](docs/FINAL_EVALUATION_STATUS.md).
 
-| Metric | Base | SFT | RL |
-| --- | ---: | ---: | ---: |
-| Task success | 0.8750 | 0.6875 | 1.0000 |
-| Constraint satisfaction | 0.8750 | 0.6875 | 1.0000 |
-| Valid tool-call rate | 0.8889 | 1.0000 | 1.0000 |
-| Final-answer rate | 0.8750 | 0.6875 | 1.0000 |
-| Loop rate | 0.0000 | 0.3125 | 0.0000 |
-| Tool efficiency | 0.9375 | 0.6563 | 1.0000 |
-| Fixed Judge / 5 | 4.7768 | 4.0714 | 4.9911 |
+## Frozen internal comparison
 
-Formal GRPO used Qwen3-4B, full-parameter updates, G=6, max_turns=13, eight
-tools, Replay Policy v2, immutable snapshot v4, and zero public-network requests. It
-completed exactly 200 unique RL queries x 6 generations. Reward mean was 4.511838,
-mean KL was 0.008048, and the advantage non-zero ratio was 0.970149.
+| Model | Structural success / 80 | Final answers / 80 | Valid tool-call rate | Loops / 80 |
+| --- | ---: | ---: | ---: | ---: |
+| Base | 2 (2.50%) | 5 | 21.05% | 0 |
+| SFT-v2 | 55 (68.75%) | 80 | 100% | 5 |
+| **GRPO-v1** | **68 (85.00%)** | 76 | 100% | 1 |
+| GRPO-v2 | 61 (76.25%) | 80 | 100% | 3 |
 
-The unified dev set contains only 16 synthetic engineering tool-coverage queries. These
-results establish the completed reproduction on that frozen protocol; they are not a
-broad travel-planning benchmark claim. See `FINAL_REPORT.md` for limitations and full
-provenance.
+GRPO-v1 improves structural success over SFT-v2 by **16.25 percentage points**.
+Structural success is an internal protocol/delivery measure, **not validated task
+success**, factual correctness, or evidence of external generalization. Producing
+an answer or a valid tool call does not establish that travel constraints are met.
 
-## Official TravelPlanner validation
+## Dual-Judge pairwise results
 
-Frozen post-hoc evaluation used the official 180-query validation split and the unmodified
-official evaluator at commit `e52c87f4ac348a3410c46dc3553c519db5ec5e23`.
+All rows cover the same 80 queries with both candidate positions. W/T/L is from
+the **left-hand model's** perspective. Position disagreements are reported
+separately and mapped to aggregate ties by the predeclared rule.
 
-The first submission was subsequently shown to be adapter-contaminated: day prose was
-placed wholesale in `attraction`, while other official fields were dropped. That original
-0/180 result and its metrics remain immutable, but are labeled invalid for scientific
-comparison. A deterministic adapter was unit-tested, audited on a fixed 20+20+20 sample,
-hash-frozen, and applied once to the unchanged saved final answers without model inference.
+| Judge | Model pair (left / right) | W / T / L | Position disagreements / 80 |
+| --- | --- | ---: | ---: |
+| GPT | Base / SFT-v2 | 2 / 0 / 78 | 0 |
+| GPT | Base / GRPO-v1 | 2 / 1 / 77 | 1 |
+| GPT | SFT-v2 / GRPO-v1 | 16 / 9 / 55 | 9 |
+| Gemini 3.1 Pro | Base / SFT-v2 | 2 / 5 / 73 | 5 |
+| Gemini 3.1 Pro | Base / GRPO-v1 | 1 / 5 / 74 | 5 |
+| Gemini 3.1 Pro | SFT-v2 / GRPO-v1 | 8 / 15 / 57 | 14 |
 
-| Corrected official deterministic metric | Base | SFT | RL |
-| --- | ---: | ---: | ---: |
-| Commonsense Constraint Micro | 2.0833% | 1.4583% | 29.7917% |
-| Commonsense Constraint Macro | 0.0000% | 0.0000% | 0.0000% |
-| Hard Constraint Micro | 0.0000% | 0.0000% | 0.0000% |
-| Hard Constraint Macro | 0.0000% | 0.0000% | 0.0000% |
-| Final Pass Rate | 0/180 | 0/180 | 0/180 |
+Against SFT-v2, **GRPO-v1 wins/ties/loses 55/9/16 under GPT and 57/15/8 under
+Gemini**. Their direct win rates are 68.75% and 71.25%; half-tie preference scores
+are 74.375% and 80.625%, respectively. Preference scores are not task-success rates.
+GPT/Gemini agree on 71.25% of the SFT-v2/GRPO-v1 aggregate outcomes.
 
-Among parsed plans, structural schema validity was 8/8 Base, 6/6 SFT, and 106/106 RL.
-However, official completeness was 0/180 for every model, so hard constraints executed for
-0/180 tasks. The corrected result therefore confirms a remaining frozen-output
-delivery/completeness/generalization gap, not a universal residual schema bug. See
-`reports/TRAVELPLANNER_ADAPTER_REPAIR.md` for the audit trail.
+The report includes weighted score differences, query-level bootstrap intervals,
+Wilson intervals, Judge agreement, and failure cases. Shared-context batch
+effects are not modeled by those intervals; they are not uncertainty guarantees
+for an entirely independent experiment.
 
-The 95% Wilson interval for each Final Pass estimate is 0.0000%-2.0895%. Project Task
-Success—an interface/delivery metric distinct from official Final Pass—was Base 6/180
-(3.3333%), SFT 5/180 (2.7778%), and RL 78/180 (43.3333%). The contamination re-audit
-scanned 2,932 training-derived rows and found zero overlap. No validation-specific tuning
-or retraining was performed. Deterministic benchmark, internal pointwise Judge, and
-internal pairwise Judge results are reported separately in `FINAL_REPORT.md`.
+## Provenance and scope
+
+- Original run: 473 valid GPT and 451 valid Gemini ratings. The 7 GPT and 29
+  Gemini missing ratings were supplemented through user-authorized shared-context
+  batches; all original failures are retained, not overwritten or converted to ties.
+- The actual browser-transmitted bytes and provider identity/settings of the
+  user-pasted supplemental responses were not independently observed. Earlier
+  shared/manual Gemini protocol exceptions also remain documented.
+- Excluding all 36 new supplements and 7 prior Gemini protocol-exception ratings
+  leaves the prior-stage preference evidence supporting GRPO-v1. See the
+  [strict sensitivity summary](reports/final80_sensitivity_057.json).
+- The actual replay provenance of these saved outputs is **snapshot v1**, with
+  **2,185 normalized observations replay-consistent** in the earlier audit. This
+  supersedes the older final-80 narrative's snapshot-v4 attribution; the historical
+  training/replay-v2 reports are separate experiments.
+- Formal external-Judge pairwise comparisons cover Base/SFT-v2, Base/GRPO-v1,
+  and SFT-v2/GRPO-v1. GRPO-v2 is included in structural comparison only; no
+  external dual-Judge preference result is invented for it.
+
+The project overview and [resume-ready project summary](reports/resume_project_latest.md)
+focus on completed data construction, SFT, GRPO, reward design, and the measured
+internal results. Human review and external benchmark history remain in the full
+audit reports, are not presented as completed achievements, and are not additional
+resume-completion tasks.
+
+## Evidence and historical results
+
+| Evidence | Location |
+| --- | --- |
+| Latest full internal report | [Final report 063](reports/final_metrics_report_063.md) |
+| Latest pairwise and agreement metrics | [Metrics JSON](reports/final80_metrics_063.json) |
+| Strict pre-supplement sensitivity | [Sensitivity JSON](reports/final80_sensitivity_057.json) |
+| Compact integrity audit and artifact hashes | [Audit JSON](reports/final80_audit_063.json) |
+| Current publication and artifact guide | [Status guide](docs/FINAL_EVALUATION_STATUS.md) |
+| Data construction / distillation | [Distillation report](reports/distillation_1835.md) |
+| Original SFT / GRPO engineering | [SFT report](reports/sft_training.md), [formal GRPO report](reports/GRPO_FORMAL_REPORT.md) |
+| Historical 16-query engineering evaluation | [Original final report](FINAL_REPORT.md), [previous README](docs/history/README_before_final80.md) |
+| Historical external evaluation audit | [Corrected validation](reports/TRAVELPLANNER_CORRECTED_VALIDATION.md), [adapter audit](reports/TRAVELPLANNER_ADAPTER_REPAIR.md) |
+
+The older 16-query synthetic engineering results are retained for provenance and
+must not be pooled with, or substituted for, the frozen 80-query results above.
+No external-generalization improvement is claimed. Checkpoints and raw browser
+account/session captures are not published as part of this documentation update.
 
 ## Reproduction entry points
 
-Create the base environment and run deterministic checks:
+For the original implementation and deterministic project checks:
 
 ```bash
 python3.10 -m venv .venv
@@ -90,8 +120,8 @@ pytest -q
 ruff check .
 ```
 
-The exact frozen inputs, hashes, model lineage, topology logs, commands, and output
-artifacts are listed in `outputs/final/repro_manifest.json` and
-`outputs/final/external_validation_repro_manifest.json`. The orchestration system of
-record is `orchestration/STATE.json`; detailed stage commands are documented in
-`docs/reproduction.md` and the stage reports.
+These are existing project checks, not a command to retrain or resubmit Judge
+requests. The latest completion-stage offline regression run passed 17 tests;
+the full original training-stage test count is historical, not a new run.
+Full raw artifacts and the immutable supplemental overlay remain in the server
+archive, identified in the [artifact guide](docs/FINAL_EVALUATION_STATUS.md).
