@@ -1,0 +1,485 @@
+{
+  "presentation": "single_SFT_GRPO_project_workflow",
+  "updated_local": "2026-10-20",
+  "timezone": "Asia/Shanghai",
+  "checkpoint_label_note": "SFT is the frozen supervised comparison; GRPO is the selected delivery checkpoint. Display labels do not assert direct checkpoint parentage. Exact identities remain in archived provenance.",
+  "frozen_query_count": 80,
+  "path_weight": 0.3,
+  "final_weight": 0.7,
+  "structural_success_not_task_success": true,
+  "selected_model": "GRPO",
+  "structural_comparison": {
+    "Base": {
+      "structural_success": 2,
+      "final_answers": 5,
+      "valid_tool_call_rate": 0.2105,
+      "loops": 0
+    },
+    "SFT": {
+      "structural_success": 55,
+      "final_answers": 80,
+      "valid_tool_call_rate": 1.0,
+      "loops": 5
+    },
+    "GRPO": {
+      "structural_success": 68,
+      "final_answers": 76,
+      "valid_tool_call_rate": 1.0,
+      "loops": 1
+    }
+  },
+  "judges": {
+    "gpt": {
+      "usable_score_slots": 480,
+      "pairs": {
+        "base__sft": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 2,
+          "tie": 0,
+          "loss": 78,
+          "relative_score": 0.025,
+          "relative_score_ci95": [
+            0.0,
+            0.0625
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.006882893202970648,
+            0.0866443298557801
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.025,
+            0.025
+          ],
+          "position_disagreement": 0,
+          "mixed_surface_queries": 3,
+          "position_disagreement_wilson_ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "weighted_left_minus_right": -0.283375,
+          "weighted_delta_ci95": [
+            -0.31271875,
+            -0.2529375
+          ]
+        },
+        "base__grpo": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 2,
+          "tie": 1,
+          "loss": 77,
+          "relative_score": 0.03125,
+          "relative_score_ci95": [
+            0.0,
+            0.06875
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.006882893202970648,
+            0.0866443298557801
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.03125,
+            0.03125
+          ],
+          "position_disagreement": 1,
+          "mixed_surface_queries": 2,
+          "position_disagreement_wilson_ci95": [
+            0.0022099755204522745,
+            0.06746270077668665
+          ],
+          "weighted_left_minus_right": -0.31290625,
+          "weighted_delta_ci95": [
+            -0.34187500000000004,
+            -0.28359375
+          ]
+        },
+        "sft__grpo": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 16,
+          "tie": 9,
+          "loss": 55,
+          "relative_score": 0.25625,
+          "relative_score_ci95": [
+            0.16875,
+            0.34375
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.12702844043960787,
+            0.30046243728170835
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.25625,
+            0.25625
+          ],
+          "position_disagreement": 9,
+          "mixed_surface_queries": 2,
+          "position_disagreement_wilson_ci95": [
+            0.060326869466304764,
+            0.20018218092372875
+          ],
+          "weighted_left_minus_right": -0.09190625,
+          "weighted_delta_ci95": [
+            -0.12193749999999999,
+            -0.06271875000000002
+          ]
+        }
+      }
+    },
+    "gemini": {
+      "usable_score_slots": 480,
+      "pairs": {
+        "base__sft": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 2,
+          "tie": 5,
+          "loss": 73,
+          "relative_score": 0.05625,
+          "relative_score_ci95": [
+            0.01875,
+            0.1
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.006882893202970648,
+            0.0866443298557801
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.05625,
+            0.05625
+          ],
+          "position_disagreement": 5,
+          "mixed_surface_queries": 9,
+          "position_disagreement_wilson_ci95": [
+            0.026989375670841982,
+            0.13810148767274424
+          ],
+          "weighted_left_minus_right": -0.24059375,
+          "weighted_delta_ci95": [
+            -0.27446875,
+            -0.20603124999999997
+          ]
+        },
+        "base__grpo": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 1,
+          "tie": 5,
+          "loss": 74,
+          "relative_score": 0.04375,
+          "relative_score_ci95": [
+            0.0125,
+            0.08125
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.0022099755204522745,
+            0.06746270077668665
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.04375,
+            0.04375
+          ],
+          "position_disagreement": 5,
+          "mixed_surface_queries": 5,
+          "position_disagreement_wilson_ci95": [
+            0.026989375670841982,
+            0.13810148767274424
+          ],
+          "weighted_left_minus_right": -0.30465625,
+          "weighted_delta_ci95": [
+            -0.34809375,
+            -0.26240625
+          ]
+        },
+        "sft__grpo": {
+          "valid_queries": 80,
+          "coverage_of_frozen80": 1.0,
+          "win": 8,
+          "tie": 15,
+          "loss": 57,
+          "relative_score": 0.19375,
+          "relative_score_ci95": [
+            0.125,
+            0.26875
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.05154761556738083,
+            0.18510688806104086
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.19375,
+            0.19375
+          ],
+          "position_disagreement": 14,
+          "mixed_surface_queries": 7,
+          "position_disagreement_wilson_ci95": [
+            0.10720636440977926,
+            0.2725754197883133
+          ],
+          "weighted_left_minus_right": -0.1411875,
+          "weighted_delta_ci95": [
+            -0.17709375,
+            -0.10590625000000001
+          ]
+        }
+      }
+    }
+  },
+  "judge_agreement": {
+    "base__sft": {
+      "common_valid_queries": 80,
+      "exact_agreement": 0.925,
+      "cohen_kappa": 0.31623931623931695,
+      "exact_agreement_wilson_ci95": [
+        0.8458798391878072,
+        0.9651747507069949
+      ]
+    },
+    "base__grpo": {
+      "common_valid_queries": 80,
+      "exact_agreement": 0.925,
+      "cohen_kappa": 0.3093525179856122,
+      "exact_agreement_wilson_ci95": [
+        0.8458798391878072,
+        0.9651747507069949
+      ]
+    },
+    "sft__grpo": {
+      "common_valid_queries": 80,
+      "exact_agreement": 0.7125,
+      "cohen_kappa": 0.3870752831445704,
+      "exact_agreement_wilson_ci95": [
+        0.6053965378701002,
+        0.8001307570773007
+      ]
+    }
+  },
+  "strict_sensitivity": {
+    "gpt": {
+      "pairs": {
+        "base__sft": {
+          "valid_queries": 77,
+          "coverage_of_frozen80": 0.9625,
+          "win": 2,
+          "tie": 0,
+          "loss": 75,
+          "relative_score": 0.025974025974025976,
+          "relative_score_ci95": [
+            0.0,
+            0.06493506493506493
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.007152159807893181,
+            0.08984582779753134
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.025,
+            0.0625
+          ],
+          "position_disagreement": 0,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.0,
+            0.04751842528243408
+          ],
+          "weighted_left_minus_right": -0.2812987012987013,
+          "weighted_delta_ci95": [
+            -0.3104545454545455,
+            -0.25032467532467534
+          ]
+        },
+        "base__grpo": {
+          "valid_queries": 78,
+          "coverage_of_frozen80": 0.975,
+          "win": 2,
+          "tie": 0,
+          "loss": 76,
+          "relative_score": 0.02564102564102564,
+          "relative_score_ci95": [
+            0.0,
+            0.0641025641025641
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.007060093472759203,
+            0.08875270035675845
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.025,
+            0.05
+          ],
+          "position_disagreement": 0,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.0,
+            0.04693780971219429
+          ],
+          "weighted_left_minus_right": -0.3176282051282051,
+          "weighted_delta_ci95": [
+            -0.34451923076923074,
+            -0.2892948717948718
+          ]
+        },
+        "sft__grpo": {
+          "valid_queries": 78,
+          "coverage_of_frozen80": 0.975,
+          "win": 16,
+          "tie": 9,
+          "loss": 53,
+          "relative_score": 0.26282051282051283,
+          "relative_score_ci95": [
+            0.17307692307692307,
+            0.3525641025641026
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.13039795219832023,
+            0.307539730452461
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.25625,
+            0.28125
+          ],
+          "position_disagreement": 9,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.061905106255333214,
+            0.20497013198481626
+          ],
+          "weighted_left_minus_right": -0.09076923076923077,
+          "weighted_delta_ci95": [
+            -0.12067307692307692,
+            -0.06115384615384616
+          ]
+        }
+      }
+    },
+    "gemini": {
+      "pairs": {
+        "base__sft": {
+          "valid_queries": 70,
+          "coverage_of_frozen80": 0.875,
+          "win": 2,
+          "tie": 4,
+          "loss": 64,
+          "relative_score": 0.05714285714285714,
+          "relative_score_ci95": [
+            0.014285714285714285,
+            0.10714285714285714
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.007870611945441225,
+            0.09832256118423902
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.05,
+            0.175
+          ],
+          "position_disagreement": 4,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.02244377910071125,
+            0.1379195047483823
+          ],
+          "weighted_left_minus_right": -0.22949999999999995,
+          "weighted_delta_ci95": [
+            -0.2662857142857143,
+            -0.19214285714285714
+          ]
+        },
+        "base__grpo": {
+          "valid_queries": 71,
+          "coverage_of_frozen80": 0.8875,
+          "win": 1,
+          "tie": 3,
+          "loss": 67,
+          "relative_score": 0.035211267605633804,
+          "relative_score_ci95": [
+            0.007042253521126761,
+            0.07746478873239436
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.002490603270544213,
+            0.07556050520249005
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.03125,
+            0.14375
+          ],
+          "position_disagreement": 3,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.014473260620475319,
+            0.11702416040484681
+          ],
+          "weighted_left_minus_right": -0.3061619718309859,
+          "weighted_delta_ci95": [
+            -0.35267605633802823,
+            -0.2607394366197183
+          ]
+        },
+        "sft__grpo": {
+          "valid_queries": 71,
+          "coverage_of_frozen80": 0.8875,
+          "win": 6,
+          "tie": 12,
+          "loss": 53,
+          "relative_score": 0.16901408450704225,
+          "relative_score_ci95": [
+            0.09859154929577464,
+            0.24647887323943662
+          ],
+          "bootstrap_degenerate": false,
+          "win_rate_wilson_ci95": [
+            0.03930650771071112,
+            0.1723603821430428
+          ],
+          "frozen80_relative_score_missingness_bounds": [
+            0.15,
+            0.2625
+          ],
+          "position_disagreement": 12,
+          "mixed_surface_queries": 0,
+          "position_disagreement_wilson_ci95": [
+            0.09941454752428264,
+            0.2725912799863349
+          ],
+          "weighted_left_minus_right": -0.15133802816901407,
+          "weighted_delta_ci95": [
+            -0.1892605633802817,
+            -0.11267605633802817
+          ]
+        }
+      }
+    }
+  },
+  "original_primary_counts": {
+    "gpt_valid": 473,
+    "gemini_valid": 451,
+    "gpt_failures_retained": 7,
+    "gemini_failures_retained": 29
+  },
+  "manual_supplement_counts": {
+    "gpt": 7,
+    "gemini": 29
+  },
+  "limitations": [
+    "Manual supplements used shared-context batches, not independent per-packet conversations.",
+    "Actual manual input bytes and provider identity/settings were not independently observed.",
+    "All score slots present does not imply all independent provider calls succeeded.",
+    "Query bootstrap and Wilson intervals do not model within-batch dependence.",
+    "Original failure records and complete experimental lineage remain unchanged.",
+    "No external-generalization improvement or completed human-rating claim."
+  ],
+  "incremental_paid_api_cost_usd": 0
+}

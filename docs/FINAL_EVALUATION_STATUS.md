@@ -1,76 +1,62 @@
-# Current evaluation status and publication scope
+# Evaluation scope and archived provenance
 
-Updated 2026-10-19 (Asia/Shanghai). The internal dual-Judge completion was accepted
-on 2026-10-18. This update publishes the latest progress and auditable result
-summaries; it does not merge the server's entire experimental code/data branch
-into the GitHub default branch, rerun training, or upload checkpoints.
+Updated 2026-10-20 (Asia/Shanghai). The main project presentation uses **Base**,
+**SFT**, and **GRPO** only. Its workflow is data construction, supervised
+adaptation, agentic reinforcement learning, and frozen evaluation. GRPO denotes
+the selected internal delivery model; SFT denotes the frozen supervised comparison.
+These concise labels do not alter the underlying checkpoint identities or imply
+that the displayed SFT checkpoint directly initialized the displayed GRPO model.
 
-## Current result
+## Current evidence
 
-- Selected internal delivery recommendation: **GRPO-v1**.
-- Frozen test set: 80 queries; four-model structural comparison.
-- Judge pairs: Base/SFT-v2, Base/GRPO-v1, SFT-v2/GRPO-v1; AB and BA each.
-- GPT: 480 usable score slots = 473 original valid + 7 manual supplements.
-- Unified Gemini 3.1 Pro: 480 = 451 original valid + 29 manual supplements.
-- All six Judge/pair combinations have 80 bidirectionally scored queries.
-- Original primary failures are preserved. Supplements are explicitly labeled in
-  a derived overlay, not silently substituted into the immutable primary run.
-- Training, new judging, and automatic continuation remain stopped. No new paid
-  API calls or checkpoint changes were made during completion/publication.
+- Frozen internal set: 80 queries, unchanged eight-tool protocol and candidate outputs.
+- Judge comparisons: Base/SFT, Base/GRPO, and SFT/GRPO, each in AB and BA order.
+- GPT: 480 usable slots, consisting of 473 original valid scores and 7 manual supplements.
+- Gemini 3.1 Pro: 480 slots, consisting of 451 original valid scores and 29 manual supplements.
+- Shared scoring rule: 30% path quality and 70% final-answer quality, using the original seven dimensions.
+- The selected GRPO model has 68/80 internal structural successes; SFT has 55/80.
+- Against SFT, GRPO receives GPT W/T/L 55/9/16 and Gemini W/T/L 57/15/8.
 
-## Claims and limits
+## What the labels do not claim
 
-960 scored slots do not establish 960 independent calls. Manual batches shared
-context; exact provider identity/settings and transmitted bytes were not
-independently verified. The 30/70 weighting and reference input contents are
-unchanged. The machine-readable metrics include position disagreement, Judge
-agreement, weighted differences, Wilson intervals and query bootstrap intervals.
-Those intervals do not model same-batch correlation.
+Structural success is not factual correctness or independently verified task
+success. The 36 manual supplements came from shared-context batches; their actual
+transmitted inputs and provider identities/settings were not independently
+observed. Earlier shared/manual protocol exceptions remain in the provenance.
+960 complete score slots do not establish 960 independent successful calls.
 
-The strict sensitivity summary excludes all 36 new manual supplements and the
-7 earlier Gemini shared/manual protocol exceptions. Its preference conclusion
-still supports GRPO-v1; full independent coverage is not claimed. Human-review
-materials do not constitute completed human ratings. Historical external
-evaluation remains separately documented, not an internal metric or a resume
-completion requirement. There is no external-generalization success claim.
+Excluding the manual supplements and earlier protocol exceptions still supports
+the selected GRPO model in the strict earlier-stage sensitivity analysis. Its
+coverage is incomplete; it must not be presented as a fully independent full-80
+experiment. Query bootstrap intervals do not model within-batch correlation.
 
-## Published evidence versus server archive
+## Archive policy
 
-GitHub includes the unchanged final report 063, compact aggregate metrics,
-strict sensitivity metrics, an integrity-audit summary, and a short resume
-project summary. Per-query rationales, user attachments, browser account/session
-captures, model outputs, checkpoints, and frozen training/test data are not added
-by this documentation update. Their omission is not deletion from the archive.
+This change simplifies the current presentation, **not the experimental record**.
+The original reports, exact checkpoint/version mapping, unsuccessful experiments,
+source metrics, frozen request queue, and original failed Judge records remain
+unchanged. Machine-readable presentation labels are separate from archived source
+keys; no frozen metric is rewritten. Older reports can still be inspected for
+the exact technical lineage, but are not used as the primary resume narrative.
 
-The source implementation/evidence branch on the server is `experiments/sft-v2`,
-at completion commit `75c081ca03d968da54c57c0bb31733428b1cd709`.
-The full supplement delivery is retained under
+The original completion report and integrity summaries are retained in the
+existing repository reports. Raw attachments and the derived completion overlay
+remain in the server archive under
 `outputs/experiments/final_evaluation_20261016/manual_completion_063/`, with the
-original primary browser records in the adjacent `browser_judges/` directory.
-Paths beginning `results/` in report 063 refer to that archive, not files newly
-published on GitHub. The four-model source outputs and original training hashes
-remain in their original server locations.
+original primary records in the adjacent `browser_judges/` directory. Full raw
+browser/session captures, checkpoints, and additional training/test data are not
+uploaded by this documentation update.
 
 | Integrity object | SHA256 |
 | --- | --- |
 | Frozen 480-request queue | `ede327adfae4423f4916cfa34ce05ea1897135a2c687fc527fa5889f2ccee380` |
 | Original 960-record primary inventory | `7a01d3384afaf6126a2c3b8da5951c2175293549041b36145793f22444913ccc` |
-| Final lightweight audit ZIP 063 | `2c0809efb750179cf2bb0a10b0eae504dfb71a33aa8e24bbe05c59e5421e84dc` |
+| Completion audit archive | `2c0809efb750179cf2bb0a10b0eae504dfb71a33aa8e24bbe05c59e5421e84dc` |
 
-Both original primary and derived-overlay inventories, as well as archive
-integrity, were checked on the server during delivery. Reference hashes verify
-the preserved artifacts, not unobserved manual browser transmission.
+Human-review materials are not completed human ratings. Historical external
+evaluation is retained separately and is not an internal success metric or an
+additional resume-completion task. No external-generalization improvement is claimed.
 
-## Historical material
-
-The previous README is retained verbatim in
-[docs/history/README_before_final80.md](history/README_before_final80.md).
-The original `FINAL_REPORT.md`, existing training reports, and external benchmark
-audits remain unchanged. Earlier 16-query results and snapshot-v4 narratives must
-not be relabeled as the latest 80-query evidence: the actual saved final-80
-trajectories were audited against snapshot v1, with 2,185 normalized observations
-replay-consistent.
-
-The latest completion-stage validation passed 17 offline Python regression tests.
-The public-facing documentation update itself is checked for metric agreement,
-relative-link integrity, accidental secrets/session data, and preserved history.
+The current update changes presentation only: no retraining, new inference,
+checkpoint alteration, paid API calls, data deletion, or Git history rewrite.
+Experiments and automatic continuation remain stopped.
