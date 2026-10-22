@@ -11,10 +11,6 @@ from pathlib import Path
 from time import perf_counter
 from typing import Any
 
-import torch
-from peft import PeftModel
-from swift.llm import get_model_tokenizer, get_template
-
 from travel_agent_rl.evaluation.agent_eval import (
     completion_score,
     parse_native_agent_output,
@@ -58,6 +54,8 @@ def _load_rows(path: Path) -> list[dict[str, Any]]:
 
 
 def _generate(model, tokenizer, template, messages, tools, max_new_tokens: int) -> str:
+    import torch
+
     item = template.encode({"messages": messages, "tools": json.dumps(tools, ensure_ascii=False)})
     input_ids = torch.tensor([item["input_ids"]], device=model.device)
     attention_mask = torch.ones_like(input_ids)
@@ -294,6 +292,11 @@ def main() -> None:
     args = parse_args()
     if args.output_dir.exists():
         raise FileExistsError(f"refusing to overwrite immutable evaluation: {args.output_dir}")
+    # Replay-environment tests do not need the optional model-inference stack.
+    import torch
+    from peft import PeftModel
+    from swift.llm import get_model_tokenizer, get_template
+
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")

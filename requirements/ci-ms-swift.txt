@@ -1,0 +1,13 @@
+# Install ci-torch-cpu.txt first. Keep the protocol/API versions used by the project.
+# The distribution is ms-swift; it provides the swift.* namespace (not PyPI swift).
+# No [all] extras, vLLM, DeepSpeed, FlashAttention, or GPU training environment.
+torch==2.6.0+cpu
+ms-swift==3.8.3
+transformers==4.53.3
+peft==0.17.1
+trl==0.20.0
+datasets==3.6.0
+# New Gradio releases require huggingface-hub>=1, unlike this Transformers API.
+gradio==5.32.1
+# ms-swift's multi_turn module instantiates MathAccuracy during import.
+math_verify==0.5.2

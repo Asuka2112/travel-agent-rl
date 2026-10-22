@@ -13,6 +13,45 @@ jobs:
         with:
           python-version: "3.10.12"
           cache: pip
+          cache-dependency-path: |
+            pyproject.toml
+            requirements/base.txt
+            requirements/dev.txt
       - run: python -m pip install -r requirements/base.txt -r requirements/dev.txt
       - run: ruff check src tests scripts
-      - run: pytest
+      # The real ms-swift protocol tests run in the complementary CPU job below.
+      - run: python -m pytest --ignore=tests/grpo/test_scheduler.py
+
+  ms-swift-cpu:
+    runs-on: ubuntu-22.04
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10.12"
+          cache: pip
+          cache-dependency-path: |
+            pyproject.toml
+            requirements/base.txt
+            requirements/dev.txt
+            requirements/ci-torch-cpu.txt
+            requirements/ci-ms-swift.txt
+      - run: python -m pip install -r requirements/ci-torch-cpu.txt
+      - run: >-
+          python -m pip install -r requirements/base.txt -r requirements/dev.txt
+          -r requirements/ci-ms-swift.txt
+      - run: python -m pip check
+      - name: Verify the real framework and CPU-only runtime
+        run: |
+          python - <<'PY'
+          from importlib.metadata import version
+          import torch
+          assert version("ms-swift") == "3.8.3"
+          assert torch.__version__ == "2.6.0+cpu"
+          assert torch.version.cuda is None
+          PY
+      - run: python -m pytest tests/grpo/test_scheduler.py

@@ -10,9 +10,6 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any
 
-import torch
-from swift.llm import get_model_tokenizer
-
 from travel_agent_rl.filtering.judge import JudgeScores
 from travel_agent_rl.sft.data import sha256_file
 
@@ -127,6 +124,10 @@ def aggregate_pair(left: str, right: str, rows: list[dict[str, Any]]) -> dict[st
 
 def main() -> None:
     args = parse_args()
+    # Reporting helpers are also used without the optional inference environment.
+    import torch
+    from swift.llm import get_model_tokenizer
+
     torch.manual_seed(args.seed)
     model, tokenizer = get_model_tokenizer(
         str(args.model),
